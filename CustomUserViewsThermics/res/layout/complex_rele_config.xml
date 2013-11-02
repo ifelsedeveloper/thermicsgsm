@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <!-- 4 row -->
+      <!--  
+        <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        
+        >
+		<LinearLayout 
+		    android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:layout_alignParentLeft="true"
+             android:layout_centerVertical="true"
+		    android:layout_toLeftOf="@+id/layoutCheckBox1">
+            <TextView
+            	    android:id="@+id/titleRele1"
+            	    android:layout_width="wrap_content"
+            	    android:layout_height="wrap_content"
+            	    android:gravity="center_vertical"       	    
+            	    android:text="@string/light"
+            	    android:textColor="@color/text_button_color"
+            	    android:textSize="@dimen/size_button_text"
+            		android:textStyle="bold" />
+
+            <TextView 
+            android:id="@+id/LabelOnOff1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/on_off"
+            android:textColor="@color/text_button_color"
+            android:textSize="@dimen/text_size_subttl"
+            android:textStyle="bold"/>
+
+		</LinearLayout>
+        
+        <LinearLayout
+             android:id="@+id/layoutCheckBox1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_alignParentTop="true"
+             android:orientation="vertical" >
+            <FrameLayout 
+                android:id="@+id/frameCheckBox1"
+                android:layout_width="wrap_content"
+             	android:layout_height="wrap_content">
+	        <CheckBox
+	                android:id="@+id/checkBoxRele1"
+	                android:layout_width="60dp"
+	                android:layout_height="45dp"     
+	                android:layout_marginRight="15dp"
+	                android:gravity="center_vertical"
+	                android:button="@drawable/box"
+	                android:onClick="onClickCheckBoxRele1"/>
+
+	        <ImageView
+	            android:id="@+id/imageViewAutomatic1"
+	            android:layout_width="40dp"
+	            android:layout_height="30dp"
+	            android:layout_marginLeft="12dp"
+	            android:layout_marginRight="15dp"
+	            android:layout_marginTop="7dp"
+	            android:gravity="center_vertical"
+	            android:src="@drawable/reload"
+	             />
+
+	        </FrameLayout>
+	        
+		    <TextView 
+	            android:id="@+id/LabelRele1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/rele1"
+	            android:textColor="@color/text_button_color"
+	            android:textSize="@dimen/text_size_subttl"
+	            android:textStyle="bold"
+	            android:layout_marginLeft="10dp"/>
+	        </LinearLayout>
+        </RelativeLayout>
+      --> 
+</merge>

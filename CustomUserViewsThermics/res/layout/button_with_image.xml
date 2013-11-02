@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+<!-- <LinearLayout 
+           android:orientation="horizontal"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent" >
+	       <View
+	        	android:layout_width="10dp"
+	        	android:layout_height="fill_parent"
+	        	android:background="@drawable/drop_shadow_left" />
+	       
+		    <LinearLayout
+		        android:id="@+id/layoutButton"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:weightSum="1.0"
+		        android:orientation="vertical"
+		        android:state_enabled="true"
+		        android:clickable="true"
+		         >
+			         	<View
+				            android:layout_weight="0.02"
+				        	android:layout_width="fill_parent"
+				        	android:layout_height="0dp"
+				        	android:background="@drawable/drop_shadow_top" >
+			    		</View>
+						<RelativeLayout
+				        android:id="@+id/layoutContent"
+				        android:layout_width="match_parent"
+				        android:orientation="vertical"
+				        android:layout_height="0dp"
+				        android:layout_weight="0.94"
+				        android:layout_marginRight="-5dp"
+				        android:background="@drawable/button_background_with_border">
+				        
+				        <ImageView
+				            android:id="@+id/imageViewButtonCustom"
+				            android:layout_width="48dp"
+				            android:layout_height="48dp"
+				            android:layout_centerHorizontal="true"
+				            android:layout_centerVertical="true"
+				            android:layout_marginBottom="-5dp"
+				            android:contentDescription="@string/content_description_image"
+				            android:src="@drawable/ic_launcher" />
+				
+				        <TextView
+				            android:id="@+id/textViewButton"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_alignParentLeft="true"
+				            android:layout_marginLeft="5dp"
+				            android:layout_marginBottom="0dp"
+				            android:layout_below="@+id/imageViewButtonCustom"
+				            android:text="@string/title_button"
+				            android:textColor="@color/button_text"
+				            android:textSize="8pt"
+				            android:textStyle="bold" />
+				        
+				        </RelativeLayout>
+				        <View
+				            android:layout_weight="0.05"
+				        	android:layout_width="fill_parent"
+				        	android:layout_height="0dp"
+				        	android:background="@drawable/drop_shadow" >
+				    	</View>
+		    </LinearLayout>
+		    
+	    	<View
+	        	android:layout_width="3dp"
+	        	android:layout_height="fill_parent"
+	        	android:background="@drawable/drop_shadow_right" />
+	     	</LinearLayout> 
+     
+      
+      -->
+        
+		    <LinearLayout
+		        android:id="@+id/layoutButton"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:weightSum="1.0"
+		        android:background="#000000"
+		        android:orientation="vertical"
+		        android:state_enabled="true"
+		        android:clickable="true"
+		         >
+
+						<RelativeLayout
+				        android:id="@+id/layoutContent"
+				        android:layout_width="match_parent"
+				        android:orientation="vertical"
+				        android:layout_height="0dp"
+				        android:layout_weight="1.0"
+				        android:layout_marginLeft="2dp"
+				        android:layout_marginRight="5dp"
+				        android:layout_marginBottom="3dp"
+				        android:layout_marginTop="5dp"
+				        android:paddingTop="0dp"
+				        android:paddingBottom="2dp"
+				        android:background="@drawable/button_background_with_border">
+				        
+				        <ImageView
+				            android:id="@+id/imageViewButtonCustom"
+				            android:layout_width="40dp"
+				            android:layout_height="40dp"
+				            android:layout_marginTop="0dp"
+				            android:layout_centerHorizontal="true"
+				            android:contentDescription="@string/content_description_image"
+				            android:src="@drawable/ic_launcher" />
+
+				        <TextView
+				            android:id="@+id/textViewButton"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_alignParentBottom="true"
+				            android:layout_marginLeft="5dp"
+				            android:layout_marginTop="2dp"
+				            android:text="@string/title_button"
+				            android:textColor="@color/button_text"
+				            android:textSize="8pt"
+				            android:textStyle="bold" />
+				        
+				        </RelativeLayout>
+
+		    </LinearLayout>
+
+</merge>

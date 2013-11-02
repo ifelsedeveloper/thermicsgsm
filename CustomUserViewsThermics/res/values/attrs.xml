@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="button_with_image">
+        <attr name="valueTitle" format="string" localization="suggested" />
+        <attr name="valueBackground" format="color" />
+        <attr name="valueBackgroundGradient1" format="color" />
+        <attr name="valueBackgroundGradient2" format="color" />
+        <attr name="valueImage" format="reference"/>
+        <attr name="valueImageWidth" format="dimension"/>
+        <attr name="valueImageHeight" format="dimension"/>
+        <attr name="valueBorderColor" format = "color"/>
+        <attr name="valueWith" format="dimension"/>
+        <attr name="valueHeight" format="dimension"/>
+        <attr name="valueBorderWith" format="dimension"/>
+    </declare-styleable>
+
+</resources> 

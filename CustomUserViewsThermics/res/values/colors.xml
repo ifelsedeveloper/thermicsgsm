@@ -1,0 +1,24 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <color name="window_background">#e9e8ec</color>
+    <color name="window_background_light">#faf9fd</color>
+	<color name="button_text">#ffffffff</color>
+	<color name="button_green">#ff509237</color>
+	<color name="button_light_blue">#ff0099d9</color>
+	<color name="button_light_orange">#fff16723</color>
+	<color name="button_blue">#ff0e50a3</color>
+	<color name="button_border_black">#ff000000</color>
+	<color name="gradient_green1">#ff185322</color>
+	<color name="gradient_green2">#ff16461f</color>
+	<color name="gradient_light_green1">#ff5aa519</color>
+	<color name="gradient_light_green2">#ff6cb91e</color>
+	<color name="gradient_purpure1">#ff5133ab</color>
+	<color name="gradient_purpure2">#ff643ebf</color>
+	<color name="gradient_orange1">#ffd24726</color>
+	<color name="gradient_orange2">#ffde572e</color>
+	<color name="gradient_blue1">#ff2672ec</color>
+	<color name="gradient_blue2">#ff2c8def</color>
+	<color name="gradient_red1">#ffac193d</color>
+	<color name="gradient_red2">#ffbf1e4b</color>
+</resources>
