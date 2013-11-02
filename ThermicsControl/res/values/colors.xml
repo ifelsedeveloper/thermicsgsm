@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_color11">#E46C0A</color>
+    <color name="background_color22">#E39624</color>
+    <color name="background_color">#d45700</color>
+    <color name="background_settings_color">#A43C05</color>
+    <color name="background_button_color">#ff6a15</color>
+    <color name="background_button_color2">#Bf5010</color>
+    <color name="border_button_color">#442211</color>
+    <color name="selected_button_color">#FFADAA</color>
+    <color name="text_button_color">#fefefe</color>
+    <color name="config_title_color">#24343e</color>
+    <color name="devider_color">#eeeeee</color>
+    <color name="text_black">#000000</color>
+    <color name="version_bkgrd">#1a1a48</color>
+    <color name="light_grey_color">#aaaaaa</color>
+    
+</resources>

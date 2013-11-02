@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_settings_param">Управление параметрами</string>
+    <string name="title_config_system">Настройки системы</string>
+    <string name="title_sytem_messages">Сообщения от системы</string>
+    <string name="title_last_report">Последнее сообщение</string>
+    <string name="title_request_report">Запрос отчёта</string>
+    <string name="title_guard_set">Охрана поставить/снять</string>
+    <string name="title_request_balans">Запрос баланса</string>
+    <string name="title_label_thermix">THERMICS</string>
+    <string name="title_label_gsm">GSM</string>
+    <dimen name="size_gsm_text">12dp</dimen>
+    <color name="color_gsm_tetx">#ffd700</color>
+    <dimen name="thremix">24dp</dimen>
+    <dimen name="width_button">300dp</dimen>
+    <dimen name="height_button">50dp</dimen>
+    <dimen name="size_button_text">8pt</dimen>
+    <dimen name="size_title_text">12pt</dimen>
+    <dimen name="size_button_text_small">7pt</dimen>
+</resources>

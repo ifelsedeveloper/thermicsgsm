@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_green_border"
+    android:orientation="vertical" >
+
+    
+    
+    <LinearLayout
+        android:id="@+id/layoutTimer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:background="@drawable/background_green_border"
+        android:clickable="true"
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+		
+        <LinearLayout
+        	android:id="@+id/layoutFunction"
+        	android:layout_width="fill_parent"
+        	android:layout_height="wrap_content"
+        	android:clickable="true"
+        	android:weightSum="1.0"
+        	android:orientation="horizontal" >
+        	
+        <TextView
+            android:id="@+id/titleTimerDestenation"
+            android:layout_width="0dp"
+            android:layout_weight="1.0"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/boiler"
+            android:textColor="@color/text_button_color"
+            android:textSize="@dimen/size_button_text"
+            android:textStyle="bold" />
+        
+        <!-- 
+        <Spinner
+        android:id="@+id/spinnerTimerDestenation"
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_button_color"
+        android:textSize="@dimen/size_button_text" />
+         -->
+         
+        <CheckBox
+            android:id="@+id/checkBoxEnableTimer"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:button="@drawable/box"
+            android:gravity="center_vertical" />
+        
+    	</LinearLayout>
+        
+        <TextView
+            android:id="@+id/titleStartWork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/start_work_timer"
+            android:textColor="@color/text_button_color"
+            android:textSize="@dimen/size_button_text"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/valueTimeStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/value_hour"
+            android:textColor="@color/text_button_color"
+            android:textSize="@dimen/text_size_subttl"
+            android:textStyle="bold" />
+        
+        
+        <TextView
+            android:id="@+id/titleStopWork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:text="@string/end_work_timer"
+            android:textColor="@color/text_button_color"
+            android:textSize="@dimen/size_button_text"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/valueTimeStop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/value_hour"
+            android:textColor="@color/text_button_color"
+            android:textSize="@dimen/text_size_subttl"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/titleTimeRepeatDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/repeat"
+            android:textColor="@color/text_button_color"
+            android:textSize="@dimen/size_button_text"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/valueTimeRepeatDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/daily_request"
+            android:textColor="@color/text_button_color"
+            android:textSize="@dimen/text_size_subttl"
+            android:textStyle="bold" />
+        
+    </LinearLayout>
+
+    
+    
+</LinearLayout>

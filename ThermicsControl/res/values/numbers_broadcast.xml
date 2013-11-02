@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="additional_numbers">Дополнительные номера рассылок</string>
+	<string name="add_number">Добавить номер</string>
+	<string name="delete_all_numbers">Удалить все номера</string>
+	<string name="name_contact">Имя</string>
+	<string name="number">Номер</string>
+	<string name="numbers_from_contacts">&#8230;</string>
+	<string name="change">Изменить</string>
+	<string name="delete">Удалить</string>
+	<string name="cancel">Отмена</string>
+</resources>

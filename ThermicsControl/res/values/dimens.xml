@@ -1,0 +1,14 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">2dp</dimen>
+    <dimen name="activity_vertical_margin">2dp</dimen>
+	<dimen name="beetwen_button">2dp</dimen>
+	<dimen name="size_image1">40dp</dimen>
+	<dimen name="size_image2">30dp</dimen>
+	<dimen name="height_login_form_element">40dp</dimen>
+	<dimen name="height_login_form_element_small">38dp</dimen>
+	<dimen name="text_main_size">8pt</dimen>
+	<dimen name="text_main_size_small">7pt</dimen>
+	<dimen name="text_main_size_big">9pt</dimen>
+</resources>

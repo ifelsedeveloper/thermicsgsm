@@ -1,0 +1,174 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Holo">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.<style name="AppTheme" parent="android:style/Theme.Holo.Light">
+        -->
+        
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="android:style/Theme.Holo">
+        	<item name="android:windowTitleSize">44dip</item>
+			<item name="android:windowTitleBackgroundStyle">@style/TextViewTitleActivity</item>
+    </style>
+
+    <style name="TextViewConfigTitle" parent="@android:style/TextAppearance.Widget.TextView">
+			<item name="android:layout_width">fill_parent</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:background">@color/config_title_color</item>
+            <item name="android:textSize">@dimen/size_button_text</item>
+            <item name="android:textStyle">bold</item>
+            <item name="android:paddingLeft">10dp</item>
+    </style>
+    <style name="TextViewConfigSubTitle" parent="@android:style/TextAppearance.Widget.TextView">
+    		<item name="android:layout_width">wrap_content</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:layout_alignParentLeft">true</item>
+            <item name="android:layout_centerVertical">true</item>
+            <item name="android:gravity">center_vertical</item>
+            <item name="android:textSize">@dimen/main_text_size</item>
+            <item name="android:textStyle">bold</item>
+            <item name="android:paddingLeft">12dp</item>
+    </style>
+    <style name="ViewDeviderHorizontal">
+		<item name="android:layout_height">2dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:background">@color/devider_color</item>
+    </style>
+    <style name="ViewDeviderVertical">
+		<item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_width">2dp</item>
+        <item name="android:background">@color/devider_color</item>
+    </style>
+    <style name="CheckBoxGreen">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">45dp</item>     
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+    </style>
+    <style name="TextViewTitleActivity" parent="@android:style/TextAppearance.Widget.TextView">
+    	<item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:textColor">@color/text_button_color</item>
+        <item name="android:textSize">@dimen/size_button_text</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="TitleOkCancle">
+        <item name="android:layout_width">fill_parent</item> 
+    	<item name="android:layout_height">wrap_content</item>
+    	<item name="android:layout_alignParentBottom">true</item>
+    	<item name="android:layout_alignParentLeft">true</item>
+    	<item name="android:layout_marginTop">2dp</item>
+    	<item name="android:weightSum">1.0</item>
+    	<item name="android:background">@color/config_title_color</item>
+    </style>
+    <style name="SettingsElement">
+    	<item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">60dp</item>
+		<item name="android:orientation">vertical</item>
+		<item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:gravity">center_vertical</item>
+     </style>
+     
+    <style name="CheckElem">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">5dp</item>
+    </style>
+    
+    <style name="ImageElem">
+        <item name="android:layout_width">40dp</item>
+	    <item name="android:layout_height">30dp</item>
+	    <item name="android:layout_marginLeft">12dp</item>
+	    <item name="android:layout_marginRight">15dp</item>
+	    <item name="android:layout_marginTop">14dp</item>
+	    <item name="android:gravity">center_vertical</item>
+    </style>
+    
+    <style name="CheckBoxElem">
+        <item name="android:layout_width">60dp</item>
+	    <item name="android:layout_height">45dp</item>     
+	    <item name="android:gravity">center_vertical</item>
+	    <item name="android:layout_gravity">center_vertical</item>
+	    <item name="android:button">@drawable/box</item>
+    </style>
+    
+    <style name="TextViewValue">
+         <item name="android:layout_width">wrap_content</item>
+         <item name="android:layout_height">wrap_content</item>
+         <item name="android:layout_alignParentLeft">true</item>
+         <item name="android:layout_centerVertical">true</item>
+         <item name="android:gravity">center_vertical</item>
+         <item name="android:textColor">@color/text_button_color</item>
+         <item name="android:textSize">@dimen/size_text_relefunction</item>
+         <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="ButtonPlus">
+         <item name="android:layout_width">35dp</item>
+         <item name="android:layout_height">35dp</item>
+         <item name="android:gravity">center_vertical|center_horizontal</item>
+         <item name="android:layout_centerVertical">true</item>
+         <item name="android:text">@string/plus</item>
+         <item name="android:layout_marginLeft">2dp</item>
+         <item name="android:textColor">@color/text_button_color</item>
+         <item name="android:textColorHint">@color/selected_button_color</item>
+         <item name="android:textSize">@dimen/decinc</item>
+         <item name="android:textStyle">bold</item>
+         <item name="android:background">@drawable/background_button</item>
+    </style>
+    
+    <style name="ButtonMinus">
+         <item name="android:layout_width">35dp</item>
+         <item name="android:layout_height">35dp</item>
+         <item name="android:gravity">center_vertical|center_horizontal</item>
+         <item name="android:layout_centerVertical">true</item>
+         <item name="android:text">@string/minus</item>
+         <item name="android:layout_marginLeft">2dp</item>
+         <item name="android:textColor">@color/text_button_color</item>
+         <item name="android:textColorHint">@color/selected_button_color</item>
+         <item name="android:textSize">@dimen/decinc</item>
+         <item name="android:textStyle">bold</item>
+         <item name="android:background">@drawable/background_button</item>
+    </style>
+    
+    <style name="EditText3EmsValue">
+         <item name="android:layout_width">40dp</item>
+         <item name="android:layout_height">40dp</item>
+         <item name="android:layout_centerVertical">true</item>
+         <item name="android:layout_marginLeft">1dp</item>
+		 <item name="android:layout_marginRight">5dp</item>
+         <item name="android:background">@drawable/border_textfield</item>
+         <item name="android:ems">3</item>
+         <item name="android:gravity">center_vertical|center_horizontal</item>
+         <item name="android:inputType">numberSigned</item>
+         <item name="android:focusable">false</item>
+		 <item name="android:focusableInTouchMode">false</item>
+		 <item name="android:clickable">false</item>
+		 <item name="android:layout_alignParentRight">true</item>
+		 <item name="android:textColor">@color/text_black</item>
+    </style>
+</resources>

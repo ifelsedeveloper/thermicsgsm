@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="row_height">60dp</dimen>
+    <dimen name="devider_height">2dp</dimen>
+    <string name="settings_parapm">Управление параметрами</string>
+    <string name="auto_rele_warm">Реле термостата</string>
+    <string name="sensor_number">Датчик №2</string>
+    <string name="function_sensor">Температура воздуха</string>
+    <string name="tmp_water">Температура воды, С</string>
+    <string name="tmp_air">Температура воздуха, С</string>
+    <string name="sensor2">Датчик №2</string>
+    <string name="sensor3">Датчик №3</string>
+    <string name="light">Освещение</string>
+    <string name="boiler">Котёл</string>
+    <string name="alarm">Сирена</string>
+    <string name="microphone">Микрофон</string>
+    <string name="rele1">Реле №1</string>
+    <string name="rele2">Реле №2</string>
+    <string name="rele3">Реле №3</string>
+    <string name="Upr">Управление</string>
+    <string name="timer">Таймер</string>
+    <string name="UprSubttl">Выход Упр.</string>
+    <string name="on_off">Вкл/Откл</string>
+    <string name="auto_on">Вкл/Авт</string>
+    <string name="control">Упр.</string>
+    <string name="send">Отправить</string>
+    <string name="dec">&lt;</string>
+    <string name="inc">&gt;</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="datatmpwater">20</string>
+    <string name="datatmpair">24</string>
+    <string name="enable">ВКЛ</string>
+    <string name="disable">ВЫКЛ</string>
+    <dimen name="decinc">25dp</dimen>
+    <dimen name="text_size_subttl">11dp</dimen>
+    <string name="accept_button">Принять</string>
+    <string name="apply_button">Применить</string>
+</resources>

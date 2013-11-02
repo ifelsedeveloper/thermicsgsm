@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="function_tmpsensor">Назначение термодатчиков</string>
+	<string name="head_number_tmp_sensor">№ Датчика</string>
+	<string name="head_tmp_sensor_function">Назначение</string>
+	<string name="n_tmp_sensor1">№1 (встроенный)</string>
+	<string name="n_tmp_sensor2">№2 (внешний)</string>
+	<string name="n_tmp_sensor3">№3 (внешний)</string>
+	<string name="n_tmp_sensor4">№4 (внешний)</string>
+	<string name="n_tmp_sensor5">№5 (внешний)</string>
+	<string name="n_tmp_sensor6">№6 (внешний)</string>
+	<string name="tmp_sensor_additional">Дополнительные термодатчики</string>
+	<string name="tmp_function_sensor4">Доп. датчик 4</string>
+	<string name="tmp_function_sensor5">Доп. датчик 5</string>
+	<string name="tmp_function_sensor6">Доп. датчик 6</string>
+</resources>

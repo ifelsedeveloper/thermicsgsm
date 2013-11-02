@@ -1,0 +1,231 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical"
+    tools:context=".FunctionReleActivity" >
+    
+
+<TextView
+        android:id="@+id/titleFunctionRele"
+        android:text="@string/function_rele"
+        style="@style/TextViewTitleActivity"
+        android:background="@color/button_blue"  />
+
+<View   android:id="@+id/firstDivider1"
+        android:layout_height="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_below="@+id/titleFunctionRele"
+        android:layout_width="fill_parent"
+        android:background="#ffffff" />
+
+
+<ScrollView
+	    android:id="@+id/ScrollViewReleFunctions"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_below="@+id/firstDivider1"
+	    android:layout_above="@+id/layoutOKCancel"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
+	    android:layout_margin="5dp"
+	     >
+	<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    <!-- 1 row -->
+        <LinearLayout
+        android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content"
+    	android:weightSum="1.0" >
+
+            <TextView
+            	    android:id="@+id/titleRele1"
+            	    android:layout_width="0dp" 
+            	    android:layout_weight="0.35"
+            	    android:layout_height="wrap_content"
+            	    android:gravity="center_vertical"
+            	    android:text="@string/rele1"
+            	    android:textColor="@color/text_button_color"
+            	    android:textSize="@dimen/size_text_relefunction"
+            		android:textStyle="bold" />
+            
+            	<EditText
+            	    android:id="@+id/editTextFunctionRele1"
+            	    android:layout_width="0dp" 
+            	    android:layout_weight="0.65"
+            	    android:layout_height="wrap_content"
+            	    android:layout_marginLeft="10dp"
+            	    android:gravity="center_vertical|center_horizontal"
+            	    android:inputType="text"
+            	    android:text="@string/light"
+            	    android:focusable="true"
+					android:focusableInTouchMode="true">
+
+            	</EditText>     	
+		</LinearLayout>
+    
+        <View   android:id="@+id/firstDivider2"
+        android:layout_height="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_width="fill_parent"
+        android:background="#ffffff" />
+        
+        <!-- 2 row -->
+        <LinearLayout
+        android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content"
+    	android:weightSum="1.0" >
+
+            <TextView
+            	    android:id="@+id/titleRele2"
+            	    android:layout_width="0dp" 
+            	    android:layout_weight=".35"
+            	    android:layout_height="wrap_content"
+            	    android:gravity="center_vertical"
+            	    android:text="@string/rele2"
+            	    android:textColor="@color/text_button_color"
+            	    android:textSize="@dimen/size_text_relefunction"
+            		android:textStyle="bold" />
+            
+            	<EditText
+            	    android:id="@+id/editTextFunctionRele2"
+            	    android:layout_width="0dp" 
+            	    android:layout_weight=".65"
+            	    android:layout_height="wrap_content"
+            	    android:layout_marginLeft="10dp"
+            	    android:gravity="center_vertical|center_horizontal"
+            	    android:inputType="text"
+            	    android:text="@string/boiler"
+            	    android:focusable="true"
+					android:focusableInTouchMode="true">
+
+            	</EditText>     	
+		</LinearLayout>
+    
+        <View   android:id="@+id/firstDivider3"
+        android:layout_height="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_width="fill_parent"
+        android:background="#ffffff" />
+        
+        <!-- 3 row -->
+        <LinearLayout
+        android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content"
+    	android:weightSum="1.0" >
+
+            <TextView
+            	    android:id="@+id/titleRele3"
+            	    android:layout_width="0dp" 
+            	    android:layout_weight=".35"
+            	    android:layout_height="wrap_content"
+            	    android:gravity="center_vertical"
+            	    android:text="@string/rele3"
+            	    android:textColor="@color/text_button_color"
+            	    android:textSize="@dimen/size_text_relefunction"
+            		android:textStyle="bold" />
+            
+            	<EditText
+            	    android:id="@+id/editTextFunctionRele3"
+            	    android:layout_width="0dp" 
+            	    android:layout_weight=".65"
+            	    android:layout_height="wrap_content"
+            	    android:layout_marginLeft="10dp"
+            	    android:gravity="center_vertical|center_horizontal"
+            	    android:inputType="text"
+            	    android:text="@string/alarm"
+            	    android:focusable="true"
+					android:focusableInTouchMode="true">
+
+            	</EditText>     	
+		</LinearLayout>
+    
+        <View   android:id="@+id/firstDivider4"
+        android:layout_height="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_width="fill_parent"
+        android:background="#ffffff" />
+        
+     
+    
+	   <!-- 4 row -->
+        <LinearLayout
+        android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content"
+    	android:weightSum="1.0" >
+
+            <TextView
+            	    android:id="@+id/titleUpr"
+            	    android:layout_width="0dp" 
+            	    android:layout_weight=".35"
+            	    android:layout_height="wrap_content"
+            	    android:gravity="center_vertical"
+            	    android:text="@string/output_upr"
+            	    android:textColor="@color/text_button_color"
+            	    android:textSize="@dimen/size_text_relefunction"
+            		android:textStyle="bold" />
+            
+            	<EditText
+            	    android:id="@+id/editTextFunctionUpr"
+            	    android:layout_width="0dp" 
+            	    android:layout_weight=".65"
+            	    android:layout_height="wrap_content"
+            	    android:layout_marginLeft="10dp"
+            	    android:gravity="center_vertical|center_horizontal"
+            	    android:inputType="text"
+            	    android:text="@string/Upr"
+            	    android:focusable="true"
+					android:focusableInTouchMode="true">
+
+            	</EditText>     	
+		</LinearLayout>
+    
+        <View   android:id="@+id/firstDivider5"
+        android:layout_height="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_width="fill_parent"
+        android:background="#ffffff" />
+        
+     </LinearLayout>
+	
+    </ScrollView>
+<LinearLayout
+    android:id="@+id/layoutOKCancelFunctionRele"
+    style="@style/TitleOkCancle" >
+<Button
+    android:id="@+id/buttonReleOK"
+    android:layout_width="0dp"
+    android:layout_height="40dp"
+    android:layout_weight=".50"
+    android:text="@string/OK"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="1dp"
+    android:textColor="@color/text_button_color"
+    android:textStyle="bold"
+    android:onClick="OnClickOkButton"
+    />
+<Button
+    android:id="@+id/buttonReleCancel"
+    android:layout_width="0dp"
+    android:layout_height="40dp"
+    android:layout_weight=".50"
+    android:layout_marginLeft="1dp"
+    android:layout_marginRight="2dp"
+    android:text="@string/Cancel"
+    android:textColor="@color/text_button_color"
+    android:textStyle="bold"
+    android:onClick="OnClickCancelButton"
+    />
+</LinearLayout>
+</RelativeLayout>

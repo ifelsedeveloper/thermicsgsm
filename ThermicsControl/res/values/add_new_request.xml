@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enable_request">Включить запрос</string>
+	<string name="time">Время</string>
+	<string name="repeat">Повторить</string>
+	<string name="daily_request">Каждый день</string>
+	<string name="set">Установить</string>
+	<string name="value_hour">12</string>
+	<string name="value_minutes">46</string>
+	<string name="devider_time">:</string>
+	<string name="time_value">12:46</string>  
+	<dimen name="height_add_request">60dp</dimen>  
+</resources>

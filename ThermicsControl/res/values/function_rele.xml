@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="function_rele">Назначение реле</string>
+    <string name="OK">OK</string>
+    <string name="Cancel">Отмена</string>
+    <string name="output_upr">Выход упр.</string>
+    <dimen name="width_rele_function">200dp</dimen>
+    <dimen name="heigt_rele_function">40dp</dimen>
+    <dimen name="size_text_relefunction">8pt</dimen>
+</resources>

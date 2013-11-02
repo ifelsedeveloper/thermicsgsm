@@ -1,0 +1,239 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:background="@color/window_background"
+    android:orientation="vertical"
+    tools:context=".MainMenuActivity" >
+
+    <RelativeLayout 
+        android:id="@+id/RelativeLayoutMainMenuTitle"
+ 	    style="@style/TextViewTitleActivity"
+ 	    android:background="@drawable/background_title"
+ 	    android:layout_marginBottom="2dp"
+ 	    >
+
+        <TextView
+            android:id="@+id/textViewTitleCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="@string/company_name"
+            android:textColor="@color/text_button_color"
+            android:textSize="@dimen/size_title_text"
+            android:textStyle="bold|italic" />
+		
+        <View   android:id="@+id/firstDivider1"
+        		style="@style/ViewDeviderVertical"
+        		android:layout_toLeftOf="@+id/imageViewInformationHelp" />
+        
+        <ImageView
+            android:id="@+id/imageViewInformationHelp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:onClick="onClickLayoutLabelThermix"
+            android:src="@drawable/information" />
+    
+    </RelativeLayout> 
+ 
+   	<ScrollView
+	    android:id="@+id/ScrollViewMainMenu"
+	    android:layout_width="match_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_below="@+id/RelativeLayoutMainMenuTitle"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
+	     >
+    <RelativeLayout 
+        android:id="@+id/RelativeLayoutInScrollView"
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="wrap_content"
+ 	    >
+ <LinearLayout
+    android:id="@+id/LinearLayoutMainActions"
+    android:layout_width="fill_parent"
+ 	android:layout_height="360dp"
+ 	android:layout_below="@+id/RelativeLayoutMainMenuTitle"
+ 	android:orientation="vertical"
+ 	android:weightSum="0.75"
+ 	     >
+ 	
+ 	<LinearLayout
+ 	    android:id="@+id/relativeLayoutRow1"
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="0dp"
+ 	    android:layout_weight="0.25"
+ 	    android:weightSum="1.0"
+ 	     >
+        <com.dev.customuserviewsthermics.ButtonWithImage
+	        android:id="@+id/buttonWithImageMessages"
+	        android:layout_width="0dp"
+	        android:layout_weight="0.50"
+	        android:layout_margin="@dimen/beetwen_button"
+	        android:layout_height="fill_parent"
+	        android:clickable="true"
+	        android:onClick="onClickReportSystem"
+	        custom:valueBackground="@color/button_green"
+	        custom:valueBackgroundGradient1="@color/gradient_green1"
+	        custom:valueBackgroundGradient2="@color/gradient_green2"
+	        custom:valueImage="@drawable/messages"
+	        custom:valueImageHeight="@dimen/size_image1"
+	        custom:valueImageWidth="@dimen/size_image1"
+	        custom:valueTitle="@string/messages" >
+    	</com.dev.customuserviewsthermics.ButtonWithImage>
+    	
+    	<com.dev.customuserviewsthermics.ButtonWithImage
+	        android:id="@+id/buttonWithImage2"
+	        android:layout_width="0dp"
+	        android:layout_weight="0.50"
+	        android:layout_margin="@dimen/beetwen_button"
+	        android:layout_height="fill_parent"
+	        android:clickable="true"
+	        android:onClick="onClickSettingsParam"
+	        custom:valueImage="@drawable/settings"
+	        custom:valueBackground="@color/button_light_blue"
+	        custom:valueBackgroundGradient1="@color/gradient_purpure1"
+	        custom:valueBackgroundGradient2="@color/gradient_purpure2"
+	        custom:valueImageHeight="@dimen/size_image1"
+	        custom:valueImageWidth="@dimen/size_image1"
+	        custom:valueTitle="@string/config" >
+    	</com.dev.customuserviewsthermics.ButtonWithImage>
+	</LinearLayout>
+
+ 	<LinearLayout
+ 	    android:id="@+id/relativeLayoutRow2"
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="0dp"
+ 	    android:layout_weight="0.25"
+ 	    android:weightSum="1.0"
+ 	     >
+        <com.dev.customuserviewsthermics.ButtonWithImage
+	        android:id="@+id/buttonWithImageReport"
+	        android:layout_width="0dp"
+	        android:layout_weight="0.50"
+	        android:layout_margin="@dimen/beetwen_button"
+	        android:layout_height="fill_parent"
+	        android:clickable="true"
+	        android:onClick="onClickRequestReport"
+	        custom:valueBackground="@color/button_light_orange"
+	        custom:valueBackgroundGradient1="@color/gradient_light_green1"
+	        custom:valueBackgroundGradient2="@color/gradient_light_green2"
+	        custom:valueImage="@drawable/report3"
+	        custom:valueImageHeight="@dimen/size_image1"
+	        custom:valueImageWidth="@dimen/size_image1"
+	        custom:valueTitle="@string/report" >
+    	</com.dev.customuserviewsthermics.ButtonWithImage>
+    	
+    	<com.dev.customuserviewsthermics.ButtonWithImage
+	        android:id="@+id/buttonWithImageGuardian"
+	        android:layout_width="0dp"
+	        android:layout_weight="0.50"
+	        android:layout_margin="@dimen/beetwen_button"
+	        android:layout_height="fill_parent"
+	        android:clickable="true"
+	        android:onClick="onClickGuardianSet"
+	        custom:valueBackground="@color/button_light_orange"
+	        custom:valueBackgroundGradient1="@color/gradient_blue1"
+	        custom:valueBackgroundGradient2="@color/gradient_blue2"
+	        custom:valueImage="@drawable/lock"
+	        custom:valueImageHeight="@dimen/size_image1"
+	        custom:valueImageWidth="@dimen/size_image1"
+	        custom:valueTitle="@string/guardian" >
+    	</com.dev.customuserviewsthermics.ButtonWithImage>
+    	
+	</LinearLayout>
+
+	
+	
+		<LinearLayout
+ 	    android:id="@+id/relativeLayoutRow6"
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="0dp"
+ 	    android:layout_weight="0.25"
+ 	    android:weightSum="1.0"
+ 	     >
+        <com.dev.customuserviewsthermics.ButtonWithImage
+	        android:id="@+id/buttonWithImageSettings"
+	        android:layout_width="0dp"
+	        android:layout_weight="0.50"
+	        android:layout_margin="@dimen/beetwen_button"
+	        android:layout_height="fill_parent"
+	        android:clickable="true"
+	        android:onClick="onClickConfigSystem"
+	        custom:valueBackground="@color/button_blue"
+	        custom:valueImage="@drawable/config"
+	        custom:valueImageHeight="@dimen/size_image2"
+	        custom:valueImageWidth="@dimen/size_image2"
+	        custom:valueTitle="@string/settings" >
+    	</com.dev.customuserviewsthermics.ButtonWithImage>
+    	
+    	<com.dev.customuserviewsthermics.ButtonWithImage
+	        android:id="@+id/buttonWithImageBalalnce"
+	        android:layout_width="0dp"
+	        android:layout_weight="0.50"
+	        android:layout_margin="@dimen/beetwen_button"
+	        android:layout_height="fill_parent"
+	        android:clickable="true"
+	        android:onClick="onClickRequestBalans"
+	        custom:valueBackground="@color/button_light_orange"
+	        custom:valueBackgroundGradient1="@color/gradient_red1"
+	        custom:valueBackgroundGradient2="@color/gradient_red2"
+	        custom:valueImage="@drawable/cash"
+	        custom:valueImageHeight="@dimen/size_image2"
+	        custom:valueImageWidth="@dimen/size_image2"
+	        custom:valueTitle="@string/balance" >
+    	</com.dev.customuserviewsthermics.ButtonWithImage>
+	</LinearLayout>
+
+
+		
+ 	</LinearLayout>
+	<View   android:id="@+id/firstDivider123"
+        	style="@style/ViewDeviderHorizontal" 
+        	android:layout_below="@+id/LinearLayoutMainActions"/>
+
+
+<LinearLayout
+    android:id="@+id/LinearLayout1LastRep"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_below="@+id/LinearLayoutMainActions"
+    android:layout_margin="@dimen/beetwen_button"
+    android:background="@drawable/background_button" >
+
+    <TextView
+        android:id="@+id/TextViewLastReportTitle"
+        android:text="@string/title_last_report"
+        android:background="@color/gradient_green1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_button_color"
+        android:gravity="center_horizontal" />
+	
+    
+    <TextView
+        android:id="@+id/TextViewLastReport"
+        android:layout_width="fill_parent"
+        android:padding="5sp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_button_color"
+        android:maxLines="25" 
+		android:ellipsize="marquee" 
+		android:singleLine="false"
+        android:text="trMessage. this is very long message. it must be ellipsed." />
+
+</LinearLayout>
+</RelativeLayout>
+</ScrollView>
+</RelativeLayout>
