@@ -47,7 +47,7 @@ public class TimerActionService extends Service {
 				settingsDev = new CSettingsDev(settings,this);
 				
 					TimerValue value = (TimerValue) intent.getSerializableExtra("TimerValue");
-					if(value != null)
+					if(value != null && value.enable)
 					{
 						//Toast.makeText(this,"TimerValue = " + value.toString(), Toast.LENGTH_LONG).show();
 						boolean vkl = intent.getBooleanExtra(ATTRIBUTE_COMMAND, false); 

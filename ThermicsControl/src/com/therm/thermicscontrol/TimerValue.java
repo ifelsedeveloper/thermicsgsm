@@ -122,92 +122,97 @@ public class TimerValue implements Serializable {
 	
 	private void AddToAlarmMangerTimer(Context context,int vhour, int vminute, boolean isStart)
 	{
-		Calendar calendar = Calendar.getInstance();
-		long calTime = calendar.getTimeInMillis()/1000L;
-		int day_of_week = calendar.get(Calendar.DAY_OF_WEEK);
-
-		int hour = calendar.get(Calendar.HOUR_OF_DAY);
-		int minute = calendar.get(Calendar.MINUTE);
-		
-		long timeToSend;
-		timeToSend = calTime - minute*60 - hour * 3600 + vhour *3600 + vminute * 60;
-		if((vhour*60 + vminute)<(hour*60+minute))
+		if(enable)
 		{
-			timeToSend=timeToSend + 24 * 3600;
-			day_of_week++;
-		}
-		
-		//Toast.makeText(this, "number = " + Long.toString(currentRowNumber), Toast.LENGTH_LONG).show();
-		int repeat_time = 7*24*3600*1000;
-		int k = 0;
-		
-		AlarmManager schedulerManger = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-		int [] idIntents = new int[7];
-
+			Calendar calendar = Calendar.getInstance();
+			long calTime = calendar.getTimeInMillis()/1000L;
+			int day_of_week = calendar.get(Calendar.DAY_OF_WEEK);
+	
+			int hour = calendar.get(Calendar.HOUR_OF_DAY);
+			int minute = calendar.get(Calendar.MINUTE);
 			
-		
-		
-		for(int i=(day_of_week + 5)%7;i<7;i++)
-		{
-			if(isStart)
-				idIntents[i] = getStartIdIntent(i);
-			else
-				idIntents[i] = getStopIdIntent(i);
-			
-			Intent intent = new Intent(context, TimerActionService.class);
-
-			//to pass :
-			intent.putExtra("TimerValue", this);  
-			intent.putExtra(TimerActionService.ATTRIBUTE_COMMAND, isStart);
-			int add_time = k*24*3600;
-		    //intent.putExtra("extra", extra)
-			if(idIntents[i] != 0  && !isDay[i])
+			long timeToSend;
+			timeToSend = calTime - minute*60 - hour * 3600 + vhour *3600 + vminute * 60;
+			if((vhour*60 + vminute)<(hour*60+minute))
 			{
-				intent.setAction(Long.toString(idIntents[i]));
-				PendingIntent pIntent = PendingIntent.getService(context, 0, intent, 0);
-				schedulerManger.cancel(pIntent);
-				idIntents[i] = 0;
+				timeToSend=timeToSend + 24 * 3600;
+				day_of_week++;
 			}
-			if(idIntents[i] != 0  && isDay[i])
-			{
-				intent.setAction(Long.toString(idIntents[i]));
-				PendingIntent pIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+			
+			//Toast.makeText(this, "number = " + Long.toString(currentRowNumber), Toast.LENGTH_LONG).show();
+			int repeat_time = 7*24*3600*1000;
+			int k = 0;
+			
+			AlarmManager schedulerManger = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+			int [] idIntents = new int[7];
+	
 				
-				schedulerManger.set(AlarmManager.RTC_WAKEUP, (timeToSend + 4)*1000, pIntent);
-				schedulerManger.setRepeating(AlarmManager.RTC_WAKEUP,(timeToSend + 2 + add_time)*1000, repeat_time, pIntent);
-			}
-			k++;
-		}
-		
-		for(int i=0;i<(day_of_week+5)%7;i++)
-		{
-			if(isStart)
-				idIntents[i] = getStartIdIntent(i);
-			else
-				idIntents[i] = getStopIdIntent(i);
 			
-			Intent intent = new Intent(context, TimerActionService.class);
-			intent.putExtra("TimerValue", this); 
-			intent.putExtra(TimerActionService.ATTRIBUTE_COMMAND, isStart);
-			int add_time = k*24*3600;
-		    //intent.putExtra("extra", extra)
-			if(idIntents[i] != 0  && isDay[i] == false)
+			
+			for(int i=(day_of_week + 5)%7;i<7;i++)
 			{
-				intent.setAction(Long.toString(idIntents[i]));
-				PendingIntent pIntent = PendingIntent.getService(context, 0, intent, 0);
-				schedulerManger.cancel(pIntent);
-				idIntents[i] = 0;
-			}
-			if(idIntents[i] != 0  && isDay[i] == true)
-			{
-				intent.setAction(Long.toString(idIntents[i]));
-				PendingIntent pIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+				if(isStart)
+					idIntents[i] = getStartIdIntent(i);
+				else
+					idIntents[i] = getStopIdIntent(i);
 				
-				schedulerManger.set(AlarmManager.RTC_WAKEUP, (timeToSend + 4)*1000, pIntent);
-				schedulerManger.setRepeating(AlarmManager.RTC_WAKEUP,(timeToSend + 2 + add_time)*1000, repeat_time, pIntent);
+				Intent intent = new Intent(context, TimerActionService.class);
+	
+				//to pass :
+				intent.putExtra("TimerValue", this);  
+				intent.putExtra(TimerActionService.ATTRIBUTE_COMMAND, isStart);
+				int add_time = k*24*3600;
+			    //intent.putExtra("extra", extra)
+				if(idIntents[i] != 0  && !isDay[i])
+				{
+					intent.setAction(Long.toString(idIntents[i]));
+					PendingIntent pIntent = PendingIntent.getService(context, 0, intent, 0);
+					schedulerManger.cancel(pIntent);
+					idIntents[i] = 0;
+				}
+				if(idIntents[i] != 0  && isDay[i])
+				{
+					intent.setAction(Long.toString(idIntents[i]));
+					PendingIntent pIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+					
+					schedulerManger.set(AlarmManager.RTC_WAKEUP, (timeToSend + 4)*1000, pIntent);
+					schedulerManger.setRepeating(AlarmManager.RTC_WAKEUP,(timeToSend + 2 + add_time)*1000, repeat_time, pIntent);
+				}
+				k++;
 			}
-			k++;
+			
+			for(int i=0;i<(day_of_week+5)%7;i++)
+			{
+				if(isStart)
+					idIntents[i] = getStartIdIntent(i);
+				else
+					idIntents[i] = getStopIdIntent(i);
+				
+				Intent intent = new Intent(context, TimerActionService.class);
+				intent.putExtra("TimerValue", this); 
+				intent.putExtra(TimerActionService.ATTRIBUTE_COMMAND, isStart);
+				int add_time = k*24*3600;
+			    //intent.putExtra("extra", extra)
+				if(idIntents[i] != 0  && isDay[i] == false)
+				{
+					intent.setAction(Long.toString(idIntents[i]));
+					PendingIntent pIntent = PendingIntent.getService(context, 0, intent, 0);
+					schedulerManger.cancel(pIntent);
+					idIntents[i] = 0;
+				}
+				if(idIntents[i] != 0  && isDay[i] == true)
+				{
+					intent.setAction(Long.toString(idIntents[i]));
+					PendingIntent pIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+					
+					schedulerManger.set(AlarmManager.RTC_WAKEUP, (timeToSend + 4)*1000, pIntent);
+					schedulerManger.setRepeating(AlarmManager.RTC_WAKEUP,(timeToSend + 2 + add_time)*1000, repeat_time, pIntent);
+				}
+				k++;
+			}
 		}
+		else
+			CancelAllTimer(context);
 	}
 	
 	public void CancelAllTimer(Context context)
