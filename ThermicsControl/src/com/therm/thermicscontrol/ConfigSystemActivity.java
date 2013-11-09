@@ -150,7 +150,8 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	editTextLowerBoundTmp,
 	editTextUpperBoundTmp,
 	editTextSMSHead,
-	editTextSMSAarmZone;
+	editTextSMSAarmZone,
+	editSimPassword;
 	
 	CheckBox checkBoxDaylyReport,
 	checkBoxSMSPostanovka,
@@ -439,7 +440,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	String LtitleSMSAlarmZone;
 	String LtextSMSAlarmZone;
 	public static boolean isOKSend = false;
-	
+	boolean isSendNewPassword = false;
 	public void saveParam( )
 	{
 		
@@ -471,11 +472,42 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		
 		//add others....
 		//add commands to queue
-		boolean isAnyway = false;
+		
 		settingsDev.clearQueueCommands();
 		settingsDev.password = LsimPassword;
+		
+		if(!LsimPassword.equalsIgnoreCase(simPassword))
+		{
+			//show dialog
+			final AlertDialog.Builder b = new AlertDialog.Builder(this);
+			b.setTitle("Смена пароля");
+			b.setMessage("Изменить настройки в");
+			b.setPositiveButton("программе", new OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) {
+		        	isSendNewPassword = false;
+		        	saveParamStep2();
+		        }
+		      });
+			b.setNegativeButton("устройстве", new OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) {
+		        	isSendNewPassword = true;
+		        	saveParamStep2();
+		        }});
+			b.setCancelable(false);
+			b.show();
+		}
+		
+		
+ 	}
+	
+	private void saveParamStep2()
+	{
+		boolean isAnyway = false;
+		
+		if(isSendNewPassword)
+			settingsDev.AddSetSimPasswordCommand(LsimPassword,false);
+		
 		settingsDev.AddSetUSSDCommand(LsimUSSD, isAnyway);
-		settingsDev.AddSetSimPasswordCommand(LsimPassword,isAnyway);
 		settingsDev.AddSetDailyReportCommand(LisDailyReport, isAnyway);
 		settingsDev.AddSetIsSMSPostanovkaCommand(LisSMSPostanovka, isAnyway);
 		settingsDev.AddSetIsSMSSnjatieCommand(LisSMSSnjatie, isAnyway);
@@ -492,6 +524,8 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		
 		
 		if(isChangeSIMDevice) settingsDev.AddSwitchSimCommand(LisSIM1);
+		
+		
 		
 		if(settingsDev.sms_to_send.size() > 0)
 		{
@@ -590,12 +624,16 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		    		settings.setNumberSIM(simNumber);
 		    		simNumber2 =  editTextPhoneNumber2.getText().toString();
 		    		settings.setNumberSIM2(simNumber2);
+		    		simPassword = LsimPassword;
+		    		settings.setPinSIM(simPassword);
 		    		titleSMSAlarmZone = editTextSMSHead.getText().toString();
 		    		settings.setTextSMSTitle(titleSMSAlarmZone);
 		    		textSMSAlarmZone = editTextSMSAarmZone.getText().toString();
 		    		settings.setTextSMSAlarm(textSMSAlarmZone);
 		    		settings.setIsSMSInIncoming(isSMSInIncoming);
 		    		viewOkCancel.setVisibility(View.GONE);
+		    		settings.setPinSIM(LsimPassword); 
+		    		simPassword = LsimPassword;
 		    		setVisiblePassword();
 		    		setRequestCodeBalanse();
 		        }
@@ -603,6 +641,9 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 			b.setNegativeButton("Отмена", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		        	ActiveSIM.setChecked(isSIM1);
+		        	simPassword = settings.getPinSIM();
+		        	LsimPassword = simPassword;
+		        	editSimPassword.setText(simPassword);
 		        	editTextPhoneNumber.setText(simNumber);
 		        	editTextPhoneNumber2.setText(simNumber2);
 		        	editTextSMSHead.setText(titleSMSAlarmZone);
@@ -614,8 +655,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		        }});
 			b.show();
 		}
-		
- 	}
+	}
 	
 	public void HideKeyboard()
 	{
