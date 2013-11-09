@@ -122,19 +122,6 @@ public class MainMenuActivity extends BaseActivity {
 		   current_local_num_not = settings.getNumNotificationSaved();
 		   setTitleMessageButton(current_local_num_not);
 		   
-//		   //DateTimeActionManager actionManager = new DateTimeActionManager("testdb", this, new DateTimeActionManager.FunctionAction() {
-//			
-//			@Override
-//			public int function() {
-//				// TODO Auto-generated method stub
-//				
-//				Toast.makeText(getApplicationContext(), "testing action !!!!!!", Toast.LENGTH_LONG).show();
-//				return 0;
-//			}
-//		});
-//		   boolean [] days_of_week = {true,false,false,false,false,false,false};
-//		   actionManager.StartAction(2013, 9, 23, 21, 49, 1, days_of_week);
-		   
 		}
 		catch(Exception e)
 		{
@@ -186,18 +173,6 @@ public class MainMenuActivity extends BaseActivity {
         TitleLastReport.setText("Последнее сообщение" + " - " + dateString);
 	}
 	
-//	public void SetValueSIMSwitcher()
-//	{
-//		ButtonWithImage cbutton = (ButtonWithImage) findViewById(R.id.buttonWithImageSIM);
-//		if(settings.getIsFirstSim())
-//		{
-//			cbutton.setTitle("SIM 1");
-//		}
-//		else
-//		{
-//			cbutton.setTitle("SIM 2");
-//		}
-//	}
 	
 	public void onClickConfigSystem(View v)
 	{
@@ -338,33 +313,6 @@ public class MainMenuActivity extends BaseActivity {
 		startActivity(browserIntent);
 	}
 	
-//	public void onClickButtonWithImageSIM(View v)
-//	{
-//		
-//		count_reques = 0;
-//		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-//		final AlertDialog.Builder b = new AlertDialog.Builder(this);
-//		b.setTitle("Переключить SIM?");
-//		b.setPositiveButton("Да", new OnClickListener() {
-//	        public void onClick(DialogInterface dialog, int which) {
-//	        	Toast.makeText(getApplicationContext(),"Переключение SIM",Toast.LENGTH_LONG).show();
-//	        	settingsDev.clearQueueCommands();
-//	        	settingsDev.AddSwitchSimCommand(true);
-//	        	LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Переключение SIM");
-//	    		settingsDev.sendCommands();
-//	    		pd.show();
-//	    		settings.setIsFirstSim(!settings.getIsFirstSim());
-//	        	SetValueSIMSwitcher();
-//	        }
-//	      });
-//		b.setNegativeButton("Отмена", new OnClickListener() {
-//	        public void onClick(DialogInterface dialog, int which) {
-//	        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-//	        	
-//	        }});
-//		b.show();
-//		Log.i(TAG_events,"request report");
-//	}
 	
 	public static boolean flagNeedsSendRequest=false;
 	public static boolean flagSMSPostanovka;

@@ -30,10 +30,7 @@ public class CounterTimer extends CountDownTimer {
     {
         Log.i("Main","Timer Completed");
         
-        if(isOverTime) 
-        	pd.setTitle(title + '\n' +"Требуется доп. время...");
-        else
-        	pd.setTitle(title);
+        pd.setTitle(title);
     }
 
     
@@ -42,6 +39,10 @@ public class CounterTimer extends CountDownTimer {
     public void onTick(long millisUntilFinished)
     {
  	   pd.setTitle(title + "\n(" + (millisUntilFinished/1000) + " сек)");
- 	   if((millisUntilFinished/1000)==1) isOverTime = true;
+ 	   if((millisUntilFinished/1000)==1)
+ 	   {   
+ 		  isOverTime = true;
+ 		  this.pd.dismiss();
+ 	   }
     } 
 }

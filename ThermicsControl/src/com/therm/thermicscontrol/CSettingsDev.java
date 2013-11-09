@@ -620,10 +620,10 @@ public class CSettingsDev {
 				res = ncmd1*TimeExecuteFirstCommand  + ncmd2*TimeExecuteSecondCommand +10;
 		}
 		
-		if(length == 1) res = ncmd1*120 + ncmd2*TimeExecuteSecondCommand;
+		if(length == 1) res = ncmd1*200 + ncmd2*TimeExecuteSecondCommand;
 		
 		
-		return res;
+		return res+20;
 	}
   }
 
