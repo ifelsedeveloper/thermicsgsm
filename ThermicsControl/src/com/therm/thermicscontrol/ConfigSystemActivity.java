@@ -496,6 +496,8 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 			b.setCancelable(false);
 			b.show();
 		}
+		else
+			saveParamStep2();
 		
 		
  	}
@@ -682,7 +684,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	}
 	
 	
-	CounterTimer timer = new CounterTimer(30000, 1000);
+	CounterTimer timer = new CounterTimer(1000, 1000);
 	ProgressDialog pd = null;
 	static Handler hpd =null;
 	public void LoadProgressDialog(int count_sms,String title)
