@@ -353,6 +353,28 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		
 		editTextNumberPassword.setText(simPassword);
 		editTextNumberPassword.addTextChangedListener(this);
+		editTextNumberPassword.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				isEditNumberPasswordHasFocus = true;
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				isEditNumberPasswordHasFocus = true;
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				isEditNumberPasswordHasFocus = true;
+			}
+		});
+		
 		
 		checkBoxDaylyReport.setChecked(isDailyReport);
 		checkBoxDaylyReport.setOnCheckedChangeListener(this);
