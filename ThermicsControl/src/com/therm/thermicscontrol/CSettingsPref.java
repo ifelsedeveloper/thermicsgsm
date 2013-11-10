@@ -196,7 +196,7 @@ public class CSettingsPref {
 		return ;
 	}
 	
-	public static String phone_number2="+79131234567";
+	public static String phone_number2="+7913XXXXXXX";
 	public String getNumberSIM2()
 	{
 		String result=phone_number2;
