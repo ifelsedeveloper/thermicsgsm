@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -84,14 +85,57 @@ public class CSettingsDev {
 	}
 	
 	public void sendSMS(String message) {
-		phoneNumber=settings_.getNumberSIM();
-		password=settings_.getPinSIM();
-	    SmsManager smsManager = SmsManager.getDefault();
-	    smsManager.sendTextMessage(phoneNumber, null, message, null, null);
-	    long currentTime = new Long(System.currentTimeMillis()/1000);
-	    SMSRequestReportSender.lastSendTime.set(currentTime);
+		if(isSimNumberValid())
+		{
+			phoneNumber=settings_.getNumberSIM();
+			password=settings_.getPinSIM();
+		    SmsManager smsManager = SmsManager.getDefault();
+		    smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+		    long currentTime = new Long(System.currentTimeMillis()/1000);
+		    SMSRequestReportSender.lastSendTime.set(currentTime);
+		}
+			
 	}
 	
+	public boolean isSimNumberValid()
+	{
+		boolean res = false;
+		String phone_number;
+		if(settings_.getIsFirstSim())
+		{
+			phone_number = settings_.getNumberSIM();
+		}
+		else
+		{
+			phone_number = settings_.getNumberSIM2();
+		}
+		
+		res = isPhoneNumberValid(phone_number);
+		return res;
+	}
+	
+	public boolean isPhoneNumberValid(String phone_number)
+	{
+		boolean res = false;
+		if(phone_number.length() == 12)
+		{
+			if(PhoneNumberUtils.isGlobalPhoneNumber(phone_number))
+				res = true;
+		}
+		
+		if(phone_number.length() == 11)
+		{
+			if(phone_number.charAt(0)=='8')
+			{
+				phone_number=String.format("+7%s", phone_number.substring(1,phone_number.length()));
+			
+				if(PhoneNumberUtils.isGlobalPhoneNumber(phone_number))
+					res = true;
+			}
+		}
+		if(!res) Toast.makeText(appcontext, "Введите корректный номер SIM карты", Toast.LENGTH_LONG).show();
+		return res;
+	}
 	
 	public void clearQueueCommands()
 	{
@@ -170,15 +214,23 @@ public class CSettingsDev {
 	}
 	
 	
-	public void sendCommands()
+	public boolean sendCommands()
 	{
-		Toast.makeText(appcontext, "Отправка команд устройству", Toast.LENGTH_LONG).show();
-		phoneNumber=settings_.getNumberSIM();
-		password=settings_.getPinSIM();
-		if(sms_to_send.size()>0)
+		if(isSimNumberValid())
 		{
-			mysend = new SendCommandsRun(sms_to_send,phoneNumber,appcontext,handler,hdp,getActualPhoneNumber());
-			ex.execute(mysend);
+			Toast.makeText(appcontext, "Отправка команд устройству", Toast.LENGTH_LONG).show();
+			phoneNumber=settings_.getNumberSIM();
+			password=settings_.getPinSIM();
+			if(sms_to_send.size()>0)
+			{
+				mysend = new SendCommandsRun(sms_to_send,phoneNumber,appcontext,handler,hdp,getActualPhoneNumber());
+				ex.execute(mysend);
+			}
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 	

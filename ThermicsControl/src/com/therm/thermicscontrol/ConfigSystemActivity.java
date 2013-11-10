@@ -496,46 +496,47 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		
 		LisSIM1 = ActiveSIM.isChecked();
 		
-		LnumberTmpSensorSMS=Integer.parseInt(editTextNumberSensorTMPSMS.getText().toString());
-		if(LnumberTmpSensorSMS>0)
+		if(settingsDev.isPhoneNumberValid(LsimNumber))
 		{
-			LnotificationSMS.lower_bound=Integer.parseInt(editTextLowerBoundTmp.getText().toString());
-			LnotificationSMS.upper_bound=Integer.parseInt(editTextUpperBoundTmp.getText().toString());
+			LnumberTmpSensorSMS=Integer.parseInt(editTextNumberSensorTMPSMS.getText().toString());
+			if(LnumberTmpSensorSMS>0)
+			{
+				LnotificationSMS.lower_bound=Integer.parseInt(editTextLowerBoundTmp.getText().toString());
+				LnotificationSMS.upper_bound=Integer.parseInt(editTextUpperBoundTmp.getText().toString());
+			}
+			
+			LtitleSMSAlarmZone = editTextSMSHead.getText().toString();
+			LtextSMSAlarmZone = editTextSMSAarmZone.getText().toString();
+			
+			//add others....
+			//add commands to queue
+			
+			settingsDev.clearQueueCommands();
+			settingsDev.password = LsimPassword;
+			
+			if(isEditNumberPasswordHasFocus)
+			{
+				//show dialog
+				final AlertDialog.Builder b = new AlertDialog.Builder(this);
+				b.setTitle("Смена пароля");
+				b.setMessage("Изменить настройки в");
+				b.setPositiveButton("программе", new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	isSendNewPassword = false;
+			        	saveParamStep2();
+			        }
+			      });
+				b.setNegativeButton("устройстве", new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	isSendNewPassword = true;
+			        	saveParamStep2();
+			        }});
+				b.setCancelable(false);
+				b.show();
+			}
+			else
+				saveParamStep2();
 		}
-		
-		LtitleSMSAlarmZone = editTextSMSHead.getText().toString();
-		LtextSMSAlarmZone = editTextSMSAarmZone.getText().toString();
-		
-		//add others....
-		//add commands to queue
-		
-		settingsDev.clearQueueCommands();
-		settingsDev.password = LsimPassword;
-		
-		if(isEditNumberPasswordHasFocus)
-		{
-			//show dialog
-			final AlertDialog.Builder b = new AlertDialog.Builder(this);
-			b.setTitle("Смена пароля");
-			b.setMessage("Изменить настройки в");
-			b.setPositiveButton("программе", new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		        	isSendNewPassword = false;
-		        	saveParamStep2();
-		        }
-		      });
-			b.setNegativeButton("устройстве", new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		        	isSendNewPassword = true;
-		        	saveParamStep2();
-		        }});
-			b.setCancelable(false);
-			b.show();
-		}
-		else
-			saveParamStep2();
-		
-		
  	}
 	
 	private void saveParamStep2()
@@ -613,29 +614,33 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		    		settings.setNumberSIM(simNumber);
 		    		settings.setUSSDSIM(simUSSD);
 		    		settings.setPinSIM(simPassword);
-		    		
-		    		settings.setIsDailyReport(isDailyReport);
-		    		settings.setIsSMSPostanovka(isSMSPostanovka);
-		    		settings.setIsSMSSnjatie(isSMSSnjatie);
-		    		settings.setIsAutoPowerOnAlarm(isAutoAlarm);
-		    		settings.setIsSetAutoRele1Control(isAutoOnRele1);
-		    		settings.setActiveZoneValue(zoneValue);
-		    		settings.setNumberTmpSensorSMS(numberTmpSensorSMS);
-		    		settings.setIsSMSInIncoming(isSMSInIncoming);
-		    		
-		    		
-		    		if(numberTmpSensorSMS>0)
-		    			settings.setCNotificationSMS(numberTmpSensorSMS-1, notificationSMS[numberTmpSensorSMS-1]);
-
-		    		//first launch
-		    		settings.setIsSendAnyway(false);
-		    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Установка параметров");
-		    		settingsDev.sendCommands();	
-		    		
-		    		viewOkCancel.setVisibility(View.GONE);
-		    		isOKSend = true;
-		    		pd.show();
-		    		setRequestCodeBalanse();
+		    		if(settingsDev.isSimNumberValid())
+		    		{
+			    		settings.setIsDailyReport(isDailyReport);
+			    		settings.setIsSMSPostanovka(isSMSPostanovka);
+			    		settings.setIsSMSSnjatie(isSMSSnjatie);
+			    		settings.setIsAutoPowerOnAlarm(isAutoAlarm);
+			    		settings.setIsSetAutoRele1Control(isAutoOnRele1);
+			    		settings.setActiveZoneValue(zoneValue);
+			    		settings.setNumberTmpSensorSMS(numberTmpSensorSMS);
+			    		settings.setIsSMSInIncoming(isSMSInIncoming);
+			    		
+			    		
+			    		if(numberTmpSensorSMS>0)
+			    			settings.setCNotificationSMS(numberTmpSensorSMS-1, notificationSMS[numberTmpSensorSMS-1]);
+	
+			    		//first launch
+			    		settings.setIsSendAnyway(false);
+			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Установка параметров");
+			    		settingsDev.sendCommands();	
+			    		
+			    		viewOkCancel.setVisibility(View.GONE);
+			    		isOKSend = true;
+			    		pd.show();
+			    		setRequestCodeBalanse();
+		    		}
+		    		else
+		    			loadParam();
 		        }
 		      });
 			b.setNegativeButton("Отмена", new OnClickListener() {

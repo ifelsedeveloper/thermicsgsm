@@ -608,44 +608,47 @@ public class SettingsParamActivity extends BaseActivity {
 		//add commands to queue
 		boolean isAnyway = true;
 		settingsDev.clearQueueCommands();
-		settingsDev.AddSetNumberSensorReleWarmCommand(numberSensorTMPReleWarm,numberRele, false);
-		if(numberSensorTMPReleWarm!=0)
-		settingsDev.AddSetTmpReleCommand(numberSensorTMPReleWarm-1,value_seek_rele,value_seek_rele_night,numberRele, isAnyway);
-		
-		if(settingsDev.sms_to_send.size() > 0)
+		if(settingsDev.isSimNumberValid())
 		{
-			//save parameters
-			final AlertDialog.Builder b = new AlertDialog.Builder(this);
-			b.setIcon(android.R.drawable.ic_dialog_alert);
-			b.setTitle("Установить параметры реле нагревателя?");
-			//b.setMessage("Отправить" + String.format(" %d ", settingsDev.sms_to_send.size()) + "SMS?");
-			b.setPositiveButton("Установить", new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		        	settings.setNumberSensorReleWarm(numberSensorTMPReleWarm);
-		    		settings.setNumberReleWarm(numberRele);
-		        	//viewOkCancel.setVisibility(View.INVISIBLE);
-		        	viewOkCancel.setVisibility(View.GONE);
-		        	if(numberSensorTMPReleWarm!=0)
-		    		{
-		        		tmp_rele_warm = value_seek_rele;
-		        		tmp_rele_warm_night = value_seek_rele_night;
-		        		settings.setTmpReleWarm(numberSensorTMPReleWarm-1,tmp_rele_warm);
-		        		settings.setTmpReleWarmNight(numberSensorTMPReleWarm-1,tmp_rele_warm_night);
-		        	}
-		        	
-		    		
-		    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Настройка термостата");
-		    		settingsDev.sendCommands();		
-		    		setReleState();
-		    		pd.show();
-		        }
-		      });
-			b.setNegativeButton("Отмена", new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-		        	
-		        }});
-			b.show();
+			settingsDev.AddSetNumberSensorReleWarmCommand(numberSensorTMPReleWarm,numberRele, false);
+			if(numberSensorTMPReleWarm!=0)
+			settingsDev.AddSetTmpReleCommand(numberSensorTMPReleWarm-1,value_seek_rele,value_seek_rele_night,numberRele, isAnyway);
+			
+			if(settingsDev.sms_to_send.size() > 0)
+			{
+				//save parameters
+				final AlertDialog.Builder b = new AlertDialog.Builder(this);
+				b.setIcon(android.R.drawable.ic_dialog_alert);
+				b.setTitle("Установить параметры реле нагревателя?");
+				//b.setMessage("Отправить" + String.format(" %d ", settingsDev.sms_to_send.size()) + "SMS?");
+				b.setPositiveButton("Установить", new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	settings.setNumberSensorReleWarm(numberSensorTMPReleWarm);
+			    		settings.setNumberReleWarm(numberRele);
+			        	//viewOkCancel.setVisibility(View.INVISIBLE);
+			        	viewOkCancel.setVisibility(View.GONE);
+			        	if(numberSensorTMPReleWarm!=0)
+			    		{
+			        		tmp_rele_warm = value_seek_rele;
+			        		tmp_rele_warm_night = value_seek_rele_night;
+			        		settings.setTmpReleWarm(numberSensorTMPReleWarm-1,tmp_rele_warm);
+			        		settings.setTmpReleWarmNight(numberSensorTMPReleWarm-1,tmp_rele_warm_night);
+			        	}
+			        	
+			    		
+			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Настройка термостата");
+			    		settingsDev.sendCommands();		
+			    		setReleState();
+			    		pd.show();
+			        }
+			      });
+				b.setNegativeButton("Отмена", new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+			        	
+			        }});
+				b.show();
+			}
 		}
 		
  	}
@@ -676,87 +679,97 @@ public class SettingsParamActivity extends BaseActivity {
 		//set parameters to device
 		//add commands to queue
 		settingsDev.clearQueueCommands();
-		settingsDev.AddSetReleNCommand(1, isRele1, true);
-		
-		if(settingsDev.sms_to_send.size() > 0)
+		if(settingsDev.isSimNumberValid())
 		{
-			//save parameters
-			final AlertDialog.Builder b = new AlertDialog.Builder(this);
-			b.setIcon(android.R.drawable.ic_dialog_alert);
-			b.setTitle(questionDialog);
-			b.setPositiveButton(actionDialog, new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		    		
-		    		//set parameters to preference 
-		    		//settings.setIsRele1(isRele1);
-		    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,titleProgress);
-		    		settingsDev.sendCommands();		
-		    		pd.show();
-		        }
-		      });
-			b.setNegativeButton("Отмена", new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-		        	isRele1=(!isRele1);
-		        	CheckBox checkbox=(CheckBox) findViewById(R.id.checkBoxRele1);
-		        	checkbox.setChecked(isRele1);
-		        }});
-			b.show();
+			settingsDev.AddSetReleNCommand(1, isRele1, true);
+			
+			if(settingsDev.sms_to_send.size() > 0)
+			{
+				//save parameters
+				final AlertDialog.Builder b = new AlertDialog.Builder(this);
+				b.setIcon(android.R.drawable.ic_dialog_alert);
+				b.setTitle(questionDialog);
+				b.setPositiveButton(actionDialog, new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			    		
+			    		//set parameters to preference 
+			    		//settings.setIsRele1(isRele1);
+			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,titleProgress);
+			    		settingsDev.sendCommands();		
+			    		pd.show();
+			        }
+			      });
+				b.setNegativeButton("Отмена", new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+			        	isRele1=(!isRele1);
+			        	CheckBox checkbox=(CheckBox) findViewById(R.id.checkBoxRele1);
+			        	checkbox.setChecked(isRele1);
+			        }});
+				b.show();
+			}
 		}
-		
-		
 	}
 	
 	public boolean isUpr = false;
 	public void onClickCheckBoxUpr(View v)
 	{
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-		Log.i(TAG_events,"onClickCheckBoxBoiler");
-		isUpr=(!isUpr);
-		final String titleProgress;
-		final String questionDialog;
-		final String actionDialog;
-		if(isUpr)
+		if(settingsDev.isSimNumberValid())
 		{
-			titleProgress = "Включение управления";
-			questionDialog = "Включить управление?";
-			actionDialog = "Включить";
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+			Log.i(TAG_events,"onClickCheckBoxBoiler");
+			isUpr=(!isUpr);
+			final String titleProgress;
+			final String questionDialog;
+			final String actionDialog;
+			if(isUpr)
+			{
+				titleProgress = "Включение управления";
+				questionDialog = "Включить управление?";
+				actionDialog = "Включить";
+			}
+			else
+			{
+				titleProgress = "Отключение управления";
+				questionDialog = "Отключить управление?";
+				actionDialog = "Отключить";
+			}
+			//set parameters to device
+			//add commands to queue
+			settingsDev.clearQueueCommands();
+		
+			settingsDev.AddSetUpravlenieCommand(isUpr);
+		
+			if(settingsDev.sms_to_send.size() > 0)
+			{
+				//save parameters
+				final AlertDialog.Builder b = new AlertDialog.Builder(this);
+				b.setIcon(android.R.drawable.ic_dialog_alert);
+				b.setTitle(questionDialog);
+				b.setPositiveButton(actionDialog, new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			    		
+			    		//set parameters to preference 
+			    		settings.setIsUpr(isUpr);
+			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,titleProgress);
+			    		settingsDev.sendCommands();		
+			    		pd.show();
+			        }
+			      });
+				b.setNegativeButton("Отмена", new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+			        	isUpr=(!isUpr);
+			        	CheckBox checkbox=(CheckBox) findViewById(R.id.checkBoxUpr);
+			        	checkbox.setChecked(isUpr);
+			        }});
+				b.show();
+			}
 		}
 		else
 		{
-			titleProgress = "Отключение управления";
-			questionDialog = "Отключить управление?";
-			actionDialog = "Отключить";
-		}
-		//set parameters to device
-		//add commands to queue
-		settingsDev.clearQueueCommands();
-		settingsDev.AddSetUpravlenieCommand(isUpr);
-		
-		if(settingsDev.sms_to_send.size() > 0)
-		{
-			//save parameters
-			final AlertDialog.Builder b = new AlertDialog.Builder(this);
-			b.setIcon(android.R.drawable.ic_dialog_alert);
-			b.setTitle(questionDialog);
-			b.setPositiveButton(actionDialog, new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		    		
-		    		//set parameters to preference 
-		    		settings.setIsUpr(isUpr);
-		    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,titleProgress);
-		    		settingsDev.sendCommands();		
-		    		pd.show();
-		        }
-		      });
-			b.setNegativeButton("Отмена", new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-		        	isUpr=(!isUpr);
-		        	CheckBox checkbox=(CheckBox) findViewById(R.id.checkBoxUpr);
-		        	checkbox.setChecked(isUpr);
-		        }});
-			b.show();
+			CheckBox checkbox=(CheckBox) findViewById(R.id.checkBoxUpr);
+			checkbox.setChecked(isUpr);
 		}
 	}
 	
@@ -785,31 +798,33 @@ public class SettingsParamActivity extends BaseActivity {
 		//add commands to queue
 		settingsDev.clearQueueCommands();
 		settingsDev.AddSetReleNCommand(2, isRele2, true);
-		
-		if(settingsDev.sms_to_send.size() > 0)
+		if(settingsDev.isSimNumberValid())
 		{
-			//save parameters
-			final AlertDialog.Builder b = new AlertDialog.Builder(this);
-			b.setIcon(android.R.drawable.ic_dialog_alert);
-			b.setTitle(questionDialog);
-			b.setPositiveButton(actionDialog, new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		    		
-		    		//set parameters to preference 
-		    		//settings.setIsRele2(isRele2);
-		    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,titleProgress);
-		    		settingsDev.sendCommands();		
-		    		pd.show();
-		        }
-		      });
-			b.setNegativeButton("Отмена", new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-		        	isRele2=(!isRele2);
-		        	CheckBox checkbox=(CheckBox) findViewById(R.id.checkBoxRele2);
-		        	checkbox.setChecked(isRele2);
-		        }});
-			b.show();
+			if(settingsDev.sms_to_send.size() > 0)
+			{
+				//save parameters
+				final AlertDialog.Builder b = new AlertDialog.Builder(this);
+				b.setIcon(android.R.drawable.ic_dialog_alert);
+				b.setTitle(questionDialog);
+				b.setPositiveButton(actionDialog, new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			    		
+			    		//set parameters to preference 
+			    		//settings.setIsRele2(isRele2);
+			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,titleProgress);
+			    		settingsDev.sendCommands();		
+			    		pd.show();
+			        }
+			      });
+				b.setNegativeButton("Отмена", new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+			        	isRele2=(!isRele2);
+			        	CheckBox checkbox=(CheckBox) findViewById(R.id.checkBoxRele2);
+			        	checkbox.setChecked(isRele2);
+			        }});
+				b.show();
+			}
 		}
 	}
 	
@@ -837,32 +852,35 @@ public class SettingsParamActivity extends BaseActivity {
 		//set parameters to device
 		//add commands to queue
 		settingsDev.clearQueueCommands();
-		settingsDev.AddSetReleNCommand(3, isRele3, true);
-		
-		if(settingsDev.sms_to_send.size() > 0)
+		if(settingsDev.isSimNumberValid())
 		{
-			//save parameters
-			final AlertDialog.Builder b = new AlertDialog.Builder(this);
-			b.setIcon(android.R.drawable.ic_dialog_alert);
-			b.setTitle(questionDialog);
-			b.setPositiveButton(actionDialog, new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		    		
-		    		//set parameters to preference 
-		    		//settings.setIsRele3(isRele3);
-		    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,titleProgress);
-		    		settingsDev.sendCommands();		
-		    		pd.show();
-		        }
-		      });
-			b.setNegativeButton("Отмена", new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-		        	isRele3=(!isRele3);
-		        	CheckBox checkbox=(CheckBox) findViewById(R.id.checkBoxRele3);
-		        	checkbox.setChecked(isRele3);
-		        }});
-			b.show();
+			settingsDev.AddSetReleNCommand(3, isRele3, true);
+			
+			if(settingsDev.sms_to_send.size() > 0)
+			{
+				//save parameters
+				final AlertDialog.Builder b = new AlertDialog.Builder(this);
+				b.setIcon(android.R.drawable.ic_dialog_alert);
+				b.setTitle(questionDialog);
+				b.setPositiveButton(actionDialog, new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			    		
+			    		//set parameters to preference 
+			    		//settings.setIsRele3(isRele3);
+			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,titleProgress);
+			    		settingsDev.sendCommands();		
+			    		pd.show();
+			        }
+			      });
+				b.setNegativeButton("Отмена", new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+			        	isRele3=(!isRele3);
+			        	CheckBox checkbox=(CheckBox) findViewById(R.id.checkBoxRele3);
+			        	checkbox.setChecked(isRele3);
+			        }});
+				b.show();
+			}
 		}
 	}
 	
@@ -872,29 +890,32 @@ public class SettingsParamActivity extends BaseActivity {
 		//set parameters to device
 		//add commands to queue
 		settingsDev.clearQueueCommands();
-		settingsDev.AddSetCallMicrophoneCommand();
-		
-		if(settingsDev.sms_to_send.size() > 0)
+		if(settingsDev.isSimNumberValid())
 		{
-			//save parameters
-			final AlertDialog.Builder b = new AlertDialog.Builder(this);
-			b.setIcon(android.R.drawable.ic_dialog_alert);
-			b.setTitle("Вызвать устройство на связь?");
-			b.setPositiveButton("Ok", new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		    		
-		    		//set parameters to preference 
-		    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Вызов устройства");
-		    		settingsDev.sendCommands();		
-		    		pd.show();
-		    		Toast.makeText(getApplicationContext(), "Ожидайте входящего вызова", Toast.LENGTH_LONG);
-		        }
-		      });
-			b.setNegativeButton("Отмена", new OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) {
-		        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-		        }});
-			b.show();
+			settingsDev.AddSetCallMicrophoneCommand();
+			
+			if(settingsDev.sms_to_send.size() > 0)
+			{
+				//save parameters
+				final AlertDialog.Builder b = new AlertDialog.Builder(this);
+				b.setIcon(android.R.drawable.ic_dialog_alert);
+				b.setTitle("Вызвать устройство на связь?");
+				b.setPositiveButton("Ok", new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			    		
+			    		//set parameters to preference 
+			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Вызов устройства");
+			    		settingsDev.sendCommands();		
+			    		pd.show();
+			    		Toast.makeText(getApplicationContext(), "Ожидайте входящего вызова", Toast.LENGTH_LONG);
+			        }
+			      });
+				b.setNegativeButton("Отмена", new OnClickListener() {
+			        public void onClick(DialogInterface dialog, int which) {
+			        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+			        }});
+				b.show();
+			}
 		}
 	}
 	

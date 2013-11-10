@@ -215,7 +215,7 @@ public class MainMenuActivity extends BaseActivity {
 	        	settingsDev.clearQueueCommands();
 	        	settingsDev.AddRequestReportCommand();
 	        	LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Запрос отчёта");
-	    		settingsDev.sendCommands();
+	    		if(settingsDev.sendCommands())
 	    		pd.show();
 	        }
 	      });
@@ -239,7 +239,7 @@ public class MainMenuActivity extends BaseActivity {
 	        	settingsDev.clearQueueCommands();
 	        	settingsDev.AddRequestBalansCommand();
 	    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Запрос баланса сим карты");
-	    		settingsDev.sendCommands();
+	    		if(settingsDev.sendCommands())
 	    		pd.show();
 	        }
 	      });
@@ -296,7 +296,7 @@ public class MainMenuActivity extends BaseActivity {
 	        	}
 	        	
 	    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,TitleProgressBar);
-	    		settingsDev.sendCommands();
+	    		if(settingsDev.sendCommands())
 	    		pd.show();
 	        }
 	      });
