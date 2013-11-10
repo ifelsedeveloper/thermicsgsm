@@ -22,6 +22,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -34,7 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class ConfigSystemActivity extends BaseActivity implements TextWatcher, OnCheckedChangeListener {
+public class ConfigSystemActivity extends BaseActivity implements TextWatcher, OnCheckedChangeListener  {
 
 	
 	public static final String TAG_events="event_tag_config_sytem";
@@ -91,8 +92,22 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	    });
 	    
 	    setVisiblePassword();
+	    isEditNumberPasswordHasFocus = false;
+	    editTextNumberPassword.setOnFocusChangeListener(new OnFocusChangeListener() {
+	    	@Override
+	    	public void onFocusChange(View v, boolean hasFocus) {
+	    	    if(hasFocus){
+	    	        //Toast.makeText(getApplicationContext(), "got the focus", Toast.LENGTH_LONG).show();
+	    	    	isEditNumberPasswordHasFocus = true;
+	    	    	checkStateOkCancel();
+	    	    }else {
+	    	        //Toast.makeText(getApplicationContext(), "lost the focus", Toast.LENGTH_LONG).show();
+	    	    }
+	    	   }
+	    	});
 	}
-
+	boolean isEditNumberPasswordHasFocus = false;
+	
 	public void setVisiblePassword()
 	{
 		RelativeLayout lpassword = (RelativeLayout) findViewById(R.id.relativeLayoutPassword);
@@ -150,8 +165,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	editTextLowerBoundTmp,
 	editTextUpperBoundTmp,
 	editTextSMSHead,
-	editTextSMSAarmZone,
-	editSimPassword;
+	editTextSMSAarmZone;
 	
 	CheckBox checkBoxDaylyReport,
 	checkBoxSMSPostanovka,
@@ -268,7 +282,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 				  (isSMSInIncoming ^ LisSMSInIncoming) ||
 				  (isAutoOnRele1 ^ LisAutoOnRele1) ||
 				  (isSMSPostanovka ^ LisSMSPostanovka) ||
-				  (isSMSSnjatie ^ LisSMSSnjatie)) ||
+				  (isSMSSnjatie ^ LisSMSSnjatie)) || isEditNumberPasswordHasFocus ||
 				  (LisSIM1 != isSIM1) && 
 				  flag_digits
 						)
@@ -476,7 +490,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		settingsDev.clearQueueCommands();
 		settingsDev.password = LsimPassword;
 		
-		if(!LsimPassword.equalsIgnoreCase(simPassword))
+		if(isEditNumberPasswordHasFocus)
 		{
 			//show dialog
 			final AlertDialog.Builder b = new AlertDialog.Builder(this);
@@ -506,8 +520,8 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	{
 		boolean isAnyway = false;
 		
-		if(isSendNewPassword)
-			settingsDev.AddSetSimPasswordCommand(LsimPassword,false);
+		if(isSendNewPassword && isEditNumberPasswordHasFocus)
+			settingsDev.AddSetSimPasswordCommand(LsimPassword,true);
 		
 		settingsDev.AddSetUSSDCommand(LsimUSSD, isAnyway);
 		settingsDev.AddSetDailyReportCommand(LisDailyReport, isAnyway);
@@ -645,7 +659,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		        	ActiveSIM.setChecked(isSIM1);
 		        	simPassword = settings.getPinSIM();
 		        	LsimPassword = simPassword;
-		        	editSimPassword.setText(simPassword);
+		        	editTextNumberPassword.setText(simPassword);
 		        	editTextPhoneNumber.setText(simNumber);
 		        	editTextPhoneNumber2.setText(simNumber2);
 		        	editTextSMSHead.setText(titleSMSAlarmZone);
@@ -657,6 +671,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		        }});
 			b.show();
 		}
+		isEditNumberPasswordHasFocus = false;
 	}
 	
 	public void HideKeyboard()
