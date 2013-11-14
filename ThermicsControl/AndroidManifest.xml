@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.therm.thermicscontrol"
     android:theme="@style/AppBaseTheme"
-    android:versionCode="18"
-    android:versionName="2.2.2" >
+    android:versionCode="19"
+    android:versionName="2.2.3" >
 
     <uses-sdk
-        android:minSdkVersion="9"
+        android:minSdkVersion="8"
         android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.INTERNET" >

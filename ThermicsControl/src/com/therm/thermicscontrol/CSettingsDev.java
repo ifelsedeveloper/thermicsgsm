@@ -144,6 +144,8 @@ public class CSettingsDev {
 	
 	public void RequestReport()
 	{
+		phoneNumber=settings_.getNumberSIM();
+		password=settings_.getPinSIM();
 		String message=String.format(Locale.US,"Kak dela? %s", password);
 		sendSMS(message);
 	}

@@ -37,6 +37,7 @@ public class SMSRequestReportSender extends BroadcastReceiver {
 				long n_row = intent.getLongExtra(AddRequestActivity.ATTRIBUTE_ROWID, -1);
 				long day_of_week = intent.getLongExtra(AddRequestActivity.ATTRIBUTE_DAYOFWEEK, -1);
 				//Toast.makeText(ctx, "Отправляем по расписанию: n_row = " + Long.toString(n_row) + "n_day = " + Long.toString(day_of_week), Toast.LENGTH_LONG).show();
+				
 				if(n_row>=0 && day_of_week>=0)
 				{
 					if(doesDatabaseExist(ctx,DBRequest.DATABASE_PATH + DBRequest.DB_NAME))
@@ -60,9 +61,9 @@ public class SMSRequestReportSender extends BroadcastReceiver {
 							if(currentTime - lastSendTime.get() > 60)
 							{
 								//settingsDev.RequestReport();
-								//Toast.makeText(ctx, "Отправляем по расписанию 2: n_row = " + Long.toString(n_row) + "n_day = " + Long.toString(day_of_week), Toast.LENGTH_LONG).show();
+								//Toast.makeText(ctx, "Отправляем по расписанию :" + settings.getPinSIM(), Toast.LENGTH_LONG).show();
 								settingsDev.RequestReport();
-								Toast.makeText(ctx, "Запрос отправлен", Toast.LENGTH_LONG).show();
+								//Toast.makeText(ctx, "Запрос отправлен", Toast.LENGTH_LONG).show();
 								lastSendTime.set(currentTime);
 							}
 							flag_not_check = false;
