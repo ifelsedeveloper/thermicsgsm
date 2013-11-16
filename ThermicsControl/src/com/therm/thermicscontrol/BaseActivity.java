@@ -116,12 +116,17 @@ public final static String prefLastSystemReport = "lastSystemReport";
 public final static String prefLastSystemReportTime = "lastSystemReportTime";
 
 public static CSettingsPref settings_st;
+public final static String prefDeviceVersion = "deviceVersion";
 
 // имена атрибутов для Map
 static final String ATTRIBUTE_PHONE = "phone";
 static final String ATTRIBUTE_CONTACT_NAME = "contactName";
 static final String ATTRIBUTE_POSIITION = "position";
 static final String ATTRIBUTE_AVAILABLE = "available";
+
+public final static int deviceBefore01112011 = 1; 
+public final static int deviceBefore01112012 = 2;
+public final static int deviceAfter01112012 = 3;
 
 public boolean onOptionsItemSelected(MenuItem item) {
 //	switch (item.getItemId()) {

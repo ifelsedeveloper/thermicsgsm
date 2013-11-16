@@ -27,6 +27,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -54,6 +55,8 @@ public class SettingsParamActivity extends BaseActivity {
 	
 	LinearLayout linearLayoutDayTemp;
 	LinearLayout linearLayoutNightTemp;
+	RelativeLayout RelativeLayoutReleWarm;
+	RelativeLayout RelativeLayoutNTmpSensor;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,8 @@ public class SettingsParamActivity extends BaseActivity {
 		editNTmpSensorRele=(EditText) findViewById(R.id.editTextNTmpSensorRele);
 		linearLayoutDayTemp = (LinearLayout) findViewById(R.id.layoutSeekBarReleWarm);
 		linearLayoutNightTemp = (LinearLayout) findViewById(R.id.layoutSeekBarReleWarmNight);
+		RelativeLayoutReleWarm = (RelativeLayout) findViewById(R.id.RelativeLayoutReleWarm);
+		RelativeLayoutNTmpSensor = (RelativeLayout) findViewById(R.id.RelativeLayoutNTmpSensor);
 		//number_tmp_sensor = settings.getNumberSensorReleWarm();
 		
 		//create for work with shared preference
@@ -256,6 +261,18 @@ public class SettingsParamActivity extends BaseActivity {
 			linearLayoutDayTemp.setVisibility(View.VISIBLE);
 			linearLayoutNightTemp.setVisibility(View.VISIBLE);
 		}
+		if(settings.getDevVersion() == 1)
+		{
+			linearLayoutDayTemp.setVisibility(View.VISIBLE);
+			linearLayoutNightTemp.setVisibility(View.GONE);
+			RelativeLayoutReleWarm.setVisibility(View.GONE);
+			//RelativeLayoutNRele.setVisibility(View.GONE);
+		}
+		if(settings.getDevVersion() == 2)
+		{
+			RelativeLayoutReleWarm.setVisibility(View.GONE);
+			//RelativeLayoutNTmpSensor.setVisibility(View.GONE);
+		}
 	}
 	
 	static int min_tmp=-55;
@@ -437,15 +454,18 @@ public class SettingsParamActivity extends BaseActivity {
 		else
 			viewOkCancel.setVisibility(View.GONE);
 		
-		if(numberSensorTMPReleWarm==0)
+		
+		if(numberSensorTMPReleWarm==0 && settings.getDevVersion() == 1)
 		{
 			linearLayoutDayTemp.setVisibility(View.GONE);
 			linearLayoutNightTemp.setVisibility(View.GONE);
 		}
 		else
 		{
-			linearLayoutDayTemp.setVisibility(View.VISIBLE);
-			linearLayoutNightTemp.setVisibility(View.VISIBLE);
+			setVisibilityScrollRegulator();
+			//linearLayoutDayTemp.setVisibility(View.VISIBLE);
+			//linearLayoutNightTemp.setVisibility(View.VISIBLE);
+			
 			value_seek_rele =settings.getTmpReleWarm(numberSensorTMPReleWarm-1);
 			value_seek_rele_night =settings.getTmpReleWarmNight(numberSensorTMPReleWarm-1);
 			sbWeightRele.setProgress(value_seek_rele-min_tmp);

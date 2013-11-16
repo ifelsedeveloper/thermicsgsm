@@ -68,18 +68,7 @@ public class TimerActivity extends BaseActivity {
 			
 			if(timerValue == null) timerValue = new TimerValue();
 		}
-//		//to pass :
-//		   intent.putExtra("MyClass", obj);  
-//
-//		// to retrieve object in second Activity
-////		getIntent().getSerializableExtra("MyClass");
-//		TimerValue startValue = (TimerValue) getIntent().getSerializableExtra("TimerValue");
-//		if(startValue != null)
-//		{
-//			timerValue = startValue;
-//		}
-		
-		//
+
 		checkBoxsDays[0] = (CheckBox) dialogSetDay.findViewById(R.id.checkBoxDayMon);
 		checkBoxsDays[1] = (CheckBox) dialogSetDay.findViewById(R.id.checkBoxDayTue);
 		checkBoxsDays[2] = (CheckBox) dialogSetDay.findViewById(R.id.checkBoxDayWen);

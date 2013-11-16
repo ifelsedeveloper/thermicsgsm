@@ -25,12 +25,15 @@ import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -105,6 +108,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	    	    }
 	    	   }
 	    	});
+	    
 	}
 	boolean isEditNumberPasswordHasFocus = false;
 	
@@ -131,6 +135,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		return true;
 	}
 
+	Spinner spinnerSelectDevice;
 	//data for activity
 	public String simNumber;
 	public String simNumber2;
@@ -184,6 +189,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	
 	public void getViewVaribales()
 	{
+		spinnerSelectDevice = (Spinner) findViewById(R.id.device_versions);
 		viewOkCancel = findViewById(R.id.layoutApplyCancelConfigSystem);
 		
 		editTextPhoneNumber = (EditText) findViewById(R.id.editTextPhoneNumber);
@@ -218,6 +224,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	
 	public void checkStateOkCancel()
 	{
+		LdeviceVersion = spinnerSelectDevice.getSelectedItemPosition()+1;
 		LsimNumber =  editTextPhoneNumber.getText().toString();	
 		LsimNumber2 =  editTextPhoneNumber2.getText().toString();	
 		LsimUSSD = editTextCodeRequestBalans.getText().toString();
@@ -283,6 +290,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 				  (isAutoOnRele1 ^ LisAutoOnRele1) ||
 				  (isSMSPostanovka ^ LisSMSPostanovka) ||
 				  (isSMSSnjatie ^ LisSMSSnjatie)) || isEditNumberPasswordHasFocus ||
+				  (LdeviceVersion != deviceVersion) ||
 				  (LisSIM1 != isSIM1) && 
 				  flag_digits
 						)
@@ -299,6 +307,20 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	
 	public void loadParam()
 	{
+		deviceVersion = settings.getDevVersion();
+		spinnerSelectDevice.setSelection(deviceVersion-1);
+		spinnerSelectDevice.setOnItemSelectedListener(new OnItemSelectedListener() {
+		    @Override
+		    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+		    	checkStateOkCancel();
+		    }
+
+		    @Override
+		    public void onNothingSelected(AdapterView<?> parentView) {
+		        // your code here
+		    }
+
+		});
 		loaded_complete = false;
 		//load configuration from settings
 		isSIM1 = settings.getIsFirstSim();
@@ -463,6 +485,8 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	String LsimUSSD;
 	String LsimPassword;
 	
+	int deviceVersion = 3;
+	int LdeviceVersion = 3;
 	boolean LisDailyReport;
 	boolean LisAutoAlarm;
 	boolean LisAutoOnRele1;
@@ -486,6 +510,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		LsimNumber2 =  editTextPhoneNumber2.getText().toString();	
 		LsimUSSD = editTextCodeRequestBalans.getText().toString();
 		LsimPassword = editTextNumberPassword.getText().toString();
+		LdeviceVersion = spinnerSelectDevice.getSelectedItemPosition()+1;
 		
 		LisDailyReport=checkBoxDaylyReport.isChecked();
 		LisAutoAlarm=checkBoxAutoPowerOnAlarm.isChecked();
@@ -677,6 +702,13 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		    		viewOkCancel.setVisibility(View.GONE);
 		    		settings.setPinSIM(LsimPassword); 
 		    		simPassword = LsimPassword;
+		    		
+		    		deviceVersion = LdeviceVersion;
+		    		settings.setDevVersion(deviceVersion);
+		    		if(deviceVersion != 3)
+		    		{
+			    		settings.setNumberReleWarm(2);
+		    		}
 		    		setVisiblePassword();
 		    		setRequestCodeBalanse();
 		        }
@@ -686,6 +718,8 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		        	ActiveSIM.setChecked(isSIM1);
 		        	simPassword = settings.getPinSIM();
 		        	LsimPassword = simPassword;
+		        	LdeviceVersion = deviceVersion;
+		        	spinnerSelectDevice.setSelection(LdeviceVersion-1);
 		        	editTextNumberPassword.setText(simPassword);
 		        	editTextPhoneNumber.setText(simNumber);
 		        	editTextPhoneNumber2.setText(simNumber2);

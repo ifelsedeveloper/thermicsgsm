@@ -433,6 +433,7 @@ public class SmsService extends Service {
         	notif.defaults |= Notification.DEFAULT_VIBRATE |Notification.DEFAULT_SOUND |Notification.FLAG_AUTO_CANCEL;
         	notif.flags |= Notification.FLAG_SHOW_LIGHTS;
         	
+        	
         	notif.ledARGB = 0xff0000ff;
         	notif.ledOnMS = 800;
         	notif.ledOffMS = 1000* 36000;

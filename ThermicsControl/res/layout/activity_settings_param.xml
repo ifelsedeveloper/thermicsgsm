@@ -41,8 +41,10 @@
 		android:layout_marginBottom="2dp"
         android:orientation="vertical" >
         <RelativeLayout
+        android:id="@+id/RelativeLayoutReleWarm"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="visible">
 
 	        <TextView
 	           android:id="@+id/titleAutoRele"
@@ -71,8 +73,10 @@
         </RelativeLayout>
         <!-- 2 row -->
         <RelativeLayout
+        android:id="@+id/RelativeLayoutNTmpSensor"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="visible">
 
             <TextView
             	android:id="@+id/titleTmpEnableReleWarm"

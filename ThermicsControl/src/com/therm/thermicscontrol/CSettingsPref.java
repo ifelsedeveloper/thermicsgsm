@@ -67,6 +67,24 @@ public class CSettingsPref {
 		return ;
 	}
 	
+	public int getDevVersion()
+	{
+		int result=3;
+		if (_settings.contains(BaseActivity.prefDeviceVersion) == true)
+			 result = _settings.getInt(BaseActivity.prefDeviceVersion, result);
+		else 
+			setTmpWater(result);
+		return result;
+	}
+	
+	public void setDevVersion(int deviceVersion)
+	{
+		SharedPreferences.Editor prefEditor = _settings.edit();
+		prefEditor.putInt(BaseActivity.prefDeviceVersion, deviceVersion);
+		prefEditor.commit();
+		return ;
+	}
+	
 	public int getTmpAir()
 	{
 		int result=(int) 70.0;
@@ -304,7 +322,7 @@ public class CSettingsPref {
 	
 	public int getNumberSensorReleWarm()
 	{
-		int result=0;
+		int result=1;
 		if (_settings.contains(BaseActivity.prefNumberSensorReleWarm) == true)
 			 result = _settings.getInt(BaseActivity.prefNumberSensorReleWarm, result);
 		else 

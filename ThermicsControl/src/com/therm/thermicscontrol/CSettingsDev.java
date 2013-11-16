@@ -397,26 +397,43 @@ public class CSettingsDev {
 	public void AddSetNumberSensorReleWarmCommand(int nSensorReleWarm,int n_rele,boolean anyway)
 	{
 		if(nSensorReleWarm>-1 && nSensorReleWarm<7)
-		if( ( nSensorReleWarm != settings_.getNumberSensorReleWarm() )  || ( n_rele != settings_.getNumberReleWarm() ) || anyway)
 		{
-			password=settings_.getPinSIM();
-			String val = "020";
-			switch(n_rele)
+			if(settings_.getDevVersion() == BaseActivity.deviceAfter01112012)
 			{
-			 case 1:
-				 val = String.format(Locale.US,"%d00", nSensorReleWarm);
-				 break;
-			 case 2:
-				 val = String.format(Locale.US,"0%d0", nSensorReleWarm);
-				 break;
-			 case 3:
-				 val = String.format(Locale.US,"00%d", nSensorReleWarm);
-				 break;
+				if( ( nSensorReleWarm != settings_.getNumberSensorReleWarm() )  || ( n_rele != settings_.getNumberReleWarm() ) || anyway)
+				{
+					password=settings_.getPinSIM();
+					String val = "020";
+					switch(n_rele)
+					{
+					 case 1:
+						 val = String.format(Locale.US,"%d00", nSensorReleWarm);
+						 break;
+					 case 2:
+						 val = String.format(Locale.US,"0%d0", nSensorReleWarm);
+						 break;
+					 case 3:
+						 val = String.format(Locale.US,"00%d", nSensorReleWarm);
+						 break;
+					}
+					
+					SMSCommand smsCommand = new SMSCommand(getCommandDevSettings(numberSMSFunction.NTmpSensorReleWarm.ncommand(), val, password), 0);
+					sms_to_send.add(smsCommand);
+					//settings_.setNumberSensorReleWarm(nReleWarm);
+				}
 			}
-			
-			SMSCommand smsCommand = new SMSCommand(getCommandDevSettings(numberSMSFunction.NTmpSensorReleWarm.ncommand(), val, password), 0);
-			sms_to_send.add(smsCommand);
-			//settings_.setNumberSensorReleWarm(nReleWarm);
+			else
+			{
+				if( ( nSensorReleWarm != settings_.getNumberSensorReleWarm() )  || ( n_rele != settings_.getNumberReleWarm() ) || anyway)
+				{
+					password=settings_.getPinSIM();
+					String val = "1";
+					val = String.format(Locale.US,"%d", nSensorReleWarm);
+					SMSCommand smsCommand = new SMSCommand(getCommandDevSettings(numberSMSFunction.NTmpSensorReleWarm.ncommand(), val, password), 0);
+					sms_to_send.add(smsCommand);
+					//settings_.setNumberSensorReleWarm(nReleWarm);
+				}
+			}
 		}
 	}
 	
@@ -472,12 +489,39 @@ public class CSettingsDev {
 	public void AddSetTmpReleCommand(int n_tmpsensor,int tmprele,int tmprele_night,int n_rele,boolean anyway)
 	{
 		if(tmprele>-56 && tmprele<100)
-		if(tmprele != settings_.getTmpReleWarm(n_tmpsensor) || anyway || n_rele != settings_.getNumberReleWarm())
 		{
-				password=settings_.getPinSIM();
-				String val = String.format(Locale.US,"Temp.R%d=%d/%d %s",n_rele, tmprele,tmprele_night,password);
-				SMSCommand smsCommand = new SMSCommand(val, 1);
-				sms_to_send.add(smsCommand);	
+			switch(settings_.getDevVersion())
+			{
+			case BaseActivity.deviceAfter01112012:
+				if(tmprele != settings_.getTmpReleWarm(n_tmpsensor) || anyway || n_rele != settings_.getNumberReleWarm())
+				{
+						password=settings_.getPinSIM();
+						String val = String.format(Locale.US,"Temp.R%d=%d/%d %s",n_rele, tmprele,tmprele_night,password);
+						SMSCommand smsCommand = new SMSCommand(val, 1);
+						sms_to_send.add(smsCommand);	
+				}
+				break;
+				
+			case BaseActivity.deviceBefore01112011:
+				if(tmprele != settings_.getTmpReleWarm(n_tmpsensor) || anyway )
+				{
+						password=settings_.getPinSIM();
+						String val = String.format(Locale.US,"Temp.R=%d %s", tmprele, password);
+						SMSCommand smsCommand = new SMSCommand(val, 1);
+						sms_to_send.add(smsCommand);	
+				}
+				break;
+				
+			case BaseActivity.deviceBefore01112012:
+				if(tmprele != settings_.getTmpReleWarm(n_tmpsensor) || anyway )
+				{
+						password=settings_.getPinSIM();
+						String val = String.format(Locale.US,"Temp.R=%d/%d %s", tmprele,tmprele_night,password);
+						SMSCommand smsCommand = new SMSCommand(val, 1);
+						sms_to_send.add(smsCommand);	
+				}
+				break;
+			}
 		}
 	}
 	
