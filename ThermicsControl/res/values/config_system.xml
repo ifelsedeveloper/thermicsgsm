@@ -70,5 +70,5 @@
     </string-array>
     <string name="label_device_version">Дата выпуска Кситал</string>
     <string name="description_device_version">Эта установка необходима для настройки термостата</string>
-    
+    <string name="detect_device_version">Определить автоматически</string>
 </resources>

@@ -218,12 +218,28 @@
            android:entries="@array/device_versions" />
 
        	</RelativeLayout>
+       	<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+       <Button
+            android:id="@+id/buttonRequestDevVerion"
+            android:layout_width="140dp"
+            android:layout_height="50dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/detect_device_version"
+            android:textSize="6pt"
+            android:textStyle="bold"
+            android:layout_alignParentRight="true"
+            android:onClick="OnbuttonRequestDevVerion" />
        	<TextView
            android:id="@+id/textViewDeviceDescription"
            android:layout_width="fill_parent"
+           android:layout_toLeftOf="@+id/buttonRequestDevVerion"
            android:text="@string/description_device_version"
            style="@style/TextViewConfigSubTitle"
            android:layout_height="wrap_content" />
+       	
+       	</RelativeLayout>
         <View   android:id="@+id/firstDivider2"
         		style="@style/ViewDeviderHorizontal" />
         

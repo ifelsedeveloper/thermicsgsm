@@ -190,7 +190,7 @@ public class SmsService extends Service {
 			
 			String strTEMPR="Temp.R";
 			if(sms_body.contains(strTEMPR))
-				sms_body=sms_body.replace(strTEMPR,"Заданная температура для реле");
+				sms_body=sms_body.replace(strTEMPR,"Заданная температура для реле №2");
 			
 			String strVkluchenoRele="Vklucheno rele N1";
 			if(sms_body.contains(strVkluchenoRele))
@@ -302,11 +302,22 @@ public class SmsService extends Service {
 			
 			if(sms_body.contains(datchik_rele))
 			{
-				String to_replace = sms_body.substring(sms_body.indexOf(datchik_rele),sms_body.indexOf(datchik_rele)+datchik_rele.length()+3);
-				if(settings.getNumberSensorReleWarm() > 0)
-					sms_body=sms_body.replace(to_replace,"Для реле №"+Integer.toString(settings.getNumberReleWarm())+" задан термодатчик №"+Integer.toString(settings.getNumberSensorReleWarm()));
+				if(sms_body.length() > sms_body.indexOf(datchik_rele)+datchik_rele.length()+2 && settings.getDevVersion() == BaseActivity.deviceAfter01112012)
+				{
+					String to_replace = sms_body.substring(sms_body.indexOf(datchik_rele),sms_body.indexOf(datchik_rele)+datchik_rele.length()+3);
+					if(settings.getNumberSensorReleWarm() > 0)
+						sms_body=sms_body.replace(to_replace,"Для реле №"+Integer.toString(settings.getNumberReleWarm())+" задан термодатчик №"+Integer.toString(settings.getNumberSensorReleWarm()));
+					else
+						sms_body=sms_body.replace(to_replace,"Термостат отключен");
+				}
 				else
-					sms_body=sms_body.replace(to_replace,"Термостат отключен");
+				{
+					String to_replace = sms_body.substring(sms_body.indexOf(datchik_rele),sms_body.indexOf(datchik_rele)+datchik_rele.length()+1);
+					if(settings.getNumberSensorReleWarm() > 0)
+						sms_body=sms_body.replace(to_replace,"Для реле №"+Integer.toString(settings.getNumberReleWarm())+" задан термодатчик №"+Integer.toString(settings.getNumberSensorReleWarm()));
+					else
+						sms_body=sms_body.replace(to_replace,"Термостат отключен");
+				}
 			}
 			
 			sms_body+= "\nSIM = "+ sms_from;
@@ -458,7 +469,33 @@ public class SmsService extends Service {
 	         notif.number = num_not;
 	         nm.notify(1, notif);
         }
-		
+		//detect device version
+        String [] linesRep = sms.split("\n");
+        int k = 0;
+        for(k = 0; k< linesRep.length; k++)
+        {
+        	if(linesRep[k].contains("Temp.R"))
+        	{
+        		String lineRele = linesRep[k];
+        		String tempR = "Temp.R=";
+                if(lineRele.contains(tempR))
+                {
+                	//device 1 or 2
+                	if(lineRele.contains("\\"))
+                		settings.setDevVersion(BaseActivity.deviceBefore01112011);
+                	else
+                		settings.setDevVersion(BaseActivity.deviceBefore01112012);
+                }
+                else
+                {
+                	settings.setDevVersion(BaseActivity.deviceAfter01112012);
+                }
+        	}
+        }
+        
+        
+        //
+        
 		//rele
 		int n = sms.indexOf("RELE=");
 		
@@ -550,26 +587,35 @@ public class SmsService extends Service {
         	int n_sensor=0;
         	int n_rele = 0;
         	String str_nsenosr1=sms.substring(n+datchik_rele.length(), n+datchik_rele.length()+1);
-        	String str_nsenosr2=sms.substring(n+datchik_rele.length()+1, n+datchik_rele.length()+2);
-        	String str_nsenosr3=sms.substring(n+datchik_rele.length()+2, n+datchik_rele.length()+3);
+        	
+        	
         	if(!str_nsenosr1.equalsIgnoreCase("0"))
         	{
         		n_sensor=Integer.parseInt(str_nsenosr1);
         		n_rele = 1;
         	}
-        	if(!str_nsenosr2.equalsIgnoreCase("0"))
+        	if(sms.length() > n+datchik_rele.length()+2)
         	{
-            	n_sensor=Integer.parseInt(str_nsenosr2);
-            	n_rele = 2;
-        	}
-        	if(!str_nsenosr3.equalsIgnoreCase("0"))
-        	{
-            	n_sensor=Integer.parseInt(str_nsenosr3);
-            	n_rele = 3;
+	        	String str_nsenosr2=sms.substring(n+datchik_rele.length()+1, n+datchik_rele.length()+2);
+	        	String str_nsenosr3=sms.substring(n+datchik_rele.length()+2, n+datchik_rele.length()+3);
+	        	if(!str_nsenosr2.equalsIgnoreCase("0"))
+	        	{
+	            	n_sensor=Integer.parseInt(str_nsenosr2);
+	            	n_rele = 2;
+	        	}
+	        	if(!str_nsenosr3.equalsIgnoreCase("0"))
+	        	{
+	            	n_sensor=Integer.parseInt(str_nsenosr3);
+	            	n_rele = 3;
+	        	}
         	}
         	//Toast.makeText(getApplicationContext(), str_nsenosr1 + str_nsenosr2 + str_nsenosr3, Toast.LENGTH_LONG).show();
         	settings.setNumberSensorReleWarm(n_sensor);
-        	settings.setNumberReleWarm(n_rele);
+        	
+        	if(settings.getDevVersion() == BaseActivity.deviceAfter01112012)
+        		settings.setNumberReleWarm(n_rele);
+        	else
+        		settings.setNumberReleWarm(2);
         }
         for(int i=1;i<10;i++)
         {

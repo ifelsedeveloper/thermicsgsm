@@ -150,7 +150,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	public boolean isSMSSnjatie;
 	public boolean isAutoOnRele1;
 	public boolean isSMSInIncoming;
-	
+	public boolean isShowDeviceVersion = false;
 	public CNotificationSMS [] notificationSMS=null;
 	public int numberTmpSensorSMS=0;
 	
@@ -791,7 +791,26 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	            pd.dismiss();
 	            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 	            Toast.makeText(getApplicationContext(),"Все команды успешно отправлены",Toast.LENGTH_LONG).show();
-	            
+
+	            if(isShowDeviceVersion)
+	            {
+	            	settings = new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_MULTI_PROCESS));
+            		deviceVersion = settings.getDevVersion();
+            		spinnerSelectDevice.setSelection(deviceVersion-1);
+            		switch(deviceVersion)
+            		{
+            		case BaseActivity.deviceAfter01112012:
+            			Toast.makeText(getApplicationContext(),"Ваша версия устройства после 01 11 2012",Toast.LENGTH_LONG).show();
+            			break;
+            		case BaseActivity.deviceBefore01112012:
+            			Toast.makeText(getApplicationContext(),"Ваша версия устройства до 01 11 2012",Toast.LENGTH_LONG).show();
+            			break;
+            		case BaseActivity.deviceBefore01112011:
+            			Toast.makeText(getApplicationContext(),"Ваша версия устройства до 01 11 2011",Toast.LENGTH_LONG).show();
+            			break;
+            		}
+            		
+	            }
 	            //set final settings
 	            if(isOKSend) settings.setIsFirstSim(isSIM1);
 	            setVisiblePassword();
@@ -937,5 +956,29 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		        }});
 			b.show();
 		}
+	}
+	
+	public void OnbuttonRequestDevVerion(View v)
+	{
+		
+		final AlertDialog.Builder b = new AlertDialog.Builder(this);
+		b.setTitle("Определить версию устройcтва?");
+		b.setPositiveButton("Да", new OnClickListener() {
+	        public void onClick(DialogInterface dialog, int which) {
+	        	Toast.makeText(getApplicationContext(),"Опред. вер. устройcтва",Toast.LENGTH_LONG).show();
+	        	settingsDev.clearQueueCommands();
+	        	settingsDev.AddRequestReportCommand();
+	        	LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Опред. вер. устройcтва");
+	        	
+	    		if(settingsDev.sendCommands())
+	    		{	pd.show(); isShowDeviceVersion = true;}
+	        }
+	      });
+		b.setNegativeButton("Отмена", new OnClickListener() {
+	        public void onClick(DialogInterface dialog, int which) {
+	        	//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+	        }});
+		b.show();
+		Log.i(TAG_events,"request report");
 	}
 }
