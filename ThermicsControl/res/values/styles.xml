@@ -155,6 +155,44 @@
          <item name="android:background">@drawable/background_button</item>
     </style>
     
+    <style name="ButtonPlusBig">
+         <item name="android:layout_width">70dp</item>
+         <item name="android:layout_height">45dp</item>
+         <item name="android:gravity">center_vertical|center_horizontal</item>
+         <item name="android:layout_centerVertical">true</item>
+         <item name="android:text">@string/plus</item>
+         <item name="android:layout_marginLeft">2dp</item>
+         <item name="android:textColor">@color/text_button_color</item>
+         <item name="android:textColorHint">@color/selected_button_color</item>
+         <item name="android:textSize">30sp</item>
+         <item name="android:textStyle">bold</item>
+         <item name="android:background">@drawable/background_button</item>
+    </style>
+    
+    <style name="ButtonMinusBig">
+         <item name="android:layout_width">70dp</item>
+         <item name="android:layout_height">45dp</item>
+         <item name="android:gravity">center_vertical|center_horizontal</item>
+         <item name="android:layout_centerVertical">true</item>
+         <item name="android:text">@string/minus</item>
+         <item name="android:layout_marginLeft">2dp</item>
+         <item name="android:textColor">@color/text_button_color</item>
+         <item name="android:textColorHint">@color/selected_button_color</item>
+         <item name="android:textSize">30sp</item>
+         <item name="android:textStyle">bold</item>
+         <item name="android:background">@drawable/background_button</item>
+    </style>
+    
+    <style name="cust_dialog" parent="@android:style/Theme.Dialog">
+    	<item name="android:windowTitleStyle">@style/dialog_title_style</item>
+  	</style>
+
+	<style name="dialog_title_style" parent="android:Widget.TextView">
+	    <item name="android:background">@color/button_blue</item>
+	    <item name="android:padding">10dp</item>
+	    <item name="android:textSize">16sp</item>
+	</style>
+    
     <style name="EditText3EmsValue">
          <item name="android:layout_width">40dp</item>
          <item name="android:layout_height">40dp</item>

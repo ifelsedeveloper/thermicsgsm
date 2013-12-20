@@ -5,10 +5,12 @@ package com.therm.thermicscontrol;
 import com.therm.thermicscontrol.R;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.DialogInterface.OnClickListener;
@@ -21,6 +23,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 //import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -33,6 +36,8 @@ import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 //import android.content.SharedPreferences;
 import android.widget.TextView;
+import android.view.View.OnLongClickListener;
+
 
 public class SettingsParamActivity extends BaseActivity {
 
@@ -76,6 +81,7 @@ public class SettingsParamActivity extends BaseActivity {
 		linearLayoutNightTemp = (LinearLayout) findViewById(R.id.layoutSeekBarReleWarmNight);
 		RelativeLayoutReleWarm = (RelativeLayout) findViewById(R.id.RelativeLayoutReleWarm);
 		RelativeLayoutNTmpSensor = (RelativeLayout) findViewById(R.id.RelativeLayoutNTmpSensor);
+		layoutToggleButtons = (LinearLayout)findViewById(R.id.layotSwitchButton);
 		//number_tmp_sensor = settings.getNumberSensorReleWarm();
 		
 		//create for work with shared preference
@@ -89,6 +95,7 @@ public class SettingsParamActivity extends BaseActivity {
 	    editTextTmpReleWarm = (EditText) findViewById(R.id.editTextTmpRele);
 	    editTextTmpReleWarmNight = (EditText) findViewById(R.id.editTextTmpReleNight);
 	    editNRele = (EditText) findViewById(R.id.editTextNRele);
+	    
 		loadParam();
 		Log.i(TAG_events, "creating activity");
 //		settings.setIsTimerRunning(2,true);
@@ -164,6 +171,8 @@ public class SettingsParamActivity extends BaseActivity {
 	  	      boolean fromUser) {
 	  			value_seek_rele = progress + min_tmp;
 	  			editTextTmpReleWarm.setText(String.format("%d", value_seek_rele));
+	  			dayValueTemp = value_seek_rele;
+	  			setValueForHotButton(newTempSelectedButton, dayValueTemp, nightValueTemp);
 	  			//Log.i(TAG_events,String.format("%d", value_seek_rele));
 	  	  }
 
@@ -191,6 +200,8 @@ public class SettingsParamActivity extends BaseActivity {
 	  	      boolean fromUser) {
 	  			value_seek_rele_night = progress + min_tmp;
 	  			editTextTmpReleWarmNight.setText(String.format("%d", value_seek_rele_night));
+	  			nightValueTemp = value_seek_rele_night;
+	  			setValueForHotButton(newTempSelectedButton, dayValueTemp, nightValueTemp);
 	  			//Log.i(TAG_events,String.format("%d", value_seek_rele));
 	  	  }
 
@@ -255,11 +266,13 @@ public class SettingsParamActivity extends BaseActivity {
 		{
 			linearLayoutDayTemp.setVisibility(View.GONE);
 			linearLayoutNightTemp.setVisibility(View.GONE);
+			layoutToggleButtons.setVisibility(View.GONE);
 		}
 		else
 		{
 			linearLayoutDayTemp.setVisibility(View.VISIBLE);
 			linearLayoutNightTemp.setVisibility(View.VISIBLE);
+			layoutToggleButtons.setVisibility(View.VISIBLE);
 		}
 		if(settings.getDevVersion() == 1)
 		{
@@ -294,6 +307,7 @@ public class SettingsParamActivity extends BaseActivity {
 	//load parameters from system and display it on activity
 	public void loadParam()
 	{
+		LoadButtons();
 		//load parameters from preference
 		//tmp_water=settings.getTmpWater();
 		//tmp_air=settings.getTmpAir();
@@ -446,9 +460,9 @@ public class SettingsParamActivity extends BaseActivity {
 		
 		
 	}
-	
+	LinearLayout layoutToggleButtons;
 	public void setSeekBar()
-	{
+	{ 
 		if(numberSensorTMPReleWarm != settings.getNumberSensorReleWarm() || (value_seek_rele!=tmp_rele_warm) || numberRele != settings.getNumberReleWarm())
 			viewOkCancel.setVisibility(View.VISIBLE );
 		else
@@ -459,6 +473,7 @@ public class SettingsParamActivity extends BaseActivity {
 		{
 			linearLayoutDayTemp.setVisibility(View.GONE);
 			linearLayoutNightTemp.setVisibility(View.GONE);
+			layoutToggleButtons.setVisibility(View.GONE);
 		}
 		else
 		{
@@ -492,6 +507,14 @@ public class SettingsParamActivity extends BaseActivity {
 		SetFunctionSensorRele();
 		setSeekBar();
 		setReleState();
+		LoadButtons();
+//		for(int i = 0;i <4; i++)
+//    	{
+//    		statesButtons[i] = false;
+//    		LoadValueForHotButton(i);
+//    	}
+//    	ntemp_config = settings.getNTempConfig();
+//    	DisplayStatesButtons();
 	}
 	
 	boolean isEnableRele1 = false;
@@ -626,7 +649,7 @@ public class SettingsParamActivity extends BaseActivity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 		//set parameters to device
 		//add commands to queue
-		boolean isAnyway = true;
+		boolean isAnyway = false;
 		settingsDev.clearQueueCommands();
 		if(settingsDev.isSimNumberValid())
 		{
@@ -634,8 +657,7 @@ public class SettingsParamActivity extends BaseActivity {
 			if(numberSensorTMPReleWarm!=0)
 			settingsDev.AddSetTmpReleCommand(numberSensorTMPReleWarm-1,value_seek_rele,value_seek_rele_night,numberRele, isAnyway);
 			
-			if(settingsDev.sms_to_send.size() > 0)
-			{
+
 				//save parameters
 				final AlertDialog.Builder b = new AlertDialog.Builder(this);
 				b.setIcon(android.R.drawable.ic_dialog_alert);
@@ -643,33 +665,56 @@ public class SettingsParamActivity extends BaseActivity {
 				//b.setMessage("Отправить" + String.format(" %d ", settingsDev.sms_to_send.size()) + "SMS?");
 				b.setPositiveButton("Установить", new OnClickListener() {
 			        public void onClick(DialogInterface dialog, int which) {
-			        	settings.setNumberSensorReleWarm(numberSensorTMPReleWarm);
-			    		settings.setNumberReleWarm(numberRele);
-			        	//viewOkCancel.setVisibility(View.INVISIBLE);
-			        	viewOkCancel.setVisibility(View.GONE);
-			        	if(numberSensorTMPReleWarm!=0)
-			    		{
-			        		tmp_rele_warm = value_seek_rele;
-			        		tmp_rele_warm_night = value_seek_rele_night;
-			        		settings.setTmpReleWarm(numberSensorTMPReleWarm-1,tmp_rele_warm);
-			        		settings.setTmpReleWarmNight(numberSensorTMPReleWarm-1,tmp_rele_warm_night);
+			        	//set hot keys state
+			        	settings.setNTempConfig(newTempSelectedButton);
+			        	for(int i = 0; i<4;i++)
+			        	{
+			        		settings.setTempDayConfig(i, newTempDayHotKeys[i]);
+							settings.setTempNightConfig(i, newTempNightHotKeys[i]);
+							
+							oldTempDayHotKeys[i] = newTempDayHotKeys[i];
+							oldTempNightHotKeys[i] = newTempNightHotKeys[i];
 			        	}
-			        	
-			    		
-			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Настройка термостата");
-			    		settingsDev.sendCommands();		
-			    		setReleState();
-			    		pd.show();
+			        	oldTempSelectedButton = newTempSelectedButton;
+						
+						if(settingsDev.sms_to_send.size() > 0)
+						{
+				        	settings.setNumberSensorReleWarm(numberSensorTMPReleWarm);
+				    		settings.setNumberReleWarm(numberRele);
+				        	//viewOkCancel.setVisibility(View.INVISIBLE);
+				        	viewOkCancel.setVisibility(View.GONE);
+				        	if(numberSensorTMPReleWarm!=0)
+				    		{
+				        		tmp_rele_warm = value_seek_rele;
+				        		tmp_rele_warm_night = value_seek_rele_night;
+				        		settings.setTmpReleWarm(numberSensorTMPReleWarm-1,tmp_rele_warm);
+				        		settings.setTmpReleWarmNight(numberSensorTMPReleWarm-1,tmp_rele_warm_night);
+				        	}
+				    		
+				    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Настройка термостата");
+				    		settingsDev.sendCommands();		
+				    		setReleState();
+				    		pd.show();
+						}
+						else
+						{
+							viewOkCancel.setVisibility(View.GONE);
+						}
 			        }
 			      });
 				b.setNegativeButton("Отмена", new OnClickListener() {
 			        public void onClick(DialogInterface dialog, int which) {
+			        	
+			        	
+			        	
+			        	
 			        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 			        	
 			        }});
 				b.show();
 			}
-		}
+
+		
 		
  	}
 	
@@ -981,6 +1026,280 @@ public class SettingsParamActivity extends BaseActivity {
 	{
 		Intent intent = new Intent(this, TimersListActivity.class);
 	    startActivity(intent);
+	}
+	
+	boolean [] statesButtons = new boolean[4];
+	Button [] valuesButtons = new Button[4];
+	
+	void LoadButtons()
+	{
+		valuesButtons[0] = (Button)findViewById(R.id.buttonSwitch1);
+		valuesButtons[1] = (Button)findViewById(R.id.buttonSwitch2);
+		valuesButtons[2] = (Button)findViewById(R.id.buttonSwitch3);
+		valuesButtons[3] = (Button)findViewById(R.id.buttonSwitch4);
+		
+
+		valuesButtons[0].setOnLongClickListener(new OnLongClickListener() {		
+				@Override
+				public boolean onLongClick(View v) {
+					//call change value
+					ShowDialogTempPicker(0);
+					return false;
+				}
+			});
+			
+		valuesButtons[1].setOnLongClickListener(new OnLongClickListener() {		
+			@Override
+			public boolean onLongClick(View v) {
+				//call change value
+				ShowDialogTempPicker(1);
+				return false;
+			}
+		});
+		
+		valuesButtons[2].setOnLongClickListener(new OnLongClickListener() {		
+			@Override
+			public boolean onLongClick(View v) {
+				//call change value
+				ShowDialogTempPicker(2);
+				return false;
+			}
+		});
+		
+		valuesButtons[3].setOnLongClickListener(new OnLongClickListener() {		
+			@Override
+			public boolean onLongClick(View v) {
+				//call change value
+				ShowDialogTempPicker(3);
+				return false;
+			}
+		});
+		oldTempSelectedButton = newTempSelectedButton = settings.getNTempConfig();
+		dayValueTemp = settings.getTempDayConfig(newTempSelectedButton);
+		nightValueTemp = settings.getTempNightConfig(newTempSelectedButton);;
+		setValueForHotButton(newTempSelectedButton, dayValueTemp, nightValueTemp);
+
+		for(int i = 0; i < 4; i++)
+		{
+			oldTempDayHotKeys[i] = newTempDayHotKeys[i] = settings.getTempDayConfig(i);
+			oldTempNightHotKeys[i] = newTempNightHotKeys[i] = settings.getTempNightConfig(i); 
+			if(i!= newTempSelectedButton)
+			{
+				setValueForHotButton(i, settings.getTempDayConfig(i), settings.getTempNightConfig(i));
+				statesButtons[i] = false;
+			}
+		}
+		
+		statesButtons[newTempSelectedButton] = true;
+		
+		DisplayStatesButtons();
+	}
+	
+	void setValueForHotButton(int n, int temp_day, int temp_night)
+	{
+		valuesButtons[n].setText(String.format("%d\n%d", temp_day, temp_night));
+	}
+	
+	void LoadValueForHotButton(int n)
+	{
+		int dayTemp = settings.getTempDayConfig(n);
+		int nightTemp = settings.getTempNightConfig(n);
+		valuesButtons[n].setText(String.format("%d\n%d", dayTemp, nightTemp));
+		
+	}
+	
+	final Context context = this;
+	TextView dialogTempNight;
+	TextView dialogTempDay;
+	int nightValueTemp = 0;
+	int dayValueTemp = 0;
+	int nConfigTempTuning = 0;
+	
+	int []newTempDayHotKeys = new int[4];
+	int []newTempNightHotKeys = new int[4];
+	int newTempSelectedButton = 0;
+	
+	int []oldTempDayHotKeys = new int[4];
+	int []oldTempNightHotKeys = new int[4];
+	int oldTempSelectedButton = 1;
+	
+	public void ShowDialogTempPicker(int n)
+	{
+		nConfigTempTuning = n;
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+		// custom dialog
+		final Dialog dialog = new Dialog(context,R.style.cust_dialog);
+		dialog.setTitle("Установка значений регулятора");
+		dialog.setContentView(R.layout.dialog_temerature_picker);
+		dialogTempNight = (TextView) dialog.findViewById(R.id.titleNightTemp);
+		dialogTempDay = (TextView) dialog.findViewById(R.id.titleDayTemp);
+		
+		dayValueTemp = newTempDayHotKeys[n];
+		nightValueTemp = newTempNightHotKeys[n];
+		dialogTempNight.setText(Integer.toString(nightValueTemp));
+		dialogTempDay.setText(Integer.toString(dayValueTemp));
+		
+		dialog.setOnCancelListener(new OnCancelListener() {
+			
+			@Override
+			public void onCancel(DialogInterface dialog) {
+				// TODO Auto-generated method stub
+				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+			}
+
+		});
+		
+		Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOkTempPick);
+		
+		dialogButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// OK
+				//save parameters		
+				newTempDayHotKeys[nConfigTempTuning] = dayValueTemp;
+				newTempNightHotKeys[nConfigTempTuning] = nightValueTemp;
+				
+				if(newTempSelectedButton == nConfigTempTuning)
+				{
+					//set progress bar
+					sbWeightRele.setProgress(dayValueTemp-min_tmp);
+					sbWeightReleNight.setProgress(nightValueTemp-min_tmp);
+					if( tmp_rele_warm_night != nightValueTemp || dayValueTemp != tmp_rele_warm)
+						viewOkCancel.setVisibility(View.VISIBLE);
+				}
+
+				//view ok/cancel
+				boolean isShowOkCancel = false;
+				for(int i=0; i<4; i++)
+					if(newTempDayHotKeys[i] != oldTempDayHotKeys[i] || newTempNightHotKeys[i] != oldTempNightHotKeys[i])
+					{
+						isShowOkCancel = true;
+						break;
+					}
+				
+				if(isShowOkCancel)
+					viewOkCancel.setVisibility(View.VISIBLE);
+				
+
+				setValueForHotButton(nConfigTempTuning, dayValueTemp, nightValueTemp);
+				dialog.dismiss();
+				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+			}
+		});
+		
+		dialogButton = (Button) dialog.findViewById(R.id.dialogButtonCancelTempPick);
+		
+		dialogButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// Cancel
+				dialog.dismiss();
+				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+			}
+		});
+		
+		dialogButton = (Button) dialog.findViewById(R.id.buttonNightPlusTempReg);
+		
+		dialogButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// inc night
+				nightValueTemp++;
+				dialogTempNight.setText(Integer.toString(nightValueTemp));
+			}
+		});
+		
+		dialogButton = (Button) dialog.findViewById(R.id.buttonNightMinusTempReg);
+		
+		dialogButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// inc night
+				nightValueTemp--;
+				dialogTempNight.setText(Integer.toString(nightValueTemp));
+			}
+		});
+		
+		dialogButton = (Button) dialog.findViewById(R.id.buttonDayMinusTempReg);
+		
+		dialogButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// inc night
+				dayValueTemp--;
+				dialogTempDay.setText(Integer.toString(dayValueTemp));
+			}
+		});
+		
+		
+		dialogButton = (Button) dialog.findViewById(R.id.buttonDayPlusTempReg);
+		
+		dialogButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// inc night
+				dayValueTemp++;
+				dialogTempDay.setText(Integer.toString(dayValueTemp));
+			}
+		});
+	 
+		dialog.show();
+	}
+	
+	public void DisplayStatesButtons()
+	{
+		for(int i = 0; i < 4;i++)
+		{
+			if(statesButtons[i])
+				valuesButtons[i].setBackgroundResource(R.drawable.background_lightred_togglebutton);
+			else
+				valuesButtons[i].setBackgroundResource(R.drawable.background_lightgreen_togglebutton);;
+		}
+	}
+	
+	public void EnableButton(int n)
+	{
+		setValueForHotButton(n, newTempDayHotKeys[n], newTempNightHotKeys[n]);
+		newTempSelectedButton = n;
+		Button buttonOld;
+		int i;
+		for(i=0;i<4;i++)
+		{
+			if(statesButtons[i]) break;
+		}
+		buttonOld = valuesButtons[i];
+		statesButtons[i] = false;
+		buttonOld.setBackgroundResource(R.drawable.background_lightgreen_togglebutton);
+		
+		valuesButtons[n].setBackgroundResource(R.drawable.background_lightred_togglebutton);
+		statesButtons[n] = true;
+		int dayTemp = newTempDayHotKeys[n];
+		int nightTemp = newTempNightHotKeys[n];
+		sbWeightRele.setProgress(dayTemp-min_tmp);
+		sbWeightReleNight.setProgress(nightTemp-min_tmp);
+		int nsenesor = settings.getNumberSensorReleWarm();
+		if( dayTemp != settings.getTmpReleWarm(nsenesor-1) || nightTemp != settings.getTmpReleWarmNight(nsenesor-1) || newTempSelectedButton != settings.getNTempConfig())
+			viewOkCancel.setVisibility(View.VISIBLE);
+	}
+	
+	public void onClickButtonSwitch1(View v)
+	{
+		EnableButton(0);
+	}
+	
+	public void onClickButtonSwitch2(View v)
+	{
+		EnableButton(1);
+	}
+	
+	public void onClickButtonSwitch3(View v)
+	{
+		EnableButton(2);
+	}
+	
+	public void onClickButtonSwitch4(View v)
+	{
+		EnableButton(3);
 	}
 	
 	@Override

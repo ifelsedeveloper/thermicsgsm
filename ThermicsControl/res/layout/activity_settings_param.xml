@@ -227,6 +227,66 @@
         </LinearLayout>
         
         <LinearLayout
+        android:id="@+id/layotSwitchButton"
+        android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+    	android:weightSum="1.0" >
+
+            <Button
+                android:id="@+id/buttonSwitch1"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.25"
+                android:background="@drawable/background_lightgreen_togglebutton"
+                android:text="+25\n-10"
+                android:onClick="onClickButtonSwitch1"
+                android:longClickable="true"
+                android:textSize="20sp" />
+            
+            <Button
+                android:id="@+id/buttonSwitch2"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="60dp"
+                android:layout_marginLeft="-5dp"
+                android:background="@drawable/background_lightred_togglebutton"
+                android:text="+25\n-10"
+                android:onClick="onClickButtonSwitch2"
+                android:longClickable="true"
+                android:textSize="20sp"
+                />
+            
+            <Button
+                android:id="@+id/buttonSwitch3"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="60dp"
+                android:layout_marginLeft="-5dp"
+                android:text="+25\n-10"
+                android:background="@drawable/background_lightgreen_togglebutton"
+                android:onClick="onClickButtonSwitch3"
+                android:longClickable="true"
+                android:textSize="20sp"
+                />
+            
+            <Button
+                android:id="@+id/buttonSwitch4"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="60dp"
+                android:layout_marginLeft="-5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/background_lightgreen_togglebutton"
+                android:text="+25\n-10"
+                android:onClick="onClickButtonSwitch4"
+                android:longClickable="true"
+                android:textSize="20sp"
+                />	
+        </LinearLayout>
+        
+        <LinearLayout
 		    	android:id="@+id/layoutOKCancelReleWarm"
 		        android:layout_width="fill_parent" 
 		    	android:layout_height="wrap_content"
@@ -262,7 +322,8 @@
 			    />
 		</LinearLayout>
 		
-
+        
+		
         </LinearLayout>
 
         

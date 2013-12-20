@@ -320,6 +320,68 @@ public class CSettingsPref {
 		return ;
 	}
 	
+	public int getTempNightConfig(int number)
+	{
+		int result=0;
+		if (_settings.contains(BaseActivity.prefTEMP_NIGHT_CONFIG[number]) == true)
+			 result = _settings.getInt(BaseActivity.prefTEMP_NIGHT_CONFIG[number], result);
+		else 
+			setTempNightConfig(number, result);
+		return result;
+	}
+	
+	public void setTempNightConfig(int number, int temp)
+	{
+		SharedPreferences.Editor prefEditor = _settings.edit();
+		prefEditor.putInt(BaseActivity.prefTEMP_NIGHT_CONFIG[number], temp);
+		prefEditor.commit();
+		return ;
+	}
+	
+	public int getTempDayConfig(int number)
+	{
+		int result=0;
+		if (_settings.contains(BaseActivity.prefTEMP_DAY_CONFIG[number]) == true)
+			 result = _settings.getInt(BaseActivity.prefTEMP_DAY_CONFIG[number], result);
+		else 
+			setTempDayConfig(number, result);
+		return result;
+	}
+	
+	public void setTempDayConfig(int number, int temp)
+	{
+		SharedPreferences.Editor prefEditor = _settings.edit();
+		prefEditor.putInt(BaseActivity.prefTEMP_DAY_CONFIG[number], temp);
+		prefEditor.commit();
+		return ;
+	}
+	
+	public int getNTempConfig()
+	{
+		int result=1;
+		if (_settings.contains(BaseActivity.NTEMP_CONFIG) == true)
+			 result = _settings.getInt(BaseActivity.NTEMP_CONFIG, result);
+		else
+		{
+			//set day temp config
+			int numberSensorTMPReleWarm=getNumberSensorReleWarm();		
+			int tmp_rele_warm=getTmpReleWarm(numberSensorTMPReleWarm-1);
+			int tmp_rele_warm_night=getTmpReleWarmNight(numberSensorTMPReleWarm-1);
+			setTempDayConfig(result, tmp_rele_warm);
+			setTempNightConfig(result, tmp_rele_warm_night);
+			setNTempConfig(result);
+		}
+		return result;
+	}
+	
+	public void setNTempConfig(int nconfig_temp)
+	{
+		SharedPreferences.Editor prefEditor = _settings.edit();
+		prefEditor.putInt(BaseActivity.NTEMP_CONFIG, nconfig_temp);
+		prefEditor.commit();
+		return ;
+	}
+	
 	public int getNumberSensorReleWarm()
 	{
 		int result=1;

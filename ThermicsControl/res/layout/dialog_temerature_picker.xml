@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:gravity="center_horizontal"
+	    android:layout_marginRight="5dp">
+	<ImageView 
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:src="@drawable/moon"
+                android:contentDescription="@string/content_description_image"/>
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+
+	        <Button
+	            android:id="@+id/buttonNightPlusTempReg"
+            	style="@style/ButtonPlusBig" />
+            <TextView
+	           android:id="@+id/titleNightTemp"
+	           android:text="-20"
+	           style="@style/ButtonPlusBig" />
+            <Button
+                android:id="@+id/buttonNightMinusTempReg"
+            	style="@style/ButtonMinusBig"/>
+	</LinearLayout>
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:layout_marginLeft="5dp" >
+
+	        <Button
+	            android:id="@+id/buttonDayPlusTempReg"
+            	style="@style/ButtonPlusBig" />
+            <TextView
+	           android:id="@+id/titleDayTemp"
+	           android:text="+15"
+	           style="@style/ButtonPlusBig" />
+            <Button
+                android:id="@+id/buttonDayMinusTempReg"
+            	style="@style/ButtonMinusBig"/>
+	</LinearLayout>
+	<ImageView 
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:src="@drawable/sun"
+                android:contentDescription="@string/content_description_image"/>
+</LinearLayout>
+
+    <LinearLayout
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:weightSum="1.0"
+       style="@style/TitleOkCancle" >
+
+       <Button
+           android:id="@+id/dialogButtonOkTempPick"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_marginRight="2dp"
+           android:layout_marginTop="2dp"
+           android:layout_weight="0.50"
+           android:text="@string/set" />
+
+       <Button
+           android:id="@+id/dialogButtonCancelTempPick"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_marginRight="2dp"
+           android:layout_marginTop="2dp"
+           android:layout_weight="0.50"
+           android:text="@string/cancel" />
+   </LinearLayout>
+    
+</LinearLayout>

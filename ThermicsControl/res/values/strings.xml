@@ -37,4 +37,6 @@
 
     <string name="add_timer">Добавить таймер</string>
     <string name="timer_days">Каждый день</string>
+    
+    <string name="settings_param_regulator">Установка значений регулятора</string>
 </resources>

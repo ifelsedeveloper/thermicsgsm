@@ -102,6 +102,16 @@ public static final String [] TMPN_RELE_NIGHT = {
 	"tmp1_rele_night", "tmp2_rele_night", "tmp3_rele_night",
 	"tmp4_rele_night", "tmp5_rele_night", "tmp6_rele_night"};
 
+public static final String [] prefTEMP_NIGHT_CONFIG = {
+	"temp_night_config1", "temp_night_config2", "temp_night_config3",
+	"temp_night_config4"};
+
+public static final String [] prefTEMP_DAY_CONFIG = {
+	"temp_day_config1", "temp_day_config2", "temp_day_config3",
+	"temp_day_config4"};
+
+public final static String NTEMP_CONFIG = "ntemp_config";
+
 public final static String FUNCTION_UPR = "function_upr";
 
 public final static String prefIsSetAutoRele1Control = "setAutoRele1Control";
