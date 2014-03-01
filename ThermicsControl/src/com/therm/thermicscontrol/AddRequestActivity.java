@@ -1,14 +1,10 @@
 package com.therm.thermicscontrol;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import com.therm.thermicscontrol.R;
 
 import android.os.Bundle;
-import android.os.SystemClock;
-
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -26,7 +22,6 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;

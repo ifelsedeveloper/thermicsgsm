@@ -54,6 +54,7 @@ public class DBSMS{
   // получить все данные из таблицы DB_TABLE
   public Cursor getAllData() {
     return mDB.query(DB_TABLE, null, null, null, null, null, null);
+    
   }
   
   // добавить запись в DB_TABLE

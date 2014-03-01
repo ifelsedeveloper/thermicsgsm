@@ -3,12 +3,11 @@ package com.therm.thermicscontrol;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import android.content.Intent;
-import android.os.Bundle;
+
 import android.telephony.SmsMessage;
-import android.util.Log;
+
 import android.widget.Toast;
 //import android.util.Log;
 
@@ -16,16 +15,6 @@ public class SMSMonitor extends BroadcastReceiver {
 	
 	
 	private static final String ACTION = "android.provider.Telephony.SMS_RECEIVED";
-	
-//	@Override
-//	protected void onCreate() {
-//	    super.onCreate(savedInstanceState);
-//	     Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-//	        @Override
-//	        public void uncaughtException(Thread paramThread, Throwable paramThrowable) {
-//	            Log.e("Alert","Lets See if it Works !!!");
-//	        }
-//	    });}
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {

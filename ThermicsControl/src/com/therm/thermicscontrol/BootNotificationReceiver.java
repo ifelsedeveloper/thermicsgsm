@@ -10,10 +10,6 @@ import android.content.Context;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Bundle;
-import android.telephony.SmsMessage;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.widget.Toast;
 //import android.util.Log;
 

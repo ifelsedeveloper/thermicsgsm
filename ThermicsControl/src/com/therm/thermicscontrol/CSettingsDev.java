@@ -142,6 +142,15 @@ public class CSettingsDev {
 		sms_to_send.clear();
 	}
 	
+	public void VklRele(int nrele, int timeout)
+	{
+		phoneNumber=settings_.getNumberSIM();
+		password=settings_.getPinSIM();
+		String message=String.format(Locale.US,"Vkl %d %d %s",nrele, timeout, password);
+		sendSMS(message);
+		Toast.makeText(appcontext,String.format(Locale.US,"Отправлена команда: %s",message),Toast.LENGTH_LONG).show();
+	}
+	
 	public void RequestReport()
 	{
 		phoneNumber=settings_.getNumberSIM();
@@ -490,10 +499,11 @@ public class CSettingsDev {
 	{
 		if(tmprele>-56 && tmprele<100)
 		{
+			int nbutton = settings_.getNTempConfig();
 			switch(settings_.getDevVersion())
 			{
 			case BaseActivity.deviceAfter01112012:
-				if(tmprele != settings_.getTmpReleWarm(n_tmpsensor) || anyway || n_rele != settings_.getNumberReleWarm())
+				if(tmprele != settings_.getTempDayConfig(n_tmpsensor,nbutton) || anyway || n_rele != settings_.getNumberReleWarm())
 				{
 						password=settings_.getPinSIM();
 						String val = String.format(Locale.US,"Temp.R%d=%d/%d %s",n_rele, tmprele,tmprele_night,password);
@@ -503,7 +513,7 @@ public class CSettingsDev {
 				break;
 				
 			case BaseActivity.deviceBefore01112011:
-				if(tmprele != settings_.getTmpReleWarm(n_tmpsensor) || anyway )
+				if(tmprele != settings_.getTempDayConfig(n_tmpsensor, nbutton) || anyway )
 				{
 						password=settings_.getPinSIM();
 						String val = String.format(Locale.US,"Temp.R=%d %s", tmprele, password);
@@ -513,7 +523,7 @@ public class CSettingsDev {
 				break;
 				
 			case BaseActivity.deviceBefore01112012:
-				if(tmprele != settings_.getTmpReleWarm(n_tmpsensor) || anyway )
+				if(tmprele != settings_.getTempDayConfig(n_tmpsensor, nbutton) || anyway )
 				{
 						password=settings_.getPinSIM();
 						String val = String.format(Locale.US,"Temp.R=%d/%d %s", tmprele,tmprele_night,password);
@@ -559,14 +569,18 @@ public class CSettingsDev {
 			sms_to_send.add(command);
 		}
 	}
+	public void AddSetReleNCommand(int nrele,boolean value, boolean anyway)
+	{
+		AddSetReleNCommand(nrele, value, -1, anyway);
+	}
 	
-	public void AddSetReleNCommand(int nrele,boolean value,boolean anyway)
+	public void AddSetReleNCommand(int nrele,boolean value, int time, boolean anyway)
 	{
 		if(nrele>0 && nrele<4)
 		{
-			boolean releval=settings_.getReleValue(nrele);
+			boolean releval=settings_.getIsRele(nrele-1);
 			String command_text = "";
-			command_text = GetCmdRele(nrele, value);
+			command_text = GetCmdRele(nrele, value, time);
 			if(value != releval || anyway)
 			{
 				SMSCommand smsCommand = new SMSCommand(command_text, 1);
@@ -575,40 +589,31 @@ public class CSettingsDev {
 		}
 	}
 	
-	
 	public String GetCmdRele(int nrele, boolean value)
+	{
+		return GetCmdRele(nrele, value, -1);
+	}
+	
+	public String GetCmdRele(int nrele, boolean value, int time)
 	{
 		if(nrele == 0) nrele++;
 		password = settings_.getPinSIM();
 		String command_text = "";
-		switch(nrele)
+		
+		if(time < 0)
 		{
-			case 1:
-			{
-				if(value)
-					command_text = String.format(Locale.US,"Vkl rele 1 %s",password);
-				else
-					command_text = String.format(Locale.US,"Otkl rele 1 %s",password);	
-			}
-				break;
-			case 2:
-			{
-				if(value)
-					command_text = String.format(Locale.US,"Vkl rele 2 %s",password);
-				else
-					command_text = String.format(Locale.US,"Otkl rele 2 %s",password);
-			}
-				break;
-			case 3:
-			{
-				if(value)
-					command_text = String.format(Locale.US,"Vkl rele 3 %s",password);
-				else
-					command_text = String.format(Locale.US,"Otkl rele 3 %s",password);
-			}
-				break ;
-			default:
-				return command_text;
+			command_text = String.format(Locale.US,"%s rele %d %s", 
+																value ? "Vkl" :"Otkl",
+																nrele, 
+																password);
+		}
+		else
+		{
+			command_text = String.format(Locale.US,"%s rele %d %d %s", 
+																value ? "Vkl" :"Otkl",
+																nrele, 
+																time, 
+																password);
 		}
 		return command_text;
 	}

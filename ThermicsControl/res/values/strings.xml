@@ -39,4 +39,5 @@
     <string name="timer_days">Каждый день</string>
     
     <string name="settings_param_regulator">Установка значений регулятора</string>
+    <string name="default_value_hotkey">+25\n-10</string>
 </resources>

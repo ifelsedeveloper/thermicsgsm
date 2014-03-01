@@ -3,7 +3,6 @@ package com.therm.thermicscontrol;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.MenuItem;
-import android.widget.Toast;
 //import android.os.Bundle;
 //import android.util.Log;
 public class BaseActivity extends Activity {
@@ -21,9 +20,7 @@ public static final String prefTmpAir = "tmpAir";
 public static final String prefNameRele1 = "nameRele1";
 public static final String prefNameRele2 = "nameRele2";
 public static final String prefNameRele3 = "nameRele3";
-public static final String prefIsRele1 = "isRele1";
-public static final String prefIsRele2 = "isRele2";
-public static final String prefIsRele3 = "isRele3";
+public static final String prefIsRele[] = {"isRele1","isRele2","isRele3"};
 public static final String prefIsMicrophone = "isMicrophone";
 
 //config system
@@ -103,12 +100,20 @@ public static final String [] TMPN_RELE_NIGHT = {
 	"tmp4_rele_night", "tmp5_rele_night", "tmp6_rele_night"};
 
 public static final String [] prefTEMP_NIGHT_CONFIG = {
-	"temp_night_config1", "temp_night_config2", "temp_night_config3",
-	"temp_night_config4"};
+	"temp_night_config11", "tmp1_rele_night", "temp_night_config13","temp_night_config14",
+	"temp_night_config21", "tmp2_rele_night", "temp_night_config23","temp_night_config24",
+	"temp_night_config31", "tmp3_rele_night", "temp_night_config33","temp_night_config34",
+	"temp_night_config41", "tmp4_rele_night", "temp_night_config43","temp_night_config44",
+	"temp_night_config51", "tmp5_rele_night", "temp_night_config53","temp_night_config54",
+	"temp_night_config61", "tmp6_rele_night", "temp_night_config63","temp_night_config64"};
 
 public static final String [] prefTEMP_DAY_CONFIG = {
-	"temp_day_config1", "temp_day_config2", "temp_day_config3",
-	"temp_day_config4"};
+	"temp_day_config11", "tmp1_rele", "temp_day_config13","temp_day_config14",
+	"temp_day_config21", "tmp2_rele", "temp_day_config23","temp_day_config24",
+	"temp_day_config31", "tmp3_rele", "temp_day_config33","temp_day_config34",
+	"temp_day_config41", "tmp4_rele", "temp_day_config43","temp_day_config44",
+	"temp_day_config51", "tmp5_rele", "temp_day_config53","temp_day_config54",
+	"temp_day_config61", "tmp6_rele", "temp_day_config63","temp_day_config64"};
 
 public final static String NTEMP_CONFIG = "ntemp_config";
 

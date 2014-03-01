@@ -9,12 +9,30 @@
     android:background="@color/window_background"
     android:orientation="vertical"
     tools:context=".MessageSystemActivity" >
-    
+    <RelativeLayout 
+        android:id="@+id/relativeLayoutMessageSystem"
+        android:background="@color/gradient_green1"
+        android:layout_width="fill_parent"
+        style="@style/TextViewTitleActivity">
     <TextView
         android:id="@+id/titleMessageSystem"
         android:text="@string/title_sytem_messages"
-        android:background="@color/gradient_green1"
-        style="@style/TextViewTitleActivity" />
+        style="@style/TextViewTitleActivity"
+        android:layout_width="wrap_content"
+         />
+
+    <ImageView
+        android:id="@+id/saveButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/content_description_image"
+        android:src="@drawable/save_icon"
+        android:layout_marginRight="10dp"
+        android:onClick="clickSaveButton" />
+
+    </RelativeLayout>
     
     <ListView
         android:id="@+id/listViewSMSessages"
@@ -22,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttonClear"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/titleMessageSystem"
+        android:layout_below="@+id/relativeLayoutMessageSystem"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"

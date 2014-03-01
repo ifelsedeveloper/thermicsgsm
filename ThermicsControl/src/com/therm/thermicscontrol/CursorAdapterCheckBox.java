@@ -14,22 +14,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.View.OnClickListener;
-import android.webkit.WebView.FindListener;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemLongClickListener;
 
 public class CursorAdapterCheckBox extends SimpleCursorAdapter implements
 		OnClickListener, OnLongClickListener  {
@@ -41,6 +36,7 @@ public class CursorAdapterCheckBox extends SimpleCursorAdapter implements
 	static Dialog dialog;
 	static Integer id_ = 0;
 	
+	@SuppressWarnings("deprecation")
 	public CursorAdapterCheckBox(Context context, int layout, Cursor c,
 			String[] from, int[] to, DBRequest dbHelper) {
 		super(context, layout, c, from, to);

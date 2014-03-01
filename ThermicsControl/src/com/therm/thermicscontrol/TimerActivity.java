@@ -6,7 +6,6 @@ import java.util.List;
 import com.therm.thermicscontrol.R;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
@@ -22,7 +21,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 public class TimerActivity extends BaseActivity {
 

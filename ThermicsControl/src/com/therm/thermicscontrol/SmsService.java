@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import com.therm.thermicscontrol.R;
@@ -157,9 +158,9 @@ public class SmsService extends Service {
 				String active_zone ="\n"+ "Зоны контроля: "+zone_value;
 				sms_body=sms_body.replace(zone_value,active_zone);
 				String releTitle = sms_body.substring(n, n+9);
-				String reles_value1 = "1. " + settings.getFunctionRele1() +" = "+ (settings.getIsRele1() ? "вкл" : "откл");
-				String reles_value2 = "2. " + settings.getFunctionRele2() +" = "+ (settings.getIsRele2() ? "вкл" : "откл");
-				String reles_value3 = "3. " + settings.getFunctionRele3() +" = "+ (settings.getIsRele3() ? "вкл" : "откл");
+				String reles_value1 = "1. " + settings.getFunctionRele1() +" = "+ (settings.getIsRele(0) ? "вкл" : "откл");
+				String reles_value2 = "2. " + settings.getFunctionRele2() +" = "+ (settings.getIsRele(1) ? "вкл" : "откл");
+				String reles_value3 = "3. " + settings.getFunctionRele3() +" = "+ (settings.getIsRele(2) ? "вкл" : "откл");
 				boolean upr_flag = false;
 				if(rele_value.length()>8 && (rele_value.charAt(8) == '0' || rele_value.charAt(8) == '1'))
 					upr_flag = true;
@@ -192,53 +193,26 @@ public class SmsService extends Service {
 			if(sms_body.contains(strTEMPR))
 				sms_body=sms_body.replace(strTEMPR,"Заданная температура для реле №2");
 			
-			String strVkluchenoRele="Vklucheno rele N1";
-			if(sms_body.contains(strVkluchenoRele))
+			for(int nrele = 0; nrele< CSettingsPref.numReles; nrele++)
 			{
-				sms_body=sms_body.replace(strVkluchenoRele,settings.getFunctionRele1() + " вкл");
-				settings.setIsRele1(true);
-				intent.putExtra(BaseActivity.prefIsRele1, true);
+				String strVkluchenoRele = String.format("Vklucheno rele N%d", nrele+1);
+				if(sms_body.contains(strVkluchenoRele))
+				{
+					sms_body=sms_body.replace(strVkluchenoRele,settings.getFunctionRele(nrele) + " вкл");
+					settings.setIsRele(nrele,true);
+					intent.putExtra(BaseActivity.prefIsRele[nrele], true);
+				}
 			}
 			
-			strVkluchenoRele="Vklucheno rele N2";
-			if(sms_body.contains(strVkluchenoRele))
+			for(int nrele = 0; nrele< CSettingsPref.numReles; nrele++)
 			{
-				sms_body=sms_body.replace(strVkluchenoRele,settings.getFunctionRele2() + " вкл");
-				settings.setIsRele2(true);
-				intent.putExtra(BaseActivity.prefIsRele2, true);
-			}
-	
-			strVkluchenoRele="Vklucheno rele N3";
-			if(sms_body.contains(strVkluchenoRele))
-			{
-				sms_body=sms_body.replace(strVkluchenoRele,settings.getFunctionRele3() + " вкл");
-				settings.setIsRele3(true);
-				intent.putExtra(BaseActivity.prefIsRele3, true);
-			}
-	
-			
-			String strOtkluchenoRele="Otklucheno rele N1";
-			if(sms_body.contains(strOtkluchenoRele))
-			{
-				sms_body=sms_body.replace(strOtkluchenoRele,settings.getFunctionRele1() + " откл");
-				settings.setIsRele1(false);
-				intent.putExtra(BaseActivity.prefIsRele1, false);
-			}
-			
-			strOtkluchenoRele="Otklucheno rele N2";
-			if(sms_body.contains(strOtkluchenoRele))
-			{
-				sms_body=sms_body.replace(strOtkluchenoRele,settings.getFunctionRele2() + " откл");
-				settings.setIsRele2(false);
-				intent.putExtra(BaseActivity.prefIsRele2, false);
-			}
-			
-			strOtkluchenoRele="Otklucheno rele N3";
-			if(sms_body.contains(strOtkluchenoRele))
-			{
-				sms_body=sms_body.replace(strOtkluchenoRele,settings.getFunctionRele3() + " откл");
-				settings.setIsRele3(false);
-				intent.putExtra(BaseActivity.prefIsRele3, false);
+				String strVkluchenoRele = String.format("Otklucheno rele N%d", nrele+1);
+				if(sms_body.contains(strVkluchenoRele))
+				{
+					sms_body=sms_body.replace(strVkluchenoRele,settings.getFunctionRele(nrele) + " откл");
+					settings.setIsRele(nrele,false);
+					intent.putExtra(BaseActivity.prefIsRele[nrele], false);
+				}
 			}
 			
 			String strVyhodUpravlenieVkluchen="Vyhod Upravlenie vkluchen";
@@ -360,7 +334,7 @@ public class SmsService extends Service {
 			dbsms.close();
 			Intent intent = new Intent(MessageSystemActivity.BROADCAST_ACTION_RCVSMS);
 			intent.putExtra(MessageSystemActivity.PARAM_SMS, sms_body);
-		    String strDate=new SimpleDateFormat("dd.MM.yy HH:mm").format(now_long);
+		    String strDate=new SimpleDateFormat("dd.MM.yy HH:mm",Locale.ENGLISH).format(now_long);
 		    //Toast.makeText(getApplicationContext(), strDate, Toast.LENGTH_LONG).show();
 	    	intent.putExtra(MessageSystemActivity.PARAM_SMSTIME, strDate );
 	    	intent.putExtra(BaseActivity.prefLastSystemReport, sms_body);
@@ -371,31 +345,31 @@ public class SmsService extends Service {
 	    
 	}
 	
-	private int parseIntValue(String value)
-	{
-		int res = 0;
-		
-		int isPositive = 1;
-		if(value.charAt(0) == '-')
-		{
-			isPositive = -1;
-		}
-		if(value.charAt(1) == 0 && value.length() == 3) 
-		{
-			String str = "";
-			str+=value.charAt(2);
-			res = Integer.parseInt(str)* isPositive;
-		}
-		if(value.length() == 3 && value.charAt(1) != 0)
-		{
-			String str = "";
-			str+=value.charAt(1);
-			str+=value.charAt(2);
-			res = Integer.parseInt(str)* isPositive;
-		}
-		
-		return res;
-	}
+//	private int parseIntValue(String value)
+//	{
+//		int res = 0;
+//		
+//		int isPositive = 1;
+//		if(value.charAt(0) == '-')
+//		{
+//			isPositive = -1;
+//		}
+//		if(value.charAt(1) == 0 && value.length() == 3) 
+//		{
+//			String str = "";
+//			str+=value.charAt(2);
+//			res = Integer.parseInt(str)* isPositive;
+//		}
+//		if(value.length() == 3 && value.charAt(1) != 0)
+//		{
+//			String str = "";
+//			str+=value.charAt(1);
+//			str+=value.charAt(2);
+//			res = Integer.parseInt(str)* isPositive;
+//		}
+//		
+//		return res;
+//	}
 	
 	private boolean IsReportSystem(String sms_body)
 	{
@@ -505,19 +479,19 @@ public class SmsService extends Service {
 			String str_rele = sms.substring(n+5, n+9);
 			//Toast.makeText(getApplicationContext(), str_rele, Toast.LENGTH_LONG).show();
 			if(str_rele.charAt(0)=='1')
-				settings.setIsRele1(true);
+				settings.setIsRele(0,true);
 			else if(str_rele.charAt(0)=='0')
-				settings.setIsRele1(false);
+				settings.setIsRele(0,false);
 			
 			if(str_rele.charAt(1)=='1')
-				settings.setIsRele2(true);
+				settings.setIsRele(1,true);
 			else if(str_rele.charAt(1)=='0')
-				settings.setIsRele2(false);
+				settings.setIsRele(1,false);
 			
 			if(str_rele.charAt(2)=='1')
-				settings.setIsRele3(true);
+				settings.setIsRele(2,true);
 			else if(str_rele.charAt(2)=='0')
-				settings.setIsRele3(false);
+				settings.setIsRele(2,false);
 			
 			if(str_rele.charAt(3)=='1')
 				settings.setIsUpr(true);
@@ -565,18 +539,7 @@ public class SmsService extends Service {
         	int n_rele = Integer.parseInt(rele_value);
         	if(n_rele>0 && n_rele<4)
         	{
-        		switch(n_rele)
-        		{
-        		case 1:
-        			settings.setIsRele1(flag_vkl);
-        			break;
-        		case 2:
-        			settings.setIsRele2(flag_vkl);
-        			break;
-        		case 3:
-        			settings.setIsRele3(flag_vkl);
-        			break;
-        		}
+        		settings.setIsRele(n_rele-1,flag_vkl);
         	}
         }
         ////n tmp sensor
@@ -619,8 +582,8 @@ public class SmsService extends Service {
         }
         for(int i=1;i<10;i++)
         {
-        	String prefix_str = String.format("0%d SMS=+7",i);
-        	String wrong_number = String.format("0%d SMS=+7**********", i);
+        	String prefix_str = String.format(Locale.ENGLISH,"0%d SMS=+7",i);
+        	String wrong_number = String.format(Locale.ENGLISH,"0%d SMS=+7**********", i);
         	if(sms.contains(wrong_number))
         	{
         		ArrayList<Map<String, String>> data = new ArrayList<Map<String, String>>();

@@ -10,7 +10,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
-import java.lang.Math;
 
 @SuppressLint("NewApi")
 public class CSettingsPref {
@@ -67,6 +66,8 @@ public class CSettingsPref {
 		return ;
 	}
 	
+	
+	
 	public int getDevVersion()
 	{
 		int result=3;
@@ -102,59 +103,22 @@ public class CSettingsPref {
 		prefEditor.commit();
 		return ;
 	}
-
-	public boolean getIsRele1()
+	public static int numReles = 3;
+	public boolean getIsRele(int nrele)
 	{
 		boolean result=false;
-		if (_settings.contains(BaseActivity.prefIsRele1) == true) 
-			 result = _settings.getBoolean(BaseActivity.prefIsRele1, result);
+		if (_settings.contains(BaseActivity.prefIsRele[nrele]) == true) 
+			 result = _settings.getBoolean(BaseActivity.prefIsRele[nrele], result);
 		else 
-			setIsRele1(result);
+			setIsRele(nrele,result);
 		return result;
 	}
 	
-	public void setIsRele1(boolean isRele1)
+	public void setIsRele(int nrele,boolean isRele)
 	{
 		SharedPreferences.Editor prefEditor = _settings.edit();
-		prefEditor.putBoolean(BaseActivity.prefIsRele1, isRele1);
+		prefEditor.putBoolean(BaseActivity.prefIsRele[nrele], isRele);
 		prefEditor.commit();
-		return ;
-	}
-	
-	public boolean getIsRele2()
-	{
-		boolean result=false;
-		if (_settings.contains(BaseActivity.prefIsRele2) == true) 
-			 result = _settings.getBoolean(BaseActivity.prefIsRele2, result);
-		else 
-			setIsRele2(result);
-		return result;
-	}
-	
-	public void setIsRele2(boolean isRele2)
-	{
-		SharedPreferences.Editor prefEditor = _settings.edit();
-		prefEditor.putBoolean(BaseActivity.prefIsRele2, isRele2);
-		prefEditor.commit();
-		return ;
-	}
-	
-	public boolean getIsRele3()
-	{
-		boolean result=false;
-		if (_settings.contains(BaseActivity.prefIsRele3) == true) 
-			 result = _settings.getBoolean(BaseActivity.prefIsRele3, result);
-		else 
-			setIsRele3(result);
-		return result;
-	}
-	
-	public void setIsRele3(boolean isRele3)
-	{
-		SharedPreferences.Editor prefEditor = _settings.edit();
-		prefEditor.putBoolean(BaseActivity.prefIsRele3, isRele3);
-		prefEditor.commit();
-		return ;
 	}
 	
 	public boolean getIsUpr()
@@ -278,7 +242,7 @@ public class CSettingsPref {
 		if (_settings.contains(BaseActivity.prefIsDailyReport) == true) 
 			result = _settings.getBoolean(BaseActivity.prefIsDailyReport, result);
 		else 
-			setIsRele3(result);
+			setIsRele(2,result);
 		return result;
 	}
 	
@@ -320,41 +284,70 @@ public class CSettingsPref {
 		return ;
 	}
 	
-	public int getTempNightConfig(int number)
+	public final static int numberSensors = 7;
+	public final static int numberButtons = 4;
+	
+	private int getPosConfigButton(int nsensor,int nbutton)
+	{
+		if(nsensor > 0)
+			return (nsensor-1)*numberButtons + nbutton;
+		else
+			return -1;
+	}
+	
+	public int getTempNightConfig(int nsensor,int nbutton)
 	{
 		int result=0;
-		if (_settings.contains(BaseActivity.prefTEMP_NIGHT_CONFIG[number]) == true)
-			 result = _settings.getInt(BaseActivity.prefTEMP_NIGHT_CONFIG[number], result);
-		else 
-			setTempNightConfig(number, result);
+		int pos = getPosConfigButton(nsensor, nbutton);
+		if(pos > -1)
+		{
+			if (_settings.contains(BaseActivity.prefTEMP_NIGHT_CONFIG[pos]) == true)
+				 result = _settings.getInt(BaseActivity.prefTEMP_NIGHT_CONFIG[pos], result);
+			else 
+				setTempNightConfig(nsensor, nbutton, result);
+		}
 		return result;
 	}
 	
-	public void setTempNightConfig(int number, int temp)
+	public void setTempNightConfig(int nsensor, int nbutton, int temp)
 	{
-		SharedPreferences.Editor prefEditor = _settings.edit();
-		prefEditor.putInt(BaseActivity.prefTEMP_NIGHT_CONFIG[number], temp);
-		prefEditor.commit();
+		int pos = getPosConfigButton(nsensor, nbutton);
+		if(pos > -1)
+		{
+			SharedPreferences.Editor prefEditor = _settings.edit();
+			prefEditor.putInt(BaseActivity.prefTEMP_NIGHT_CONFIG[pos], temp);
+			prefEditor.commit();
+		}
 		return ;
 	}
 	
-	public int getTempDayConfig(int number)
+	public int getTempDayConfig(int nsensor,int nbutton)
 	{
 		int result=0;
-		if (_settings.contains(BaseActivity.prefTEMP_DAY_CONFIG[number]) == true)
-			 result = _settings.getInt(BaseActivity.prefTEMP_DAY_CONFIG[number], result);
-		else 
-			setTempDayConfig(number, result);
+		int pos = getPosConfigButton(nsensor, nbutton);
+		if(pos > -1)
+		{
+			if (_settings.contains(BaseActivity.prefTEMP_DAY_CONFIG[pos]) == true)
+				 result = _settings.getInt(BaseActivity.prefTEMP_DAY_CONFIG[pos], result);
+			else 
+				setTempDayConfig(nsensor, nbutton, result);
+		}
 		return result;
 	}
 	
-	public void setTempDayConfig(int number, int temp)
+	public void setTempDayConfig(int nsensor, int nbutton, int temp)
 	{
-		SharedPreferences.Editor prefEditor = _settings.edit();
-		prefEditor.putInt(BaseActivity.prefTEMP_DAY_CONFIG[number], temp);
-		prefEditor.commit();
+		int pos = getPosConfigButton(nsensor, nbutton);
+		if(pos > -1)
+		{
+			SharedPreferences.Editor prefEditor = _settings.edit();
+			prefEditor.putInt(BaseActivity.prefTEMP_DAY_CONFIG[pos], temp);
+			prefEditor.commit();
+		}
 		return ;
 	}
+	
+
 	
 	public int getNTempConfig()
 	{
@@ -365,10 +358,10 @@ public class CSettingsPref {
 		{
 			//set day temp config
 			int numberSensorTMPReleWarm=getNumberSensorReleWarm();		
-			int tmp_rele_warm=getTmpReleWarm(numberSensorTMPReleWarm-1);
-			int tmp_rele_warm_night=getTmpReleWarmNight(numberSensorTMPReleWarm-1);
-			setTempDayConfig(result, tmp_rele_warm);
-			setTempNightConfig(result, tmp_rele_warm_night);
+			int tmp_rele_warm=getTempDayConfig(numberSensorTMPReleWarm, result);
+			int tmp_rele_warm_night=getTempNightConfig(numberSensorTMPReleWarm, result);
+			setTempDayConfig(getNumberSensorReleWarm(),result, tmp_rele_warm);
+			setTempNightConfig(getNumberSensorReleWarm(),result, tmp_rele_warm_night);
 			setNTempConfig(result);
 		}
 		return result;
@@ -762,21 +755,6 @@ public class CSettingsPref {
 		return "";
 	}
 	
-	public boolean getReleValue(int nrele)
-	{
-		boolean res = false;
-		switch(nrele)
-		{
-		case 0:
-			res = getIsRele1();
-		case 1:
-			res = getIsRele2();
-		case 2:
-			res = getIsRele3();
-		}
-
-		return res;
-	}
 	
 	public void setFunctionRele3(String functionRele3)
 	{
@@ -945,50 +923,50 @@ public class CSettingsPref {
 	}
 	
 	//settings parameters
-		public int getTmpReleWarm(int n_sensor)
-		{
-			if(n_sensor>-1 && n_sensor<6)
-			{
-				int result=0;
-				if (_settings.contains(BaseActivity.TMPN_RELE[n_sensor]) == true)
-					 result = _settings.getInt(BaseActivity.TMPN_RELE[n_sensor], result);
-				else 
-					setTmpReleWarm(n_sensor,result);
-				return result;
-			}
-			else return 0;
-		}
-		
-		public void setTmpReleWarm(int n_sensor,int tmpReleWarm)
-		{
-			SharedPreferences.Editor prefEditor = _settings.edit();
-			prefEditor.putInt(BaseActivity.TMPN_RELE[n_sensor], tmpReleWarm);
-			prefEditor.commit();
-			return ;
-		}
-	
-		//settings parameters
-		public int getTmpReleWarmNight(int n_sensor)
-		{
-			if(n_sensor>-1 && n_sensor<6)
-			{
-				int result=0;
-				if (_settings.contains(BaseActivity.TMPN_RELE_NIGHT[n_sensor]) == true)
-					 result = _settings.getInt(BaseActivity.TMPN_RELE_NIGHT[n_sensor], result);
-				else 
-					setTmpReleWarmNight(n_sensor,result);
-				return result;
-			}
-			else return 0;
-		}
-		
-		public void setTmpReleWarmNight(int n_sensor,int tmpReleWarm)
-		{
-			SharedPreferences.Editor prefEditor = _settings.edit();
-			prefEditor.putInt(BaseActivity.TMPN_RELE_NIGHT[n_sensor], tmpReleWarm);
-			prefEditor.commit();
-			return ;
-		}
+//		public int getTmpReleWarm(int n_sensor)
+//		{
+//			if(n_sensor>-1 && n_sensor<6)
+//			{
+//				int result=0;
+//				if (_settings.contains(BaseActivity.TMPN_RELE[n_sensor]) == true)
+//					 result = _settings.getInt(BaseActivity.TMPN_RELE[n_sensor], result);
+//				else 
+//					setTmpReleWarm(n_sensor,result);
+//				return result;
+//			}
+//			else return 0;
+//		}
+//		
+//		public void setTmpReleWarm(int n_sensor,int tmpReleWarm)
+//		{
+//			SharedPreferences.Editor prefEditor = _settings.edit();
+//			prefEditor.putInt(BaseActivity.TMPN_RELE[n_sensor], tmpReleWarm);
+//			prefEditor.commit();
+//			return ;
+//		}
+//	
+//		//settings parameters
+//		public int getTmpReleWarmNight(int n_sensor)
+//		{
+//			if(n_sensor>-1 && n_sensor<6)
+//			{
+//				int result=0;
+//				if (_settings.contains(BaseActivity.TMPN_RELE_NIGHT[n_sensor]) == true)
+//					 result = _settings.getInt(BaseActivity.TMPN_RELE_NIGHT[n_sensor], result);
+//				else 
+//					setTmpReleWarmNight(n_sensor,result);
+//				return result;
+//			}
+//			else return 0;
+//		}
+//		
+//		public void setTmpReleWarmNight(int n_sensor,int tmpReleWarm)
+//		{
+//			SharedPreferences.Editor prefEditor = _settings.edit();
+//			prefEditor.putInt(BaseActivity.TMPN_RELE_NIGHT[n_sensor], tmpReleWarm);
+//			prefEditor.commit();
+//			return ;
+//		}
 		
 	static public int getNumNotification()
 	{

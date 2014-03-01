@@ -2,22 +2,15 @@ package com.therm.thermicscontrol;
 
 
 import java.io.File;
-import java.sql.Time;
 import java.util.concurrent.atomic.AtomicLong;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
-import android.telephony.SmsMessage;
-import android.util.Log;
 import android.widget.Toast;
 //import android.util.Log;
 

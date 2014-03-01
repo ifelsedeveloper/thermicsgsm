@@ -1,10 +1,9 @@
 package com.therm.thermicscontrol;
 
 
-import java.util.TooManyListenersException;
-
 import com.therm.thermicscontrol.R;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -27,7 +26,6 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -38,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+@SuppressLint("HandlerLeak")
 public class ConfigSystemActivity extends BaseActivity implements TextWatcher, OnCheckedChangeListener  {
 
 	

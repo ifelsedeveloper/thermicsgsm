@@ -1,6 +1,16 @@
 package com.therm.thermicscontrol;
 
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+
 import com.therm.thermicscontrol.R;
 
 import android.os.Bundle;
@@ -10,6 +20,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -40,6 +51,7 @@ public class MessageSystemActivity extends BaseActivity {
 	BroadcastReceiver br;
 	
 	public static final String TAG_events="event_tag_message_sytem";
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -163,16 +175,64 @@ public class MessageSystemActivity extends BaseActivity {
 		
 	}
 	
-//	@Override
-//	public boolean onKeyLongPress(int keyCode, KeyEvent event) {
-//	    if (keyCode == KeyEvent.KEYCODE_BACK) 
-//	    {
-//	    	
-//	        // do your stuff here
-//	        return true;
-//	    }
-//	    return super.onKeyLongPress(keyCode, event);
-//	}
+	public void clickSaveButton(View v)
+	{
+		
+		//save parameters
+		final AlertDialog.Builder b = new AlertDialog.Builder(this);
+		b.setIcon(android.R.drawable.ic_dialog_alert);
+		b.setTitle("Сохранить сообщения в файл?");
+		b.setPositiveButton("Сохранить", new OnClickListener() {
+	        public void onClick(DialogInterface dialog, int which) {
+	        	SaveMessage();
+	        }
+	      });
+		b.setNegativeButton("Отмена", new OnClickListener() {
+	        public void onClick(DialogInterface dialog, int which) {
+
+	        }});
+		b.show();
+		
+		
+	}
+	
+	public void SaveMessage()
+	{
+		try {
+			Date currentDate = new Date();
+			Calendar cdate = new GregorianCalendar();
+			cdate.setTime(currentDate);
+			String filePath = String.format(Locale.US,"/sdcard/messages %d %d %d.doc",  cdate.get(Calendar.DAY_OF_MONTH),cdate.get(Calendar.MONTH)+1, cdate.get(Calendar.YEAR));
+            File myFile = new File(filePath);
+            myFile.createNewFile();
+
+            Writer myOutWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(myFile), "UTF8"));
+            DBSMS ldb = new DBSMS(this);
+            ldb.open();
+            Cursor lcursor = ldb.getAllData();
+            String message;
+            String date;
+            int nmessage = 1;
+            
+            for (lcursor.moveToFirst(); !lcursor.isAfterLast(); lcursor.moveToNext()) {
+            	
+        		message = lcursor.getString(this.cursor.getColumnIndex(DBSMS.COLUMN_TXT));
+            	date = lcursor.getString(this.cursor.getColumnIndex(DBSMS.COLUMN_DATE));
+            	myOutWriter.append(String.format("%d %s\n%s\n",nmessage, date,message));
+            	nmessage++;
+            }
+
+            
+            
+            myOutWriter.close();
+            
+            Toast.makeText(getApplicationContext(),String.format("Сообщения экспортированы в файл: %s", filePath), Toast.LENGTH_LONG).show();
+        } 
+        catch (Exception e) 
+        {
+            Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_LONG).show();
+        }
+	}
 	
 	@Override  
 	public void onBackPressed() {

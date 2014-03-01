@@ -240,7 +240,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="0.25"
                 android:background="@drawable/background_lightgreen_togglebutton"
-                android:text="+25\n-10"
+                android:text="@string/default_value_hotkey"
                 android:onClick="onClickButtonSwitch1"
                 android:longClickable="true"
                 android:textSize="20sp" />
@@ -252,7 +252,7 @@
                 android:layout_height="60dp"
                 android:layout_marginLeft="-5dp"
                 android:background="@drawable/background_lightred_togglebutton"
-                android:text="+25\n-10"
+                android:text="@string/default_value_hotkey"
                 android:onClick="onClickButtonSwitch2"
                 android:longClickable="true"
                 android:textSize="20sp"
@@ -264,7 +264,7 @@
                 android:layout_weight="0.25"
                 android:layout_height="60dp"
                 android:layout_marginLeft="-5dp"
-                android:text="+25\n-10"
+                android:text="@string/default_value_hotkey"
                 android:background="@drawable/background_lightgreen_togglebutton"
                 android:onClick="onClickButtonSwitch3"
                 android:longClickable="true"
@@ -279,7 +279,7 @@
                 android:layout_marginLeft="-5dp"
                 android:layout_marginRight="5dp"
                 android:background="@drawable/background_lightgreen_togglebutton"
-                android:text="+25\n-10"
+                android:text="@string/default_value_hotkey"
                 android:onClick="onClickButtonSwitch4"
                 android:longClickable="true"
                 android:textSize="20sp"
@@ -369,7 +369,8 @@
                 android:id="@+id/frameCheckBox1"
                 android:layout_width="60dp"
              	android:layout_height="60dp"
-             	android:layout_gravity="center_vertical|center_horizontal">
+             	android:layout_gravity="center_vertical|center_horizontal"
+             	android:onClick="onClickFrameCheckBox1">
 	        <CheckBox
 	                android:id="@+id/checkBoxRele1"
 					style="@style/CheckBoxElem"
@@ -378,7 +379,8 @@
 	        <ImageView
 	            android:id="@+id/imageViewAutomatic1"
 				style="@style/ImageElem"
-	            android:src="@drawable/reload" />
+	            android:src="@drawable/reload"
+	            android:contentDescription="@string/content_description_image" />
 
 	        </FrameLayout>
   
@@ -429,7 +431,8 @@
                 android:id="@+id/frameCheckBox2"
                 android:layout_width="60dp"
              	android:layout_height="60dp"
-             	android:layout_gravity="center_vertical|center_horizontal">
+             	android:layout_gravity="center_vertical|center_horizontal"
+             	android:onClick="onClickFrameCheckBox2">
 	        <CheckBox
 	                android:id="@+id/checkBoxRele2"
 					style="@style/CheckBoxElem"
@@ -438,7 +441,8 @@
 	        <ImageView
 	            android:id="@+id/imageViewAutomatic2"
 				style="@style/ImageElem"
-	            android:src="@drawable/reload" />
+	            android:src="@drawable/reload"
+	            android:contentDescription="@string/content_description_image" />
 
 	        </FrameLayout>
   
@@ -490,7 +494,8 @@
                 android:id="@+id/frameCheckBox3"
                 android:layout_width="60dp"
              	android:layout_height="60dp"
-             	android:layout_gravity="center_vertical|center_horizontal">
+             	android:layout_gravity="center_vertical|center_horizontal"
+             	android:onClick="onClickFrameCheckBox3">
 	        <CheckBox
 	                android:id="@+id/checkBoxRele3"
 					style="@style/CheckBoxElem"
@@ -499,7 +504,8 @@
 	        <ImageView
 	            android:id="@+id/imageViewAutomatic3"
 				style="@style/ImageElem"
-	            android:src="@drawable/reload" />
+	            android:src="@drawable/reload"
+	            android:contentDescription="@string/content_description_image" />
 
 	        </FrameLayout>
   
@@ -609,7 +615,8 @@
 	            android:src="@drawable/phone_call"
 	            android:layout_gravity="center_vertical|center_horizontal"
 	            android:layout_width="45dp"
-             	android:layout_height="45dp" />
+             	android:layout_height="45dp"
+             	android:contentDescription="@string/content_description_image" />
 
 	        </FrameLayout>
   
@@ -663,6 +670,7 @@
 	            android:id="@+id/imageViewStateTimer"
 				style="@style/ImageElem"
 	            android:src="@drawable/stop_timer"
+	            android:contentDescription="@string/content_description_image"
 	             />
 
 	        
