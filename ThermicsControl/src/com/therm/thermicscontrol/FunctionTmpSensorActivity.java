@@ -17,7 +17,7 @@ import android.widget.EditText;
 public class FunctionTmpSensorActivity extends BaseActivity {
 
 	public static final String TAG_events="event_tag_function_tmp_sensor";
-	public CSettingsPref settings=null;
+	public SystemConfig settings=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -30,7 +30,7 @@ public class FunctionTmpSensorActivity extends BaseActivity {
 		setContentView(R.layout.activity_function_tmpsensor);
 		
 		//create for work with shared preference
-		settings=new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_MULTI_PROCESS));
+		settings=SystemConfigDataSource.getActiveSystem();
 		loadParam();
 		Log.i(TAG_events, "creating activity");
 		

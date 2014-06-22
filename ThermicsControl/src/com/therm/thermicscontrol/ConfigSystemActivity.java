@@ -41,7 +41,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 
 	
 	public static final String TAG_events="event_tag_config_sytem";
-	public CSettingsPref settings=null;
+	public SystemConfig settings=null;
 	public CSettingsDev settingsDev=null;
 	
 	static View viewOkCancel;
@@ -63,7 +63,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		Log.i(TAG_events,"start activity config sytem");
 		
 		//create for work with shared preference
-		settings=new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_MULTI_PROCESS));
+		settings=SystemConfigDataSource.getActiveSystem();
 		settingsDev= new CSettingsDev(settings,getApplicationContext());
 		getViewVaribales();
 		loadParam();
@@ -793,7 +793,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 
 	            if(isShowDeviceVersion)
 	            {
-	            	settings = new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_MULTI_PROCESS));
+	            	settings = SystemConfigDataSource.getActiveSystem();
             		deviceVersion = settings.getDevVersion();
             		spinnerSelectDevice.setSelection(deviceVersion-1);
             		switch(deviceVersion)

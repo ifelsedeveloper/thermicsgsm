@@ -3,17 +3,14 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background_green_border"
     android:orientation="vertical" >
 
-    
-    
     <LinearLayout
         android:id="@+id/layoutTimer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
-        android:background="@drawable/background_green_border"
+        android:background="@drawable/back_white_roundcorners"
         android:clickable="true"
         android:padding="10dp"
         android:gravity="center_vertical"

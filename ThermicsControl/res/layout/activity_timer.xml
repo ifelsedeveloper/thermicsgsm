@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/titleConfigTimer"
         android:text="@string/title_activity_timer"
-        android:background="@color/button_blue"
+        android:background="@drawable/nav"
         style="@style/TextViewTitleActivity" />
     
     	<ScrollView
@@ -28,7 +28,7 @@
 			<LinearLayout 
 			    style="@style/SettingsElement"
 			    android:layout_height="90dp"
-			    android:background="@drawable/background_green_border"
+			    android:background="@drawable/white_back"
 			    android:onClick="onClickLayoutCheckBoxTimer"
 			     >
 	            <TextView
@@ -46,48 +46,15 @@
 	            	    android:layout_height="50dp"
 	            	    android:gravity="center_vertical"       	    
 	            	    android:text="@string/boiler"
-	            	    android:textColor="@color/text_button_color"
+	            	    android:textColor="@color/main_menu_message"
 	            	    android:textSize="@dimen/size_button_text"
 	            		android:textStyle="bold" />
 			</LinearLayout>
-	    	<!--
-			<RelativeLayout
-	            android:id="@+id/linearLayoutEnableTimer"
-	            android:background="@drawable/background_green_border"
-	            android:layout_marginTop="2dp"
-	            android:onClick="onClickEnableTimer"
-	            style="@style/SettingsElement" >
-	
-	            <CheckBox
-	                android:id="@+id/checkBoxEnableTimer"
-	                android:layout_width="60dp"
-	                android:layout_height="45dp"
-	                android:layout_alignParentRight="true"
-	                android:layout_centerVertical="true"
-	                android:layout_marginRight="5dp"
-	                android:button="@drawable/box"
-	                android:gravity="center_vertical"
-	                android:clickable="false"
-	                android:checked="true" />
-	
-	            <TextView
-	                android:id="@+id/textEnableTimer"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:layout_alignParentLeft="true"
-	                android:layout_centerVertical="true"
-	                android:layout_marginLeft="10dp"
-	                android:text="@string/enable_timer"
-	                android:textColor="@color/text_button_color"
-	                android:textSize="@dimen/size_button_text"
-	                android:textStyle="bold" />
 
-      		</RelativeLayout>
-			-->
 		    <RelativeLayout
 		        android:id="@+id/linearLayoutConfigTimeStart"
 		        android:onClick="onClickConfigTimeStart"
-		        android:background="@drawable/background_green_border"
+		        android:background="@drawable/white_back"
 	            android:layout_marginTop="2dp"
 	            style="@style/SettingsElement" >
 		        
@@ -124,7 +91,7 @@
 		    <RelativeLayout
 		        android:id="@+id/linearLayoutConfigTimeEnd"
 		        android:onClick="onClickConfigTimeEnd"
-		        android:background="@drawable/background_green_border"
+		        android:background="@drawable/white_back"
 	            android:layout_marginTop="2dp"
 	            style="@style/SettingsElement" >
 		        
@@ -161,7 +128,7 @@
 		    <RelativeLayout
 		        android:id="@+id/relativeLayoutConfigWeek"
 		        android:layout_marginTop="2dp"
-		        android:background="@drawable/background_button"
+		        android:background="@drawable/white_back"
 		        android:clickable="true"
 		        android:onClick="onClickConfigWeek"
 		        style="@style/SettingsElement">
@@ -198,29 +165,17 @@
      </LinearLayout>
     </ScrollView>
 <LinearLayout  android:id="@+id/layoutOKCancelFunctionRele"
-    style="@style/TitleOkCancle" >
+    style="@style/TitleOkCancle"
+    android:layout_marginTop="2dp"
+    android:paddingTop="2dp" >
 <Button
     android:id="@+id/buttonReleOK"
-    android:layout_width="0dp"
-    android:layout_height="40dp"
-    android:layout_weight=".50"
-    android:text="@string/OK"
-    android:layout_marginLeft="2dp"
-    android:layout_marginRight="1dp"
-    android:textColor="@color/text_button_color"
-    android:textStyle="bold"
+    style="@style/ButtonAccept"
     android:onClick="OnClickOkButton"
     />
 <Button
     android:id="@+id/buttonReleCancel"
-    android:layout_width="0dp"
-    android:layout_height="40dp"
-    android:layout_weight=".50"
-    android:layout_marginLeft="1dp"
-    android:layout_marginRight="2dp"
-    android:text="@string/Cancel"
-    android:textColor="@color/text_button_color"
-    android:textStyle="bold"
+    style="@style/ButtonCancel"
     android:onClick="OnClickCancelButton"
     />
 </LinearLayout>

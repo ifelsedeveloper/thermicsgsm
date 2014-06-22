@@ -27,8 +27,8 @@ public class SMSMonitor extends BroadcastReceiver {
 				messages[i] = SmsMessage.createFromPdu((byte[]) pduArray[i]);
 			}
 			String sms_from = messages[0].getDisplayOriginatingAddress();
-			CSettingsPref settings=new CSettingsPref(context.getSharedPreferences(BaseActivity.MYSYSTEM_PREFERENCES, BaseActivity.MODE_MULTI_PROCESS));
-			if(checkSMSKsytal(sms_from,settings))
+			SystemConfig settings=SystemConfigDataSource.sharedInstanceSystemConfigDataSource().getSystemConfig(sms_from);
+			if(settings != null)
 			{
 				//Toast.makeText(, text, duration)
 				StringBuilder bodyText = new StringBuilder();
@@ -53,32 +53,5 @@ public class SMSMonitor extends BroadcastReceiver {
 			Toast.makeText(context, "Error in sms monitor: " + e.toString(), Toast.LENGTH_LONG).show();
 		}
 	}
-	public static boolean checkSMSKsytal(String sms_from, CSettingsPref settings)
-	{
-		boolean res = false;
-		if(sms_from!=null)
-		{
-			res = compareSIMNumbers(sms_from,settings.getNumberSIM2()) || compareSIMNumbers(sms_from,settings.getNumberSIM());
-		}
-		return res;
-	}
-	
-	public static boolean compareSIMNumbers(String number1,String number2)
-	{
-		boolean res = false;
-		if(number1.length() > 0 && number2.length() > 0)
-		{
-			if((number1.charAt(0)=='8') && (number2.charAt(0)=='+'))
-				number1=String.format("+7%s", number1.substring(1,number1.length()));
-	
-			if((number1.charAt(0)=='+') && (number2.charAt(0)=='8'))
-				number2=String.format("+7%s", number2.substring(1,number2.length()));
-			//Log.i("TAG_compare_numbers", number2+" = "+number1);
-			if (number2.equalsIgnoreCase(number1))
-			{
-				res = true;
-			}
-		}
-		return res;
-	}
+
 }

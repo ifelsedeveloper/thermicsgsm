@@ -15,12 +15,12 @@ import android.widget.Toast;
 //import android.util.Log;
 
 public class SMSRequestReportSender extends BroadcastReceiver {
-	
-	
+
+
 	static AtomicLong lastSendTime = new AtomicLong(0);
 	static boolean flag_not_check = true;
 	final static String ATTRIBUTE_TIME = "attribute_time";
-	
+
 	@Override
 	public void onReceive(Context ctx, Intent intent) {
 		try{
@@ -29,8 +29,9 @@ public class SMSRequestReportSender extends BroadcastReceiver {
 			{
 				long n_row = intent.getLongExtra(AddRequestActivity.ATTRIBUTE_ROWID, -1);
 				long day_of_week = intent.getLongExtra(AddRequestActivity.ATTRIBUTE_DAYOFWEEK, -1);
+				long id_system = intent.getLongExtra(AddRequestActivity.ATTRIBUTE_IDSYSTEM, 1);
 				//Toast.makeText(ctx, "Отправляем по расписанию: n_row = " + Long.toString(n_row) + "n_day = " + Long.toString(day_of_week), Toast.LENGTH_LONG).show();
-				
+
 				if(n_row>=0 && day_of_week>=0)
 				{
 					if(doesDatabaseExist(ctx,DBRequest.DATABASE_PATH + DBRequest.DB_NAME))
@@ -44,21 +45,19 @@ public class SMSRequestReportSender extends BroadcastReceiver {
 						{
 							//send request
 							//Toast.makeText(ctx, "Проверили", Toast.LENGTH_LONG).show();
-							SharedPreferences pref = ctx.getSharedPreferences(BaseActivity.MYSYSTEM_PREFERENCES, Context.MODE_MULTI_PROCESS);
-							CSettingsPref settings = new CSettingsPref(pref);
+							SystemConfig settings = SystemConfigDataSource.sharedInstanceSystemConfigDataSource().getSystemConfig(id_system);
 							CSettingsDev settingsDev = new CSettingsDev(settings,ctx);
-							
+
 							//long sendingTime = intent.getLongExtra(ATTRIBUTE_TIME, System.currentTimeMillis()/1000);
 							long currentTime = System.currentTimeMillis()/1000;
-							
-							if(currentTime - lastSendTime.get() > 60)
-							{
-								//settingsDev.RequestReport();
-								//Toast.makeText(ctx, "Отправляем по расписанию :" + settings.getPinSIM(), Toast.LENGTH_LONG).show();
-								settingsDev.RequestReport();
-								//Toast.makeText(ctx, "Запрос отправлен", Toast.LENGTH_LONG).show();
-								lastSendTime.set(currentTime);
-							}
+
+
+							//settingsDev.RequestReport();
+							//Toast.makeText(ctx, "Отправляем по расписанию :" + settings.getPinSIM(), Toast.LENGTH_LONG).show();
+							settingsDev.RequestReport();
+							//Toast.makeText(ctx, "Запрос отправлен", Toast.LENGTH_LONG).show();
+							lastSendTime.set(currentTime);
+
 							flag_not_check = false;
 						}
 						else
@@ -71,7 +70,7 @@ public class SMSRequestReportSender extends BroadcastReceiver {
 							PendingIntent lpIntent = PendingIntent.getBroadcast(ctx, 0, lintent, 0);
 							amSendRequest.cancel(lpIntent);
 						}
-						
+
 					}
 					else
 					{
@@ -85,19 +84,19 @@ public class SMSRequestReportSender extends BroadcastReceiver {
 						amSendRequest.cancel(lpIntent);
 					}
 				}
-				
+
 			}
-			
+
 		}
 		catch(Exception e)
 		{
 			Toast.makeText(ctx, "Ошибка при отправке: " + e.toString(), Toast.LENGTH_LONG).show();
 		}
 	}
-	
+
 	private static boolean doesDatabaseExist(Context context, String dbName) {
-	    File dbFile=context.getDatabasePath(dbName);
-	    return dbFile.exists();
+		File dbFile=context.getDatabasePath(dbName);
+		return dbFile.exists();
 	}
-	
+
 }

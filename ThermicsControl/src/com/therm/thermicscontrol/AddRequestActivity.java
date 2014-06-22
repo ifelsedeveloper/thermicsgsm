@@ -30,19 +30,20 @@ import android.database.Cursor;
 public class AddRequestActivity extends BaseActivity {
 
 	public static final String TAG_events="event_tag_add_request";
-	public CSettingsPref settings=null;
+	public SystemConfig settings=null;
 	CheckBox checkBoxEnableRequest_;
 	AlarmManager amSendRequest;
 	
 	public static final String ATTRIBUTE_ROWID = "attribute_rowid";
 	public static final String ATTRIBUTE_DAYOFWEEK = "attribute_dayofweek";
-	
+	public static final String ATTRIBUTE_IDSYSTEM = "attribute_idsystem";
 	
 	final Context context = this;
 	
 	int DIALOG_TIME = 1;
 	int myHour = 14;
 	int myMinute = 35;
+	TextView titleAddRequest;
 	TextView tvTime;
 	TextView tvDays;
 	DBRequest dbRequest;
@@ -85,9 +86,9 @@ public class AddRequestActivity extends BaseActivity {
 		
 		try{
 		checkBoxEnableRequest_ = (CheckBox) findViewById(R.id.checkBoxEnableRequest);
-		
+		titleAddRequest = (TextView) findViewById(R.id.titleAddRequest);
 		//create for work with shared preference
-		settings=new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_MULTI_PROCESS));
+		settings=SystemConfigDataSource.getActiveSystem();
 		
 		
 		//initialize
@@ -122,6 +123,7 @@ public class AddRequestActivity extends BaseActivity {
 		{
 
 			modifay = true;
+			titleAddRequest.setText("Изменить запрос");
 			id_ = Integer.parseInt(myIntent.getStringExtra(ATTRIBUTE_ROWID));
 			//Toast.makeText(getApplicationContext(), "my id = "+ Integer.toString(id_), Toast.LENGTH_LONG).show();
 			Cursor cursor = dbRequest.getRec(id_);
@@ -454,7 +456,7 @@ public class AddRequestActivity extends BaseActivity {
 		if(modifay)
 			dbRequest.updateRec(id_,enable, myHour, myMinute, str_repeat, idInntents[0], idInntents[1], idInntents[2], idInntents[3], idInntents[4], idInntents[5], idInntents[6]);
 		else
-			dbRequest.addRec(enable, myHour, myMinute, str_repeat, idInntents[0], idInntents[1], idInntents[2], idInntents[3], idInntents[4], idInntents[5], idInntents[6]);
+			dbRequest.addRec(enable, myHour, myMinute, str_repeat, idInntents[0], idInntents[1], idInntents[2], idInntents[3], idInntents[4], idInntents[5], idInntents[6],(int)settings.getId());
 			
 		if(!modifay)
 		{
@@ -474,6 +476,7 @@ public class AddRequestActivity extends BaseActivity {
 			Intent intent = new Intent(this, SMSRequestReportSender.class);
 			intent.putExtra(ATTRIBUTE_ROWID, (long)currentRowNumber);
 			intent.putExtra(ATTRIBUTE_DAYOFWEEK, (long)i);
+			intent.putExtra(ATTRIBUTE_IDSYSTEM, settings.getId());
 			int add_time = k*24*3600;
 		    //intent.putExtra("extra", extra)
 			if(idInntents[i] != 0  && days_of_week[i] == false)
@@ -499,6 +502,7 @@ public class AddRequestActivity extends BaseActivity {
 			Intent intent = new Intent(this, SMSRequestReportSender.class);
 			intent.putExtra(ATTRIBUTE_ROWID, (long)currentRowNumber);
 			intent.putExtra(ATTRIBUTE_DAYOFWEEK, (long)i);
+			intent.putExtra(ATTRIBUTE_IDSYSTEM, settings.getId());
 			int add_time = k*24*3600;
 		    //intent.putExtra("extra", extra)
 			if(idInntents[i] != 0  && days_of_week[i] == false)

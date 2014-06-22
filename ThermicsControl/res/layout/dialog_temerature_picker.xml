@@ -26,10 +26,12 @@
 	        <Button
 	            android:id="@+id/buttonNightPlusTempReg"
             	style="@style/ButtonPlusBig" />
-            <TextView
-	           android:id="@+id/titleNightTemp"
-	           android:text="-20"
-	           style="@style/ButtonPlusBig" />
+
+	        <TextView
+	            android:id="@+id/titleNightTemp"
+	            style="@style/EditText"
+	            android:text="@string/value" />
+
             <Button
                 android:id="@+id/buttonNightMinusTempReg"
             	style="@style/ButtonMinusBig"/>
@@ -45,8 +47,8 @@
             	style="@style/ButtonPlusBig" />
             <TextView
 	           android:id="@+id/titleDayTemp"
-	           android:text="+15"
-	           style="@style/ButtonPlusBig" />
+	           android:text="@string/value"
+	           style="@style/EditText" />
             <Button
                 android:id="@+id/buttonDayMinusTempReg"
             	style="@style/ButtonMinusBig"/>
@@ -67,21 +69,11 @@
 
        <Button
            android:id="@+id/dialogButtonOkTempPick"
-           android:layout_width="0dp"
-           android:layout_height="wrap_content"
-           android:layout_marginRight="2dp"
-           android:layout_marginTop="2dp"
-           android:layout_weight="0.50"
-           android:text="@string/set" />
+           style="@style/ButtonAccept" />
 
        <Button
            android:id="@+id/dialogButtonCancelTempPick"
-           android:layout_width="0dp"
-           android:layout_height="wrap_content"
-           android:layout_marginRight="2dp"
-           android:layout_marginTop="2dp"
-           android:layout_weight="0.50"
-           android:text="@string/cancel" />
+           style="@style/ButtonCancel"></Button>"
    </LinearLayout>
     
 </LinearLayout>

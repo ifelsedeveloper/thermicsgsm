@@ -17,7 +17,7 @@ import android.database.Cursor;
 public class RequestSystemActivity extends BaseActivity {
 
 	public static final String TAG_events="event_tag_request_system";
-	public CSettingsPref settings=null;
+	public SystemConfig settings=null;
 	
 	ListView lvData;
 	DBRequest db;
@@ -37,7 +37,7 @@ public class RequestSystemActivity extends BaseActivity {
 			setContentView(R.layout.activity_request_system);
 			
 			//create for work with shared preference
-			settings=new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_MULTI_PROCESS));
+			settings=SystemConfigDataSource.getActiveSystem();
 	
 		try
 		{
@@ -48,7 +48,7 @@ public class RequestSystemActivity extends BaseActivity {
 			    db.open();
 
 			    // получаем курсор
-			    cursor = db.getAllData();
+			    cursor = db.getAllData(settings.getId());
 			    startManagingCursor(cursor);
 			    
 			    // формируем столбцы сопоставления

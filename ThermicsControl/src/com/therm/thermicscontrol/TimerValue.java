@@ -22,6 +22,8 @@ public class TimerValue implements Serializable {
 	public int stop_minute = 0;
 	public boolean [] isDay = new boolean[7];
 	String [] days = {"пн","вт","ср","чт","пт","сб","вс"};
+	public long id_system = 1;
+	public long row_id = 0;
 	
 	public TimerValue()
 	{
@@ -99,14 +101,15 @@ public class TimerValue implements Serializable {
 	}
 	
 	int multpParameter = 5000000;
+	int multpParameter2 = 333333;
 	public int getStartIdIntent(int nDay)
 	{
-		return (2*n_rele)*multpParameter + start_hour*60 + start_minute + nDay * 24 *60;	
+		return (2*n_rele)*multpParameter + start_hour*60 + start_minute + nDay * 24 *60 + multpParameter2*((int)id_system-1);	
 	}
 	
 	public int getStopIdIntent(int nDay)
 	{
-		return (2*n_rele+1)*multpParameter + start_hour*60 + start_minute + nDay * 24 *60;	
+		return (2*n_rele+1)*multpParameter + start_hour*60 + start_minute + nDay * 24 *60 + multpParameter2*((int)id_system-1);	
 	}
 	
 	public void AddStartTimer(Context ctx)
@@ -161,6 +164,7 @@ public class TimerValue implements Serializable {
 				//to pass :
 				intent.putExtra("TimerValue", this);  
 				intent.putExtra(TimerActionService.ATTRIBUTE_COMMAND, isStart);
+				intent.putExtra(TimerActionService.ATTRIBUTE_IDSYSTEM, id_system);
 				int add_time = k*24*3600;
 			    //intent.putExtra("extra", extra)
 				if(idIntents[i] != 0  && !isDay[i])
@@ -191,6 +195,7 @@ public class TimerValue implements Serializable {
 				Intent intent = new Intent(context, TimerActionService.class);
 				intent.putExtra("TimerValue", this); 
 				intent.putExtra(TimerActionService.ATTRIBUTE_COMMAND, isStart);
+				intent.putExtra(TimerActionService.ATTRIBUTE_IDSYSTEM, id_system);
 				int add_time = k*24*3600;
 			    //intent.putExtra("extra", extra)
 				if(idIntents[i] != 0  && isDay[i] == false)

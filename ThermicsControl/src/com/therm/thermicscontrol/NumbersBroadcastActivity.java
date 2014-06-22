@@ -58,7 +58,7 @@ public class NumbersBroadcastActivity extends BaseActivity{
 	static ListView lvData;
 	static EditText main_number;
 	static EditText main_name;
-	public CSettingsPref settings=null;
+	public SystemConfig settings=null;
 	public CSettingsDev settingsDev=null;
 	final Context context = this;
 	static Dialog dialog;
@@ -106,7 +106,7 @@ public class NumbersBroadcastActivity extends BaseActivity{
 		Log.i(TAG_events,"start activity_numbers_broadcast sytem");
 		
 		//create for work with shared preference
-		settings=new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_MULTI_PROCESS));
+		settings=SystemConfigDataSource.getActiveSystem();
 		settingsDev= new CSettingsDev(settings,getApplicationContext());
 		
 		lvData = (ListView)findViewById(R.id.listViewNumbers);

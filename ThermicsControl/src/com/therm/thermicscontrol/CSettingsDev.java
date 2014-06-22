@@ -25,7 +25,7 @@ import java.util.concurrent.Executors;
 
 
 public class CSettingsDev {
-	CSettingsPref settings_;
+	SystemConfig settings_;
 	String phoneNumber;
 	String password;
 	public Queue<SMSCommand> sms_to_send=new LinkedList<SMSCommand>();
@@ -61,7 +61,7 @@ public class CSettingsDev {
 		{return ncommand;}
 	};
 	
-	CSettingsDev(CSettingsPref settings,final Context appcontext)
+	CSettingsDev(SystemConfig settings,final Context appcontext)
 	{
 		this.settings_=settings;
 		
@@ -76,6 +76,11 @@ public class CSettingsDev {
 	            
 	            //}
 	     }};
+	}
+	
+	public void setSettingsAndContext(SystemConfig settings,final Context appcontext) {
+		this.settings_=settings;
+		this.appcontext = appcontext;
 	}
 	
 	Handler hdp;	
@@ -229,7 +234,7 @@ public class CSettingsDev {
 	{
 		if(isSimNumberValid())
 		{
-			Toast.makeText(appcontext, "Отправка команд устройству", Toast.LENGTH_LONG).show();
+			Toast.makeText(appcontext, "Отправка команд "+settings_.getName(), Toast.LENGTH_LONG).show();
 			phoneNumber=settings_.getNumberSIM();
 			password=settings_.getPinSIM();
 			if(sms_to_send.size()>0)

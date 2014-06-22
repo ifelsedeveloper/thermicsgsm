@@ -18,6 +18,7 @@ public class TimerActionService extends Service {
 	public static final String ATTRIBUTE_NRELE = "attribute_n_rele";
 	public static final String ATTRIBUTE_VKL = "attribute_vkl";
 	public static final String ATTRIBUTE_ACTION = "attribute_timer_action";
+	public static final String ATTRIBUTE_IDSYSTEM = "ATTRIBUTE_IDSYSTEM";
 	CSettingsDev settingsDev;
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -32,13 +33,11 @@ public class TimerActionService extends Service {
 			if(intent !=null)
 			{
 				//Toast.makeText(this, "Запуск таймера ", Toast.LENGTH_LONG).show();
-				SharedPreferences pref = this.getSharedPreferences(BaseActivity.MYSYSTEM_PREFERENCES, Context.MODE_MULTI_PROCESS);
-				CSettingsPref settings = new CSettingsPref(pref);
-				settingsDev = new CSettingsDev(settings,this);
-				
 					TimerValue value = (TimerValue) intent.getSerializableExtra("TimerValue");
 					if(value != null && value.enable)
 					{
+						SystemConfig settings = SystemConfigDataSource.sharedInstanceSystemConfigDataSource().getSystemConfig(intent.getLongExtra(ATTRIBUTE_IDSYSTEM, 1));
+						settingsDev = new CSettingsDev(settings,this);
 						//Toast.makeText(this,"TimerValue = " + value.toString(), Toast.LENGTH_LONG).show();
 						boolean vkl = intent.getBooleanExtra(ATTRIBUTE_COMMAND, false); 
 						String cmd = settingsDev.GetCmdRele(value.n_rele+1, vkl);

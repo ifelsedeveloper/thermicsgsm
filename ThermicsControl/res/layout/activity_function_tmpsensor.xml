@@ -55,7 +55,7 @@
             	    android:layout_height="wrap_content"
             	    android:gravity="center_vertical"
             	    android:text="@string/head_number_tmp_sensor"
-            	    android:textColor="@color/text_button_color"
+            	    android:textColor="@color/title_white_color"
             	    android:textSize="@dimen/size_text_relefunction"
             		android:textStyle="bold" />
             
@@ -65,7 +65,7 @@
             	    android:layout_weight=".60"
             	    android:layout_height="wrap_content"
             	    android:layout_marginLeft="10dp"
-            	    android:textColor="@color/text_button_color"
+            	    android:textColor="@color/title_white_color"
             	    android:textStyle="bold"
             	    android:paddingLeft="10dp"
             	    android:textSize="@dimen/size_text_relefunction"
@@ -95,7 +95,7 @@
             	    android:gravity="center_vertical"
             	    android:layout_gravity="center_vertical"
             	    android:text="@string/n_tmp_sensor1"
-            	    android:textColor="@color/text_button_color"
+            	    android:textColor="@color/title_white_color"
             	    android:textSize="@dimen/size_text_relefunction"
             		android:textStyle="bold" />
             
@@ -136,7 +136,7 @@
             	    android:layout_height="wrap_content"
             	    android:gravity="center_vertical"
             	    android:text="@string/n_tmp_sensor2"
-            	    android:textColor="@color/text_button_color"
+            	    android:textColor="@color/title_white_color"
             	    android:textSize="@dimen/size_text_relefunction"
             		android:textStyle="bold" />
             
@@ -178,7 +178,7 @@
             	    android:gravity="center_vertical"
             	    android:layout_gravity="center_vertical"
             	    android:text="@string/n_tmp_sensor3"
-            	    android:textColor="@color/text_button_color"
+            	    android:textColor="@color/title_white_color"
             	    android:textSize="@dimen/size_text_relefunction"
             		android:textStyle="bold" />
             
@@ -222,7 +222,7 @@
             	    android:gravity="center_vertical"
             	    android:layout_gravity="center_vertical"
             	    android:text="@string/n_tmp_sensor4"
-            	    android:textColor="@color/text_button_color"
+            	    android:textColor="@color/title_white_color"
             	    android:textSize="@dimen/size_text_relefunction"
             		android:textStyle="bold" />
             
@@ -264,7 +264,7 @@
             	    android:gravity="center_vertical"
             	    android:layout_gravity="center_vertical"
             	    android:text="@string/n_tmp_sensor5"
-            	    android:textColor="@color/text_button_color"
+            	    android:textColor="@color/title_white_color"
             	    android:textSize="@dimen/size_text_relefunction"
             		android:textStyle="bold" />
             
@@ -307,7 +307,7 @@
             	    android:gravity="center_vertical"
             	    android:layout_gravity="center_vertical"
             	    android:text="@string/n_tmp_sensor6"
-            	    android:textColor="@color/text_button_color"
+            	    android:textColor="@color/title_white_color"
             	    android:textSize="@dimen/size_text_relefunction"
             		android:textStyle="bold" />
             

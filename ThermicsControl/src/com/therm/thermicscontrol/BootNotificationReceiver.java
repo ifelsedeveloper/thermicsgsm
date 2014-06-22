@@ -79,6 +79,7 @@ public class BootNotificationReceiver extends BroadcastReceiver {
 							//enable alarms recreate it
 						 	int myHour = cursor.getInt(cursor.getColumnIndex(DBRequest.COLUMN_HOUR));
 							int myMinute = cursor.getInt(cursor.getColumnIndex(DBRequest.COLUMN_MINUTES));
+							int idSystem = cursor.getInt(cursor.getColumnIndex(DBRequest.COLUMN_ID_SYSTEM));
 							
 							Calendar calendar = Calendar.getInstance();
 
@@ -103,6 +104,7 @@ public class BootNotificationReceiver extends BroadcastReceiver {
 							
 							Intent intentLocal = new Intent(context, SMSRequestReportSender.class);
 							intentLocal.putExtra(AddRequestActivity.ATTRIBUTE_ROWID, (long)id);
+							intentLocal.putExtra(AddRequestActivity.ATTRIBUTE_IDSYSTEM, (long)idSystem);
 							
 							for(int i=(day_of_week + 5)%7;i<7;i++)
 							{

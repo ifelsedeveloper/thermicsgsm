@@ -16,7 +16,6 @@ import android.app.Service;
 
 
 import android.content.SharedPreferences;
-
 import android.content.Intent;
 
 
@@ -41,29 +40,22 @@ public class SmsService extends Service {
 	}
 	
 	
-
-	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		String sms_body = intent.getExtras().getString("sms_body");
 		String sms_from = intent.getExtras().getString("incoming_number");
 		if(sms_from!=null)
 		{
-			CSettingsPref settings=new CSettingsPref(this.getSharedPreferences(BaseActivity.MYSYSTEM_PREFERENCES, BaseActivity.MODE_MULTI_PROCESS));
-			if(SMSMonitor.checkSMSKsytal(sms_from,settings))
+			SystemConfig settings=SystemConfigDataSource.sharedInstanceSystemConfigDataSource().getSystemConfig(sms_from);
+			if(settings != null)
 			{
 				Log.i("database",sms_body);
 				nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-				saveSms(sms_body,sms_from);
+				saveSms(settings,sms_body,sms_from);
 			}
 
 		}
-		else
-		{
-			Log.i("database",sms_body);
-			nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-			saveSms(sms_body,sms_from);
-		}
+
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 	        @Override
 	        public void uncaughtException(Thread paramThread, Throwable paramThrowable) {
@@ -75,11 +67,8 @@ public class SmsService extends Service {
 		return START_STICKY_COMPATIBILITY;
 	}
 	
-	private void saveSms(String sms_body,String sms_from) {
+	private void saveSms(SystemConfig settings,String sms_body,String sms_from) {
 		try{
-		//
-			SharedPreferences pref = getSharedPreferences(BaseActivity.MYSYSTEM_PREFERENCES, MODE_MULTI_PROCESS);
-			CSettingsPref settings = new CSettingsPref(pref);
 			//parse sms
 			//Toast.makeText(getApplicationContext(), sms_body,Toast.LENGTH_LONG).show();
 			boolean isReportSystem = IsReportSystem(sms_body);
@@ -193,7 +182,7 @@ public class SmsService extends Service {
 			if(sms_body.contains(strTEMPR))
 				sms_body=sms_body.replace(strTEMPR,"Заданная температура для реле №2");
 			
-			for(int nrele = 0; nrele< CSettingsPref.numReles; nrele++)
+			for(int nrele = 0; nrele< SystemConfig.numReles; nrele++)
 			{
 				String strVkluchenoRele = String.format("Vklucheno rele N%d", nrele+1);
 				if(sms_body.contains(strVkluchenoRele))
@@ -204,7 +193,7 @@ public class SmsService extends Service {
 				}
 			}
 			
-			for(int nrele = 0; nrele< CSettingsPref.numReles; nrele++)
+			for(int nrele = 0; nrele< SystemConfig.numReles; nrele++)
 			{
 				String strVkluchenoRele = String.format("Otklucheno rele N%d", nrele+1);
 				if(sms_body.contains(strVkluchenoRele))
@@ -294,7 +283,7 @@ public class SmsService extends Service {
 				}
 			}
 			
-			sms_body+= "\nSIM = "+ sms_from;
+			sms_body+= "\n"+settings.getName()+": "+ sms_from;
 			
 			DBSMS dbsms = new DBSMS(this);
 			dbsms.open();
@@ -325,8 +314,6 @@ public class SmsService extends Service {
 			long now_long = now.getTime();
 			dbsms.addRec(sms_body, now_long);
 
-			SharedPreferences pref = getSharedPreferences(BaseActivity.MYSYSTEM_PREFERENCES, MODE_MULTI_PROCESS);
-			CSettingsPref settings = new CSettingsPref(pref);
 			settings.setLastSystemReport(sms_body);
 			settings.setLastSystemReportTime(now_long);
 
@@ -345,31 +332,6 @@ public class SmsService extends Service {
 	    
 	}
 	
-//	private int parseIntValue(String value)
-//	{
-//		int res = 0;
-//		
-//		int isPositive = 1;
-//		if(value.charAt(0) == '-')
-//		{
-//			isPositive = -1;
-//		}
-//		if(value.charAt(1) == 0 && value.length() == 3) 
-//		{
-//			String str = "";
-//			str+=value.charAt(2);
-//			res = Integer.parseInt(str)* isPositive;
-//		}
-//		if(value.length() == 3 && value.charAt(1) != 0)
-//		{
-//			String str = "";
-//			str+=value.charAt(1);
-//			str+=value.charAt(2);
-//			res = Integer.parseInt(str)* isPositive;
-//		}
-//		
-//		return res;
-//	}
 	
 	private boolean IsReportSystem(String sms_body)
 	{
@@ -387,7 +349,7 @@ public class SmsService extends Service {
 		return res;
 	}
 	
-	private void parseSMS(String sms,CSettingsPref settings)
+	private void parseSMS(String sms,SystemConfig settings)
 	{
 		//increment number notifications
 		//CSettingsPref.incNumNotification();
@@ -582,7 +544,6 @@ public class SmsService extends Service {
         }
         for(int i=1;i<10;i++)
         {
-        	String prefix_str = String.format(Locale.ENGLISH,"0%d SMS=+7",i);
         	String wrong_number = String.format(Locale.ENGLISH,"0%d SMS=+7**********", i);
         	if(sms.contains(wrong_number))
         	{
@@ -596,43 +557,7 @@ public class SmsService extends Service {
     		    settings.setNumbersBroadcast(data);
         	}
         }
-        
-        //tmp sensor
-//        String tmpR2="Temp.R2=";
-//        n=sms.indexOf(tmpR2);
-//        if(n>-1)
-//        {
-//        	int n_sensor=settings.getNumberSensorReleWarm();
-//        	String str_tmp_rele=sms.substring(n+tmpR2.length(),n+tmpR2.length()+3);
-//        	int nplus=str_tmp_rele.indexOf("+0");
-//        	int nminus=-1;
-//        	if(nplus>-1)
-//        	{
-//        		str_tmp_rele=str_tmp_rele.substring(1, 2);
-//        	}
-//        	else
-//        	{
-//        		nminus=str_tmp_rele.indexOf("-0");
-//        		if(nminus >-1)
-//        		{
-//        			str_tmp_rele=str_tmp_rele.substring(1, 2);
-//        		}
-//        	}
-//        	
-//        	int tmp=Integer.parseInt(str_tmp_rele);
-//        	if(nminus>-1) tmp=0-tmp;
-//        	
-//        	settings.setTmpReleWarm(n_sensor, tmp);
-//        }
-        
-
-        
-//        try {
-//            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-//            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-//            r.play();
-//        } catch (Exception e) {}
-//        
+           
 	}
 	
 }

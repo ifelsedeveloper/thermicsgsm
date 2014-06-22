@@ -115,8 +115,8 @@ public class MessageSystemActivity extends BaseActivity {
 	        }
 	    });
 	    
-	    CSettingsPref settings=new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_PRIVATE));
-	    CSettingsPref.clearNumNotification();
+	    SystemConfig settings=SystemConfigDataSource.getActiveSystem();
+	    SystemConfig.clearNumNotification();
 	    settings.setNumNotificationSaved(0);
 	    NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	    nm.cancelAll();
@@ -238,8 +238,8 @@ public class MessageSystemActivity extends BaseActivity {
 	public void onBackPressed() {
 	      
 	    //clear count notifications
-	    CSettingsPref settings=new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_PRIVATE));
-	    CSettingsPref.clearNumNotification();
+	    SystemConfig settings=SystemConfigDataSource.getActiveSystem();
+	    SystemConfig.clearNumNotification();
 	    NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	    
 	    nm.cancelAll();

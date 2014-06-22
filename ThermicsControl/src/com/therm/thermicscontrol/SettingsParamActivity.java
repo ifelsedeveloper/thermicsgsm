@@ -45,7 +45,7 @@ import android.view.View.OnLongClickListener;
 public class SettingsParamActivity extends BaseActivity {
 
 	public static final String TAG_events="event_tag_settings_param";
-	public CSettingsPref settings=null;
+	public SystemConfig settings=null;
 	public CSettingsDev settingsDev=null;
 	SeekBar sbWeightRele;
 	SeekBar sbWeightReleNight;
@@ -86,10 +86,7 @@ public class SettingsParamActivity extends BaseActivity {
 		layoutToggleButtons = (LinearLayout)findViewById(R.id.layotSwitchButton);
 		//number_tmp_sensor = settings.getNumberSensorReleWarm();
 		
-		//create for work with shared preference
-		settings=new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_MULTI_PROCESS));
-		CSettingsPref.phone_number = settings.getNumberSIM();
-		settingsDev= new CSettingsDev(settings,getApplicationContext());
+		loadSystemSettings();
 		automatic[0] = (ImageView)findViewById(R.id.imageViewAutomatic1);
 	    automatic[1] = (ImageView)findViewById(R.id.imageViewAutomatic2);
 	    automatic[2] = (ImageView)findViewById(R.id.imageViewAutomatic3);
@@ -112,9 +109,7 @@ public class SettingsParamActivity extends BaseActivity {
 	    brTimer = new BroadcastReceiver() {
 	      // действия при получении сообщений
 	      public void onReceive(Context context, Intent intent) {
-	    	  int n_rele = intent.getIntExtra(TimerActionService.ATTRIBUTE_NRELE, 0); 
-	    	  boolean value = intent.getBooleanExtra(TimerActionService.ATTRIBUTE_VKL, false); 
-	    	  settings.setIsTimerRunning(n_rele,value);
+	    	  loadSystemSettings();
 	    	  setTimerState();
 	      }
 	    };
@@ -134,6 +129,7 @@ public class SettingsParamActivity extends BaseActivity {
 	        //отправляем полученное сообщение нашему классу
 	        //if(run_sms_sender) settingsDev.smsRecive(sms);
 	        settingsDev.recvSMS(sms);
+	        loadSystemSettings();
 	        setReleState();
 	        for(int i =0; i<3; i++)
 	        {
@@ -222,6 +218,13 @@ public class SettingsParamActivity extends BaseActivity {
 	    
 	}
 
+	private void loadSystemSettings() {
+		//create for work with shared preference
+		settings=SystemConfigDataSource.getActiveSystem();
+		SystemConfig.phone_number = settings.getNumberSIM();
+		settingsDev= new CSettingsDev(settings,getApplicationContext());
+	}
+	
 	@Override
 	public void onResume() {
 	    super.onResume();  // Always call the superclass method first
@@ -293,24 +296,18 @@ public class SettingsParamActivity extends BaseActivity {
 	public void loadParam()
 	{
 		LoadButtons();
-		//load parameters from preference
-		//tmp_water=settings.getTmpWater();
-		//tmp_air=settings.getTmpAir();
+
 		numberRele = settings.getNumberReleWarm();
 		numberSensorTMPReleWarm=settings.getNumberSensorReleWarm();		
 		tmp_rele_warm=settings.getTempDayConfig(numberSensorTMPReleWarm,newTempSelectedButton);
 		tmp_rele_warm_night=settings.getTempNightConfig(numberSensorTMPReleWarm,newTempSelectedButton);
 		value_seek_rele = tmp_rele_warm;
 		value_seek_rele_night = tmp_rele_warm_night;
-		for(int nrele=0; nrele<CSettingsPref.numReles; nrele++)
+		for(int nrele=0; nrele<SystemConfig.numReles; nrele++)
 			isRele[nrele]=settings.getIsRele(nrele);
 		
 		isUpr=settings.getIsUpr();
 		
-		//isMicrophone=settings.getIsMicrophone();
-		//Log.i(TAG_events,"isRele1="+ Boolean.toString(isRele1));
-		//Log.i(TAG_events,"isRele2="+ Boolean.toString(isRele2));
-		//set parameters to view
 		TextView text  = (TextView) findViewById(R.id.editTextTmpRele);
 		text.setText(Integer.toString(tmp_rele_warm));
 		
@@ -455,21 +452,11 @@ public class SettingsParamActivity extends BaseActivity {
 	}
 	public void OnClickCancelButton(View v)
 	{
-		//numberSensorTMPReleWarm=settings.getNumberSensorReleWarm();
-		//numberRele = settings.getNumberReleWarm();
-		//editTextTmpReleWarm.setText(String.format("%d", tmp_rele_warm));	
-		//editNTmpSensorRele.setText(String.format("%d", numberSensorTMPReleWarm));
-		//editNRele.setText(String.format("%d", numberRele));
-		//sbWeightRele.setProgress(tmp_rele_warm-min_tmp);
-
-		//viewOkCancel.setVisibility(View.INVISIBLE);
-		
 		LoadButtons();
 		SetFunctionSensorRele();
 		setSeekBar();
 		setReleState();
 		viewOkCancel.setVisibility(View.GONE);
-
 	}
 	
 	boolean isEnableRele[] = new boolean[3];
@@ -596,9 +583,9 @@ public class SettingsParamActivity extends BaseActivity {
 			        		tmp_rele_warm_night = value_seek_rele_night;
 			        		newTempDayHotKeys[numberSensorTMPReleWarm][newTempSelectedButton] = tmp_rele_warm;
 			        		newTempNightHotKeys[numberSensorTMPReleWarm][newTempSelectedButton] = tmp_rele_warm_night;
-			        		for(int nsensor = 0; nsensor < CSettingsPref.numberSensors; nsensor++)
+			        		for(int nsensor = 0; nsensor < SystemConfig.numberSensors; nsensor++)
 			        		{
-			        			for(int nbutton = 0; nbutton < CSettingsPref.numberButtons; nbutton++)
+			        			for(int nbutton = 0; nbutton < SystemConfig.numberButtons; nbutton++)
 			        			{
 			        				settings.setTempDayConfig(nsensor, nbutton, newTempDayHotKeys[nsensor][nbutton]);
 			        				settings.setTempNightConfig(nsensor, nbutton, newTempNightHotKeys[nsensor][nbutton]);
@@ -992,9 +979,9 @@ public class SettingsParamActivity extends BaseActivity {
 		nightValueTemp = settings.getTempNightConfig(numberSensorTMPReleWarm, newTempSelectedButton);
 		setValueForHotButton(newTempSelectedButton, dayValueTemp, nightValueTemp);
 
-		for(int nsensor = 0; nsensor < CSettingsPref.numberSensors; nsensor++)
+		for(int nsensor = 0; nsensor < SystemConfig.numberSensors; nsensor++)
 		{
-			for(int nbutton = 0; nbutton < CSettingsPref.numberButtons ; nbutton++)
+			for(int nbutton = 0; nbutton < SystemConfig.numberButtons ; nbutton++)
 			{
 				oldTempDayHotKeys[nsensor][nbutton] = newTempDayHotKeys[nsensor][nbutton] = settings.getTempDayConfig(nsensor, nbutton);
 				oldTempNightHotKeys[nsensor][nbutton] = newTempNightHotKeys[nsensor][nbutton] = settings.getTempNightConfig(nsensor, nbutton); 
@@ -1015,7 +1002,7 @@ public class SettingsParamActivity extends BaseActivity {
 	void UpdateValueButtons()
 	{
 		int nsensor = numberSensorTMPReleWarm;
-		for(int nbutton = 0; nbutton < CSettingsPref.numberButtons ; nbutton++)
+		for(int nbutton = 0; nbutton < SystemConfig.numberButtons ; nbutton++)
 		{ 
 			setValueForHotButton(nbutton, newTempDayHotKeys[nsensor][nbutton], newTempNightHotKeys[nsensor][nbutton]);
 			statesButtons[nbutton] = false;
@@ -1358,9 +1345,9 @@ public class SettingsParamActivity extends BaseActivity {
 		for(int i = 0; i < 4;i++)
 		{
 			if(statesButtons[i])
-				valuesButtons[i].setBackgroundResource(R.drawable.background_lightred_togglebutton);
+				valuesButtons[i].setBackgroundResource(R.drawable.button_hover);
 			else
-				valuesButtons[i].setBackgroundResource(R.drawable.background_lightgreen_togglebutton);;
+				valuesButtons[i].setBackgroundResource(R.drawable.button_white);;
 		}
 	}
 	
@@ -1373,13 +1360,7 @@ public class SettingsParamActivity extends BaseActivity {
 			statesButtons[i] = false;
 		statesButtons[newTempSelectedButton] = true;
 		
-		for(i=0;i<4;i++)
-		{
-			if(statesButtons[i])
-				valuesButtons[i].setBackgroundResource(R.drawable.background_lightred_togglebutton);
-			else
-				valuesButtons[i].setBackgroundResource(R.drawable.background_lightgreen_togglebutton);
-		}
+		DisplayStatesButtons();
 		
 		int dayTemp = newTempDayHotKeys[numberSensorTMPReleWarm][n];
 		int nightTemp = newTempNightHotKeys[numberSensorTMPReleWarm][n];
@@ -1486,6 +1467,50 @@ public class SettingsParamActivity extends BaseActivity {
 	        	
 	        }});
 		b.show();
+	}
+	
+	//AutoRequest
+	public void onClickLayoutCheckBoxAutoRequest(View v) {
+		Log.i(TAG_events,"RequestSystemActivity");
+		Intent intent = new Intent(this, RequestSystemActivity.class);
+	    startActivity(intent);
+	}
+	
+	private boolean isAutoRequest = true;
+	public void onClickCheckBoxAutoRequest(View v) {
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+		Log.i(TAG_events,"onClickCheckBoxisTimer");
+		isTimer=(!isTimer);
+		final String questionDialog;
+		final String actionDialog;
+		if(isTimer)
+		{
+			questionDialog = "Включить автозапрос?";
+			actionDialog = "Включить";
+		}
+		else
+		{
+			questionDialog = "Отключить автозапрос?";
+			actionDialog = "Отключить";
+		}
+		
+
+			//save parameters
+			final AlertDialog.Builder b = new AlertDialog.Builder(this);
+			b.setIcon(android.R.drawable.ic_dialog_alert);
+			b.setTitle(questionDialog);
+			b.setPositiveButton(actionDialog, new OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) {
+		        		
+		        }
+		      });
+			b.setNegativeButton("Отмена", new OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) {
+		        	isAutoRequest=(!isAutoRequest);
+		        	//CheckBox checkbox=(CheckBox) findViewById(R.id.checkBoxAutoRequest);
+		        	//checkbox.setChecked(isAutoRequest);
+		        }});
+			b.show();
 	}
 	
 }

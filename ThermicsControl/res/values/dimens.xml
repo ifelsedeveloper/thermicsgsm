@@ -11,4 +11,8 @@
 	<dimen name="text_main_size">8pt</dimen>
 	<dimen name="text_main_size_small">7pt</dimen>
 	<dimen name="text_main_size_big">9pt</dimen>
+	<dimen name="slidingmenu_offset">60dp</dimen>
+	<dimen name="list_padding">10dp</dimen>
+	<dimen name="shadow_width">15dp</dimen>
+	<dimen name="height_edit_field">38dp</dimen>
 </resources>
