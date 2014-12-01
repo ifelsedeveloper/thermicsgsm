@@ -43,7 +43,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	public static final String TAG_events="event_tag_config_sytem";
 	public SystemConfig settings=null;
 	public CSettingsDev settingsDev=null;
-	
+	private TextView textNameSystem;
 	static View viewOkCancel;
 	
 	BroadcastReceiver br;
@@ -84,14 +84,6 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	    IntentFilter intFilt = new IntentFilter(BROADCAST_ACTION_RCVSMS);
 	    // регистрируем (включаем) BroadcastReceiver
 	    registerReceiver(br, intFilt);
-	    
-	    Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-	        @Override
-	        public void uncaughtException(Thread paramThread, Throwable paramThrowable) {
-	            Log.e("Alert","Lets See if it Works MainMenu !!!");
-	            Toast.makeText(getApplicationContext(), "Error config system", Toast.LENGTH_LONG).show();
-	        }
-	    });
 	    
 	    setVisiblePassword();
 	    isEditNumberPasswordHasFocus = false;
@@ -218,7 +210,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		buttonZone4 = (TextView)findViewById(R.id.buttonZone4);
 		
 		titleCodeRequestBalans = (TextView) findViewById(R.id.titleCodeRequestBalans);
-		
+		textNameSystem = (TextView) findViewById(R.id.textNameSystem);
 	}
 	
 	public void checkStateOkCancel()
@@ -229,6 +221,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		LsimUSSD = editTextCodeRequestBalans.getText().toString();
 		LsimPassword = editTextNumberPassword.getText().toString();
 		LisSIM1 = ActiveSIM.isChecked();
+		
 		
 		String LnumberTmpSensorSMSstr = editTextNumberSensorTMPSMS.getText().toString();
 		boolean flagLow=false,flagUp=false;
@@ -272,6 +265,8 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 				LisSMSSnjatie=checkBoxSMSSnjatie.isChecked();
 				LisSMSInIncoming = checkBoxIsSMSInIncoming.isChecked();
 				
+				
+				
 				if(((!LsimNumber.equalsIgnoreCase(simNumber)) || (!LsimNumber2.equalsIgnoreCase(simNumber2)) ||
 				  (!LsimUSSD.equalsIgnoreCase(simUSSD)) ||
 				  (!LsimPassword.equalsIgnoreCase(simPassword)) ||
@@ -306,6 +301,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	
 	public void loadParam()
 	{
+		textNameSystem.setText( settings.getName() );
 		deviceVersion = settings.getDevVersion();
 		spinnerSelectDevice.setSelection(deviceVersion-1);
 		spinnerSelectDevice.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -538,6 +534,9 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 			settingsDev.clearQueueCommands();
 			settingsDev.password = LsimPassword;
 			
+			if(LsimPassword.equalsIgnoreCase(simPassword))
+				isEditNumberPasswordHasFocus = false;
+			
 			if(isEditNumberPasswordHasFocus)
 			{
 				//show dialog
@@ -710,6 +709,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		    		}
 		    		setVisiblePassword();
 		    		setRequestCodeBalanse();
+		    		isEditNumberPasswordHasFocus = false;
 		        }
 		      });
 			b.setNegativeButton("Отмена", new OnClickListener() {
@@ -728,6 +728,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 		        	viewOkCancel.setVisibility(View.GONE);
 		        	setRequestCodeBalanse();
+		        	isEditNumberPasswordHasFocus = false;
 		        }});
 			b.show();
 		}

@@ -146,14 +146,6 @@ public class NumbersBroadcastActivity extends BaseActivity{
 	    IntentFilter intFilt = new IntentFilter(BROADCAST_ACTION_RCVSMS);
 	    // регистрируем (включаем) BroadcastReceiver
 	    registerReceiver(br, intFilt);
-	    
-	    Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-	        @Override
-	        public void uncaughtException(Thread paramThread, Throwable paramThrowable) {
-	            Log.e("Alert","Lets See if it Works MainMenu !!!");
-	            Toast.makeText(getApplicationContext(), "Error config system", Toast.LENGTH_LONG).show();
-	        }
-	    });
 		
 
 	    // массивы данных

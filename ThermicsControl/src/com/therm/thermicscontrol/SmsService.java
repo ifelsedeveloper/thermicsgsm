@@ -42,28 +42,21 @@ public class SmsService extends Service {
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		String sms_body = intent.getExtras().getString("sms_body");
-		String sms_from = intent.getExtras().getString("incoming_number");
-		if(sms_from!=null)
-		{
-			SystemConfig settings=SystemConfigDataSource.sharedInstanceSystemConfigDataSource().getSystemConfig(sms_from);
-			if(settings != null)
+		if(intent != null && intent.getExtras() != null){
+			String sms_body = intent.getExtras().getString("sms_body");
+			String sms_from = intent.getExtras().getString("incoming_number");
+			if(sms_from!=null)
 			{
-				Log.i("database",sms_body);
-				nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-				saveSms(settings,sms_body,sms_from);
+				SystemConfig settings=SystemConfigDataSource.sharedInstanceSystemConfigDataSource().getSystemConfig(sms_from);
+				if(settings != null)
+				{
+					Log.i("database",sms_body);
+					nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+					saveSms(settings,sms_body,sms_from);
+				}
+	
 			}
-
 		}
-
-		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-	        @Override
-	        public void uncaughtException(Thread paramThread, Throwable paramThrowable) {
-	            Log.e("Alert","Lets See if it Works SmsService !!!");
-	            Toast.makeText(getApplicationContext(), "Error SmsService", Toast.LENGTH_LONG).show();
-	        }
-	    });
-		
 		return START_STICKY_COMPATIBILITY;
 	}
 	
@@ -181,6 +174,7 @@ public class SmsService extends Service {
 			String strTEMPR="Temp.R";
 			if(sms_body.contains(strTEMPR))
 				sms_body=sms_body.replace(strTEMPR,"Заданная температура для реле №2");
+				
 			
 			for(int nrele = 0; nrele< SystemConfig.numReles; nrele++)
 			{
@@ -295,6 +289,7 @@ public class SmsService extends Service {
 			}
 		    //write sms to base
 			dbsms.close();
+			
 			
 		    intent.putExtra(MessageSystemActivity.PARAM_SMS, sms_body);
 		    String strDate=new SimpleDateFormat("dd.MM.yy HH:mm").format(now_long);
@@ -425,6 +420,17 @@ public class SmsService extends Service {
                 else
                 {
                 	settings.setDevVersion(BaseActivity.deviceAfter01112012);
+                	if(sms.contains("RELE=")){
+                		int nRele = Integer.parseInt(lineRele.substring(6, 7));
+                		int dayTempR = Integer.parseInt(lineRele.substring(8, 11).replace("+", ""));
+                		int nigthTempR = Integer.parseInt(lineRele.substring(12, 15).replace("+", ""));
+                		Log.d("parseSMS",String.format("nRele = %d dayTempR = %d nigthTempR = %d",  nRele,dayTempR,nigthTempR));
+                		settings.setNumberReleWarm(nRele);
+                		settings.setActiveReleTemp(dayTempR,nigthTempR);
+                		if(settings.getNumberSensorReleWarm() == 0) {
+                			settings.setNumberSensorReleWarm(2);
+                		}
+                	}
                 }
         	}
         }
@@ -501,6 +507,7 @@ public class SmsService extends Service {
         	int n_rele = Integer.parseInt(rele_value);
         	if(n_rele>0 && n_rele<4)
         	{
+        		Log.d("setIsRele", ""+ Integer.toString(n_rele-1)+" | "+ Boolean.toString(flag_vkl));
         		settings.setIsRele(n_rele-1,flag_vkl);
         	}
         }

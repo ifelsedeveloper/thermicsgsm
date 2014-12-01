@@ -64,161 +64,162 @@ public class SettingsParamActivity extends BaseActivity {
 	LinearLayout linearLayoutNightTemp;
 	RelativeLayout RelativeLayoutReleWarm;
 	RelativeLayout RelativeLayoutNTmpSensor;
+	TextView textNameSystem;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
-		super.onCreate(savedInstanceState);
-		//Remove title bar
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-		//Remove notification bar
-		//this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.activity_settings_param);
-		
-		sbWeightRele = (SeekBar) findViewById(R.id.seekBarReleWarm);
-		sbWeightReleNight = (SeekBar) findViewById(R.id.seekBarReleWarmNight);
-		editNTmpSensorRele=(EditText) findViewById(R.id.editTextNTmpSensorRele);
-		linearLayoutDayTemp = (LinearLayout) findViewById(R.id.layoutSeekBarReleWarm);
-		linearLayoutNightTemp = (LinearLayout) findViewById(R.id.layoutSeekBarReleWarmNight);
-		RelativeLayoutReleWarm = (RelativeLayout) findViewById(R.id.RelativeLayoutReleWarm);
-		RelativeLayoutNTmpSensor = (RelativeLayout) findViewById(R.id.RelativeLayoutNTmpSensor);
-		layoutToggleButtons = (LinearLayout)findViewById(R.id.layotSwitchButton);
-		//number_tmp_sensor = settings.getNumberSensorReleWarm();
-		
-		loadSystemSettings();
-		automatic[0] = (ImageView)findViewById(R.id.imageViewAutomatic1);
-	    automatic[1] = (ImageView)findViewById(R.id.imageViewAutomatic2);
-	    automatic[2] = (ImageView)findViewById(R.id.imageViewAutomatic3);
-	    checkBoxRele[0] =(CheckBox) findViewById(R.id.checkBoxRele1);
-	    checkBoxRele[1] =(CheckBox) findViewById(R.id.checkBoxRele2);
-	    checkBoxRele[2] =(CheckBox) findViewById(R.id.checkBoxRele3);
-	    imageViewStateTimer = (ImageView)findViewById(R.id.imageViewStateTimer);
-	    editTextTmpReleWarm = (EditText) findViewById(R.id.editTextTmpRele);
-	    editTextTmpReleWarmNight = (EditText) findViewById(R.id.editTextTmpReleNight);
-	    editNRele = (EditText) findViewById(R.id.editTextNRele);
-	    
-		loadParam();
-		
-		Log.i(TAG_events, "creating activity");
-//		settings.setIsTimerRunning(2,true);
-//		
-
-//		boolean rest = settings.getIsTimerRunning();
-		// создаем BroadcastReceiver
-	    brTimer = new BroadcastReceiver() {
-	      // действия при получении сообщений
-	      public void onReceive(Context context, Intent intent) {
-	    	  loadSystemSettings();
-	    	  setTimerState();
-	      }
-	    };
-
-	    // создаем фильтр для BroadcastReceiver
-	    IntentFilter intFiltTimer = new IntentFilter(TimerActionService.ATTRIBUTE_ACTION);
-	    // регистрируем (включаем) BroadcastReceiver
-	    registerReceiver(brTimer, intFiltTimer);
-	    
-		// создаем BroadcastReceiver
-	    br = new BroadcastReceiver() {
-	      // действия при получении сообщений
-	      public void onReceive(Context context, Intent intent) {
-	        String sms = intent.getStringExtra(PARAM_SMS);
-	        String time = intent.getStringExtra(PARAM_SMSTIME);
-	        Log.d(TAG_events, "onReceive sms: "+sms+" ;time = "+time);
-	        //отправляем полученное сообщение нашему классу
-	        //if(run_sms_sender) settingsDev.smsRecive(sms);
-	        settingsDev.recvSMS(sms);
-	        loadSystemSettings();
-	        setReleState();
-	        for(int i =0; i<3; i++)
-	        {
-		        if(intent.hasExtra(BaseActivity.prefIsRele[i]))
-		        {
-			        isRele[i] = intent.getBooleanExtra(BaseActivity.prefIsRele[i], settings.getIsRele(i));
-			        settings.setIsRele(i,isRele[i]);
-			        setCheckRele(isRele);
-		        }  
-	        }
-	      }
-	    };
-	    // создаем фильтр для BroadcastReceiver
-	    IntentFilter intFilt = new IntentFilter(BROADCAST_ACTION_RCVSMS);
-	    // регистрируем (включаем) BroadcastReceiver
-	    registerReceiver(br, intFilt);
-	    
-	    viewOkCancel = findViewById(R.id.layoutOKCancelReleWarm);
-	    //setVisibility(mSampleContent.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
-	    //viewOkCancel.setVisibility(View.INVISIBLE);
-	    viewOkCancel.setVisibility(View.GONE);
-	    //editTextTmpReleWarm.setVisibility(View.GONE);
-	    sbWeightRele.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-	    	@Override
-	  	  public void onProgressChanged(SeekBar seekBar, int progress,
-	  	      boolean fromUser) {
-	  			value_seek_rele = progress + min_tmp;
-	  			editTextTmpReleWarm.setText(String.format("%d", value_seek_rele));
-	  			dayValueTemp = value_seek_rele;
-	  			setValueForHotButton(newTempSelectedButton, dayValueTemp, nightValueTemp);
-	  			mInitializedTempSensor[numberSensorTMPReleWarm] = true;
-	  			newTempDayHotKeys[numberSensorTMPReleWarm][newTempSelectedButton] = value_seek_rele;
-	  			//Log.i(TAG_events,String.format("%d", value_seek_rele));
-	  	  }
-
-	  	  @Override
-	  	  public void onStartTrackingTouch(SeekBar seekBar) {
-	  		  //viewOkCancel.setVisibility(View.INVISIBLE);
-	  		  viewOkCancel.setVisibility(View.GONE);
-	  	  }
-
-	  	  @Override
-	  	  public void onStopTrackingTouch(SeekBar seekBar) {  
-	  		  if(value_seek_rele!=tmp_rele_warm || value_seek_rele_night!=tmp_rele_warm_night)
-	  		  {
-
-	  			viewOkCancel.setVisibility(View.VISIBLE);
-	  		  }
-	  	  }
-	    }
-	    );
-	    
-	    
-	    sbWeightReleNight.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-	    	@Override
-	  	  public void onProgressChanged(SeekBar seekBar, int progress,
-	  	      boolean fromUser) {
-	  			value_seek_rele_night = progress + min_tmp;
-	  			editTextTmpReleWarmNight.setText(String.format("%d", value_seek_rele_night));
-	  			nightValueTemp = value_seek_rele_night;
-	  			setValueForHotButton(newTempSelectedButton, dayValueTemp, nightValueTemp);
-	  			newTempNightHotKeys[numberSensorTMPReleWarm][newTempSelectedButton] = value_seek_rele_night;
-	  			//Log.i(TAG_events,String.format("%d", value_seek_rele));
-	  	  }
-
-	  	  @Override
-	  	  public void onStartTrackingTouch(SeekBar seekBar) {
-	  		  //viewOkCancel.setVisibility(View.INVISIBLE);
-	  		  viewOkCancel.setVisibility(View.GONE);
-	  	  }
-
-	  	  @Override
-	  	  public void onStopTrackingTouch(SeekBar seekBar) {  
-	  		  if(value_seek_rele!=tmp_rele_warm || value_seek_rele_night!=tmp_rele_warm_night)
-	  		  {
-
-	  			viewOkCancel.setVisibility(View.VISIBLE);
-	  		  }
-	  	  }
-	    }
-	    );
-	    
-	    setVisibilityScrollRegulator();
-	    
-	    setTimerState();
+		try{
+			super.onCreate(savedInstanceState);
+			//Remove title bar
+			this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+	
+			//Remove notification bar
+			//this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+			setContentView(R.layout.activity_settings_param);
+			
+			sbWeightRele = (SeekBar) findViewById(R.id.seekBarReleWarm);
+			sbWeightReleNight = (SeekBar) findViewById(R.id.seekBarReleWarmNight);
+			editNTmpSensorRele=(EditText) findViewById(R.id.editTextNTmpSensorRele);
+			linearLayoutDayTemp = (LinearLayout) findViewById(R.id.layoutSeekBarReleWarm);
+			linearLayoutNightTemp = (LinearLayout) findViewById(R.id.layoutSeekBarReleWarmNight);
+			RelativeLayoutReleWarm = (RelativeLayout) findViewById(R.id.RelativeLayoutReleWarm);
+			RelativeLayoutNTmpSensor = (RelativeLayout) findViewById(R.id.RelativeLayoutNTmpSensor);
+			layoutToggleButtons = (LinearLayout)findViewById(R.id.layotSwitchButton);
+			//number_tmp_sensor = settings.getNumberSensorReleWarm();
+			
+			reloadSystemConfig();
+			automatic[0] = (ImageView)findViewById(R.id.imageViewAutomatic1);
+		    automatic[1] = (ImageView)findViewById(R.id.imageViewAutomatic2);
+		    automatic[2] = (ImageView)findViewById(R.id.imageViewAutomatic3);
+		    checkBoxRele[0] =(CheckBox) findViewById(R.id.checkBoxRele1);
+		    checkBoxRele[1] =(CheckBox) findViewById(R.id.checkBoxRele2);
+		    checkBoxRele[2] =(CheckBox) findViewById(R.id.checkBoxRele3);
+		    imageViewStateTimer = (ImageView)findViewById(R.id.imageViewStateTimer);
+		    editTextTmpReleWarm = (EditText) findViewById(R.id.editTextTmpRele);
+		    editTextTmpReleWarmNight = (EditText) findViewById(R.id.editTextTmpReleNight);
+		    editNRele = (EditText) findViewById(R.id.editTextNRele);
+		    textNameSystem = (TextView) findViewById(R.id.textNameSystem);
+			loadParam();
+			
+			Log.i(TAG_events, "creating activity");
+			// создаем BroadcastReceiver
+		    brTimer = new BroadcastReceiver() {
+		      // действия при получении сообщений
+		      public void onReceive(Context context, Intent intent) {
+		    	  reloadSystemConfig();
+		    	  setTimerState();
+		      }
+		    };
+	
+		    // создаем фильтр для BroadcastReceiver
+		    IntentFilter intFiltTimer = new IntentFilter(TimerActionService.ATTRIBUTE_ACTION);
+		    // регистрируем (включаем) BroadcastReceiver
+		    registerReceiver(brTimer, intFiltTimer);
+		    
+			// создаем BroadcastReceiver
+		    br = new BroadcastReceiver() {
+		      // действия при получении сообщений
+		      public void onReceive(Context context, Intent intent) {
+		    	  try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		        String sms = intent.getStringExtra(PARAM_SMS);
+		        String time = intent.getStringExtra(PARAM_SMSTIME);
+		        Log.d(TAG_events, "onReceive sms: "+sms+" ;time = "+time);
+		        //отправляем полученное сообщение нашему классу
+		        settingsDev.recvSMS(sms);
+		        setReleState();
+	
+		        for(int i =0; i<3; i++)
+		        	isRele[i] = settings.getIsRele(i);
+		        Log.d("event_tag_settings_param", Long.toString(settings.getId()) + settings.getName()+" | "+Boolean.toString(isRele[0])+" | "+Boolean.toString(isRele[1])+" | "+Boolean.toString(isRele[2]));
+		        setCheckRele(isRele);
+		      }
+		    };
+		    // создаем фильтр для BroadcastReceiver
+		    IntentFilter intFilt = new IntentFilter(MessageSystemActivity.BROADCAST_ACTION_RCVSMS);
+		    // регистрируем (включаем) BroadcastReceiver
+		    registerReceiver(br, intFilt);
+		    
+		    viewOkCancel = findViewById(R.id.layoutOKCancelReleWarm);
+		    //setVisibility(mSampleContent.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+		    //viewOkCancel.setVisibility(View.INVISIBLE);
+		    viewOkCancel.setVisibility(View.GONE);
+		    //editTextTmpReleWarm.setVisibility(View.GONE);
+		    sbWeightRele.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+		    	@Override
+		  	  public void onProgressChanged(SeekBar seekBar, int progress,
+		  	      boolean fromUser) {
+		  			value_seek_rele = progress + min_tmp;
+		  			editTextTmpReleWarm.setText(String.format("%d", value_seek_rele));
+		  			dayValueTemp = value_seek_rele;
+		  			setValueForHotButton(newTempSelectedButton, dayValueTemp, nightValueTemp);
+		  			mInitializedTempSensor[numberSensorTMPReleWarm] = true;
+		  			newTempDayHotKeys[numberSensorTMPReleWarm][newTempSelectedButton] = value_seek_rele;
+		  			//Log.i(TAG_events,String.format("%d", value_seek_rele));
+		  	  }
+	
+		  	  @Override
+		  	  public void onStartTrackingTouch(SeekBar seekBar) {
+		  		  //viewOkCancel.setVisibility(View.INVISIBLE);
+		  		  viewOkCancel.setVisibility(View.GONE);
+		  	  }
+	
+		  	  @Override
+		  	  public void onStopTrackingTouch(SeekBar seekBar) {  
+		  		  if(value_seek_rele!=tmp_rele_warm || value_seek_rele_night!=tmp_rele_warm_night)  {
+		  			viewOkCancel.setVisibility(View.VISIBLE);
+		  		  }
+		  	  }
+		    }
+		    );
+		    
+		    
+		    sbWeightReleNight.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+		    	@Override
+		  	  public void onProgressChanged(SeekBar seekBar, int progress,
+		  	      boolean fromUser) {
+		  			value_seek_rele_night = progress + min_tmp;
+		  			editTextTmpReleWarmNight.setText(String.format("%d", value_seek_rele_night));
+		  			nightValueTemp = value_seek_rele_night;
+		  			setValueForHotButton(newTempSelectedButton, dayValueTemp, nightValueTemp);
+		  			newTempNightHotKeys[numberSensorTMPReleWarm][newTempSelectedButton] = value_seek_rele_night;
+		  			//Log.i(TAG_events,String.format("%d", value_seek_rele));
+		  	  }
+	
+		  	  @Override
+		  	  public void onStartTrackingTouch(SeekBar seekBar) {
+		  		  //viewOkCancel.setVisibility(View.INVISIBLE);
+		  		  viewOkCancel.setVisibility(View.GONE);
+		  	  }
+	
+		  	  @Override
+		  	  public void onStopTrackingTouch(SeekBar seekBar) {  
+		  		  if(value_seek_rele!=tmp_rele_warm || value_seek_rele_night!=tmp_rele_warm_night)
+		  		  {
+	
+		  			viewOkCancel.setVisibility(View.VISIBLE);
+		  		  }
+		  	  }
+		    }
+		    );
+		    
+		    setVisibilityScrollRegulator();
+		    
+		    setTimerState();
+		}
+		catch(Exception e)
+		{
+			Toast.makeText(getApplicationContext(),Log.getStackTraceString(e) , Toast.LENGTH_LONG).show();
+		}
 	    
 	}
 
-	private void loadSystemSettings() {
+	private void reloadSystemConfig() {
 		//create for work with shared preference
 		settings=SystemConfigDataSource.getActiveSystem();
 		SystemConfig.phone_number = settings.getNumberSIM();
@@ -296,8 +297,12 @@ public class SettingsParamActivity extends BaseActivity {
 	public void loadParam()
 	{
 		LoadButtons();
-
+		textNameSystem.setText( settings.getName() );
 		numberRele = settings.getNumberReleWarm();
+		if(numberRele == 0) {
+			settings.setNumberReleWarm(2);
+			numberRele = 2;
+		}
 		numberSensorTMPReleWarm=settings.getNumberSensorReleWarm();		
 		tmp_rele_warm=settings.getTempDayConfig(numberSensorTMPReleWarm,newTempSelectedButton);
 		tmp_rele_warm_night=settings.getTempNightConfig(numberSensorTMPReleWarm,newTempSelectedButton);
@@ -456,6 +461,7 @@ public class SettingsParamActivity extends BaseActivity {
 		SetFunctionSensorRele();
 		setSeekBar();
 		setReleState();
+		loadParam();
 		viewOkCancel.setVisibility(View.GONE);
 	}
 	
@@ -590,7 +596,10 @@ public class SettingsParamActivity extends BaseActivity {
 			        				settings.setTempDayConfig(nsensor, nbutton, newTempDayHotKeys[nsensor][nbutton]);
 			        				settings.setTempNightConfig(nsensor, nbutton, newTempNightHotKeys[nsensor][nbutton]);
 			        				oldTempNightHotKeys[nsensor][nbutton] = newTempNightHotKeys[nsensor][nbutton];
-			        				oldTempDayHotKeys[nsensor][nbutton] = newTempDayHotKeys[nsensor][nbutton];;
+			        				oldTempDayHotKeys[nsensor][nbutton] = newTempDayHotKeys[nsensor][nbutton];
+			        				Log.d("save paramters", "nsensor = "+Integer.toString(nsensor) +"; " +
+			        						"nbutton = "+Integer.toString(nbutton) +"; "+
+			        						"day temp = "+Integer.toString(oldTempDayHotKeys[nsensor][nbutton]) +"; ");
 			        			}
 			        		}
 			        	}
@@ -698,6 +707,7 @@ public class SettingsParamActivity extends BaseActivity {
 				        	  public void run() {
 				        		  isRele[nrele] = false;
 				        		  checkBoxRele[nrele].setChecked(isRele[nrele]);
+				        		  settings.setIsRele(nrele, isRele[nrele]);
 				        	  }
 				        	}, 60000);
 				        	
@@ -767,6 +777,7 @@ public class SettingsParamActivity extends BaseActivity {
 			        	  public void run() {
 			        		  isRele[nrele] = false;
 			        		  checkBoxRele[nrele].setChecked(isRele[nrele]);
+			        		  settings.setIsRele(nrele, isRele[nrele]);
 			        	  }
 			        	}, 60000);
 			        	

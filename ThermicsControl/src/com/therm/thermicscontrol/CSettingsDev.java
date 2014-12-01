@@ -352,36 +352,7 @@ public class CSettingsDev {
 		//номер термодатчика
 		if( (! ( ntmpsensor == oldntmpsensor ) ) || anyway)
 		{
-			
-			String command;
-			switch(ntmpsensor)
-			{
-				case 0:
-					command="000000";
-				break;
-				case 1:
-					command="100000";
-				break;
-				case 2:
-					command="010000";
-				break;
-				case 3:
-					command="001000";
-				break;
-				case 4:
-					command="000100";
-				break;
-				case 5:
-					command="000010";
-				break;
-				case 6:
-					command="000001";
-				break;
-				default:
-					command="000000";
-				break;
-			}
-			SMSCommand smsCommand = new SMSCommand(getCommandDevSettings(numberSMSFunction.NTmpSensorSMS.ncommand(), command, password), 0);
+			SMSCommand smsCommand = new SMSCommand(getCommandDevSettings(numberSMSFunction.NTmpSensorSMS.ncommand(), Integer.toString(ntmpsensor), password), 0);
 			sms_to_send.add(smsCommand);
 			//settings_.setNumberTmpSensorSMS(ntmpsensor);
 		}
@@ -390,8 +361,6 @@ public class CSettingsDev {
 			//верхн€€ граница
 			if( (! ( notSMS.lower_bound == lowerBound ) ) || anyway)
 			{
-	
-				
 				SMSCommand smsCommand = new SMSCommand(String.format(Locale.US,"Temp.L%d=%d %s", ntmpsensor,lowerBound,password), 1);
 				sms_to_send.add(smsCommand);
 			}

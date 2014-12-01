@@ -16,6 +16,6 @@
     <dimen name="width_button">300dp</dimen>
     <dimen name="height_button">50dp</dimen>
     <dimen name="size_button_text">8pt</dimen>
-    <dimen name="size_title_text">12pt</dimen>
+    <dimen name="size_title_text">10pt</dimen>
     <dimen name="size_button_text_small">7pt</dimen>
 </resources>

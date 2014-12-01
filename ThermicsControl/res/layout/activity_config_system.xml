@@ -8,18 +8,37 @@
     android:layout_alignParentTop="true"
     android:orientation="vertical"
     tools:context=".ConfigSystemActivity" >
-
-    <TextView
-        android:id="@+id/titleConfigSytem"
-        android:text="@string/title_config_system"
+    
+    <LinearLayout
+        android:id="@+id/layoutTitle"
+        android:orientation="vertical"
         android:background="@color/button_blue"
-        style="@style/TextViewTitleActivity" />
+        style="@style/TextViewTitleActivity">
+	    <TextView
+	        android:id="@+id/titleSettingsParam"
+	        android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_config_system"
+            android:textColor="@color/title_white_color"
+            android:textSize="@dimen/size_button_text"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp" />
+	    <TextView
+            android:id="@+id/textNameSystem"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/company_name"
+            android:textColor="@color/title_white_color"
+            android:textSize="@dimen/size_button_text_small"
+            android:textStyle="bold" />
+	</LinearLayout>
     
 	<ScrollView
 	    android:id="@+id/ScrollViewMainSettings"
 	    android:layout_width="match_parent"
 	    android:layout_height="fill_parent"
-	    android:layout_below="@+id/titleConfigSytem"
+	    android:layout_below="@+id/layoutTitle"
 	    android:layout_above="@+id/layoutApplyCancelConfigSystem"
 	    android:layout_alignParentLeft="true"
 	    android:layout_alignParentRight="true"

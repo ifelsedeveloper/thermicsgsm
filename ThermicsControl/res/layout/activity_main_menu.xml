@@ -24,20 +24,29 @@
         	android:background="@drawable/menu"
         	android:onClick="onClickViewMenuGlobalx"
         	android:layout_alignParentLeft="true"></Button>
-        
-        <TextView
-            android:id="@+id/textViewTitleCompany"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+        <LinearLayout 
+            android:orientation="vertical"
             android:layout_toLeftOf="@+id/buttonViewInformationHelp"
-            android:layout_toRightOf="@+id/buttonViewMenuGlobal"
-            android:gravity="center_horizontal"
-            android:text="@string/company_name"
-            android:textColor="@color/title_white_color"
-            android:textSize="@dimen/size_title_text"
-            android:textStyle="bold" />
-
+	        android:layout_toRightOf="@+id/buttonViewMenuGlobal"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content">
+	        <TextView
+	            android:id="@+id/textViewTitleCompany"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/company_name"
+	            android:textColor="@color/title_white_color"
+	            android:textSize="@dimen/size_title_text"
+	            android:textStyle="bold" />
+	        <TextView
+	            android:id="@+id/textNameSystem"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/company_name"
+	            android:textColor="@color/title_white_color"
+	            android:textSize="@dimen/size_button_text_small"
+	            android:textStyle="bold" />
+		</LinearLayout>
         <Button
             android:id="@+id/buttonViewInformationHelp"
         	android:layout_width="50dp"

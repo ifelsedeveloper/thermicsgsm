@@ -52,9 +52,25 @@ public class DBSMS{
   }
   
   // получить все данные из таблицы DB_TABLE
-  public Cursor getAllData() {
-    return mDB.query(DB_TABLE, null, null, null, null, null, null);
-    
+  public Cursor getAllData(String filter1, String filter2) {
+	  if(filter1.length() == 0)
+		  return mDB.query(DB_TABLE, null, null, null, null, null, null);
+	  else {
+		  if(filter2.length() == 0)
+		  {
+			  return mDB.query(true, DB_TABLE, new String[] { COLUMN_ID, COLUMN_DATE,
+			    		COLUMN_TXT }, COLUMN_TXT + " LIKE ?",
+			            new String[] {"%"+ filter1+ "%" }, null, null, null,
+			            null); 
+		  }
+		  else {
+			  return mDB.query(true, DB_TABLE, new String[] { COLUMN_ID, COLUMN_DATE,
+			    		COLUMN_TXT }, COLUMN_TXT + " LIKE ?" +" OR " + COLUMN_TXT + " LIKE ?",
+			            new String[] {"%"+ filter1+ "%", "%"+ filter2+ "%"  }, null, null, null,
+			            null);
+		  }
+		  
+	  }
   }
   
   // добавить запись в DB_TABLE

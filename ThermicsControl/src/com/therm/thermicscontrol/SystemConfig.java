@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class SystemConfig {
 
@@ -18,12 +20,13 @@ public class SystemConfig {
 	private String _tableAutorequest;
 
 	public SystemConfig(long idSystem) {
+		Log.d("event_tag_settings_param", "id system = " + Long.toString(idSystem));
 		if(idSystem == 1) {
 			_settings = ContextApplication.getAppContext().getSharedPreferences(
-					BaseActivity.MYSYSTEM_PREFERENCES, Context.MODE_PRIVATE);
+					BaseActivity.MYSYSTEM_PREFERENCES, Context.MODE_MULTI_PROCESS);
 		} else {
 			_settings = ContextApplication.getAppContext().getSharedPreferences(
-					Long.toString(idSystem), Context.MODE_PRIVATE);
+					Long.toString(idSystem), Context.MODE_MULTI_PROCESS);
 		}
 	}
 
@@ -126,10 +129,7 @@ public class SystemConfig {
 	}
 
 	public void setTmpAir(int tmpWater) {
-		SharedPreferences.Editor prefEditor = _settings.edit();
-		prefEditor.putInt(BaseActivity.prefTmpAir, tmpWater);
-		prefEditor.commit();
-		return;
+		_settings.edit().putInt(BaseActivity.prefTmpAir, tmpWater).commit();
 	}
 
 	public static int numReles = 3;
@@ -141,13 +141,13 @@ public class SystemConfig {
 					result);
 		else
 			setIsRele(nrele, result);
+		Log.d("event_tag_settings_param","get " + Long.toString(_id)+" " + getName()+" | "+ Integer.toString(nrele)+" | "+ Boolean.toString(result));
 		return result;
 	}
 
 	public void setIsRele(int nrele, boolean isRele) {
-		SharedPreferences.Editor prefEditor = _settings.edit();
-		prefEditor.putBoolean(BaseActivity.prefIsRele[nrele], isRele);
-		prefEditor.commit();
+		Log.d("event_tag_settings_param", "set " + Long.toString(_id)+" " + getName()+" | "+ Integer.toString(nrele)+" | "+ Boolean.toString(isRele));
+		_settings.edit().putBoolean(BaseActivity.prefIsRele[nrele], isRele).commit();
 	}
 
 	public boolean getIsUpr() {
@@ -163,6 +163,7 @@ public class SystemConfig {
 		SharedPreferences.Editor prefEditor = _settings.edit();
 		prefEditor.putBoolean(BaseActivity.prefIsUpr, isUpr);
 		prefEditor.commit();
+		//prefEditor.apply();
 		return;
 	}
 
@@ -180,6 +181,7 @@ public class SystemConfig {
 		SharedPreferences.Editor prefEditor = _settings.edit();
 		prefEditor.putBoolean(BaseActivity.prefIsMicrophone, isMicrophone);
 		prefEditor.commit();
+		//prefEditor.apply();
 		return;
 	}
 
@@ -338,6 +340,7 @@ public class SystemConfig {
 			SharedPreferences.Editor prefEditor = _settings.edit();
 			prefEditor.putInt(BaseActivity.prefTEMP_NIGHT_CONFIG[pos], temp);
 			prefEditor.commit();
+			//prefEditor.apply();
 		}
 		return;
 	}
@@ -357,13 +360,23 @@ public class SystemConfig {
 
 	public void setTempDayConfig(int nsensor, int nbutton, int temp) {
 		int pos = getPosConfigButton(nsensor, nbutton);
+		if(pos == 0) Log.d("save parameters 2", "setTempDayConfig 0");
 		if (pos > -1) {
 			SharedPreferences.Editor prefEditor = _settings.edit();
 			prefEditor.putInt(BaseActivity.prefTEMP_DAY_CONFIG[pos], temp);
 			prefEditor.commit();
+			//prefEditor.apply();
 		}
 		return;
 	}
+	
+	public void setActiveReleTemp(int dayTemp, int nightTemp){
+		int nButton = getNTempConfig();
+		int nSensor = getNumberSensorReleWarm();
+		setTempDayConfig(nSensor,nButton,dayTemp);
+		setTempNightConfig(nSensor,nButton,nightTemp);
+	}
+	
 
 	public int getNTempConfig() {
 		int result = 1;
@@ -388,11 +401,12 @@ public class SystemConfig {
 		SharedPreferences.Editor prefEditor = _settings.edit();
 		prefEditor.putInt(BaseActivity.NTEMP_CONFIG, nconfig_temp);
 		prefEditor.commit();
+		//prefEditor.apply();
 		return;
 	}
 
 	public int getNumberSensorReleWarm() {
-		int result = 1;
+		int result = 0;
 		if (_settings.contains(BaseActivity.prefNumberSensorReleWarm) == true)
 			result = _settings.getInt(BaseActivity.prefNumberSensorReleWarm,
 					result);
@@ -406,6 +420,7 @@ public class SystemConfig {
 		prefEditor.putInt(BaseActivity.prefNumberSensorReleWarm,
 				numberSensorReleWarm);
 		prefEditor.commit();
+		//prefEditor.apply();
 		return;
 	}
 
@@ -422,6 +437,7 @@ public class SystemConfig {
 		SharedPreferences.Editor prefEditor = _settings.edit();
 		prefEditor.putInt(BaseActivity.prefNumberReleWarm, numberReleWarm);
 		prefEditor.commit();
+		//prefEditor.apply();
 		return;
 	}
 
@@ -436,8 +452,7 @@ public class SystemConfig {
 
 	public void setTextSMSAlarm(String TextSMSAlarm) {
 		SharedPreferences.Editor prefEditor = _settings.edit();
-		prefEditor.putString(BaseActivity.prefTextSMSAlarm, TextSMSAlarm);
-		prefEditor.commit();
+		prefEditor.putString(BaseActivity.prefTextSMSAlarm, TextSMSAlarm).commit();
 		return;
 	}
 
@@ -453,8 +468,7 @@ public class SystemConfig {
 	public void setLastSystemReport(String LastSystemReport) {
 		SharedPreferences.Editor prefEditor = _settings.edit();
 		prefEditor.putString(BaseActivity.prefLastSystemReport,
-				LastSystemReport);
-		prefEditor.commit();
+				LastSystemReport).commit();
 		return;
 	}
 

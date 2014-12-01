@@ -49,7 +49,8 @@ public class MainMenuActivity extends BaseActivity   {
 	BroadcastReceiver brSystemSelectionChanged;
 	public static int current_local_num_not = 0;
 	private SlidingMenu slidingMenu ;
-
+	TextView textNameSystem;
+	
 	ListView listViewSystems;
 	SystemConfigDataSource systemConfig_DB;
 	SystemConfigSympleAdapter systemConfigSCAdapter;
@@ -66,9 +67,23 @@ public class MainMenuActivity extends BaseActivity   {
 			//this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 			setContentView(R.layout.activity_main_menu);
 
+			// configure the SlidingMenu
+			slidingMenu = new SlidingMenu(this);
+			slidingMenu.setMode(SlidingMenu.LEFT);
+			slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+			slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
+			slidingMenu.setShadowDrawable(R.drawable.shadow);
+			slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+			slidingMenu.setFadeDegree(0.35f);
+			slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+			slidingMenu.setMenu(R.layout.menu);
+			slidingMenu.setSlidingEnabled(true);
+
 			//create for work with shared preference
 			settings=SystemConfigDataSource.getActiveSystem();
 			settingsDev=new CSettingsDev(settings,getApplicationContext());
+			textNameSystem = (TextView) findViewById(R.id.textNameSystem);
+			
 			setTitleLastReport(settings.getLastSystemReport(),settings.getLastSystemReportTime());
 			// создаем BroadcastReceiver
 			br = new BroadcastReceiver() {
@@ -132,19 +147,6 @@ public class MainMenuActivity extends BaseActivity   {
 			//load parameters for system
 			loadConfigParam();  
 
-
-			// configure the SlidingMenu
-			slidingMenu = new SlidingMenu(this);
-			slidingMenu.setMode(SlidingMenu.LEFT);
-			slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-			slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
-			slidingMenu.setShadowDrawable(R.drawable.shadow);
-			slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-			slidingMenu.setFadeDegree(0.35f);
-			slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-			slidingMenu.setMenu(R.layout.menu);
-			slidingMenu.setSlidingEnabled(true);
-
 			listViewSystems = (ListView) findViewById(R.id.listSystems);
 			listViewSystems.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
@@ -190,8 +192,21 @@ public class MainMenuActivity extends BaseActivity   {
 
 	public void onClickViewMenuGlobalx(View v)
 	{
-		Log.d(TAG_events,"contact information");
-		slidingMenu.showMenu(true);
+		if(slidingMenu != null){
+			Log.d(TAG_events,"contact information");
+			slidingMenu.showMenu(true);
+		} else {
+			slidingMenu = new SlidingMenu(this);
+			slidingMenu.setMode(SlidingMenu.LEFT);
+			slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+			slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
+			slidingMenu.setShadowDrawable(R.drawable.shadow);
+			slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+			slidingMenu.setFadeDegree(0.35f);
+			slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+			slidingMenu.setMenu(R.layout.menu);
+			slidingMenu.setSlidingEnabled(true);
+		}
 	}
 
 	public void onClickCreateSystem(View v)
@@ -397,6 +412,7 @@ public class MainMenuActivity extends BaseActivity   {
 	public void loadConfigParam()
 	{
 		Log.i(TAG_events,"guardian set");
+		textNameSystem.setText( settings.getName() );
 		//change title message reader
 		current_local_num_not = SystemConfig.getNumNotification();
 		setTitleMessageButton(current_local_num_not);

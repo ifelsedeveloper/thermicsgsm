@@ -10,19 +10,37 @@
     android:orientation="vertical"
     tools:context=".SettingsParamActivity" >
 
-    <TextView
-        android:id="@+id/titleSettingsParam"
-        style="@style/TextViewTitleActivity"
+    <LinearLayout
+        android:id="@+id/layoutTitle"
+        android:orientation="vertical"
         android:background="@drawable/nav"
-        android:text="@string/settings_parapm" />
-
+        style="@style/TextViewTitleActivity">
+	    <TextView
+	        android:id="@+id/titleSettingsParam"
+	        android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_parapm"
+            android:textColor="@color/title_white_color"
+            android:textSize="@dimen/size_button_text"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp" />
+	    <TextView
+            android:id="@+id/textNameSystem"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/company_name"
+            android:textColor="@color/title_white_color"
+            android:textSize="@dimen/size_button_text_small"
+            android:textStyle="bold" />
+	</LinearLayout>
     <ScrollView
         android:id="@+id/ScrollViewMainSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/titleSettingsParam" >
+        android:layout_below="@+id/layoutTitle" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -231,7 +249,7 @@
                         android:longClickable="true"
                         android:onClick="onClickButtonSwitch1"
                         android:text="@string/default_value_hotkey"
-                        android:textSize="20sp" />
+                        android:textSize="17sp" />
 
                     <Button
                         android:id="@+id/buttonSwitch2"
@@ -243,7 +261,7 @@
                         android:longClickable="true"
                         android:onClick="onClickButtonSwitch2"
                         android:text="@string/default_value_hotkey"
-                        android:textSize="20sp" />
+                        android:textSize="17sp" />
 
                     <Button
                         android:id="@+id/buttonSwitch3"
@@ -255,7 +273,7 @@
                         android:longClickable="true"
                         android:onClick="onClickButtonSwitch3"
                         android:text="@string/default_value_hotkey"
-                        android:textSize="20sp" />
+                        android:textSize="17sp" />
 
                     <Button
                         android:id="@+id/buttonSwitch4"
@@ -268,7 +286,7 @@
                         android:longClickable="true"
                         android:onClick="onClickButtonSwitch4"
                         android:text="@string/default_value_hotkey"
-                        android:textSize="20sp" />
+                        android:textSize="17sp" />
                 </LinearLayout>
 
                 <LinearLayout

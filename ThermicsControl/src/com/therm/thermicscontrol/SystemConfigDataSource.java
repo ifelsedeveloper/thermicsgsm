@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class SystemConfigDataSource {
 	public static final String SYSTEM_SELECTION_CHANGED = "SYTEM_SELECTION_CHANGED";
@@ -95,6 +96,7 @@ public class SystemConfigDataSource {
 	}
 
 	public SystemConfig createSystemConfig(String name) {
+		_allConfigs = null;
 		ContentValues values = new ContentValues();
 		values.put(SystemConfigSQLiteHelper.COLUMN_NAME, name);
 		long insertId = database.insert(SystemConfigSQLiteHelper.TABLE_SYSTEMS,
@@ -109,6 +111,7 @@ public class SystemConfigDataSource {
 	}
 
 	public void deleteSystemConfig(SystemConfig systemConfig) {
+		_allConfigs = null;
 		long id = systemConfig.getId();
 		System.out.println("Comment deleted with id: " + id);
 		// cancel all timers and delete their tables
@@ -118,32 +121,38 @@ public class SystemConfigDataSource {
 	}
 
 	public void deleteSystemConfig(int id_system) {
+		_allConfigs = null;
 		database.delete(SystemConfigSQLiteHelper.TABLE_SYSTEMS,
 				SystemConfigSQLiteHelper.COLUMN_ID + " = " + id_system, null);
 	}
 
 	public void updateSystemConfigName(int id_system, String name) {
+		_allConfigs = null;
 		ContentValues cv = new ContentValues();
 		cv.put(SystemConfigSQLiteHelper.COLUMN_NAME, name);
 		database.update(SystemConfigSQLiteHelper.TABLE_SYSTEMS, cv, SystemConfigSQLiteHelper.COLUMN_ID + " = " + id_system, null);
 	}
 
 
+	private volatile static List<SystemConfig> _allConfigs = null;
 	public List<SystemConfig> getAllSystemConfig() {
-		List<SystemConfig> systems = new ArrayList<SystemConfig>();
-
-		Cursor cursor = database.query(SystemConfigSQLiteHelper.TABLE_SYSTEMS,
-				allColumns, null, null, null, null, null);
-
-		cursor.moveToFirst();
-		while (!cursor.isAfterLast()) {
-			SystemConfig comment = cursorToSystemConfig(cursor);
-			systems.add(comment);
-			cursor.moveToNext();
+		if(_allConfigs == null){
+			List<SystemConfig> systems = new ArrayList<SystemConfig>();
+	
+			Cursor cursor = database.query(SystemConfigSQLiteHelper.TABLE_SYSTEMS,
+					allColumns, null, null, null, null, null);
+	
+			cursor.moveToFirst();
+			while (!cursor.isAfterLast()) {
+				SystemConfig comment = cursorToSystemConfig(cursor);
+				systems.add(comment);
+				cursor.moveToNext();
+			}
+			// make sure to close the cursor
+			cursor.close();
+			_allConfigs = systems;
 		}
-		// make sure to close the cursor
-		cursor.close();
-		return systems;
+		return _allConfigs;
 	}
 
 	public SystemConfig getSystemConfig(long id)
@@ -155,14 +164,23 @@ public class SystemConfigDataSource {
 //		cursor.moveToFirst();
 //		SystemConfig res = cursorToSystemConfig(cursor);
 //		close();
-		Cursor cursor = database.query(SystemConfigSQLiteHelper.TABLE_SYSTEMS,
-				allColumns, null, null, null, null, null);
-
-		cursor.moveToFirst();
-		while (!cursor.isAfterLast()) {
-			SystemConfig config = cursorToSystemConfig(cursor);
-			if(config.getId() == id) return config;
-			cursor.moveToNext();
+//		Cursor cursor = database.query(SystemConfigSQLiteHelper.TABLE_SYSTEMS,
+//				allColumns, null, null, null, null, null);
+//
+//		cursor.moveToFirst();
+//		while (!cursor.isAfterLast()) {
+//			SystemConfig config = cursorToSystemConfig(cursor);
+//			if(config.getId() == id) {
+//				Log.d("event_tag_settings_param", "System founded "+ Long.toString(id));
+//				return config;
+//			}
+//			cursor.moveToNext();
+//		}
+		for (SystemConfig config : getAllSystemConfig()) {
+			if(config.getId() == id) {
+				Log.d("event_tag_settings_param", "System founded "+ Long.toString(id));
+				return config;
+			}
 		}
 		return null;
 	}
@@ -170,22 +188,30 @@ public class SystemConfigDataSource {
 	public SystemConfig getSystemConfig(String phoneNumber) {
 		SystemConfig resSystemConfig = null;
 
-		Cursor cursor = database.query(SystemConfigSQLiteHelper.TABLE_SYSTEMS,
-				allColumns, null, null, null, null, null);
+//		Cursor cursor = database.query(SystemConfigSQLiteHelper.TABLE_SYSTEMS,
+//				allColumns, null, null, null, null, null);
+//
+//		cursor.moveToFirst();
+//		while (!cursor.isAfterLast()) {
+//			SystemConfig systemConfig = cursorToSystemConfig(cursor);
+//			if (compareSIMNumbers(phoneNumber,systemConfig.getNumberSIM())
+//					|| compareSIMNumbers(phoneNumber,systemConfig.getNumberSIM2())) {
+//				resSystemConfig = systemConfig;
+//				break;
+//			}
+//			cursor.moveToNext();
+//		}
+//		// make sure to close the cursor
+//		cursor.close();
 
-		cursor.moveToFirst();
-		while (!cursor.isAfterLast()) {
-			SystemConfig systemConfig = cursorToSystemConfig(cursor);
+		for (SystemConfig systemConfig : getAllSystemConfig()) {
 			if (compareSIMNumbers(phoneNumber,systemConfig.getNumberSIM())
 					|| compareSIMNumbers(phoneNumber,systemConfig.getNumberSIM2())) {
 				resSystemConfig = systemConfig;
 				break;
 			}
-			cursor.moveToNext();
 		}
-		// make sure to close the cursor
-		cursor.close();
-
+		
 		return resSystemConfig;
 	}
 

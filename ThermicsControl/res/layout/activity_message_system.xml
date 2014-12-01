@@ -14,10 +14,10 @@
         android:background="@drawable/nav"
         android:layout_width="fill_parent"
         style="@style/TextViewTitleActivity">
-    <TextView
-        android:id="@+id/titleMessageSystem"
+    <Spinner
+        android:id="@+id/spinnerFilterSystem"
         android:text="@string/title_sytem_messages"
-        style="@style/TextViewTitleActivity"
+        style="@style/SettingsElement" 
         android:layout_width="wrap_content"
          />
 
