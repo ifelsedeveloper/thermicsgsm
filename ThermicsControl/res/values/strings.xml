@@ -13,11 +13,11 @@
 
     <!-- Главное меню -->
     <string name="messages">Сообщения</string>
+    <string name="message">Сообщение</string>
     <string name="config">Управление</string>
     <string name="report">Отчет</string>
     <string name="guardian">Охрана</string>
     <string name="sim1">SIM 1</string>
-    <string name="microphone">Микрофон</string>
     <string name="settings">Настройки</string>
     <string name="balance">Баланс</string>
     <string name="company_name">Thermics GSM</string>
@@ -32,7 +32,6 @@
     <string name="enable_timer">Включить таймер</string>
     <string name="start_work_timer">Начало работы</string>
     <string name="end_work_timer">Окончание работы</string>
-    <string name="function_rele">Назначение реле</string>
     <string name="title_activity_timers_list">TimersListActivity</string>
 
     <string name="add_timer">Добавить таймер</string>
@@ -40,4 +39,13 @@
     
     <string name="settings_param_regulator">Установка значений регулятора</string>
     <string name="default_value_hotkey">+25\n-10</string>
+    <string name="objects">Объекты</string>
+    <string name="information">Информация</string>
+    
+    <string name="title_button">Title button</string>
+	<string name="content_description_image">content description</string>
+	
+	<string name="Text1">Text 1</string>
+	<string name="Title1">Title 1</string>
+	<string name="value">23</string>
 </resources>

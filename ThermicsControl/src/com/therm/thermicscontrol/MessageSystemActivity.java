@@ -6,9 +6,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 import com.therm.thermicscontrol.R;
@@ -20,9 +22,13 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,94 +40,140 @@ import android.content.IntentFilter;
 import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 
-
 @SuppressLint({ "NewApi", "SimpleDateFormat" })
-public class MessageSystemActivity extends BaseActivity {
+public class MessageSystemActivity extends BaseActivity implements OnItemSelectedListener {
 	
 	ListView lvData;
 	DBSMS db;
 	SimpleCursorAdapter scAdapter;
 	Cursor cursor;
 	int count_messages = 0;
-	
+	int SelectedIndexOfSystem = 0;
+	List<String> listSystems;
+	List<SystemConfig> systems;
 	BroadcastReceiver br;
+	String filterValue = "";
+	ArrayAdapter<String> dataAdapterSystems;
 	
 	public static final String TAG_events="event_tag_message_sytem";
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		//Remove title bar
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-		//Remove notification bar
-		//this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.activity_message_system);
-		
-		//create for work with shared preference
-		Log.i(TAG_events,"start activity message sytem");
-		
-		//database
-		
-		 // открываем подключение к БД
-	    db = new DBSMS(this);
-	    db.open();
-
-	    // получаем курсор
-	    cursor = db.getAllData();
-	    startManagingCursor(cursor);
+		try{
+			super.onCreate(savedInstanceState);
+			//Remove title bar
+			this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+	
+			//Remove notification bar
+			//this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+			setContentView(R.layout.activity_message_system);
+			
+			//create for work with shared preference
+			Log.i(TAG_events,"start activity message sytem");
+			
+			//database
+			
+			 // открываем подключение к БД
+		    db = new DBSMS(this);
+		    db.open();
+		    if(cursor!= null)
+		    	stopManagingCursor(cursor);
+		    // получаем курсор
+		    cursor = db.getAllData("","");
+		    startManagingCursor(cursor);
+		    
+		    // формируем столбцы сопоставления
+		    String[] from = new String[] { DBSMS.COLUMN_DATE, DBSMS.COLUMN_TXT };
+		    int[] to = new int[] { R.id.smsDate, R.id.smsMessage };
+	
+		    // создааем адаптер и настраиваем список
+		    scAdapter = new SimpleCursorAdapter(this, R.layout.sms_row, cursor, from, to);
+		    lvData = (ListView) findViewById(R.id.listViewSMSessages);
+		    lvData.setAdapter(scAdapter);
+			
+			/////
+		 // создаем BroadcastReceiver
+		    br = new BroadcastReceiver() {
+		      // действия при получении сообщений
+		      public void onReceive(Context context, Intent intent) {
+		        String sms = intent.getStringExtra(PARAM_SMS);
+		        String time = intent.getStringExtra(PARAM_SMSTIME);
+		        Log.d(TAG_events, "onReceive sms: "+sms+" ;time = "+time);
+		        // обновляем курсор
+		        updateListView();
+		        
+		      }
+		    };
+		    // создаем фильтр для BroadcastReceiver
+		    IntentFilter intFilt = new IntentFilter(BROADCAST_ACTION_RCVSMS);
+		    // регистрируем (включаем) BroadcastReceiver
+		    registerReceiver(br, intFilt);
+		    count_messages = cursor.getCount();
+		    Spinner filterSpinner = (Spinner) findViewById(R.id.spinnerFilterSystem);
+		    listSystems = new ArrayList<String>();
+		    listSystems.add("Все сообщения");
+			systems = SystemConfigDataSource.sharedInstanceSystemConfigDataSource().getAllSystemConfig();
+			for(SystemConfig system : systems)
+			{
+				Cursor systemCursor = db.getAllData(system.getNumberSIM(),system.getNumberSIM());
+				listSystems.add(system.getName()+" "+ String.format("(%d)", systemCursor.getCount()));
+			}
+			dataAdapterSystems = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, listSystems);
+			filterSpinner.setAdapter(dataAdapterSystems);
+			
+			dataAdapterSystems.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	
+		    
+		    //textViewTitle.setText(String.format("Сообщения от системы (%d)", count_messages));
+		    
+		    lvData.setSelection(lvData.getCount());
+		    
+		    SystemConfig settings=SystemConfigDataSource.getActiveSystem();
+		    SystemConfig.clearNumNotification();
+		    settings.setNumNotificationSaved(0);
+		    NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		    nm.cancelAll();
+		    filterSpinner.setOnItemSelectedListener(this);
+		    setSystemMessageCount();
+		}
+		catch(Exception e)
+		{
+			Toast.makeText(getApplicationContext(),Log.getStackTraceString(e) , Toast.LENGTH_LONG).show();
+			Log.d("Error", Log.getStackTraceString(e) );
+		}
 	    
-	    // формируем столбцы сопоставления
-	    String[] from = new String[] { DBSMS.COLUMN_DATE, DBSMS.COLUMN_TXT };
-	    int[] to = new int[] { R.id.smsDate, R.id.smsMessage };
-
-	    // создааем адаптер и настраиваем список
-	    scAdapter = new SimpleCursorAdapter(this, R.layout.sms_row, cursor, from, to);
-	    lvData = (ListView) findViewById(R.id.listViewSMSessages);
-	    lvData.setAdapter(scAdapter);
-		
-		/////
-	 // создаем BroadcastReceiver
-	    br = new BroadcastReceiver() {
-	      // действия при получении сообщений
-	      public void onReceive(Context context, Intent intent) {
-	        String sms = intent.getStringExtra(PARAM_SMS);
-	        String time = intent.getStringExtra(PARAM_SMSTIME);
-	        Log.d(TAG_events, "onReceive sms: "+sms+" ;time = "+time);
-	        // обновляем курсор
-	        updateListView();
-	        
-	      }
-	    };
-	    // создаем фильтр для BroadcastReceiver
-	    IntentFilter intFilt = new IntentFilter(BROADCAST_ACTION_RCVSMS);
-	    // регистрируем (включаем) BroadcastReceiver
-	    registerReceiver(br, intFilt);
-	    count_messages = cursor.getCount();
-	    TextView textViewTitle = (TextView) findViewById(R.id.titleMessageSystem);
-	    textViewTitle.setText(String.format("Сообщения от системы (%d)", count_messages));
-	    
-	    lvData.setSelection(lvData.getCount());
-	    
-	    Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-	        @Override
-	        public void uncaughtException(Thread paramThread, Throwable paramThrowable) {
-	            Log.e("Alert","Lets See if it Works Message system !!!");
-	            Toast.makeText(getApplicationContext(), "Error message system", Toast.LENGTH_LONG).show();
-	        }
-	    });
-	    
-	    CSettingsPref settings=new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_PRIVATE));
-	    CSettingsPref.clearNumNotification();
-	    settings.setNumNotificationSaved(0);
-	    NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-	    nm.cancelAll();
 	}
 	
+	public void onItemSelected(AdapterView<?> parent, View view, 
+            int pos, long id) {
+		//((TextView)parent.getChildAt(0)).setTextColor(Color.rgb(249, 249, 249));
+		//((TextView)parent.getChildAt(0)).setBackgroundColor(Color.rgb(0, 249, 0));
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+		stopManagingCursor(cursor);
+		if(pos == 0){
+			cursor = db.getAllData("", "");
+		} else {
+			//filter
+			SelectedIndexOfSystem = pos;
+			SystemConfig selectedSystem = systems.get(pos-1);
+			cursor = db.getAllData(selectedSystem.getNumberSIM(), selectedSystem.getNumberSIM2());
+		}
+		SelectedIndexOfSystem = pos;
+		startManagingCursor(cursor);
+		scAdapter.changeCursor(cursor);
+		setSystemMessageCount();
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    }
 	
 
 	@Override
@@ -134,18 +186,26 @@ public class MessageSystemActivity extends BaseActivity {
 	protected void onDestroy() {
 	    super.onDestroy();
 	    // закрываем подключение при выходе
-	    db.close();
 	    unregisterReceiver(br);
+	    db.close();
+	    
 	  }
 	
 	public void updateListView()
 	{
-		cursor.requery();
+		if(!cursor.isClosed())
+			cursor.requery();
+		setSystemMessageCount();
+	}
+	
+	private void setSystemMessageCount()
+	{
 		count_messages = cursor.getCount();
-		TextView textViewTitle = (TextView) findViewById(R.id.titleMessageSystem);
-		textViewTitle.setText(String.format("Сообщения от системы (%d)", count_messages));
+		if(SelectedIndexOfSystem == 0)
+			listSystems.set(SelectedIndexOfSystem, String.format("Все сообщения (%d)", count_messages ));
+		else
+			listSystems.set(SelectedIndexOfSystem, String.format(systems.get(SelectedIndexOfSystem-1).getName() + " (%d)", count_messages ));
 		lvData.smoothScrollToPosition(lvData.getCount());
-		
 	}
 	
 	public void onClickClearButton(View v)
@@ -159,10 +219,9 @@ public class MessageSystemActivity extends BaseActivity {
 			b.setPositiveButton("Да", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		        	db.clearBase();
-		    		cursor.requery();
-		    		count_messages = cursor.getCount();
-		    		TextView textViewTitle = (TextView) findViewById(R.id.titleMessageSystem);
-		    		textViewTitle.setText(String.format("Сообщения от системы (%d)", count_messages));
+		        	if(!cursor.isClosed())
+		        		cursor.requery();
+		    		setSystemMessageCount();
 		    		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 		        }
 		      });
@@ -209,7 +268,7 @@ public class MessageSystemActivity extends BaseActivity {
             Writer myOutWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(myFile), "UTF8"));
             DBSMS ldb = new DBSMS(this);
             ldb.open();
-            Cursor lcursor = ldb.getAllData();
+            Cursor lcursor = ldb.getAllData("","");
             String message;
             String date;
             int nmessage = 1;
@@ -236,10 +295,12 @@ public class MessageSystemActivity extends BaseActivity {
 	
 	@Override  
 	public void onBackPressed() {
-	      
+		//stopManagingCursor(cursor);
+		//unregisterReceiver(br);
+	    //db.close();
 	    //clear count notifications
-	    CSettingsPref settings=new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_PRIVATE));
-	    CSettingsPref.clearNumNotification();
+	    SystemConfig settings=SystemConfigDataSource.getActiveSystem();
+	    SystemConfig.clearNumNotification();
 	    NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	    
 	    nm.cancelAll();

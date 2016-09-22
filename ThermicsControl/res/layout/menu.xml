@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_color_system"
+    android:orientation="vertical"
+    tools:context=".MainMenuActivity" >
+<!-- 
+    <Button
+        android:id="@+id/buttonAddSystem"
+        style="@style/TextViewTitleActivity"
+        android:background="@drawable/system_config_row_bg"
+        android:onClick="onClickCreateSystem"
+        android:text="@string/objects"
+        android:gravity="center" />
+ -->
+    <Button
+        style="@style/TextViewTitleActivity"
+        android:background="@drawable/system_config_row_bg"
+        android:drawableLeft="@drawable/plus_white"
+        android:id="@+id/ButtonTest"
+        android:onClick="onClickCreateSystem"
+        android:paddingLeft="20sp"
+        android:drawablePadding="-55sp"
+        android:gravity="center"
+        android:text="@string/objects"></Button>
+    
+    <View
+        style="@style/ViewDeviderHorizontal"
+        android:background="@color/devider_left_menu" />
+
+    <ListView
+        android:id="@+id/listSystems"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:choiceMode="singleChoice"
+        android:divider="@color/devider_left_menu"
+        android:dividerHeight="1dp"
+        tools:class="com.therm.thermicscontrol.SystemConfigListView" />
+
+</LinearLayout>

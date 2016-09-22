@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.therm.thermicscontrol"
     android:theme="@style/AppBaseTheme"
-    android:versionCode="25"
-    android:versionName="2.4.3" >
+    android:versionCode="32"
+    android:versionName="2.4.9" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="9"
         android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.INTERNET" >
@@ -31,16 +31,24 @@
     <!-- Required permission to check licensing. -->
     <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
 
+    <supports-screens android:resizeable="true"
+                  android:smallScreens="true"
+                  android:normalScreens="true"
+                  android:largeScreens="true"
+                  android:xlargeScreens="true"
+                  android:anyDensity="true"/>
+    
     <application
+        android:name="com.therm.thermicscontrol.ContextApplication"
         android:allowBackup="true"
-        android:debuggable="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.therm.thermicscontrol.MainMenuActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop" 
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -121,18 +129,16 @@
         </service>
         
     	<service
-            android:name="com.therm.thermicscontrol.TimerActionService"
-            android:process=":timeractionserviceprocess" >
+            android:name="com.therm.thermicscontrol.TimerActionService">
         </service>
     
         <service
             android:name="com.therm.thermicscontrol.SmsService"
-            android:process=":smsserviceprocess" >
+             >
         </service>
 
         <receiver
-            android:name="com.therm.thermicscontrol.SMSMonitor"
-            android:process=":smsmonitorserviceprocess" >
+            android:name="com.therm.thermicscontrol.SMSMonitor">
             <intent-filter android:priority="100" >
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>

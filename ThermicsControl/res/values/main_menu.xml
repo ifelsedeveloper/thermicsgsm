@@ -3,7 +3,8 @@
     <string name="title_settings_param">Управление параметрами</string>
     <string name="title_config_system">Настройки системы</string>
     <string name="title_sytem_messages">Сообщения от системы</string>
-    <string name="title_last_report">Последнее сообщение</string>
+    <string name="title_last_report">Последнее сообщение:</string>
+    <string name="title_last_report_date">21 января 2014 в 21:30</string>
     <string name="title_request_report">Запрос отчёта</string>
     <string name="title_guard_set">Охрана поставить/снять</string>
     <string name="title_request_balans">Запрос баланса</string>
@@ -15,6 +16,6 @@
     <dimen name="width_button">300dp</dimen>
     <dimen name="height_button">50dp</dimen>
     <dimen name="size_button_text">8pt</dimen>
-    <dimen name="size_title_text">12pt</dimen>
+    <dimen name="size_title_text">10pt</dimen>
     <dimen name="size_button_text_small">7pt</dimen>
 </resources>

@@ -28,13 +28,13 @@ public class TimerCursorAdapter extends SimpleCursorAdapter implements
 		OnClickListener, OnLongClickListener  {
 
 	private Context context;
-	CSettingsPref settings;
+	SystemConfig settings;
 	private DBTimerDateTimeAction dbTimer;
 	private Cursor currentCursor;
 	static Dialog dialog;
 	static Integer id_ = 0;
 	
-	public TimerCursorAdapter(Context context, CSettingsPref settings,int layout, Cursor c, DBTimerDateTimeAction dbTimer, String[] from, int [] to) {
+	public TimerCursorAdapter(Context context, SystemConfig settings,int layout, Cursor c, DBTimerDateTimeAction dbTimer, String[] from, int [] to) {
 		super(context, layout, c, from, to);
 		this.currentCursor = c;
 		this.context = context;
@@ -138,15 +138,6 @@ public class TimerCursorAdapter extends SimpleCursorAdapter implements
 		ContentValues values = new ContentValues();
 		values.put(DBTimerDateTimeAction.COLUMN_ENABLE, cBox.isChecked() ? 1 : 0);
 		TimerValue value = mapTimerValues.get(_idLocal.toString());
-		
-		
-		
-//		boolean enableTimer = false;
-//		for (TimerValue iterable_value : mapTimerValues.values()) {
-//			enableTimer = enableTimer || iterable_value.enable;
-//		}
-//		settings.setIsEnableTimer(enableTimer);
-//		Toast.makeText(context, "check box " +Integer.toString(mapTimerValues.values().size()), Toast.LENGTH_LONG).show();
 		
 		this.dbTimer.mDB.update(this.dbTimer.DB_TABLE, values, "_id=?",
 				new String[] { Integer.toString(_idLocal) });

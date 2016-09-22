@@ -130,7 +130,7 @@ public final static String prefContactPhoneNames = "contactPhoneNames";
 public final static String prefLastSystemReport = "lastSystemReport";
 public final static String prefLastSystemReportTime = "lastSystemReportTime";
 
-public static CSettingsPref settings_st;
+public static SystemConfig settings_st;
 public final static String prefDeviceVersion = "deviceVersion";
 
 // имена атрибутов для Map
@@ -142,6 +142,9 @@ static final String ATTRIBUTE_AVAILABLE = "available";
 public final static int deviceBefore01112011 = 1; 
 public final static int deviceBefore01112012 = 2;
 public final static int deviceAfter01112012 = 3;
+
+public static final String prefIsAutoRequest = "prefIsAutoRequest";
+public static final String prefIsAutoRequestEnabled = "prefIsAutoRequestEnabled";
 
 public boolean onOptionsItemSelected(MenuItem item) {
 //	switch (item.getItemId()) {

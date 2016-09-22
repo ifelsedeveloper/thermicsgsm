@@ -17,7 +17,7 @@ public class TimersListActivity extends BaseActivity {
 	DBTimerDateTimeAction db;
 	TimerCursorAdapter scAdapter;
 	Cursor cursor;
-	public CSettingsPref settings=null;
+	public SystemConfig settings=null;
 	
 	final Context context = this;
 	
@@ -29,13 +29,13 @@ public class TimersListActivity extends BaseActivity {
 		try
 		{
 				lvData = (ListView) findViewById(R.id.listViewTimers);
-				settings = new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_MULTI_PROCESS));
+				settings = SystemConfigDataSource.getActiveSystem();
 				 // открываем подключение к БД
 			    db = new DBTimerDateTimeAction(this,DBTimerDateTimeAction.DB_DEFAULT_TABLE);
 			    db.open();
 			    //db.clearBase();
 			    // получаем курсор
-			    cursor = db.getAllData();
+			    cursor = db.getAllData(settings.getId());
 			    startManagingCursor(cursor);
 			    
 			    // формируем столбцы сопоставления

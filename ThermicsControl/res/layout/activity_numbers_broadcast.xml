@@ -7,6 +7,7 @@
     android:layout_alignParentRight="true"
     android:layout_alignParentTop="true"
     android:orientation="vertical"
+    android:background="@color/window_background"
     tools:context=".NumbersBroadcastActivity" >
     
     <TextView
@@ -46,7 +47,7 @@
             	    android:layout_gravity="center_vertical" 
             	    android:inputType="text"
     				android:singleLine="true"
-            	    android:text="@string/name_contact"
+            	    android:hint="@string/name_contact"
             	    android:focusable="true"
 					android:focusableInTouchMode="true"
 					android:textColor="@color/text_black"
@@ -64,7 +65,7 @@
             	    android:layout_gravity="center_vertical" 
             	    android:inputType="phone"
     				android:singleLine="true"
-            	    android:text="@string/default_text_number"
+            	    android:hint="@string/default_text_number"
             	    android:focusable="true"
 					android:focusableInTouchMode="true"
 					android:textColor="@color/text_black"
@@ -74,12 +75,13 @@
             	    android:layout_width="40dp" 
             	    android:layout_height="40dp"
             	    android:layout_marginRight="5dp"
+            	    android:layout_marginTop="2dp"
             	    android:gravity="center_vertical|center_horizontal"
             	    android:layout_gravity="center_vertical"
             	    android:text="@string/numbers_from_contacts"
             	    android:textColor="@color/text_button_color"
             	    android:textSize="@dimen/size_button_text"
-            	    android:background="@drawable/background_button"
+            	    android:background="@drawable/white_back"
             		android:textStyle="bold"
             		android:onClick="OnButtonNumberFromContacts" />     	
 		</LinearLayout>
@@ -89,7 +91,7 @@
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:layout_margin="5dp"
-    android:background="@drawable/background_button"
+    android:background="@drawable/white_back"
     android:text="@string/add_number"
     android:textColor="@color/text_button_color"
     android:textStyle="bold"
@@ -102,7 +104,7 @@
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:layout_marginBottom="5dp"
-    android:background="@drawable/background_button"
+    android:background="@drawable/white_back"
     android:text="@string/delete_all_numbers"
     android:textColor="@color/text_button_color"
     android:textStyle="bold"
@@ -119,38 +121,27 @@
     android:layout_above="@+id/layoutApplyCancel"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
-    android:background="@drawable/border_listview"
+    android:background="@drawable/white_back"
     android:overScrollMode="always"
     android:textColor="@color/text_button_color"
-    android:transcriptMode="alwaysScroll" >
+    android:transcriptMode="alwaysScroll"
+    android:divider="@color/window_background" >
 
 	</ListView>
 	
 <LinearLayout
     android:id="@+id/layoutApplyCancel"
-    style="@style/TitleOkCancle" >
+    style="@style/TitleOkCancle"
+    
+     >
 <Button
     android:id="@+id/buttonApplyNumbers"
-    android:layout_width="0dp"
-    android:layout_height="40dp"
-    android:layout_weight=".50"
-    android:text="@string/set"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="2dp"
-    android:textColor="@color/text_button_color"
-    android:textStyle="bold"
+    style="@style/ButtonAccept"
     android:onClick="OnClickApplyButton"
     />
 <Button
     android:id="@+id/buttonCancelNumbers"
-    android:layout_width="0dp"
-    android:layout_height="40dp"
-    android:layout_weight=".50"
-    android:layout_marginLeft="2dp"
-    android:layout_marginRight="5dp"
-    android:text="@string/Cancel"
-    android:textColor="@color/text_button_color"
-    android:textStyle="bold"
+    style="@style/ButtonCancel"
     android:onClick="OnClickCancelButton"
     />
 </LinearLayout>

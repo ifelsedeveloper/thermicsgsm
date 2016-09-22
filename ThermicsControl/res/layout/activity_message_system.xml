@@ -11,13 +11,13 @@
     tools:context=".MessageSystemActivity" >
     <RelativeLayout 
         android:id="@+id/relativeLayoutMessageSystem"
-        android:background="@color/gradient_green1"
+        android:background="@drawable/nav"
         android:layout_width="fill_parent"
         style="@style/TextViewTitleActivity">
-    <TextView
-        android:id="@+id/titleMessageSystem"
+    <Spinner
+        android:id="@+id/spinnerFilterSystem"
         android:text="@string/title_sytem_messages"
-        style="@style/TextViewTitleActivity"
+        style="@style/SettingsElement" 
         android:layout_width="wrap_content"
          />
 
@@ -28,7 +28,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/content_description_image"
-        android:src="@drawable/save_icon"
+        android:src="@drawable/save"
         android:layout_marginRight="10dp"
         android:onClick="clickSaveButton" />
 
@@ -44,26 +44,26 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/border_listview"
         android:overScrollMode="always"
         android:textColor="@color/text_button_color"
-        android:transcriptMode="alwaysScroll" >
+        android:transcriptMode="alwaysScroll"
+        android:divider="@color/window_background">
 
 	</ListView>
     
 <Button
     android:id="@+id/buttonClear"
-    android:layout_width="match_parent"
+    android:layout_width="129dp"
     android:layout_height="40dp"
     android:layout_alignParentBottom="true"
-    android:layout_alignParentLeft="true"
+    android:layout_centerHorizontal="true"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
-    android:background="@drawable/background_button"
+    android:background="@drawable/button_green"
     android:text="@string/clear"
-    android:textColor="@color/text_button_color"
+    android:textColor="@color/title_white_color"
     android:textStyle="bold"
     android:onClick="onClickClearButton" />
 

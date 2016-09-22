@@ -1,0 +1,10 @@
+/ThermicsControl/bin
+/ThermicsControl/.gradle
+/ThermicsControl/local.properties
+/ThermicsControl/.idea/workspace.xml
+/ThermicsControl/.DS_Store
+/build
+/ThermicsControl/.idea/
+/ThermicsControl/*iml
+/ThermicsControl/*.iml
+/ThermicsControl/build

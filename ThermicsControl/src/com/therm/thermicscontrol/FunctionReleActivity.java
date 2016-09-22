@@ -17,7 +17,7 @@ import android.widget.EditText;
 public class FunctionReleActivity extends BaseActivity {
 
 	public static final String TAG_events="event_tag_settings_param";
-	public CSettingsPref settings=null;
+	public SystemConfig settings=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -30,7 +30,7 @@ public class FunctionReleActivity extends BaseActivity {
 		setContentView(R.layout.activity_function_rele);
 		
 		//create for work with shared preference
-		settings=new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_MULTI_PROCESS));
+		settings=SystemConfigDataSource.getActiveSystem();
 		loadParam();
 		Log.i(TAG_events, "creating activity");
 		

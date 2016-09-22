@@ -26,7 +26,7 @@ public class TimerActivity extends BaseActivity {
 
 	final Context context = this;
 	
-	public CSettingsPref settings=null;
+	public SystemConfig settings=null;
 	
 	TimerValue timerValue =  new TimerValue();
 	
@@ -52,7 +52,7 @@ public class TimerActivity extends BaseActivity {
 		dialogSetDay = new Dialog(context);
 		dialogSetDay.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialogSetDay.setContentView(R.layout.custom_day_of_week_peeker);
-		settings=new CSettingsPref(getSharedPreferences(MYSYSTEM_PREFERENCES, MODE_MULTI_PROCESS));
+		settings=SystemConfigDataSource.getActiveSystem();
 		databaseTimers = new DBTimerDateTimeAction(this, DBTimerDateTimeAction.DB_DEFAULT_TABLE);
 		databaseTimers.open();
 		modify_id = getIntent().getIntExtra(DBTimerDateTimeAction.COLUMN_ID, -1);
@@ -285,6 +285,7 @@ public class TimerActivity extends BaseActivity {
 		else
 		{
 			settings.setIsEnableTimer(true);
+			timerValue.id_system = settings.getId();
 			databaseTimers.addRec(timerValue);
 		}
 		
