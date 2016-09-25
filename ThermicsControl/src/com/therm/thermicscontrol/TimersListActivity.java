@@ -30,19 +30,19 @@ public class TimersListActivity extends BaseActivity {
 		{
 				lvData = (ListView) findViewById(R.id.listViewTimers);
 				settings = SystemConfigDataSource.getActiveSystem();
-				 // открываем подключение к БД
+				 // РѕС‚РєСЂС‹РІР°РµРј РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє Р‘Р”
 			    db = new DBTimerDateTimeAction(this,DBTimerDateTimeAction.DB_DEFAULT_TABLE);
 			    db.open();
 			    //db.clearBase();
-			    // получаем курсор
+			    // РїРѕР»СѓС‡Р°РµРј РєСѓСЂСЃРѕСЂ
 			    cursor = db.getAllData(settings.getId());
 			    startManagingCursor(cursor);
 			    
-			    // формируем столбцы сопоставления
+			    // С„РѕСЂРјРёСЂСѓРµРј СЃС‚РѕР»Р±С†С‹ СЃРѕРїРѕСЃС‚Р°РІР»РµРЅРёСЏ
 			    String[] from = new String[] { DBTimerDateTimeAction.COLUMN_N_RELE,DBTimerDateTimeAction.COLUMN_ENABLE, DBTimerDateTimeAction.COLUMN_REPEAT };
 			    int[] to = new int[] 		 { R.id.titleTimerDestenation,R.id.checkBoxEnableTimer, R.id.valueTimeRepeatDay};
 		
-			    // создааем адаптер и настраиваем список
+			    // СЃРѕР·РґР°Р°РµРј Р°РґР°РїС‚РµСЂ Рё РЅР°СЃС‚СЂР°РёРІР°РµРј СЃРїРёСЃРѕРє
 			    scAdapter = new TimerCursorAdapter(this, settings, R.layout.row_timer,cursor, db, from, to);
 			    lvData.setAdapter(scAdapter);
 			    

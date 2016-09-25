@@ -68,21 +68,21 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		getViewVaribales();
 		loadParam();
 		//sender=new CSMSSender(settings.getNumberSIM(), getApplicationContext());
-		// создаем BroadcastReceiver
+		// СЃРѕР·РґР°РµРј BroadcastReceiver
 	    br = new BroadcastReceiver() {
-	      // действия при получении сообщений
+	      // РґРµР№СЃС‚РІРёСЏ РїСЂРё РїРѕР»СѓС‡РµРЅРёРё СЃРѕРѕР±С‰РµРЅРёР№
 	      public void onReceive(Context context, Intent intent) {
 	        String sms = intent.getStringExtra(PARAM_SMS);
 	        String time = intent.getStringExtra(PARAM_SMSTIME);
 	        Log.d(TAG_events, "onReceive sms: "+sms+" ;time = "+time);
-	        //отправляем полученное сообщение нашему классу
+	        //РѕС‚РїСЂР°РІР»СЏРµРј РїРѕР»СѓС‡РµРЅРЅРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ РЅР°С€РµРјСѓ РєР»Р°СЃСЃСѓ
 	        //if(run_sms_sender) settingsDev.smsRecive(sms);
 	        settingsDev.recvSMS(sms);
 	      }
 	    };
-	    // создаем фильтр для BroadcastReceiver
+	    // СЃРѕР·РґР°РµРј С„РёР»СЊС‚СЂ РґР»СЏ BroadcastReceiver
 	    IntentFilter intFilt = new IntentFilter(BROADCAST_ACTION_RCVSMS);
-	    // регистрируем (включаем) BroadcastReceiver
+	    // СЂРµРіРёСЃС‚СЂРёСЂСѓРµРј (РІРєР»СЋС‡Р°РµРј) BroadcastReceiver
 	    registerReceiver(br, intFilt);
 	    
 	    setVisiblePassword();
@@ -541,15 +541,15 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 			{
 				//show dialog
 				final AlertDialog.Builder b = new AlertDialog.Builder(this);
-				b.setTitle("Смена пароля");
-				b.setMessage("Изменить настройки в");
-				b.setPositiveButton("программе", new OnClickListener() {
+				b.setTitle("РЎРјРµРЅР° РїР°СЂРѕР»СЏ");
+				b.setMessage("РР·РјРµРЅРёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё РІ");
+				b.setPositiveButton("РїСЂРѕРіСЂР°РјРјРµ", new OnClickListener() {
 			        public void onClick(DialogInterface dialog, int which) {
 			        	isSendNewPassword = false;
 			        	saveParamStep2();
 			        }
 			      });
-				b.setNegativeButton("устройстве", new OnClickListener() {
+				b.setNegativeButton("СѓСЃС‚СЂРѕР№СЃС‚РІРµ", new OnClickListener() {
 			        public void onClick(DialogInterface dialog, int which) {
 			        	isSendNewPassword = true;
 			        	saveParamStep2();
@@ -594,9 +594,9 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 			//save parameters
 			final AlertDialog.Builder b = new AlertDialog.Builder(this);
 			b.setIcon(android.R.drawable.ic_dialog_alert);
-			b.setTitle("Установка параметров");
-			b.setMessage("Отправить" + String.format(" %d ", settingsDev.sms_to_send.size()) + "SMS?");
-			b.setPositiveButton("Отправить", new OnClickListener() {
+			b.setTitle("РЈСЃС‚Р°РЅРѕРІРєР° РїР°СЂР°РјРµС‚СЂРѕРІ");
+			b.setMessage("РћС‚РїСЂР°РІРёС‚СЊ" + String.format(" %d ", settingsDev.sms_to_send.size()) + "SMS?");
+			b.setPositiveButton("РћС‚РїСЂР°РІРёС‚СЊ", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		    		
 		        	//copy from local to class variable
@@ -654,7 +654,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	
 			    		//first launch
 			    		settings.setIsSendAnyway(false);
-			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Установка параметров");
+			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"РЈСЃС‚Р°РЅРѕРІРєР° РїР°СЂР°РјРµС‚СЂРѕРІ");
 			    		settingsDev.sendCommands();	
 			    		
 			    		viewOkCancel.setVisibility(View.GONE);
@@ -666,7 +666,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		    			loadParam();
 		        }
 		      });
-			b.setNegativeButton("Отмена", new OnClickListener() {
+			b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 		        	loadParam();
@@ -680,7 +680,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 			//save parameters
 			final AlertDialog.Builder b = new AlertDialog.Builder(this);
 			b.setIcon(android.R.drawable.ic_dialog_alert);
-			b.setTitle("Принять изменения?");
+			b.setTitle("РџСЂРёРЅСЏС‚СЊ РёР·РјРµРЅРµРЅРёСЏ?");
 			b.setPositiveButton("Ok", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		        	isSIM1 = LisSIM1;
@@ -712,7 +712,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		    		isEditNumberPasswordHasFocus = false;
 		        }
 		      });
-			b.setNegativeButton("Отмена", new OnClickListener() {
+			b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		        	ActiveSIM.setChecked(isSIM1);
 		        	simPassword = settings.getPinSIM();
@@ -770,27 +770,27 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	    pd.setTitle(title);
 	    timer.setTitle(title);
 	    timer.setProgressDialog(pd);
-	      // меняем стиль на индикатор
+	      // РјРµРЅСЏРµРј СЃС‚РёР»СЊ РЅР° РёРЅРґРёРєР°С‚РѕСЂ
 	      pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-	      // устанавливаем максимум
+	      // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РјР°РєСЃРёРјСѓРј
 	      pd.setMax(count_sms);
-	      // включаем анимацию ожидания
+	      // РІРєР»СЋС‡Р°РµРј Р°РЅРёРјР°С†РёСЋ РѕР¶РёРґР°РЅРёСЏ
 	      pd.setIndeterminate(true);
 	      pd.setCancelable(false);
 	      timer.start();
 	      hpd = new Handler() {
 	        public void handleMessage(Message msg) {
-	          // выключаем анимацию ожидания
+	          // РІС‹РєР»СЋС‡Р°РµРј Р°РЅРёРјР°С†РёСЋ РѕР¶РёРґР°РЅРёСЏ
 	          pd.setIndeterminate(false);
 	          if (pd.getProgress() < pd.getMax()) {
-	            // увеличиваем значения индикаторов
+	            // СѓРІРµР»РёС‡РёРІР°РµРј Р·РЅР°С‡РµРЅРёСЏ РёРЅРґРёРєР°С‚РѕСЂРѕРІ
 	            pd.incrementProgressBy(1);
 	            pd.incrementSecondaryProgressBy(1);
 	          } else {
 	        	timer.cancel();
 	            pd.dismiss();
 	            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-	            Toast.makeText(getApplicationContext(),"Все команды успешно отправлены",Toast.LENGTH_LONG).show();
+	            Toast.makeText(getApplicationContext(),"Р’СЃРµ РєРѕРјР°РЅРґС‹ СѓСЃРїРµС€РЅРѕ РѕС‚РїСЂР°РІР»РµРЅС‹",Toast.LENGTH_LONG).show();
 
 	            if(isShowDeviceVersion)
 	            {
@@ -800,13 +800,13 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
             		switch(deviceVersion)
             		{
             		case BaseActivity.deviceAfter01112012:
-            			Toast.makeText(getApplicationContext(),"Ваша версия устройства после 01 11 2012",Toast.LENGTH_LONG).show();
+            			Toast.makeText(getApplicationContext(),"Р’Р°С€Р° РІРµСЂСЃРёСЏ СѓСЃС‚СЂРѕР№СЃС‚РІР° РїРѕСЃР»Рµ 01 11 2012",Toast.LENGTH_LONG).show();
             			break;
             		case BaseActivity.deviceBefore01112012:
-            			Toast.makeText(getApplicationContext(),"Ваша версия устройства до 01 11 2012",Toast.LENGTH_LONG).show();
+            			Toast.makeText(getApplicationContext(),"Р’Р°С€Р° РІРµСЂСЃРёСЏ СѓСЃС‚СЂРѕР№СЃС‚РІР° РґРѕ 01 11 2012",Toast.LENGTH_LONG).show();
             			break;
             		case BaseActivity.deviceBefore01112011:
-            			Toast.makeText(getApplicationContext(),"Ваша версия устройства до 01 11 2011",Toast.LENGTH_LONG).show();
+            			Toast.makeText(getApplicationContext(),"Р’Р°С€Р° РІРµСЂСЃРёСЏ СѓСЃС‚СЂРѕР№СЃС‚РІР° РґРѕ 01 11 2011",Toast.LENGTH_LONG).show();
             			break;
             		}
             		
@@ -943,14 +943,14 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 			checkStateOkCancel();
 			//show dialog
 			final AlertDialog.Builder b = new AlertDialog.Builder(this);
-			b.setTitle("Переключение SIM");
-			b.setMessage("Изменить настройки в");
-			b.setPositiveButton("программе", new OnClickListener() {
+			b.setTitle("РџРµСЂРµРєР»СЋС‡РµРЅРёРµ SIM");
+			b.setMessage("РР·РјРµРЅРёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё РІ");
+			b.setPositiveButton("РїСЂРѕРіСЂР°РјРјРµ", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		        	isChangeSIMDevice = false;
 		        }
 		      });
-			b.setNegativeButton("устройстве", new OnClickListener() {
+			b.setNegativeButton("СѓСЃС‚СЂРѕР№СЃС‚РІРµ", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		        	isChangeSIMDevice = true;
 		        }});
@@ -962,19 +962,19 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	{
 		
 		final AlertDialog.Builder b = new AlertDialog.Builder(this);
-		b.setTitle("Определить версию устройcтва?");
-		b.setPositiveButton("Да", new OnClickListener() {
+		b.setTitle("РћРїСЂРµРґРµР»РёС‚СЊ РІРµСЂСЃРёСЋ СѓСЃС‚СЂРѕР№cС‚РІР°?");
+		b.setPositiveButton("Р”Р°", new OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) {
-	        	Toast.makeText(getApplicationContext(),"Опред. вер. устройcтва",Toast.LENGTH_LONG).show();
+	        	Toast.makeText(getApplicationContext(),"РћРїСЂРµРґ. РІРµСЂ. СѓСЃС‚СЂРѕР№cС‚РІР°",Toast.LENGTH_LONG).show();
 	        	settingsDev.clearQueueCommands();
 	        	settingsDev.AddRequestReportCommand();
-	        	LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Опред. вер. устройcтва");
+	        	LoadProgressDialog(settingsDev.sms_to_send.size()+1,"РћРїСЂРµРґ. РІРµСЂ. СѓСЃС‚СЂРѕР№cС‚РІР°");
 	        	
 	    		if(settingsDev.sendCommands())
 	    		{	pd.show(); isShowDeviceVersion = true;}
 	        }
 	      });
-		b.setNegativeButton("Отмена", new OnClickListener() {
+		b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) {
 	        	//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 	        }});

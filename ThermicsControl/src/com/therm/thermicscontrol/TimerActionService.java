@@ -32,7 +32,7 @@ public class TimerActionService extends Service {
 			
 			if(intent !=null)
 			{
-				//Toast.makeText(this, "Запуск таймера ", Toast.LENGTH_LONG).show();
+				//Toast.makeText(this, "Р—Р°РїСѓСЃРє С‚Р°Р№РјРµСЂР° ", Toast.LENGTH_LONG).show();
 					TimerValue value = (TimerValue) intent.getSerializableExtra("TimerValue");
 					if(value != null && value.enable)
 					{
@@ -41,13 +41,13 @@ public class TimerActionService extends Service {
 						//Toast.makeText(this,"TimerValue = " + value.toString(), Toast.LENGTH_LONG).show();
 						boolean vkl = intent.getBooleanExtra(ATTRIBUTE_COMMAND, false); 
 						String cmd = settingsDev.GetCmdRele(value.n_rele+1, vkl);
-						//Toast.makeText(this, "Отправляем команду = " + cmd + " :" + DBTimerDateTimeAction.DB_DEFAULT_TABLE, Toast.LENGTH_LONG).show();
+						//Toast.makeText(this, "РћС‚РїСЂР°РІР»СЏРµРј РєРѕРјР°РЅРґСѓ = " + cmd + " :" + DBTimerDateTimeAction.DB_DEFAULT_TABLE, Toast.LENGTH_LONG).show();
 
 						if(DBTimerDateTimeAction.doesDatabaseExist(this, DBTimerDateTimeAction.DATABASE_PATH + DBTimerDateTimeAction.DB_NAME))
 						{
 							DBTimerDateTimeAction dbAction = new DBTimerDateTimeAction(this,DBTimerDateTimeAction.DB_DEFAULT_TABLE);
 							dbAction.open();
-							//Toast.makeText(this, "Проверка", Toast.LENGTH_LONG).show();
+							//Toast.makeText(this, "РџСЂРѕРІРµСЂРєР°", Toast.LENGTH_LONG).show();
 							
 							if(dbAction.check(value))
 							{
@@ -69,7 +69,7 @@ public class TimerActionService extends Service {
 		}
 		catch(Exception e)
 		{
-			Toast.makeText(this, "Ошибка при отправке: " + e.toString(), Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "РћС€РёР±РєР° РїСЂРё РѕС‚РїСЂР°РІРєРµ: " + e.toString(), Toast.LENGTH_LONG).show();
 		}
 		
 		return START_STICKY_COMPATIBILITY;
@@ -78,7 +78,7 @@ public class TimerActionService extends Service {
 	
 	private void WorkAction(String cmd)
 	{
-		Toast.makeText(this, "Отправляем команду = " + cmd, Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "РћС‚РїСЂР°РІР»СЏРµРј РєРѕРјР°РЅРґСѓ = " + cmd, Toast.LENGTH_LONG).show();
 		settingsDev.sendSMS(cmd);
 	}
 	

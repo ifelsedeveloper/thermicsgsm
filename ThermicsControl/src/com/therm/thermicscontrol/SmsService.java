@@ -91,25 +91,25 @@ public class SmsService extends Service {
 				String second = sms_body.substring( nTrevoga+strTrevoga.length() );
 				sms_body=first+" "+settings.getTextSMSAlarm()+" "+second;
 				if(sms_body.contains("Trevoga"))
-				sms_body=sms_body.replace("Trevoga", "Тревога");
+				sms_body=sms_body.replace("Trevoga", "РўСЂРµРІРѕРіР°");
 				if(sms_body.contains("Narushena zona"))
-				sms_body=sms_body.replace("Narushena zona", "Нарушена зона");
+				sms_body=sms_body.replace("Narushena zona", "РќР°СЂСѓС€РµРЅР° Р·РѕРЅР°");
 			}
 			String strControlSystemSnjat="Control systemy snjat.Po SMS ot";
 			if(sms_body.contains(strControlSystemSnjat))
-				sms_body=sms_body.replace(strControlSystemSnjat, "Контроль системы снят по SMS от");
+				sms_body=sms_body.replace(strControlSystemSnjat, "РљРѕРЅС‚СЂРѕР»СЊ СЃРёСЃС‚РµРјС‹ СЃРЅСЏС‚ РїРѕ SMS РѕС‚");
 			
 			String strControlSystem="Systema na controle.Po SMS ot";
 			if(sms_body.contains(strControlSystem))
-				sms_body=sms_body.replace(strControlSystem, "Система на контроле по SMS от");
+				sms_body=sms_body.replace(strControlSystem, "РЎРёСЃС‚РµРјР° РЅР° РєРѕРЅС‚СЂРѕР»Рµ РїРѕ SMS РѕС‚");
 			
 			String strControlSnjat="Control snjat";
 			if(sms_body.contains(strControlSnjat))
-				sms_body=sms_body.replace(strControlSnjat, "Контроль снят");
+				sms_body=sms_body.replace(strControlSnjat, "РљРѕРЅС‚СЂРѕР»СЊ СЃРЅСЏС‚");
 			
 			String strNaprjagenieNorma="Naprjagenie norma";
 			if(sms_body.contains(strNaprjagenieNorma))
-				sms_body=sms_body.replace(strNaprjagenieNorma, "Напряжение норма");
+				sms_body=sms_body.replace(strNaprjagenieNorma, "РќР°РїСЂСЏР¶РµРЅРёРµ РЅРѕСЂРјР°");
 			
 			for(int i=0;i<6;i++)
 			{
@@ -137,12 +137,12 @@ public class SmsService extends Service {
 				}
 				String zone_value = res3[n_rele_str+1];
 				String rele_value = res3[n_rele_str];
-				String active_zone ="\n"+ "Зоны контроля: "+zone_value;
+				String active_zone ="\n"+ "Р—РѕРЅС‹ РєРѕРЅС‚СЂРѕР»СЏ: "+zone_value;
 				sms_body=sms_body.replace(zone_value,active_zone);
 				String releTitle = sms_body.substring(n, n+9);
-				String reles_value1 = "1. " + settings.getFunctionRele1() +" = "+ (settings.getIsRele(0) ? "вкл" : "откл");
-				String reles_value2 = "2. " + settings.getFunctionRele2() +" = "+ (settings.getIsRele(1) ? "вкл" : "откл");
-				String reles_value3 = "3. " + settings.getFunctionRele3() +" = "+ (settings.getIsRele(2) ? "вкл" : "откл");
+				String reles_value1 = "1. " + settings.getFunctionRele1() +" = "+ (settings.getIsRele(0) ? "РІРєР»" : "РѕС‚РєР»");
+				String reles_value2 = "2. " + settings.getFunctionRele2() +" = "+ (settings.getIsRele(1) ? "РІРєР»" : "РѕС‚РєР»");
+				String reles_value3 = "3. " + settings.getFunctionRele3() +" = "+ (settings.getIsRele(2) ? "РІРєР»" : "РѕС‚РєР»");
 				boolean upr_flag = false;
 				if(rele_value.length()>8 && (rele_value.charAt(8) == '0' || rele_value.charAt(8) == '1'))
 					upr_flag = true;
@@ -150,30 +150,30 @@ public class SmsService extends Service {
 					upr_flag = false;
 				if(upr_flag)
 				{
-					String upr_value = "4. " + settings.getFunctionUpr() +" = "+ (settings.getIsUpr() ? "вкл" : "откл");
-					sms_body=sms_body.replace(releTitle, "Состояния реле:\n"+reles_value1+'\n'+reles_value2+'\n'+ reles_value3+'\n'+upr_value );
+					String upr_value = "4. " + settings.getFunctionUpr() +" = "+ (settings.getIsUpr() ? "РІРєР»" : "РѕС‚РєР»");
+					sms_body=sms_body.replace(releTitle, "РЎРѕСЃС‚РѕСЏРЅРёСЏ СЂРµР»Рµ:\n"+reles_value1+'\n'+reles_value2+'\n'+ reles_value3+'\n'+upr_value );
 				}
 				else
 				{
-					sms_body=sms_body.replace(releTitle, "Состояния реле:\n"+reles_value1+'\n'+reles_value2+'\n'+ reles_value3 );
+					sms_body=sms_body.replace(releTitle, "РЎРѕСЃС‚РѕСЏРЅРёСЏ СЂРµР»Рµ:\n"+reles_value1+'\n'+reles_value2+'\n'+ reles_value3 );
 				}
 			}
 			
 			String strTEMPR1="Temp.R1";
 			if(sms_body.contains(strTEMPR1))
-				sms_body=sms_body.replace(strTEMPR1,"Заданная температура для реле №1");
+				sms_body=sms_body.replace(strTEMPR1,"Р—Р°РґР°РЅРЅР°СЏ С‚РµРјРїРµСЂР°С‚СѓСЂР° РґР»СЏ СЂРµР»Рµ в„–1");
 			
 			String strTEMPR2="Temp.R2";
 			if(sms_body.contains(strTEMPR2))
-				sms_body=sms_body.replace(strTEMPR2,"Заданная температура для реле №2");
+				sms_body=sms_body.replace(strTEMPR2,"Р—Р°РґР°РЅРЅР°СЏ С‚РµРјРїРµСЂР°С‚СѓСЂР° РґР»СЏ СЂРµР»Рµ в„–2");
 			
 			String strTEMPR3="Temp.R3";
 			if(sms_body.contains(strTEMPR3))
-				sms_body=sms_body.replace(strTEMPR3,"Заданная температура для реле №3");
+				sms_body=sms_body.replace(strTEMPR3,"Р—Р°РґР°РЅРЅР°СЏ С‚РµРјРїРµСЂР°С‚СѓСЂР° РґР»СЏ СЂРµР»Рµ в„–3");
 			
 			String strTEMPR="Temp.R";
 			if(sms_body.contains(strTEMPR))
-				sms_body=sms_body.replace(strTEMPR,"Заданная температура для реле №2");
+				sms_body=sms_body.replace(strTEMPR,"Р—Р°РґР°РЅРЅР°СЏ С‚РµРјРїРµСЂР°С‚СѓСЂР° РґР»СЏ СЂРµР»Рµ в„–2");
 				
 			
 			for(int nrele = 0; nrele< SystemConfig.numReles; nrele++)
@@ -181,7 +181,7 @@ public class SmsService extends Service {
 				String strVkluchenoRele = String.format("Vklucheno rele N%d", nrele+1);
 				if(sms_body.contains(strVkluchenoRele))
 				{
-					sms_body=sms_body.replace(strVkluchenoRele,settings.getFunctionRele(nrele) + " вкл");
+					sms_body=sms_body.replace(strVkluchenoRele,settings.getFunctionRele(nrele) + " РІРєР»");
 					settings.setIsRele(nrele,true);
 					intent.putExtra(BaseActivity.prefIsRele[nrele], true);
 				}
@@ -192,7 +192,7 @@ public class SmsService extends Service {
 				String strVkluchenoRele = String.format("Otklucheno rele N%d", nrele+1);
 				if(sms_body.contains(strVkluchenoRele))
 				{
-					sms_body=sms_body.replace(strVkluchenoRele,settings.getFunctionRele(nrele) + " откл");
+					sms_body=sms_body.replace(strVkluchenoRele,settings.getFunctionRele(nrele) + " РѕС‚РєР»");
 					settings.setIsRele(nrele,false);
 					intent.putExtra(BaseActivity.prefIsRele[nrele], false);
 				}
@@ -201,14 +201,14 @@ public class SmsService extends Service {
 			String strVyhodUpravlenieVkluchen="Vyhod Upravlenie vkluchen";
 			if(sms_body.contains(strVyhodUpravlenieVkluchen))
 			{
-				sms_body=sms_body.replace(strVyhodUpravlenieVkluchen,settings.getFunctionUpr() + " вкл");
+				sms_body=sms_body.replace(strVyhodUpravlenieVkluchen,settings.getFunctionUpr() + " РІРєР»");
 				settings.setIsUpr(true);
 			}
 			
 			String strVyhodUpravlenieOtkluchen="Vyhod Upravlenie otkluchen";
 			if(sms_body.contains(strVyhodUpravlenieOtkluchen))
 			{
-				sms_body=sms_body.replace(strVyhodUpravlenieOtkluchen,settings.getFunctionUpr()  + " откл");
+				sms_body=sms_body.replace(strVyhodUpravlenieOtkluchen,settings.getFunctionUpr()  + " РѕС‚РєР»");
 				settings.setIsUpr(false);
 			}
 			
@@ -216,17 +216,17 @@ public class SmsService extends Service {
 			
 			String strSystemaNaControle="Systema na controle";
 			if(sms_body.contains(strSystemaNaControle))
-				sms_body=sms_body.replace(strSystemaNaControle, "Система на контроле");
+				sms_body=sms_body.replace(strSystemaNaControle, "РЎРёСЃС‚РµРјР° РЅР° РєРѕРЅС‚СЂРѕР»Рµ");
 			
 			String strKluch="Kluch";
 			if(sms_body.contains(strKluch))
-				sms_body=sms_body.replace(strKluch, "Ключ");
+				sms_body=sms_body.replace(strKluch, "РљР»СЋС‡");
 			
 			
 			String TempL = "Temp.L";
 			if(sms_body.contains(TempL))
 			{
-				String res_str = "Нижняя граница оповещения";
+				String res_str = "РќРёР¶РЅСЏСЏ РіСЂР°РЅРёС†Р° РѕРїРѕРІРµС‰РµРЅРёСЏ";
 				int pos = sms_body.indexOf(TempL);
 				String number = sms_body.substring(pos+TempL.length(),pos+TempL.length()+1);
 				if(Character.isDigit(number.charAt(0)))
@@ -242,7 +242,7 @@ public class SmsService extends Service {
 			String TempH = "Temp.H";
 			if(sms_body.contains(TempH))
 			{
-				String res_str = "Верхняя граница оповещения";
+				String res_str = "Р’РµСЂС…РЅСЏСЏ РіСЂР°РЅРёС†Р° РѕРїРѕРІРµС‰РµРЅРёСЏ";
 				int pos = sms_body.indexOf(TempH);
 				String number = sms_body.substring(pos+TempL.length(),pos+TempL.length()+1);
 				if(Character.isDigit(number.charAt(0)))
@@ -263,17 +263,17 @@ public class SmsService extends Service {
 				{
 					String to_replace = sms_body.substring(sms_body.indexOf(datchik_rele),sms_body.indexOf(datchik_rele)+datchik_rele.length()+3);
 					if(settings.getNumberSensorReleWarm() > 0)
-						sms_body=sms_body.replace(to_replace,"Для реле №"+Integer.toString(settings.getNumberReleWarm())+" задан термодатчик №"+Integer.toString(settings.getNumberSensorReleWarm()));
+						sms_body=sms_body.replace(to_replace,"Р”Р»СЏ СЂРµР»Рµ в„–"+Integer.toString(settings.getNumberReleWarm())+" Р·Р°РґР°РЅ С‚РµСЂРјРѕРґР°С‚С‡РёРє в„–"+Integer.toString(settings.getNumberSensorReleWarm()));
 					else
-						sms_body=sms_body.replace(to_replace,"Термостат отключен");
+						sms_body=sms_body.replace(to_replace,"РўРµСЂРјРѕСЃС‚Р°С‚ РѕС‚РєР»СЋС‡РµРЅ");
 				}
 				else
 				{
 					String to_replace = sms_body.substring(sms_body.indexOf(datchik_rele),sms_body.indexOf(datchik_rele)+datchik_rele.length()+1);
 					if(settings.getNumberSensorReleWarm() > 0)
-						sms_body=sms_body.replace(to_replace,"Для реле №"+Integer.toString(settings.getNumberReleWarm())+" задан термодатчик №"+Integer.toString(settings.getNumberSensorReleWarm()));
+						sms_body=sms_body.replace(to_replace,"Р”Р»СЏ СЂРµР»Рµ в„–"+Integer.toString(settings.getNumberReleWarm())+" Р·Р°РґР°РЅ С‚РµСЂРјРѕРґР°С‚С‡РёРє в„–"+Integer.toString(settings.getNumberSensorReleWarm()));
 					else
-						sms_body=sms_body.replace(to_replace,"Термостат отключен");
+						sms_body=sms_body.replace(to_replace,"РўРµСЂРјРѕСЃС‚Р°С‚ РѕС‚РєР»СЋС‡РµРЅ");
 				}
 			}
 			
@@ -352,7 +352,7 @@ public class SmsService extends Service {
         //Toast.makeText(getApplicationContext(), "num not = "+ Integer.toString(num_not), Toast.LENGTH_LONG).show();
         settings.setNumNotificationSaved(num_not);
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-     // 3-я часть
+     // 3-СЏ С‡Р°СЃС‚СЊ
         Intent intent = new Intent(this, MessageSystemActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
         
@@ -364,12 +364,12 @@ public class SmsService extends Service {
 
         	builder.setContentIntent(pIntent)
         	            .setSmallIcon(R.drawable.ic_launcher)
-        	            .setTicker("Новое сообщение от системы Кситал")
+        	            .setTicker("РќРѕРІРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ РѕС‚ СЃРёСЃС‚РµРјС‹ РљСЃРёС‚Р°Р»")
         	            .setWhen(System.currentTimeMillis())
         	            .setAutoCancel(true)
         	            .setNumber(num_not)
-        	            .setContentTitle("Система Кситал")
-        	            .setContentText(String.format("Непрочитанных сообщений %d", num_not));
+        	            .setContentTitle("РЎРёСЃС‚РµРјР° РљСЃРёС‚Р°Р»")
+        	            .setContentText(String.format("РќРµРїСЂРѕС‡РёС‚Р°РЅРЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№ %d", num_not));
         	builder.setSound(soundUri);
         	Notification notif = builder.build();
         	notif.defaults |= Notification.DEFAULT_VIBRATE |Notification.DEFAULT_SOUND |Notification.FLAG_AUTO_CANCEL;
@@ -384,13 +384,13 @@ public class SmsService extends Service {
         	nm.notify(1, notif);
         } else{
             // do something for phones running an SDK before froyo
-        	Notification notif = new Notification(R.drawable.ic_launcher, "Новое сообщение от системы Кситал", 
+        	Notification notif = new Notification(R.drawable.ic_launcher, "РќРѕРІРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ РѕС‚ СЃРёСЃС‚РµРјС‹ РљСЃРёС‚Р°Р»", 
           	      System.currentTimeMillis());       	    
 	                 	    
-	         // 2-я часть
-	         notif.setLatestEventInfo(this, "Система Кситал", String.format("Непрочитанных сообщений %d", num_not), pIntent);
+	         // 2-СЏ С‡Р°СЃС‚СЊ
+	         notif.setLatestEventInfo(this, "РЎРёСЃС‚РµРјР° РљСЃРёС‚Р°Р»", String.format("РќРµРїСЂРѕС‡РёС‚Р°РЅРЅС‹С… СЃРѕРѕР±С‰РµРЅРёР№ %d", num_not), pIntent);
 	          	    
-	         // ставим флаг, чтобы уведомление пропало после нажатия
+	         // СЃС‚Р°РІРёРј С„Р»Р°Рі, С‡С‚РѕР±С‹ СѓРІРµРґРѕРјР»РµРЅРёРµ РїСЂРѕРїР°Р»Рѕ РїРѕСЃР»Рµ РЅР°Р¶Р°С‚РёСЏ
 	         notif.flags |= Notification.DEFAULT_VIBRATE |Notification.DEFAULT_SOUND |Notification.FLAG_AUTO_CANCEL;
 	         notif.flags |= Notification.FLAG_SHOW_LIGHTS;
 	         notif.ledARGB = 0xff00ff00;

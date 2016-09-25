@@ -74,15 +74,15 @@ NotificationManager nm;
 //      Intent intent = new Intent(MainActivity.BROADCAST_ACTION);
 //      Log.d(LOG_TAG, "MyRun#" + startId + " start, time = " + time);
 //      try {
-//        // сообщаем об старте задачи
+//        // СЃРѕРѕР±С‰Р°РµРј РѕР± СЃС‚Р°СЂС‚Рµ Р·Р°РґР°С‡Рё
 //        intent.putExtra(MainActivity.PARAM_TASK, task);
 //        intent.putExtra(MainActivity.PARAM_STATUS, MainActivity.STATUS_START);
 //        sendBroadcast(intent);
 //
-//        // начинаем выполнение задачи
+//        // РЅР°С‡РёРЅР°РµРј РІС‹РїРѕР»РЅРµРЅРёРµ Р·Р°РґР°С‡Рё
 //        TimeUnit.SECONDS.sleep(time);
 //
-//        // сообщаем об окончании задачи
+//        // СЃРѕРѕР±С‰Р°РµРј РѕР± РѕРєРѕРЅС‡Р°РЅРёРё Р·Р°РґР°С‡Рё
 //        intent.putExtra(MainActivity.PARAM_STATUS, MainActivity.STATUS_FINISH);
 //        intent.putExtra(MainActivity.PARAM_RESULT, time * 100);
 //        sendBroadcast(intent);

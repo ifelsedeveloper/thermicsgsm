@@ -1,13 +1,11 @@
-apply plugin: 'android'
-
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
-    compile project(':SlidingMenu-master:SlidingMenu-master:library')
+    compile project(':libs:SlidingMenu-master:library')
 }
 
 android {
     compileSdkVersion 16
-    buildToolsVersion "20.0.0"
+    buildToolsVersion "22.0.3"
 
     sourceSets {
         main {

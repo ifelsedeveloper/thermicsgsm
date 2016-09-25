@@ -117,14 +117,14 @@ public class NumbersBroadcastActivity extends BaseActivity{
 		buttonAddNumber_ = (Button)findViewById(R.id.buttonAddNumber);
 		buttonDeleteAllNumbers_ = (Button)findViewById(R.id.buttonDeleteAllNumbers);
 		//sender=new CSMSSender(settings.getNumberSIM(), getApplicationContext());
-		// создаем BroadcastReceiver
+		// СЃРѕР·РґР°РµРј BroadcastReceiver
 	    br = new BroadcastReceiver() {
-	      // действия при получении сообщений
+	      // РґРµР№СЃС‚РІРёСЏ РїСЂРё РїРѕР»СѓС‡РµРЅРёРё СЃРѕРѕР±С‰РµРЅРёР№
 	      public void onReceive(Context context, Intent intent) {
 	        String sms = intent.getStringExtra(PARAM_SMS);
 	        String time = intent.getStringExtra(PARAM_SMSTIME);
 	        Log.d(TAG_events, "onReceive sms: "+sms+" ;time = "+time);
-	        //отправляем полученное сообщение нашему классу
+	        //РѕС‚РїСЂР°РІР»СЏРµРј РїРѕР»СѓС‡РµРЅРЅРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ РЅР°С€РµРјСѓ РєР»Р°СЃСЃСѓ
 	        //if(run_sms_sender) settingsDev.smsRecive(sms);
 	        if(!flag_delete)
 	        {
@@ -142,15 +142,15 @@ public class NumbersBroadcastActivity extends BaseActivity{
 	        settingsDev.recvSMS(sms);
 	      }
 	    };
-	    // создаем фильтр для BroadcastReceiver
+	    // СЃРѕР·РґР°РµРј С„РёР»СЊС‚СЂ РґР»СЏ BroadcastReceiver
 	    IntentFilter intFilt = new IntentFilter(BROADCAST_ACTION_RCVSMS);
-	    // регистрируем (включаем) BroadcastReceiver
+	    // СЂРµРіРёСЃС‚СЂРёСЂСѓРµРј (РІРєР»СЋС‡Р°РµРј) BroadcastReceiver
 	    registerReceiver(br, intFilt);
 		
 
-	    // массивы данных
-	    contact_name = "Имя";
-	    phone_number = "Номер";
+	    // РјР°СЃСЃРёРІС‹ РґР°РЅРЅС‹С…
+	    contact_name = "РРјСЏ";
+	    phone_number = "РќРѕРјРµСЂ";
 	    main_number.setText(phone_number);
 	    main_name.setText(contact_name);
 
@@ -159,7 +159,7 @@ public class NumbersBroadcastActivity extends BaseActivity{
 	    if(ldata.size()==0)
 	    {
 	
-//		    // упаковываем данные в понятную для адаптера структуру
+//		    // СѓРїР°РєРѕРІС‹РІР°РµРј РґР°РЅРЅС‹Рµ РІ РїРѕРЅСЏС‚РЅСѓСЋ РґР»СЏ Р°РґР°РїС‚РµСЂР° СЃС‚СЂСѓРєС‚СѓСЂСѓ
 		    data = new ArrayList<Map<String, String>>();
 	    }
 	    else
@@ -186,16 +186,16 @@ public class NumbersBroadcastActivity extends BaseActivity{
 	    
 	    count_numbers =  data.size();
 	    
-	    // массив имен атрибутов, из которых будут читаться данные
+	    // РјР°СЃСЃРёРІ РёРјРµРЅ Р°С‚СЂРёР±СѓС‚РѕРІ, РёР· РєРѕС‚РѕСЂС‹С… Р±СѓРґСѓС‚ С‡РёС‚Р°С‚СЊСЃСЏ РґР°РЅРЅС‹Рµ
 	    String[] from = {  ATTRIBUTE_CONTACT_NAME,ATTRIBUTE_PHONE };
-	    // массив ID View-компонентов, в которые будут вставлять данные
+	    // РјР°СЃСЃРёРІ ID View-РєРѕРјРїРѕРЅРµРЅС‚РѕРІ, РІ РєРѕС‚РѕСЂС‹Рµ Р±СѓРґСѓС‚ РІСЃС‚Р°РІР»СЏС‚СЊ РґР°РЅРЅС‹Рµ
 	    int[] to = { R.id.rowNameContact,R.id.rowPhoneNumber};
 	    
 	    //add old data
 	    for (Map<String, String> s : numbersToAdd)
 	    	data.add(s);
 	    
-	    // создаем адаптер
+	    // СЃРѕР·РґР°РµРј Р°РґР°РїС‚РµСЂ
 	    sAdapter = new SimpleAdapter(this, data, R.layout.row_phone_number,
 	        from, to);
 	    lvData.setAdapter(sAdapter);
@@ -215,7 +215,7 @@ public class NumbersBroadcastActivity extends BaseActivity{
 	    dialog = new Dialog(context);
 	    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(R.layout.custom_dialog_change_delete);
-		dialog.setTitle("Выберите действие");
+		dialog.setTitle("Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ");
 		
 		Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonChange);
 		dialogButton.setOnClickListener(new Button.OnClickListener() {  
@@ -299,9 +299,9 @@ public class NumbersBroadcastActivity extends BaseActivity{
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 		final AlertDialog.Builder b = new AlertDialog.Builder(this);
 		b.setIcon(android.R.drawable.ic_dialog_alert);
-		b.setTitle("Удалить номер рассылки SMS?");
-		//b.setMessage("Отправить" + String.format(" %d ", settingsDev.sms_to_send.size()) + "SMS?");
-		b.setPositiveButton("Удалить", new OnClickListener() {
+		b.setTitle("РЈРґР°Р»РёС‚СЊ РЅРѕРјРµСЂ СЂР°СЃСЃС‹Р»РєРё SMS?");
+		//b.setMessage("РћС‚РїСЂР°РІРёС‚СЊ" + String.format(" %d ", settingsDev.sms_to_send.size()) + "SMS?");
+		b.setPositiveButton("РЈРґР°Р»РёС‚СЊ", new OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) {
 	        	ArrayList<Map<String, String>> old_data = settings.getNumbersBroadcast();
 	        	
@@ -326,7 +326,7 @@ public class NumbersBroadcastActivity extends BaseActivity{
 		        	setVisibleApplayCancel();
 		        	lockButtonAddNumber();
 				    lockButtonDeleteNumbers();
-		    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Удаление номера");
+		    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"РЈРґР°Р»РµРЅРёРµ РЅРѕРјРµСЂР°");
 		    		settingsDev.sendCommands();		
 		    		pd.show();
 	        		//
@@ -347,7 +347,7 @@ public class NumbersBroadcastActivity extends BaseActivity{
 	        	
 	        }
 	      });
-		b.setNegativeButton("Отмена", new OnClickListener() {
+		b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) {
 	        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 	        	try
@@ -374,7 +374,7 @@ public class NumbersBroadcastActivity extends BaseActivity{
 
 		AlertDialog.Builder alert = new AlertDialog.Builder(
 				context);
-		alert.setTitle("Изменение имени и номера");
+		alert.setTitle("РР·РјРµРЅРµРЅРёРµ РёРјРµРЅРё Рё РЅРѕРјРµСЂР°");
 		// set prompts.xml to alertdialog builder
 		alert.setView(promptsView);
 
@@ -385,7 +385,7 @@ public class NumbersBroadcastActivity extends BaseActivity{
 		final EditText inputPhone = (EditText) promptsView.findViewById(R.id.editTextPhoneContact);
 		inputPhone.setText(data.get(pos_for_modification).get(ATTRIBUTE_PHONE));
 		
-		    alert.setPositiveButton("Принять", new DialogInterface.OnClickListener() {  
+		    alert.setPositiveButton("РџСЂРёРЅСЏС‚СЊ", new DialogInterface.OnClickListener() {  
 		    public void onClick(DialogInterface dialog, int whichButton) {  
 		        String valueName = inputName.getText().toString();
 		        String valuePhone =  getCorrectPhoneNumber(inputPhone.getText().toString());
@@ -420,7 +420,7 @@ public class NumbersBroadcastActivity extends BaseActivity{
 		        		setVisibleApplayCancel();
 		        		lockButtonAddNumber();
 				    	lockButtonDeleteNumbers();
-		    			LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Удаление номера");
+		    			LoadProgressDialog(settingsDev.sms_to_send.size()+1,"РЈРґР°Р»РµРЅРёРµ РЅРѕРјРµСЂР°");
 		    			settingsDev.sendCommands();		
 		    			pd.show();
 	        		}
@@ -445,7 +445,7 @@ public class NumbersBroadcastActivity extends BaseActivity{
 		       }  
 		     });  
 
-		    alert.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+		    alert.setNegativeButton("РћС‚РјРµРЅР°", new DialogInterface.OnClickListener() {
 
 		        public void onClick(DialogInterface dialog, int which) {
 		        	try
@@ -547,7 +547,7 @@ public class NumbersBroadcastActivity extends BaseActivity{
 		}
 		else
 		{
-			Toast.makeText(getApplicationContext(), "Длина номера не может быть нулевой", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "Р”Р»РёРЅР° РЅРѕРјРµСЂР° РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅСѓР»РµРІРѕР№", Toast.LENGTH_LONG).show();
 		}
 		return result;
 	}
@@ -568,27 +568,27 @@ public class NumbersBroadcastActivity extends BaseActivity{
 	    pd.setTitle(title);
 	    timer.setTitle(title);
 	    timer.setProgressDialog(pd);
-	      // меняем стиль на индикатор
+	      // РјРµРЅСЏРµРј СЃС‚РёР»СЊ РЅР° РёРЅРґРёРєР°С‚РѕСЂ
 	      pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-	      // устанавливаем максимум
+	      // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РјР°РєСЃРёРјСѓРј
 	      pd.setMax(count_sms);
-	      // включаем анимацию ожидания
+	      // РІРєР»СЋС‡Р°РµРј Р°РЅРёРјР°С†РёСЋ РѕР¶РёРґР°РЅРёСЏ
 	      pd.setIndeterminate(true);
 	      pd.setCancelable(false);
 	      timer.start();
 	      hpd = new Handler() {
 	        public void handleMessage(Message msg) {
-	          // выключаем анимацию ожидания
+	          // РІС‹РєР»СЋС‡Р°РµРј Р°РЅРёРјР°С†РёСЋ РѕР¶РёРґР°РЅРёСЏ
 	          pd.setIndeterminate(false);
 	          if (pd.getProgress() < pd.getMax()) {
-	            // увеличиваем значения индикаторов
+	            // СѓРІРµР»РёС‡РёРІР°РµРј Р·РЅР°С‡РµРЅРёСЏ РёРЅРґРёРєР°С‚РѕСЂРѕРІ
 	            pd.incrementProgressBy(1);
 	            pd.incrementSecondaryProgressBy(1);
 	          } else {
 	        	timer.cancel();
 	            pd.dismiss();
 	            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-	            Toast.makeText(getApplicationContext(),"Все команды успешно отправлены",Toast.LENGTH_LONG).show();
+	            Toast.makeText(getApplicationContext(),"Р’СЃРµ РєРѕРјР°РЅРґС‹ СѓСЃРїРµС€РЅРѕ РѕС‚РїСЂР°РІР»РµРЅС‹",Toast.LENGTH_LONG).show();
 	            
 	          }
 	        }
@@ -709,17 +709,17 @@ public class NumbersBroadcastActivity extends BaseActivity{
 			{
 				phone_number = main_number.getText().toString();
 				contact_name = main_name.getText().toString();
-				// создаем новый Map
+				// СЃРѕР·РґР°РµРј РЅРѕРІС‹Р№ Map
 				int pos = freeNumbers.remove(0);
 			    m = new HashMap<String, String>();
 			    m.put(ATTRIBUTE_PHONE, new String(phone_number));
 			    m.put(ATTRIBUTE_POSIITION, String.format("%d", pos));
 			    m.put(ATTRIBUTE_CONTACT_NAME, new String(contact_name));
 			    m.put(ATTRIBUTE_AVAILABLE, "0");
-			    // добавляем его в коллекцию
+			    // РґРѕР±Р°РІР»СЏРµРј РµРіРѕ РІ РєРѕР»Р»РµРєС†РёСЋ
 			    data.add(m);
 			    numbersToAdd.add(m);
-			    // уведомляем, что данные изменились
+			    // СѓРІРµРґРѕРјР»СЏРµРј, С‡С‚Рѕ РґР°РЅРЅС‹Рµ РёР·РјРµРЅРёР»РёСЃСЊ
 			    sAdapter.notifyDataSetChanged();
 			    flag_added = true;
 			    count_numbers++;
@@ -738,7 +738,7 @@ public class NumbersBroadcastActivity extends BaseActivity{
 			}
 		}
 		else
-			Toast.makeText(getApplicationContext(), "Максимальное число номеров для рассылки 9", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ РЅРѕРјРµСЂРѕРІ РґР»СЏ СЂР°СЃСЃС‹Р»РєРё 9", Toast.LENGTH_LONG).show();
 		
 	}
 	
@@ -751,9 +751,9 @@ public class NumbersBroadcastActivity extends BaseActivity{
 			//save parameters
 			final AlertDialog.Builder b = new AlertDialog.Builder(this);
 			b.setIcon(android.R.drawable.ic_dialog_alert);
-			b.setTitle("Очистить список рассылки SMS?");
-			//b.setMessage("Отправить" + String.format(" %d ", settingsDev.sms_to_send.size()) + "SMS?");
-			b.setPositiveButton("Очистить", new OnClickListener() {
+			b.setTitle("РћС‡РёСЃС‚РёС‚СЊ СЃРїРёСЃРѕРє СЂР°СЃСЃС‹Р»РєРё SMS?");
+			//b.setMessage("РћС‚РїСЂР°РІРёС‚СЊ" + String.format(" %d ", settingsDev.sms_to_send.size()) + "SMS?");
+			b.setPositiveButton("РћС‡РёСЃС‚РёС‚СЊ", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		        	
 		        	ArrayList<Map<String, String>> old_data = settings.getNumbersBroadcast();
@@ -796,14 +796,14 @@ public class NumbersBroadcastActivity extends BaseActivity{
 						settingsDev.setNumbersBroadcastCommand(new_data);
 						settings.setNumbersBroadcast(new_data);
 						
-			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Очистка списка рассылки SMS");
+			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"РћС‡РёСЃС‚РєР° СЃРїРёСЃРєР° СЂР°СЃСЃС‹Р»РєРё SMS");
 			    		settingsDev.sendCommands();		
 			    		pd.show();
 					}
 					
 		        }
 		      });
-			b.setNegativeButton("Отмена", new OnClickListener() {
+			b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 		        	flag_delete = false;
@@ -825,9 +825,9 @@ public class NumbersBroadcastActivity extends BaseActivity{
 	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 		final AlertDialog.Builder b = new AlertDialog.Builder(this);
 		b.setIcon(android.R.drawable.ic_dialog_alert);
-		b.setTitle("Задать список рассылки SMS?");
-		//b.setMessage("Отправить" + String.format(" %d ", settingsDev.sms_to_send.size()) + "SMS?");
-		b.setPositiveButton("Установить", new OnClickListener() {
+		b.setTitle("Р—Р°РґР°С‚СЊ СЃРїРёСЃРѕРє СЂР°СЃСЃС‹Р»РєРё SMS?");
+		//b.setMessage("РћС‚РїСЂР°РІРёС‚СЊ" + String.format(" %d ", settingsDev.sms_to_send.size()) + "SMS?");
+		b.setPositiveButton("РЈСЃС‚Р°РЅРѕРІРёС‚СЊ", new OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) {
 	        	settings.setNumbersBroadcast(numbersToAdd);
 	        	settingsDev.clearQueueCommands();
@@ -838,12 +838,12 @@ public class NumbersBroadcastActivity extends BaseActivity{
 	        	setVisibleApplayCancel();
 	        	lockButtonAddNumber();
 			    lockButtonDeleteNumbers();
-	    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Задание списка рассылки SMS");
+	    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Р—Р°РґР°РЅРёРµ СЃРїРёСЃРєР° СЂР°СЃСЃС‹Р»РєРё SMS");
 	    		settingsDev.sendCommands();		
 	    		pd.show();
 	        }
 	      });
-		b.setNegativeButton("Отмена", new OnClickListener() {
+		b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) {
 	        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 	        	

@@ -138,7 +138,7 @@ public class CSettingsDev {
 					res = true;
 			}
 		}
-		if(!res) Toast.makeText(appcontext, "Введите корректный номер SIM карты", Toast.LENGTH_LONG).show();
+		if(!res) Toast.makeText(appcontext, "В¬РІРµРґРёС‚Рµ РєРѕСЂСЂРµРєС‚РЅС‹Р№ РЅРѕРјРµСЂ SIM РєР°СЂС‚С‹", Toast.LENGTH_LONG).show();
 		return res;
 	}
 	
@@ -153,7 +153,7 @@ public class CSettingsDev {
 		password=settings_.getPinSIM();
 		String message=String.format(Locale.US,"Vkl %d %d %s",nrele, timeout, password);
 		sendSMS(message);
-		Toast.makeText(appcontext,String.format(Locale.US,"Отправлена команда: %s",message),Toast.LENGTH_LONG).show();
+		Toast.makeText(appcontext,String.format(Locale.US,"СњС‚РїСЂР°РІР»РµРЅР° РєРѕРјР°РЅРґР°: %s",message),Toast.LENGTH_LONG).show();
 	}
 	
 	public void RequestReport()
@@ -219,7 +219,7 @@ public class CSettingsDev {
 	
 	public void SetDefaultDevParametrsMultiSMS() 
 	{
-		Toast.makeText(appcontext, "Установка начальных параметров", Toast.LENGTH_LONG).show();
+		Toast.makeText(appcontext, "вЂќСЃС‚Р°РЅРѕРІРєР° РЅР°С‡Р°Р»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ", Toast.LENGTH_LONG).show();
 		phoneNumber=settings_.getNumberSIM();
 		password=settings_.getPinSIM();
 		
@@ -234,7 +234,7 @@ public class CSettingsDev {
 	{
 		if(isSimNumberValid())
 		{
-			Toast.makeText(appcontext, "Отправка команд "+settings_.getName(), Toast.LENGTH_LONG).show();
+			Toast.makeText(appcontext, "РѕС‚РїСЂР°РІРєР° РєРѕРјР°РЅРґ "+settings_.getName(), Toast.LENGTH_LONG).show();
 			phoneNumber=settings_.getNumberSIM();
 			password=settings_.getPinSIM();
 			if(sms_to_send.size()>0)
@@ -349,7 +349,7 @@ public class CSettingsDev {
 		int oldntmpsensor = settings_.getNumberTmpSensorSMS();
 		
 		password=settings_.getPinSIM();
-		//номер термодатчика
+		//РЅРѕРјРµСЂ С‚РµСЂРјРѕРґР°С‚С‡РёРєР°
 		if( (! ( ntmpsensor == oldntmpsensor ) ) || anyway)
 		{
 			SMSCommand smsCommand = new SMSCommand(getCommandDevSettings(numberSMSFunction.NTmpSensorSMS.ncommand(), Integer.toString(ntmpsensor), password), 0);
@@ -358,14 +358,14 @@ public class CSettingsDev {
 		}
 		if(ntmpsensor>0)
 		{
-			//верхняя граница
+			//РІРµСЂС…РЅВ¤В¤ РіСЂР°РЅРёС†Р°
 			if( (! ( notSMS.lower_bound == lowerBound ) ) || anyway)
 			{
 				SMSCommand smsCommand = new SMSCommand(String.format(Locale.US,"Temp.L%d=%d %s", ntmpsensor,lowerBound,password), 1);
 				sms_to_send.add(smsCommand);
 			}
 			
-			//нижняя граница
+			//РЅРёР¶РЅВ¤В¤ РіСЂР°РЅРёС†Р°
 			if( (! ( notSMS.upper_bound == upperBound ) ) || anyway)
 			{
 				SMSCommand smsCommand = new SMSCommand(String.format(Locale.US,"Temp.H%d=%d %s", ntmpsensor,upperBound,password), 1);
@@ -786,7 +786,7 @@ public class CSettingsDev {
 				last_type=current_cmd.type;
 				Message msg = new Message();
 				Bundle b = new Bundle();
-				b.putString("msgvalue","Отправлена команда: "+current_cmd.command);
+				b.putString("msgvalue","РѕС‚РїСЂР°РІР»РµРЅР° РєРѕРјР°РЅРґР°: "+current_cmd.command);
 				msg.setData(b);
 				handler.sendMessage(msg);
 				hdp.sendEmptyMessage(0);

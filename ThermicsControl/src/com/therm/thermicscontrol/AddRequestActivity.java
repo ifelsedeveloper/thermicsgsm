@@ -78,7 +78,7 @@ public class AddRequestActivity extends BaseActivity {
 		
 		amSendRequest = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 		
-		// открываем подключение к БД
+		// РѕС‚РєСЂС‹РІР°РµРј РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє Р‘Р”
 		dbRequest = new DBRequest(this);
 		dbRequest.open();
 		
@@ -123,7 +123,7 @@ public class AddRequestActivity extends BaseActivity {
 		{
 
 			modifay = true;
-			titleAddRequest.setText("Изменить запрос");
+			titleAddRequest.setText("РР·РјРµРЅРёС‚СЊ Р·Р°РїСЂРѕСЃ");
 			id_ = Integer.parseInt(myIntent.getStringExtra(ATTRIBUTE_ROWID));
 			//Toast.makeText(getApplicationContext(), "my id = "+ Integer.toString(id_), Toast.LENGTH_LONG).show();
 			Cursor cursor = dbRequest.getRec(id_);
@@ -304,7 +304,7 @@ public class AddRequestActivity extends BaseActivity {
 	
 	String getValueDaysOfWeek()
 	{
-		String result = "Каждый день";
+		String result = "РљР°Р¶РґС‹Р№ РґРµРЅСЊ";
 		
 		CheckBox check_day = (CheckBox) dialogSetDay.findViewById(R.id.checkBoxDayMon);
 		days_of_week [0] = check_day.isChecked();
@@ -331,7 +331,7 @@ public class AddRequestActivity extends BaseActivity {
 		for(int i=0;i<7;i++)
 			flag = flag & days_of_week[i];
 		
-		String [] days = {"пн","вт","ср","чт","пт","сб","вс"};
+		String [] days = {"РїРЅ","РІС‚","СЃСЂ","С‡С‚","РїС‚","СЃР±","РІСЃ"};
 		
 		if(!flag)
 		{
@@ -356,7 +356,7 @@ public class AddRequestActivity extends BaseActivity {
 			flag = flag | days_of_week[i];
 		
 		if(!flag)
-			return "Никогда";
+			return "РќРёРєРѕРіРґР°";
 		
 		return result;
 	}

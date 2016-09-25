@@ -19,7 +19,7 @@ public class PhoneRingingMonitor extends BroadcastReceiver {
 	        	 	Bundle bundle = intent.getExtras();
 					String sms_from= bundle.getString("incoming_number");
 					Intent mIntent = new Intent(context, SmsService.class);
-					mIntent.putExtra("sms_body", "Система Кситал: входящий вызов");
+					mIntent.putExtra("sms_body", "РЎРёСЃС‚РµРјР° РљСЃРёС‚Р°Р»: РІС…РѕРґСЏС‰РёР№ РІС‹Р·РѕРІ");
 					mIntent.putExtra("incoming_number", sms_from);
 					context.startService(mIntent);
 	         }

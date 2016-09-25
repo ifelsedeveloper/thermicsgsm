@@ -49,7 +49,7 @@ OnClickListener, OnLongClickListener{
 		dialog = new Dialog(context);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(R.layout.custom_dialog_change_delete);
-		dialog.setTitle("Выберите действие");
+		dialog.setTitle("Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ");
 		nSelectedItem = systemConfigDataSource.getSelectedPosition();
 		Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonChange);
 		dialogButton.setOnClickListener(new Button.OnClickListener() {  
@@ -148,7 +148,7 @@ OnClickListener, OnLongClickListener{
 	{
 
 		AlertDialog.Builder alert = new AlertDialog.Builder(context);
-		alert.setTitle("Объект");
+		alert.setTitle("РћР±СЉРµРєС‚");
 		//alert.setMessage("Message");
 		final EditText input = new EditText(context);
 		final int id_system = getIdSystemFrom(position);
@@ -168,7 +168,7 @@ OnClickListener, OnLongClickListener{
             }
         },120);
 		
-		alert.setPositiveButton("Изменить", new DialogInterface.OnClickListener() {
+		alert.setPositiveButton("РР·РјРµРЅРёС‚СЊ", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				String value = input.getText().toString();
 				systemConfigDataSource.updateSystemConfigName(id_system, value);
@@ -176,7 +176,7 @@ OnClickListener, OnLongClickListener{
 			}
 		});
 
-		alert.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+		alert.setNegativeButton("РћС‚РјРµРЅР°", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				// Canceled.
 			}
@@ -192,17 +192,17 @@ OnClickListener, OnLongClickListener{
 			this.systemConfigDataSource.deleteSystemConfig(getIdSystemFrom(position));
 			refreshListView();
 		} else {
-			Toast.makeText(ContextApplication.getAppContext(), "Вы не можете удалить первый обьект управления", Toast.LENGTH_LONG).show();
+			Toast.makeText(ContextApplication.getAppContext(), "Р’С‹ РЅРµ РјРѕР¶РµС‚Рµ СѓРґР°Р»РёС‚СЊ РїРµСЂРІС‹Р№ РѕР±СЊРµРєС‚ СѓРїСЂР°РІР»РµРЅРёСЏ", Toast.LENGTH_LONG).show();
 		}
 	}
 
 	public void addNewSystem()
 	{
 		AlertDialog.Builder alert = new AlertDialog.Builder(context);
-		alert.setTitle("Введите название");
+		alert.setTitle("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ");
 		//alert.setMessage("Message");
 		final EditText input = new EditText(context);
-		input.setText("Объект");
+		input.setText("РћР±СЉРµРєС‚");
 		
 		alert.setView(input);
 
@@ -212,12 +212,12 @@ OnClickListener, OnLongClickListener{
                 InputMethodManager keyboard = (InputMethodManager)
                 context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 keyboard.showSoftInput(input, 0);
-                input.setSelection("Объект".length());
+                input.setSelection("РћР±СЉРµРєС‚".length());
                 input.setSelectAllOnFocus(true);
             }
         },120);
 		
-		alert.setPositiveButton("Подтвердить", new DialogInterface.OnClickListener() {
+		alert.setPositiveButton("РџРѕРґС‚РІРµСЂРґРёС‚СЊ", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				String value = input.getText().toString();
 				systemConfigDataSource.createSystemConfig(value);
@@ -225,7 +225,7 @@ OnClickListener, OnLongClickListener{
 			}
 		});
 
-		alert.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+		alert.setNegativeButton("РћС‚РјРµРЅР°", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				// Canceled.
 			}

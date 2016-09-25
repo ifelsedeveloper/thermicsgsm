@@ -43,7 +43,7 @@ public class TimerCursorAdapter extends SimpleCursorAdapter implements
 		dialog = new Dialog(context);
 	    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(R.layout.custom_dialog_change_delete);
-		dialog.setTitle("Выберите действие");
+		dialog.setTitle("Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ");
 		this.settings = settings;
 		Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonChange);
 		dialogButton.setOnClickListener(new Button.OnClickListener() {  
@@ -97,7 +97,7 @@ public class TimerCursorAdapter extends SimpleCursorAdapter implements
 		cBox.setChecked(value.enable);
 		cBox.setOnClickListener(this);
 		TextView titleTimerDestenation = (TextView) v.findViewById(R.id.titleTimerDestenation);
-		titleTimerDestenation.setText("Реле №"+Integer.toString(value.n_rele + 1) + " - " + settings.getFunctionRele(value.n_rele));
+		titleTimerDestenation.setText("Р РµР»Рµ в„–"+Integer.toString(value.n_rele + 1) + " - " + settings.getFunctionRele(value.n_rele));
 		
 		TextView valueTimeStart = (TextView) v.findViewById(R.id.valueTimeStart);
 		valueTimeStart.setText(value.getStartStringTime());

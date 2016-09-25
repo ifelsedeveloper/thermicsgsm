@@ -133,7 +133,7 @@ public final static String prefLastSystemReportTime = "lastSystemReportTime";
 public static SystemConfig settings_st;
 public final static String prefDeviceVersion = "deviceVersion";
 
-// имена атрибутов для Map
+// РёРјРµРЅР° Р°С‚СЂРёР±СѓС‚РѕРІ РґР»СЏ Map
 static final String ATTRIBUTE_PHONE = "phone";
 static final String ATTRIBUTE_CONTACT_NAME = "contactName";
 static final String ATTRIBUTE_POSIITION = "position";

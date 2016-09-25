@@ -119,7 +119,7 @@ public class DBTimerDateTimeAction{
 		return dbFile.exists();
 	}
 
-	// открыть подключение
+	// РѕС‚РєСЂС‹С‚СЊ РїРѕРґРєР»СЋС‡РµРЅРёРµ
 	public void open() {
 		mDBHelper = new DBHelper(mCtx, DB_NAME, null, DB_VERSION);
 		if(!doesDatabaseExist(mCtx, DB_NAME))
@@ -129,28 +129,28 @@ public class DBTimerDateTimeAction{
 		mDB = mDBHelper.getWritableDatabase();
 	}
 
-	// закрыть подключение
+	// Р·Р°РєСЂС‹С‚СЊ РїРѕРґРєР»СЋС‡РµРЅРёРµ
 	public void close() {
 		if (mDBHelper!=null) mDBHelper.close();
 	}
 
-	// получить все данные из таблицы DB_TABLE
+	// РїРѕР»СѓС‡РёС‚СЊ РІСЃРµ РґР°РЅРЅС‹Рµ РёР· С‚Р°Р±Р»РёС†С‹ DB_TABLE
 	public Cursor getAllData() {
 		return mDB.query(DB_TABLE, null, null, null, null, null, null);
 	}
 
-	// получить все данные из таблицы DB_TABLE
+	// РїРѕР»СѓС‡РёС‚СЊ РІСЃРµ РґР°РЅРЅС‹Рµ РёР· С‚Р°Р±Р»РёС†С‹ DB_TABLE
 	public Cursor getAllData(long id_system) {
 		return mDB.query(DB_TABLE, null, COLUMN_ID_SYSTEM+" = ?", new String[]{Long.toString(id_system)}, null, null, null);
 	}
 	
-	// добавить запись в DB_TABLE
+	// РґРѕР±Р°РІРёС‚СЊ Р·Р°РїРёСЃСЊ РІ DB_TABLE
 	public void addRec(TimerValue timerValue) {
 		ContentValues cv = getContentValue(timerValue);
 		mDB.insert(DB_TABLE, null, cv);
 	}
 
-	//добавить запись в DB_TABLE
+	//РґРѕР±Р°РІРёС‚СЊ Р·Р°РїРёСЃСЊ РІ DB_TABLE
 	public void updateRec(TimerValue timerValue, int id) {
 		ContentValues cv = getContentValue(timerValue);
 		mDB.update(DB_TABLE, cv, "_id=?",
@@ -181,7 +181,7 @@ public class DBTimerDateTimeAction{
 		return cv;
 	}
 
-	// удалить запись из DB_TABLE
+	// СѓРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ РёР· DB_TABLE
 	public void delRec(long id) {
 		mDB.delete(DB_TABLE, COLUMN_ID + " = " + id, null);
 
@@ -294,7 +294,7 @@ public class DBTimerDateTimeAction{
 		mDB.delete(DB_TABLE, null, null);
 	}
 
-	// класс по созданию и управлению БД
+	// РєР»Р°СЃСЃ РїРѕ СЃРѕР·РґР°РЅРёСЋ Рё СѓРїСЂР°РІР»РµРЅРёСЋ Р‘Р”
 	private class DBHelper extends SQLiteOpenHelper {
 
 		public DBHelper(Context context, String name, CursorFactory factory,
@@ -302,7 +302,7 @@ public class DBTimerDateTimeAction{
 			super(context, name, factory, version);
 		}
 
-		// создаем и заполняем БД
+		// СЃРѕР·РґР°РµРј Рё Р·Р°РїРѕР»РЅСЏРµРј Р‘Р”
 		@Override
 		public void onCreate(SQLiteDatabase db) {
 			db.execSQL(DB_CREATE);
@@ -320,7 +320,7 @@ public class DBTimerDateTimeAction{
 				try {		
 
 					db.execSQL("alter table " + DB_TABLE + " add column " + COLUMN_ID_SYSTEM + " integer DEFAULT '1' NOT NULL;");
-					// создаем временную таблицу 
+					// СЃРѕР·РґР°РµРј РІСЂРµРјРµРЅРЅСѓСЋ С‚Р°Р±Р»РёС†Сѓ 
 					db.execSQL("create temporary table " + DB_NAME_TEMPORARY + "(" +
 							COLUMN_ID + " integer primary key autoincrement, " +
 							COLUMN_N_RELE + " integer, " +

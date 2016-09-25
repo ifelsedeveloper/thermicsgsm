@@ -47,7 +47,7 @@ public class CursorAdapterCheckBox extends SimpleCursorAdapter implements
 		dialog = new Dialog(context);
 	    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(R.layout.custom_dialog_change_delete);
-		dialog.setTitle("Выберите действие");
+		dialog.setTitle("Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ");
 		
 		Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonChange);
 		dialogButton.setOnClickListener(new Button.OnClickListener() {  

@@ -442,7 +442,7 @@ public class SystemConfig {
 	}
 
 	public String getTextSMSAlarm() {
-		String result = "Тревога! Нарушен охраняемый периметр дома!";
+		String result = "РўСЂРµРІРѕРіР°! РќР°СЂСѓС€РµРЅ РѕС…СЂР°РЅСЏРµРјС‹Р№ РїРµСЂРёРјРµС‚СЂ РґРѕРјР°!";
 		if (_settings.contains(BaseActivity.prefTextSMSAlarm) == true)
 			result = _settings.getString(BaseActivity.prefTextSMSAlarm, result);
 		else
@@ -457,7 +457,7 @@ public class SystemConfig {
 	}
 
 	public String getTextSMSTitle() {
-		String result = "Система KSYTAL :";
+		String result = "РЎРёСЃС‚РµРјР° KSYTAL :";
 		if (_settings.contains(BaseActivity.prefTextSMSTitle) == true)
 			result = _settings.getString(BaseActivity.prefTextSMSTitle, result);
 		else
@@ -708,7 +708,7 @@ public class SystemConfig {
 	}
 
 	public String getFunctionRele1() {
-		String result = "Освещение";
+		String result = "РћСЃРІРµС‰РµРЅРёРµ";
 		if (_settings.contains(BaseActivity.FUNCTION_RELE1) == true)
 			result = _settings.getString(BaseActivity.FUNCTION_RELE1, result);
 		else
@@ -724,7 +724,7 @@ public class SystemConfig {
 	}
 
 	public String getFunctionRele2() {
-		String result = "Котел";
+		String result = "РљРѕС‚РµР»";
 		if (_settings.contains(BaseActivity.FUNCTION_RELE2) == true)
 			result = _settings.getString(BaseActivity.FUNCTION_RELE2, result);
 		else
@@ -740,7 +740,7 @@ public class SystemConfig {
 	}
 
 	public String getFunctionRele3() {
-		String result = "Сирена";
+		String result = "РЎРёСЂРµРЅР°";
 		if (_settings.contains(BaseActivity.FUNCTION_RELE3) == true)
 			result = _settings.getString(BaseActivity.FUNCTION_RELE3, result);
 		else
@@ -768,7 +768,7 @@ public class SystemConfig {
 	}
 
 	public String getFunctionUpr() {
-		String result = "Управление";
+		String result = "РЈРїСЂР°РІР»РµРЅРёРµ";
 		if (_settings.contains(BaseActivity.FUNCTION_UPR) == true)
 			result = _settings.getString(BaseActivity.FUNCTION_UPR, result);
 		else
@@ -791,9 +791,9 @@ public class SystemConfig {
 		return;
 	}
 
-	static String[] functions_tmp_sensor = { "Температура воздуха  котельной",
-			"Температура воды", "Температура  воздуха", "Доп. датчик 4",
-			"Доп. датчик 5", "Доп. датчик 6" };
+	static String[] functions_tmp_sensor = { "РўРµРјРїРµСЂР°С‚СѓСЂР° РІРѕР·РґСѓС…Р°  РєРѕС‚РµР»СЊРЅРѕР№",
+			"РўРµРјРїРµСЂР°С‚СѓСЂР° РІРѕРґС‹", "РўРµРјРїРµСЂР°С‚СѓСЂР°  РІРѕР·РґСѓС…Р°", "Р”РѕРї. РґР°С‚С‡РёРє 4",
+			"Р”РѕРї. РґР°С‚С‡РёРє 5", "Р”РѕРї. РґР°С‚С‡РёРє 6" };
 
 	public String getFunctionTmpSensor(int number) {
 		String result = functions_tmp_sensor[number];

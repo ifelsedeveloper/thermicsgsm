@@ -78,45 +78,45 @@ public class MessageSystemActivity extends BaseActivity implements OnItemSelecte
 			
 			//database
 			
-			 // открываем подключение к БД
+			 // РѕС‚РєСЂС‹РІР°РµРј РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє Р‘Р”
 		    db = new DBSMS(this);
 		    db.open();
 		    if(cursor!= null)
 		    	stopManagingCursor(cursor);
-		    // получаем курсор
+		    // РїРѕР»СѓС‡Р°РµРј РєСѓСЂСЃРѕСЂ
 		    cursor = db.getAllData("","");
 		    startManagingCursor(cursor);
 		    
-		    // формируем столбцы сопоставления
+		    // С„РѕСЂРјРёСЂСѓРµРј СЃС‚РѕР»Р±С†С‹ СЃРѕРїРѕСЃС‚Р°РІР»РµРЅРёСЏ
 		    String[] from = new String[] { DBSMS.COLUMN_DATE, DBSMS.COLUMN_TXT };
 		    int[] to = new int[] { R.id.smsDate, R.id.smsMessage };
 	
-		    // создааем адаптер и настраиваем список
+		    // СЃРѕР·РґР°Р°РµРј Р°РґР°РїС‚РµСЂ Рё РЅР°СЃС‚СЂР°РёРІР°РµРј СЃРїРёСЃРѕРє
 		    scAdapter = new SimpleCursorAdapter(this, R.layout.sms_row, cursor, from, to);
 		    lvData = (ListView) findViewById(R.id.listViewSMSessages);
 		    lvData.setAdapter(scAdapter);
 			
 			/////
-		 // создаем BroadcastReceiver
+		 // СЃРѕР·РґР°РµРј BroadcastReceiver
 		    br = new BroadcastReceiver() {
-		      // действия при получении сообщений
+		      // РґРµР№СЃС‚РІРёСЏ РїСЂРё РїРѕР»СѓС‡РµРЅРёРё СЃРѕРѕР±С‰РµРЅРёР№
 		      public void onReceive(Context context, Intent intent) {
 		        String sms = intent.getStringExtra(PARAM_SMS);
 		        String time = intent.getStringExtra(PARAM_SMSTIME);
 		        Log.d(TAG_events, "onReceive sms: "+sms+" ;time = "+time);
-		        // обновляем курсор
+		        // РѕР±РЅРѕРІР»СЏРµРј РєСѓСЂСЃРѕСЂ
 		        updateListView();
 		        
 		      }
 		    };
-		    // создаем фильтр для BroadcastReceiver
+		    // СЃРѕР·РґР°РµРј С„РёР»СЊС‚СЂ РґР»СЏ BroadcastReceiver
 		    IntentFilter intFilt = new IntentFilter(BROADCAST_ACTION_RCVSMS);
-		    // регистрируем (включаем) BroadcastReceiver
+		    // СЂРµРіРёСЃС‚СЂРёСЂСѓРµРј (РІРєР»СЋС‡Р°РµРј) BroadcastReceiver
 		    registerReceiver(br, intFilt);
 		    count_messages = cursor.getCount();
 		    Spinner filterSpinner = (Spinner) findViewById(R.id.spinnerFilterSystem);
 		    listSystems = new ArrayList<String>();
-		    listSystems.add("Все сообщения");
+		    listSystems.add("Р’СЃРµ СЃРѕРѕР±С‰РµРЅРёСЏ");
 			systems = SystemConfigDataSource.sharedInstanceSystemConfigDataSource().getAllSystemConfig();
 			for(SystemConfig system : systems)
 			{
@@ -130,7 +130,7 @@ public class MessageSystemActivity extends BaseActivity implements OnItemSelecte
 			dataAdapterSystems.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	
 		    
-		    //textViewTitle.setText(String.format("Сообщения от системы (%d)", count_messages));
+		    //textViewTitle.setText(String.format("РЎРѕРѕР±С‰РµРЅРёСЏ РѕС‚ СЃРёСЃС‚РµРјС‹ (%d)", count_messages));
 		    
 		    lvData.setSelection(lvData.getCount());
 		    
@@ -185,7 +185,7 @@ public class MessageSystemActivity extends BaseActivity implements OnItemSelecte
 	
 	protected void onDestroy() {
 	    super.onDestroy();
-	    // закрываем подключение при выходе
+	    // Р·Р°РєСЂС‹РІР°РµРј РїРѕРґРєР»СЋС‡РµРЅРёРµ РїСЂРё РІС‹С…РѕРґРµ
 	    unregisterReceiver(br);
 	    db.close();
 	    
@@ -202,7 +202,7 @@ public class MessageSystemActivity extends BaseActivity implements OnItemSelecte
 	{
 		count_messages = cursor.getCount();
 		if(SelectedIndexOfSystem == 0)
-			listSystems.set(SelectedIndexOfSystem, String.format("Все сообщения (%d)", count_messages ));
+			listSystems.set(SelectedIndexOfSystem, String.format("Р’СЃРµ СЃРѕРѕР±С‰РµРЅРёСЏ (%d)", count_messages ));
 		else
 			listSystems.set(SelectedIndexOfSystem, String.format(systems.get(SelectedIndexOfSystem-1).getName() + " (%d)", count_messages ));
 		lvData.smoothScrollToPosition(lvData.getCount());
@@ -215,8 +215,8 @@ public class MessageSystemActivity extends BaseActivity implements OnItemSelecte
 		{
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 			final AlertDialog.Builder b = new AlertDialog.Builder(this);
-			b.setTitle("Удалить сообщения?");
-			b.setPositiveButton("Да", new OnClickListener() {
+			b.setTitle("РЈРґР°Р»РёС‚СЊ СЃРѕРѕР±С‰РµРЅРёСЏ?");
+			b.setPositiveButton("Р”Р°", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		        	db.clearBase();
 		        	if(!cursor.isClosed())
@@ -225,7 +225,7 @@ public class MessageSystemActivity extends BaseActivity implements OnItemSelecte
 		    		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 		        }
 		      });
-			b.setNegativeButton("Нет", new OnClickListener() {
+			b.setNegativeButton("РќРµС‚", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 		        }});
@@ -240,13 +240,13 @@ public class MessageSystemActivity extends BaseActivity implements OnItemSelecte
 		//save parameters
 		final AlertDialog.Builder b = new AlertDialog.Builder(this);
 		b.setIcon(android.R.drawable.ic_dialog_alert);
-		b.setTitle("Сохранить сообщения в файл?");
-		b.setPositiveButton("Сохранить", new OnClickListener() {
+		b.setTitle("РЎРѕС…СЂР°РЅРёС‚СЊ СЃРѕРѕР±С‰РµРЅРёСЏ РІ С„Р°Р№Р»?");
+		b.setPositiveButton("РЎРѕС…СЂР°РЅРёС‚СЊ", new OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) {
 	        	SaveMessage();
 	        }
 	      });
-		b.setNegativeButton("Отмена", new OnClickListener() {
+		b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) {
 
 	        }});
@@ -285,7 +285,7 @@ public class MessageSystemActivity extends BaseActivity implements OnItemSelecte
             
             myOutWriter.close();
             
-            Toast.makeText(getApplicationContext(),String.format("Сообщения экспортированы в файл: %s", filePath), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),String.format("РЎРѕРѕР±С‰РµРЅРёСЏ СЌРєСЃРїРѕСЂС‚РёСЂРѕРІР°РЅС‹ РІ С„Р°Р№Р»: %s", filePath), Toast.LENGTH_LONG).show();
         } 
         catch (Exception e) 
         {

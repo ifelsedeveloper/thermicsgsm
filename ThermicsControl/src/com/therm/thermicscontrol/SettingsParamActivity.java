@@ -103,23 +103,23 @@ public class SettingsParamActivity extends BaseActivity {
 			loadParam();
 			
 			Log.i(TAG_events, "creating activity");
-			// создаем BroadcastReceiver
+			// СЃРѕР·РґР°РµРј BroadcastReceiver
 		    brTimer = new BroadcastReceiver() {
-		      // действия при получении сообщений
+		      // РґРµР№СЃС‚РІРёСЏ РїСЂРё РїРѕР»СѓС‡РµРЅРёРё СЃРѕРѕР±С‰РµРЅРёР№
 		      public void onReceive(Context context, Intent intent) {
 		    	  reloadSystemConfig();
 		    	  setTimerState();
 		      }
 		    };
 	
-		    // создаем фильтр для BroadcastReceiver
+		    // СЃРѕР·РґР°РµРј С„РёР»СЊС‚СЂ РґР»СЏ BroadcastReceiver
 		    IntentFilter intFiltTimer = new IntentFilter(TimerActionService.ATTRIBUTE_ACTION);
-		    // регистрируем (включаем) BroadcastReceiver
+		    // СЂРµРіРёСЃС‚СЂРёСЂСѓРµРј (РІРєР»СЋС‡Р°РµРј) BroadcastReceiver
 		    registerReceiver(brTimer, intFiltTimer);
 		    
-			// создаем BroadcastReceiver
+			// СЃРѕР·РґР°РµРј BroadcastReceiver
 		    br = new BroadcastReceiver() {
-		      // действия при получении сообщений
+		      // РґРµР№СЃС‚РІРёСЏ РїСЂРё РїРѕР»СѓС‡РµРЅРёРё СЃРѕРѕР±С‰РµРЅРёР№
 		      public void onReceive(Context context, Intent intent) {
 		    	  try {
 					Thread.sleep(1000);
@@ -130,7 +130,7 @@ public class SettingsParamActivity extends BaseActivity {
 		        String sms = intent.getStringExtra(PARAM_SMS);
 		        String time = intent.getStringExtra(PARAM_SMSTIME);
 		        Log.d(TAG_events, "onReceive sms: "+sms+" ;time = "+time);
-		        //отправляем полученное сообщение нашему классу
+		        //РѕС‚РїСЂР°РІР»СЏРµРј РїРѕР»СѓС‡РµРЅРЅРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ РЅР°С€РµРјСѓ РєР»Р°СЃСЃСѓ
 		        settingsDev.recvSMS(sms);
 		        setReleState();
 	
@@ -140,9 +140,9 @@ public class SettingsParamActivity extends BaseActivity {
 		        setCheckRele(isRele);
 		      }
 		    };
-		    // создаем фильтр для BroadcastReceiver
+		    // СЃРѕР·РґР°РµРј С„РёР»СЊС‚СЂ РґР»СЏ BroadcastReceiver
 		    IntentFilter intFilt = new IntentFilter(MessageSystemActivity.BROADCAST_ACTION_RCVSMS);
-		    // регистрируем (включаем) BroadcastReceiver
+		    // СЂРµРіРёСЃС‚СЂРёСЂСѓРµРј (РІРєР»СЋС‡Р°РµРј) BroadcastReceiver
 		    registerReceiver(br, intFilt);
 		    
 		    viewOkCancel = findViewById(R.id.layoutOKCancelReleWarm);
@@ -391,7 +391,7 @@ public class SettingsParamActivity extends BaseActivity {
 		TextView text;
 		if(numberSensorTMPReleWarm==0)
 		{
-			function_tmp_sensor="Датчик не задан";
+			function_tmp_sensor="Р”Р°С‚С‡РёРє РЅРµ Р·Р°РґР°РЅ";
 			findViewById(R.id.seekBarReleWarm).setEnabled(false);
 			text  = (TextView) findViewById(R.id.titleFunctionTmpSensorReleWarm);
 			text.setText(function_tmp_sensor);
@@ -440,14 +440,14 @@ public class SettingsParamActivity extends BaseActivity {
 	public void OnClickOkButton(View v)
 	{
 		final AlertDialog.Builder b = new AlertDialog.Builder(this);
-		b.setTitle("Изменить настройки в");
-		b.setPositiveButton("программе", new OnClickListener() {
+		b.setTitle("РР·РјРµРЅРёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё РІ");
+		b.setPositiveButton("РїСЂРѕРіСЂР°РјРјРµ", new OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) {
 	        	SendCommandsToDevice = false;
 	        	saveParam2();
 	        }
 	      });
-		b.setNegativeButton("устройстве", new OnClickListener() {
+		b.setNegativeButton("СѓСЃС‚СЂРѕР№СЃС‚РІРµ", new OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) {
 	        	SendCommandsToDevice = true;
 	        	saveParam2();
@@ -575,9 +575,9 @@ public class SettingsParamActivity extends BaseActivity {
 				//save parameters
 				final AlertDialog.Builder b = new AlertDialog.Builder(this);
 				b.setIcon(android.R.drawable.ic_dialog_alert);
-				b.setTitle("Установить параметры реле нагревателя?");
-				//b.setMessage("Отправить" + String.format(" %d ", settingsDev.sms_to_send.size()) + "SMS?");
-				b.setPositiveButton("Установить", new OnClickListener() {
+				b.setTitle("РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РїР°СЂР°РјРµС‚СЂС‹ СЂРµР»Рµ РЅР°РіСЂРµРІР°С‚РµР»СЏ?");
+				//b.setMessage("РћС‚РїСЂР°РІРёС‚СЊ" + String.format(" %d ", settingsDev.sms_to_send.size()) + "SMS?");
+				b.setPositiveButton("РЈСЃС‚Р°РЅРѕРІРёС‚СЊ", new OnClickListener() {
 			        public void onClick(DialogInterface dialog, int which) {
 			        	//set hot keys state
 			        	settings.setNTempConfig(newTempSelectedButton);
@@ -616,7 +616,7 @@ public class SettingsParamActivity extends BaseActivity {
 				    		settings.setNumberReleWarm(numberRele);
 				        	//viewOkCancel.setVisibility(View.INVISIBLE);
 				        	viewOkCancel.setVisibility(View.GONE);
-				    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Настройка термостата");
+				    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"РќР°СЃС‚СЂРѕР№РєР° С‚РµСЂРјРѕСЃС‚Р°С‚Р°");
 				    		settingsDev.sendCommands();		
 				    		setReleState();
 				    		pd.show();
@@ -627,7 +627,7 @@ public class SettingsParamActivity extends BaseActivity {
 						}
 			        }
 			      });
-				b.setNegativeButton("Отмена", new OnClickListener() {
+				b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 			        public void onClick(DialogInterface dialog, int which) {
 			        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 			        }});
@@ -666,16 +666,16 @@ public class SettingsParamActivity extends BaseActivity {
 		final String neutralActionDialog;
 		if(isReleN)
 		{
-			titleProgress = String.format(Locale.ENGLISH,"Включение реле №%d", nrele+1);
-			questionDialog = String.format(Locale.ENGLISH,"Включить реле №%d", nrele+1);
-			actionDialog = "Включить";
-			neutralActionDialog = "Вкл. 60 сек";
+			titleProgress = String.format(Locale.ENGLISH,"Р’РєР»СЋС‡РµРЅРёРµ СЂРµР»Рµ в„–%d", nrele+1);
+			questionDialog = String.format(Locale.ENGLISH,"Р’РєР»СЋС‡РёС‚СЊ СЂРµР»Рµ в„–%d", nrele+1);
+			actionDialog = "Р’РєР»СЋС‡РёС‚СЊ";
+			neutralActionDialog = "Р’РєР». 60 СЃРµРє";
 		}
 		else
 		{
-			titleProgress = String.format(Locale.ENGLISH,"Отключение реле №%d", nrele+1);
-			questionDialog = String.format(Locale.ENGLISH,"Отключить реле №%d", nrele+1);
-			actionDialog = "Отключить";
+			titleProgress = String.format(Locale.ENGLISH,"РћС‚РєР»СЋС‡РµРЅРёРµ СЂРµР»Рµ в„–%d", nrele+1);
+			questionDialog = String.format(Locale.ENGLISH,"РћС‚РєР»СЋС‡РёС‚СЊ СЂРµР»Рµ в„–%d", nrele+1);
+			actionDialog = "РћС‚РєР»СЋС‡РёС‚СЊ";
 			neutralActionDialog = "";
 		}
 		//set parameters to device
@@ -719,7 +719,7 @@ public class SettingsParamActivity extends BaseActivity {
 				      });
 				}
 				
-				b.setNegativeButton("Отмена", new OnClickListener() {
+				b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 			        public void onClick(DialogInterface dialog, int which) {
 			        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 			        	checkBoxRele[nrele].setChecked(isRele[nrele]);
@@ -755,9 +755,9 @@ public class SettingsParamActivity extends BaseActivity {
 		final String questionDialog;
 		final String actionDialog;
 
-		titleProgress = String.format(Locale.ENGLISH,"Включение реле №%d", nrele+1);
-		questionDialog = String.format(Locale.ENGLISH,"Включить реле №%d", nrele+1);
-		actionDialog = "Вкл. 60 сек";
+		titleProgress = String.format(Locale.ENGLISH,"Р’РєР»СЋС‡РµРЅРёРµ СЂРµР»Рµ в„–%d", nrele+1);
+		questionDialog = String.format(Locale.ENGLISH,"Р’РєР»СЋС‡РёС‚СЊ СЂРµР»Рµ в„–%d", nrele+1);
+		actionDialog = "Р’РєР». 60 СЃРµРє";
 
 		//set parameters to device
 		//add commands to queue
@@ -788,7 +788,7 @@ public class SettingsParamActivity extends BaseActivity {
 			        }
 			      });
 				
-				b.setNegativeButton("Отмена", new OnClickListener() {
+				b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 			        public void onClick(DialogInterface dialog, int which) {
 			        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 
@@ -811,15 +811,15 @@ public class SettingsParamActivity extends BaseActivity {
 			final String actionDialog;
 			if(isUpr)
 			{
-				titleProgress = "Включение управления";
-				questionDialog = "Включить управление?";
-				actionDialog = "Включить";
+				titleProgress = "Р’РєР»СЋС‡РµРЅРёРµ СѓРїСЂР°РІР»РµРЅРёСЏ";
+				questionDialog = "Р’РєР»СЋС‡РёС‚СЊ СѓРїСЂР°РІР»РµРЅРёРµ?";
+				actionDialog = "Р’РєР»СЋС‡РёС‚СЊ";
 			}
 			else
 			{
-				titleProgress = "Отключение управления";
-				questionDialog = "Отключить управление?";
-				actionDialog = "Отключить";
+				titleProgress = "РћС‚РєР»СЋС‡РµРЅРёРµ СѓРїСЂР°РІР»РµРЅРёСЏ";
+				questionDialog = "РћС‚РєР»СЋС‡РёС‚СЊ СѓРїСЂР°РІР»РµРЅРёРµ?";
+				actionDialog = "РћС‚РєР»СЋС‡РёС‚СЊ";
 			}
 			//set parameters to device
 			//add commands to queue
@@ -843,7 +843,7 @@ public class SettingsParamActivity extends BaseActivity {
 			    		pd.show();
 			        }
 			      });
-				b.setNegativeButton("Отмена", new OnClickListener() {
+				b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 			        public void onClick(DialogInterface dialog, int which) {
 			        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 			        	isUpr=(!isUpr);
@@ -875,17 +875,17 @@ public class SettingsParamActivity extends BaseActivity {
 				//save parameters
 				final AlertDialog.Builder b = new AlertDialog.Builder(this);
 				b.setIcon(android.R.drawable.ic_dialog_alert);
-				b.setTitle("Вызвать устройство на связь?");
+				b.setTitle("Р’С‹Р·РІР°С‚СЊ СѓСЃС‚СЂРѕР№СЃС‚РІРѕ РЅР° СЃРІСЏР·СЊ?");
 				b.setPositiveButton("Ok", new OnClickListener() {
 			        public void onClick(DialogInterface dialog, int which) {
 			    		
 			    		//set parameters to preference 
-			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Вызов устройства");
+			    		LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Р’С‹Р·РѕРІ СѓСЃС‚СЂРѕР№СЃС‚РІР°");
 			    		settingsDev.sendCommands();		
 			    		pd.show();
 			        }
 			      });
-				b.setNegativeButton("Отмена", new OnClickListener() {
+				b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 			        public void onClick(DialogInterface dialog, int which) {
 			        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 			        }});
@@ -904,13 +904,13 @@ public class SettingsParamActivity extends BaseActivity {
 		final String actionDialog;
 		if(isTimer)
 		{
-			questionDialog = "Включить таймер?";
-			actionDialog = "Включить";
+			questionDialog = "Р’РєР»СЋС‡РёС‚СЊ С‚Р°Р№РјРµСЂ?";
+			actionDialog = "Р’РєР»СЋС‡РёС‚СЊ";
 		}
 		else
 		{
-			questionDialog = "Отключить таймер?";
-			actionDialog = "Отключить";
+			questionDialog = "РћС‚РєР»СЋС‡РёС‚СЊ С‚Р°Р№РјРµСЂ?";
+			actionDialog = "РћС‚РєР»СЋС‡РёС‚СЊ";
 		}
 		
 
@@ -923,7 +923,7 @@ public class SettingsParamActivity extends BaseActivity {
 		        		
 		        }
 		      });
-			b.setNegativeButton("Отмена", new OnClickListener() {
+			b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		        	isTimer=(!isTimer);
 		        	CheckBox checkbox=(CheckBox) findViewById(R.id.checkBoxTimer);
@@ -1120,7 +1120,7 @@ public class SettingsParamActivity extends BaseActivity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 		// custom dialog
 		final Dialog dialog = new Dialog(context,R.style.cust_dialog);
-		dialog.setTitle("Установка значений регулятора");
+		dialog.setTitle("РЈСЃС‚Р°РЅРѕРІРєР° Р·РЅР°С‡РµРЅРёР№ СЂРµРіСѓР»СЏС‚РѕСЂР°");
 		dialog.setContentView(R.layout.dialog_temerature_picker);
 		dialogTempNight = (TextView) dialog.findViewById(R.id.titleNightTemp);
 		dialogTempDay = (TextView) dialog.findViewById(R.id.titleDayTemp);
@@ -1420,27 +1420,27 @@ public class SettingsParamActivity extends BaseActivity {
 	    pd.setTitle(title);
 	    timer.setTitle(title);
 	    timer.setProgressDialog(pd);
-	      // меняем стиль на индикатор
+	      // РјРµРЅСЏРµРј СЃС‚РёР»СЊ РЅР° РёРЅРґРёРєР°С‚РѕСЂ
 	      pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-	      // устанавливаем максимум
+	      // СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РјР°РєСЃРёРјСѓРј
 	      pd.setMax(count_sms);
-	      // включаем анимацию ожидания
+	      // РІРєР»СЋС‡Р°РµРј Р°РЅРёРјР°С†РёСЋ РѕР¶РёРґР°РЅРёСЏ
 	      pd.setIndeterminate(true);
 	      pd.setCancelable(false);
 	      timer.start();
 	      hpd = new Handler() {
 	        public void handleMessage(Message msg) {
-	          // выключаем анимацию ожидания
+	          // РІС‹РєР»СЋС‡Р°РµРј Р°РЅРёРјР°С†РёСЋ РѕР¶РёРґР°РЅРёСЏ
 	          pd.setIndeterminate(false);
 	          if (pd.getProgress() < pd.getMax()) {
-	            // увеличиваем значения индикаторов
+	            // СѓРІРµР»РёС‡РёРІР°РµРј Р·РЅР°С‡РµРЅРёСЏ РёРЅРґРёРєР°С‚РѕСЂРѕРІ
 	            pd.incrementProgressBy(1);
 	            pd.incrementSecondaryProgressBy(1);
 	          } else {
 	        	timer.cancel();
 	            pd.dismiss();
 	            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-	            Toast.makeText(getApplicationContext(),"Все команды успешно отправлены",Toast.LENGTH_LONG).show();
+	            Toast.makeText(getApplicationContext(),"Р’СЃРµ РєРѕРјР°РЅРґС‹ СѓСЃРїРµС€РЅРѕ РѕС‚РїСЂР°РІР»РµРЅС‹",Toast.LENGTH_LONG).show();
 	            
 	          }
 	        }
@@ -1464,16 +1464,16 @@ public class SettingsParamActivity extends BaseActivity {
 	
 	private void PowerOnRele(final int nrele)
 	{
-		String title = String.format(Locale.ENGLISH,"Вкл реле №%d на 60 секунд?", nrele);
+		String title = String.format(Locale.ENGLISH,"Р’РєР» СЂРµР»Рµ в„–%d РЅР° 60 СЃРµРєСѓРЅРґ?", nrele);
 		final AlertDialog.Builder b = new AlertDialog.Builder(this);
 		b.setIcon(android.R.drawable.ic_dialog_alert);
 		b.setTitle(title);
-		b.setPositiveButton("Вкл", new OnClickListener() {
+		b.setPositiveButton("Р’РєР»", new OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) {
 	    		settingsDev.VklRele(nrele, 60);
 	        }
 	      });
-		b.setNegativeButton("Отмена", new OnClickListener() {
+		b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) {
 	        	
 	        }});
@@ -1496,13 +1496,13 @@ public class SettingsParamActivity extends BaseActivity {
 		final String actionDialog;
 		if(isTimer)
 		{
-			questionDialog = "Включить автозапрос?";
-			actionDialog = "Включить";
+			questionDialog = "Р’РєР»СЋС‡РёС‚СЊ Р°РІС‚РѕР·Р°РїСЂРѕСЃ?";
+			actionDialog = "Р’РєР»СЋС‡РёС‚СЊ";
 		}
 		else
 		{
-			questionDialog = "Отключить автозапрос?";
-			actionDialog = "Отключить";
+			questionDialog = "РћС‚РєР»СЋС‡РёС‚СЊ Р°РІС‚РѕР·Р°РїСЂРѕСЃ?";
+			actionDialog = "РћС‚РєР»СЋС‡РёС‚СЊ";
 		}
 		
 
@@ -1515,7 +1515,7 @@ public class SettingsParamActivity extends BaseActivity {
 		        		
 		        }
 		      });
-			b.setNegativeButton("Отмена", new OnClickListener() {
+			b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 		        public void onClick(DialogInterface dialog, int which) {
 		        	isAutoRequest=(!isAutoRequest);
 		        	//CheckBox checkbox=(CheckBox) findViewById(R.id.checkBoxAutoRequest);

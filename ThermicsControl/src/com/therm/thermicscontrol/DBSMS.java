@@ -40,18 +40,18 @@ public class DBSMS{
     mCtx = ctx;
   }
   
-  // открыть подключение
+  // РѕС‚РєСЂС‹С‚СЊ РїРѕРґРєР»СЋС‡РµРЅРёРµ
   public void open() {
     mDBHelper = new DBHelper(mCtx, DB_NAME, null, DB_VERSION);
     mDB = mDBHelper.getWritableDatabase();
   }
   
-  // закрыть подключение
+  // Р·Р°РєСЂС‹С‚СЊ РїРѕРґРєР»СЋС‡РµРЅРёРµ
   public void close() {
     if (mDBHelper!=null) mDBHelper.close();
   }
   
-  // получить все данные из таблицы DB_TABLE
+  // РїРѕР»СѓС‡РёС‚СЊ РІСЃРµ РґР°РЅРЅС‹Рµ РёР· С‚Р°Р±Р»РёС†С‹ DB_TABLE
   public Cursor getAllData(String filter1, String filter2) {
 	  if(filter1.length() == 0)
 		  return mDB.query(DB_TABLE, null, null, null, null, null, null);
@@ -73,18 +73,18 @@ public class DBSMS{
 	  }
   }
   
-  // добавить запись в DB_TABLE
+  // РґРѕР±Р°РІРёС‚СЊ Р·Р°РїРёСЃСЊ РІ DB_TABLE
   public void addRec(String txt, long date) {
     ContentValues cv = new ContentValues();
     cv.put(COLUMN_TXT, txt);
     String strDate=new SimpleDateFormat("dd.MM.yy HH:mm").format(date);
     cv.put(COLUMN_DATE, strDate);
     mDB.insert(DB_TABLE, null, cv);
-    //обработка и выдача уведомления, передача указаний службе
+    //РѕР±СЂР°Р±РѕС‚РєР° Рё РІС‹РґР°С‡Р° СѓРІРµРґРѕРјР»РµРЅРёСЏ, РїРµСЂРµРґР°С‡Р° СѓРєР°Р·Р°РЅРёР№ СЃР»СѓР¶Р±Рµ
     
   }
   
-  // удалить запись из DB_TABLE
+  // СѓРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ РёР· DB_TABLE
   public void delRec(long id) {
     mDB.delete(DB_TABLE, COLUMN_ID + " = " + id, null);
   }
@@ -93,7 +93,7 @@ public class DBSMS{
 	    mDB.delete(DB_TABLE, null, null);
 	  }
   
-  // класс по созданию и управлению БД
+  // РєР»Р°СЃСЃ РїРѕ СЃРѕР·РґР°РЅРёСЋ Рё СѓРїСЂР°РІР»РµРЅРёСЋ Р‘Р”
   private class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context, String name, CursorFactory factory,
@@ -101,7 +101,7 @@ public class DBSMS{
       super(context, name, factory, version);
     }
 
-    // создаем и заполняем БД
+    // СЃРѕР·РґР°РµРј Рё Р·Р°РїРѕР»РЅСЏРµРј Р‘Р”
     @Override
     public void onCreate(SQLiteDatabase db) {
       db.execSQL(DB_CREATE);

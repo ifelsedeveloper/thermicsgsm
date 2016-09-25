@@ -21,7 +21,7 @@ public class TimerValue implements Serializable {
 	public int stop_hour = 0;
 	public int stop_minute = 0;
 	public boolean [] isDay = new boolean[7];
-	String [] days = {"пн","вт","ср","чт","пт","сб","вс"};
+	String [] days = {"РїРЅ","РІС‚","СЃСЂ","С‡С‚","РїС‚","СЃР±","РІСЃ"};
 	public long id_system = 1;
 	public long row_id = 0;
 	
@@ -45,7 +45,7 @@ public class TimerValue implements Serializable {
 	}
 	String getDays()
 	{
-		String result = "Каждый день";
+		String result = "РљР°Р¶РґС‹Р№ РґРµРЅСЊ";
 		
 		boolean flag = true;
 		for(int i=0;i<7;i++)
@@ -71,7 +71,7 @@ public class TimerValue implements Serializable {
 			flag = flag | isDay[i];
 		
 		if(!flag)
-			return "Никогда" +
+			return "РќРёРєРѕРіРґР°" +
 					"";
 		
 		return result;

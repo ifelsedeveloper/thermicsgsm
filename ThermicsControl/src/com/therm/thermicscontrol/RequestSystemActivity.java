@@ -43,19 +43,19 @@ public class RequestSystemActivity extends BaseActivity {
 		{
 				lvData = (ListView) findViewById(R.id.listViewRequestActions);
 				
-				 // открываем подключение к БД
+				 // РѕС‚РєСЂС‹РІР°РµРј РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє Р‘Р”
 			    db = new DBRequest(this);
 			    db.open();
 
-			    // получаем курсор
+			    // РїРѕР»СѓС‡Р°РµРј РєСѓСЂСЃРѕСЂ
 			    cursor = db.getAllData(settings.getId());
 			    startManagingCursor(cursor);
 			    
-			    // формируем столбцы сопоставления
+			    // С„РѕСЂРјРёСЂСѓРµРј СЃС‚РѕР»Р±С†С‹ СЃРѕРїРѕСЃС‚Р°РІР»РµРЅРёСЏ
 			    String[] from = new String[] { DBRequest.COLUMN_ENABLE, DBRequest.COLUMN_HOUR, DBRequest.COLUMN_MINUTES, DBRequest.COLUMN_REPEAT };
 			    int[] to = new int[] 		 { R.id.checkBoxEnableRequest, R.id.titleTimeHourRow, R.id.titleTimeMinutesRow, R.id.titleDayRow };
 		
-			    // создааем адаптер и настраиваем список
+			    // СЃРѕР·РґР°Р°РµРј Р°РґР°РїС‚РµСЂ Рё РЅР°СЃС‚СЂР°РёРІР°РµРј СЃРїРёСЃРѕРє
 			    scAdapter = new CursorAdapterCheckBox(this, R.layout.row_request,cursor, from, to, db);
 			    lvData.setAdapter(scAdapter);
 			    

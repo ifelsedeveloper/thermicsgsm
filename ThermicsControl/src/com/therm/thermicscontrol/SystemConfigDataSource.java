@@ -57,7 +57,7 @@ public class SystemConfigDataSource {
 		boolean isExistSystem = prefefrence.getBoolean("INITIAL_LOADED_FINISHED", false);
 		if(!isExistSystem) {
 			open();
-			createSystemConfig("Объект");
+			createSystemConfig("СњР±СЉРµРєС‚");
 			setSelectedSystem(1);
 			SharedPreferences.Editor editor = prefefrence.edit();
 			editor.putBoolean(INITIAL_LOADED_FINISHED, true);
@@ -90,7 +90,7 @@ public class SystemConfigDataSource {
 		return prefefrence.getLong(SELECTED_SYSTEM, 0);
 	}
 	
-	// получить все данные из таблицы DB_TABLE
+	// РїРѕР»СѓС‡РёС‚СЊ РІСЃРµ РґР°РЅРЅС‹Рµ РёР· С‚Р°Р±Р»РёС†С‹ DB_TABLE
 	public Cursor getAllData() {
 		return database.query(SystemConfigSQLiteHelper.TABLE_SYSTEMS, null, null, null, null, null, null);
 	}

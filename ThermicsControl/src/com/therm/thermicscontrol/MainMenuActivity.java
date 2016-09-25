@@ -84,9 +84,9 @@ public class MainMenuActivity extends BaseActivity   {
 			textNameSystem = (TextView) findViewById(R.id.textNameSystem);
 			
 			setTitleLastReport(settings.getLastSystemReport(),settings.getLastSystemReportTime());
-			// создаем BroadcastReceiver
+			// СЃРѕР·РґР°РµРј BroadcastReceiver
 			br = new BroadcastReceiver() {
-				// действия при получении сообщений
+				// РґРµР№СЃС‚РІРёСЏ РїСЂРё РїРѕР»СѓС‡РµРЅРёРё СЃРѕРѕР±С‰РµРЅРёР№
 				public void onReceive(Context context, Intent intent) {
 					//change title message reader
 					current_local_num_not++;
@@ -97,7 +97,7 @@ public class MainMenuActivity extends BaseActivity   {
 					Log.d(TAG_events, "onReceive sms: "+sms+" ;time = "+time);
 					if(!clickControlAlarm) Toast.makeText(getApplicationContext(),sms,Toast.LENGTH_LONG).show();
 
-					//отправляем полученное сообщение нашему классу
+					//РѕС‚РїСЂР°РІР»СЏРµРј РїРѕР»СѓС‡РµРЅРЅРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ РЅР°С€РµРјСѓ РєР»Р°СЃСЃСѓ
 					settingsDev.recvSMS(sms);
 					settings=SystemConfigDataSource.getActiveSystem();
 					settingsDev=new CSettingsDev(settings,getApplicationContext());
@@ -110,37 +110,37 @@ public class MainMenuActivity extends BaseActivity   {
 					setTitleLastReport(lastReport,date);
 				}
 			};
-			// создаем фильтр для BroadcastReceiver
+			// СЃРѕР·РґР°РµРј С„РёР»СЊС‚СЂ РґР»СЏ BroadcastReceiver
 			IntentFilter intFilt = new IntentFilter(BaseActivity.BROADCAST_ACTION_RCVSMS);
-			// регистрируем (включаем) BroadcastReceiver
+			// СЂРµРіРёСЃС‚СЂРёСЂСѓРµРј (РІРєР»СЋС‡Р°РµРј) BroadcastReceiver
 			registerReceiver(br, intFilt);
 
 
 
 			//new broadcast
-			// создаем BroadcastReceiver
+			// СЃРѕР·РґР°РµРј BroadcastReceiver
 			br_clear_unreaded_sms = new BroadcastReceiver() {
-				// действия при получении сообщений
+				// РґРµР№СЃС‚РІРёСЏ РїСЂРё РїРѕР»СѓС‡РµРЅРёРё СЃРѕРѕР±С‰РµРЅРёР№
 				public void onReceive(Context context, Intent intent) {
 					current_local_num_not = 0;
 					SystemConfig.clearNumNotification();
 					setTitleMessageButton(0);
 				}
 			};
-			// создаем фильтр для BroadcastReceiver
+			// СЃРѕР·РґР°РµРј С„РёР»СЊС‚СЂ РґР»СЏ BroadcastReceiver
 			IntentFilter intFilt2 = new IntentFilter(BaseActivity.BROADCAST_ACTION_CLEARUNREADEDSMS);
-			// регистрируем (включаем) BroadcastReceiver
+			// СЂРµРіРёСЃС‚СЂРёСЂСѓРµРј (РІРєР»СЋС‡Р°РµРј) BroadcastReceiver
 			registerReceiver(br_clear_unreaded_sms, intFilt2);
 
 			brSystemSelectionChanged = new BroadcastReceiver(){
-				// действия при смене системы
+				// РґРµР№СЃС‚РІРёСЏ РїСЂРё СЃРјРµРЅРµ СЃРёСЃС‚РµРјС‹
 				public void onReceive(Context context, Intent intent) {
 					SystemChanged();
 				}
 			};
 
 			IntentFilter intentFilter = new IntentFilter(SystemConfigDataSource.SYSTEM_SELECTION_CHANGED);
-			// регистрируем (включаем) BroadcastReceiver
+			// СЂРµРіРёСЃС‚СЂРёСЂСѓРµРј (РІРєР»СЋС‡Р°РµРј) BroadcastReceiver
 			registerReceiver(brSystemSelectionChanged, intentFilter);
 
 			//load parameters for system
@@ -161,15 +161,15 @@ public class MainMenuActivity extends BaseActivity   {
 			systemConfig_DB = SystemConfigDataSource.sharedInstanceSystemConfigDataSource();
 			systemConfig_DB.open();
 
-			// получаем курсор
+			// РїРѕР»СѓС‡Р°РµРј РєСѓСЂСЃРѕСЂ
 			systemConfigCursor = systemConfig_DB.getAllData();
 			//startManagingCursor(systemConfigCursor);
 
-			// формируем столбцы сопоставления
+			// С„РѕСЂРјРёСЂСѓРµРј СЃС‚РѕР»Р±С†С‹ СЃРѕРїРѕСЃС‚Р°РІР»РµРЅРёСЏ
 			String[] from = new String[] { SystemConfigSQLiteHelper.COLUMN_NAME };
 			int[] to = new int[] 		 { R.id.textViewSystemName };
 
-			// создааем адаптер и настраиваем список
+			// СЃРѕР·РґР°Р°РµРј Р°РґР°РїС‚РµСЂ Рё РЅР°СЃС‚СЂР°РёРІР°РµРј СЃРїРёСЃРѕРє
 			systemConfigSCAdapter = new SystemConfigSympleAdapter(this,R.layout.system_row,systemConfigCursor, from, to, 0, listViewSystems,systemConfig_DB);
 
 
@@ -226,9 +226,9 @@ public class MainMenuActivity extends BaseActivity   {
 		Button textViewTitle = (Button) findViewById(R.id.buttonWithImageMessages);
 
 		if(current_local_num_not>0)
-			textViewTitle.setText(String.format("Сообщения (%d)", current_local_num_not));
+			textViewTitle.setText(String.format("РЎРѕРѕР±С‰РµРЅРёСЏ (%d)", current_local_num_not));
 		else
-			textViewTitle.setText("Сообщения");
+			textViewTitle.setText("РЎРѕРѕР±С‰РµРЅРёСЏ");
 	}
 
 	public void SetCheckedGuardian(boolean value)
@@ -254,7 +254,7 @@ public class MainMenuActivity extends BaseActivity   {
 			String dateString;
 
 			if(lastRep.length()>0)
-				dateString = new SimpleDateFormat("dd MM yyyy в HH:mm").format(new Date(time));
+				dateString = new SimpleDateFormat("dd MM yyyy РІ HH:mm").format(new Date(time));
 			else
 				dateString = "--//--//---- --:--";
 
@@ -298,18 +298,18 @@ public class MainMenuActivity extends BaseActivity   {
 		count_reques = 0;
 
 		final AlertDialog.Builder b = new AlertDialog.Builder(this);
-		b.setTitle("Запросить отчёт?");
-		b.setPositiveButton("Да", new OnClickListener() {
+		b.setTitle("Р—Р°РїСЂРѕСЃРёС‚СЊ РѕС‚С‡С‘С‚?");
+		b.setPositiveButton("Р”Р°", new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
-				Toast.makeText(getApplicationContext(),"Запрос отчёта",Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(),"Р—Р°РїСЂРѕСЃ РѕС‚С‡С‘С‚Р°",Toast.LENGTH_LONG).show();
 				settingsDev.clearQueueCommands();
 				settingsDev.AddRequestReportCommand();
-				LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Запрос отчёта");
+				LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Р—Р°РїСЂРѕСЃ РѕС‚С‡С‘С‚Р°");
 				if(settingsDev.sendCommands())
 					pd.show();
 			}
 		});
-		b.setNegativeButton("Отмена", new OnClickListener() {
+		b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 			}});
@@ -322,18 +322,18 @@ public class MainMenuActivity extends BaseActivity   {
 		count_reques = 0;
 		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 		final AlertDialog.Builder b = new AlertDialog.Builder(this);
-		b.setTitle("Запросить баланс?");
-		b.setPositiveButton("Да", new OnClickListener() {
+		b.setTitle("Р—Р°РїСЂРѕСЃРёС‚СЊ Р±Р°Р»Р°РЅСЃ?");
+		b.setPositiveButton("Р”Р°", new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
-				Toast.makeText(getApplicationContext(),"Запрос баланса сим карты",Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(),"Р—Р°РїСЂРѕСЃ Р±Р°Р»Р°РЅСЃР° СЃРёРј РєР°СЂС‚С‹",Toast.LENGTH_LONG).show();
 				settingsDev.clearQueueCommands();
 				settingsDev.AddRequestBalansCommand();
-				LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Запрос баланса сим карты");
+				LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Р—Р°РїСЂРѕСЃ Р±Р°Р»Р°РЅСЃР° СЃРёРј РєР°СЂС‚С‹");
 				if(settingsDev.sendCommands())
 					pd.show();
 			}
 		});
-		b.setNegativeButton("Отмена", new OnClickListener() {
+		b.setNegativeButton("РћС‚РјРµРЅР°", new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 			}});
@@ -356,15 +356,15 @@ public class MainMenuActivity extends BaseActivity   {
 
 		if(isGuardian)
 		{
-			MainTitle = "Снять с контроля?";
-			ButtonTitle = "Снять";
-			TitleProgressBar = "Снятие с контроля";
+			MainTitle = "РЎРЅСЏС‚СЊ СЃ РєРѕРЅС‚СЂРѕР»СЏ?";
+			ButtonTitle = "РЎРЅСЏС‚СЊ";
+			TitleProgressBar = "РЎРЅСЏС‚РёРµ СЃ РєРѕРЅС‚СЂРѕР»СЏ";
 		}
 		else
 		{
-			MainTitle = "Поставить на контроль?";
-			ButtonTitle = "Поставить";	
-			TitleProgressBar = "Постановка на контроль";
+			MainTitle = "РџРѕСЃС‚Р°РІРёС‚СЊ РЅР° РєРѕРЅС‚СЂРѕР»СЊ?";
+			ButtonTitle = "РџРѕСЃС‚Р°РІРёС‚СЊ";	
+			TitleProgressBar = "РџРѕСЃС‚Р°РЅРѕРІРєР° РЅР° РєРѕРЅС‚СЂРѕР»СЊ";
 		}
 
 		b.setTitle(MainTitle);
@@ -390,7 +390,7 @@ public class MainMenuActivity extends BaseActivity   {
 					pd.show();
 			}
 		});
-		b.setNegativeButton("Отмена",  new OnClickListener() {
+		b.setNegativeButton("РћС‚РјРµРЅР°",  new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 			}});
@@ -437,20 +437,20 @@ public class MainMenuActivity extends BaseActivity   {
 		timer.setProgressDialog(pd);
 		timer.setTitle(title);
 		pd.setTitle(title);
-		// меняем стиль на индикатор
+		// РјРµРЅСЏРµРј СЃС‚РёР»СЊ РЅР° РёРЅРґРёРєР°С‚РѕСЂ
 		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		// устанавливаем максимум
+		// СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РјР°РєСЃРёРјСѓРј
 		pd.setMax(count_sms);
-		// включаем анимацию ожидания
+		// РІРєР»СЋС‡Р°РµРј Р°РЅРёРјР°С†РёСЋ РѕР¶РёРґР°РЅРёСЏ
 		pd.setIndeterminate(true);
 		pd.setCancelable(false);
 		timer.start();
 		hpd = new Handler() {
 			public void handleMessage(Message msg) {
-				// выключаем анимацию ожидания
+				// РІС‹РєР»СЋС‡Р°РµРј Р°РЅРёРјР°С†РёСЋ РѕР¶РёРґР°РЅРёСЏ
 				pd.setIndeterminate(false);
 				if (pd.getProgress() < pd.getMax()) {
-					// увеличиваем значения индикаторов
+					// СѓРІРµР»РёС‡РёРІР°РµРј Р·РЅР°С‡РµРЅРёСЏ РёРЅРґРёРєР°С‚РѕСЂРѕРІ
 					pd.incrementProgressBy(1);
 					pd.incrementSecondaryProgressBy(1);
 				} else {
