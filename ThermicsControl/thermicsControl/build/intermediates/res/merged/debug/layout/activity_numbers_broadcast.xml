@@ -1,0 +1,148 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical"
+    android:background="@color/window_background"
+    tools:context=".NumbersBroadcastActivity" >
+    
+    <TextView
+        android:id="@+id/titleAdditionalNumbers"
+        android:text="@string/additional_numbers"
+        style="@style/TextViewTitleActivity"
+        android:background="@color/button_blue"/>
+    
+    <View   android:id="@+id/firstDividerMainAddion"
+        android:layout_height="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_below="@+id/titleAdditionalNumbers"
+        android:layout_width="fill_parent"
+        android:background="#ffffff" />
+
+<LinearLayout 
+    	android:id="@+id/layoutMainActionNumbers"
+    	android:layout_below="@+id/firstDividerMainAddion"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    <!-- 5 row -->
+        <LinearLayout
+        android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content"
+    	android:weightSum="1.0" >
+
+            <EditText
+            	    android:id="@+id/editTextNameContact"
+            	    android:layout_width="0dp" 
+            	    android:layout_weight="0.4"
+            	    android:layout_height="40dp"
+            	    android:layout_marginLeft="5dp"
+            	    android:background="@drawable/border_textfield"
+            	    android:gravity="center_vertical|center_horizontal"
+            	    android:layout_gravity="center_vertical" 
+            	    android:inputType="text"
+    				android:singleLine="true"
+            	    android:hint="@string/name_contact"
+            	    android:focusable="true"
+					android:focusableInTouchMode="true"
+					android:textColor="@color/text_black"
+					android:textSize="@dimen/size_button_text"/>
+            
+            <EditText
+            	    android:id="@+id/editTextNumber"
+            	    android:layout_width="0dp" 
+            	    android:layout_weight="0.6"
+            	    android:layout_height="40dp"
+            	    android:layout_marginLeft="5dp"
+            	    android:layout_marginRight="5dp"
+            	    android:background="@drawable/border_textfield"
+            	    android:gravity="center_vertical|center_horizontal"
+            	    android:layout_gravity="center_vertical" 
+            	    android:inputType="phone"
+    				android:singleLine="true"
+            	    android:hint="@string/default_text_number"
+            	    android:focusable="true"
+					android:focusableInTouchMode="true"
+					android:textColor="@color/text_black"
+					android:textSize="@dimen/size_button_text"/>
+            <Button
+            	    android:id="@+id/buttonNumberFromContacts"
+            	    android:layout_width="40dp" 
+            	    android:layout_height="40dp"
+            	    android:layout_marginRight="5dp"
+            	    android:layout_marginTop="2dp"
+            	    android:gravity="center_vertical|center_horizontal"
+            	    android:layout_gravity="center_vertical"
+            	    android:text="@string/numbers_from_contacts"
+            	    android:textColor="@color/text_button_color"
+            	    android:textSize="@dimen/size_button_text"
+            	    android:background="@drawable/white_back"
+            		android:textStyle="bold"
+            		android:onClick="OnButtonNumberFromContacts" />     	
+		</LinearLayout>
+    
+    <Button
+    android:id="@+id/buttonAddNumber"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_margin="5dp"
+    android:background="@drawable/white_back"
+    android:text="@string/add_number"
+    android:textColor="@color/text_button_color"
+    android:textStyle="bold"
+    android:onClick="OnClickAddNumber" />
+
+    <Button
+    android:id="@+id/buttonDeleteAllNumbers"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/white_back"
+    android:text="@string/delete_all_numbers"
+    android:textColor="@color/text_button_color"
+    android:textStyle="bold"
+    android:onClick="OnClickDeleteAllNumbers" />
+    
+</LinearLayout>
+
+<ListView
+    android:id="@+id/listViewNumbers"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/layoutMainActionNumbers"
+    android:layout_above="@+id/layoutApplyCancel"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:background="@drawable/white_back"
+    android:overScrollMode="always"
+    android:textColor="@color/text_button_color"
+    android:transcriptMode="alwaysScroll"
+    android:divider="@color/window_background" >
+
+	</ListView>
+	
+<LinearLayout
+    android:id="@+id/layoutApplyCancel"
+    style="@style/TitleOkCancle"
+    
+     >
+<Button
+    android:id="@+id/buttonApplyNumbers"
+    style="@style/ButtonAccept"
+    android:onClick="OnClickApplyButton"
+    />
+<Button
+    android:id="@+id/buttonCancelNumbers"
+    style="@style/ButtonCancel"
+    android:onClick="OnClickCancelButton"
+    />
+</LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\uprav.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-hdpi\\uprav.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\secure.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-hdpi\\secure.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\checkbox1.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-hdpi\\checkbox1.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\secure_open.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-hdpi\\secure_open.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\report.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-hdpi\\report.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\background_main.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-hdpi\\background_main.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\background_main_land.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-hdpi\\background_main_land.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_launcher.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\settings.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-hdpi\\settings.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\balance.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-hdpi\\balance.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\checkbox0.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-hdpi\\checkbox0.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\mail.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-hdpi\\mail.png"
+    }
+]

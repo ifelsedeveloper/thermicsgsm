@@ -1,0 +1,290 @@
+[
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\border_listview.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\border_listview.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\save_icon.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\save_icon.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\white_back.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\white_back.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\automatic.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\automatic.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\information.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\information.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\system_config_row_bg.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\system_config_row_bg.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\plus_grey.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\plus_grey.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\icon_menu.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\icon_menu.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\moon.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\moon.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\minus.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\minus.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\dottedline.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\dottedline.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\custom_thumb_state_pressed.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\custom_thumb_state_pressed.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\button_green.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\button_green.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\supernodes.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\supernodes.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\edit_picker_pressed.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\edit_picker_pressed.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\list_selector_background.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\list_selector_background.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\custom_progress_bar_horizontal.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\custom_progress_bar_horizontal.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\background_main_land.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\background_main_land.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\border_textfield.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\border_textfield.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\shadow.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\shadow.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\custom_seek_bar.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\custom_seek_bar.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\search_progress_empty_clip.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\search_progress_empty_clip.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\menu.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\menu.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\play_timer.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\play_timer.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\background_blue_border.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\background_blue_border.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\uprav.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\uprav.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\edit_picker_selected.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\edit_picker_selected.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\pause_timer.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\pause_timer.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\info.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\info.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\button_hover.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\button_hover.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\save.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\save.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\backgroundcolor.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\backgroundcolor.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\thermics_logo.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\thermics_logo.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\balance.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\balance.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\yellow_botton.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\yellow_botton.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\search_progress_clip.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\search_progress_clip.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\secure.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\secure.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\background_main.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\background_main.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\hover.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\hover.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\secure_open.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\secure_open.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\button_white.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\button_white.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\background_lightgreen_togglebutton.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\background_lightgreen_togglebutton.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\round.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\round.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\plus_empty.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\plus_empty.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\settings.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\settings.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\report.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\report.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\mail.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\mail.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\background_orange_border.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\background_orange_border.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\temperature_notselected.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\temperature_notselected.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\custom_thumb_state_selected.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\custom_thumb_state_selected.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\custom_title_background.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\custom_title_background.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\edit_picker_notselected.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\edit_picker_notselected.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\add_round.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\add_round.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\ed_picker_background.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\ed_picker_background.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\check_mark.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\check_mark.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\background_green_border.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\background_green_border.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\background_title.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\background_title.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\sun.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\sun.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\check_in_box.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\check_in_box.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\reload.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\reload.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\stop_timer.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\stop_timer.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\background_lightred_togglebutton.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\background_lightred_togglebutton.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\plus_white.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\plus_white.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\check_box_ps.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\check_box_ps.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\nav.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\nav.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\search_progress_drawable.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\search_progress_drawable.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\temperature.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\temperature.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\back_white_roundcorners.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\back_white_roundcorners.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\phone_call.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\phone_call.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\plus.9.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\plus.9.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\background_button.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\background_button.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable\\custom_thumb_state_default.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable\\custom_thumb_state_default.xml"
+    }
+]

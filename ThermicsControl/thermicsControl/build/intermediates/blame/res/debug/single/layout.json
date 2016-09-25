@@ -1,0 +1,106 @@
+[
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_message_system.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_message_system.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_temerature_picker.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\dialog_temerature_picker.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_function_rele.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_function_rele.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\system_row.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\system_row.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_contact_information.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_contact_information.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\custom_dialog_change_delete.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\custom_dialog_change_delete.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main_menu.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_main_menu.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\menu.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\menu.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\row_timer.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\row_timer.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_timers_list.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_timers_list.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_request_system.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_request_system.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\sms_row.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\sms_row.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_information.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_information.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_config_system.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_config_system.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\custom_day_of_week_peeker.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\custom_day_of_week_peeker.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_add_new_request.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_add_new_request.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_help_information.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_help_information.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\row_phone_number.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\row_phone_number.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_numbers_broadcast.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_numbers_broadcast.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_settings_param.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_settings_param.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\slidingmenumain.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\exploded-aar\\ThermicsControl.libraries\\SlidingMenu\\unspecified\\res\\layout\\slidingmenumain.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_function_tmpsensor.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_function_tmpsensor.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\name_phone_contact.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\name_phone_contact.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\activity_timer.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\activity_timer.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\menu_frame.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\menu_frame.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\layout\\row_request.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\layout\\row_request.xml"
+    }
+]

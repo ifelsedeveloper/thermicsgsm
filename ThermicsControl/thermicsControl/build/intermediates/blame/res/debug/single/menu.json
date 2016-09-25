@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\menu\\timers_list.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\menu\\timers_list.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\menu\\activity_license_check_thermics.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\menu\\activity_license_check_thermics.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\menu\\activity_main_menu.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\menu\\activity_main_menu.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\menu\\activity_contact_information.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\menu\\activity_contact_information.xml"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\menu\\timer.xml",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\menu\\timer.xml"
+    }
+]

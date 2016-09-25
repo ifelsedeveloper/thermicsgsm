@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    >
+ 
+   <LinearLayout
+        android:layout_width="fill_parent" 
+    	android:layout_height="wrap_content"
+    	android:weightSum="1.0" 
+    	android:orientation="vertical">
+
+       <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000">
+       <TextView
+            	    android:id="@+id/titleRepeat"
+            	    android:layout_width="fill_parent"
+            	    android:layout_height="wrap_content"
+            	    android:layout_marginLeft="15dp"
+            	    android:layout_marginTop="5dp"
+            	    android:layout_marginBottom="5dp"
+            	    android:gravity="center_vertical"
+            	    android:text="@string/repeat"
+            	    android:textSize="@dimen/size_button_text"
+            	    android:textColor="#ffffff"
+            	    
+            	     />
+       </RelativeLayout>
+     <RelativeLayout
+         android:id="@+id/relativeLayoutMon"
+         android:clickable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+            <TextView
+            	    android:id="@+id/titleDayMon"
+            	    android:layout_width="wrap_content"
+            	    android:layout_height="wrap_content"
+            	    android:layout_alignParentLeft="true"
+            	    android:layout_marginLeft="15dp"
+            	    android:layout_centerVertical="true"
+            	    android:layout_toLeftOf="@+id/checkBoxDayMon"
+            	    android:gravity="center_vertical"
+            	    android:text="@string/monday"
+            	    android:textSize="@dimen/size_button_text" />
+
+            <CheckBox           
+                android:id="@+id/checkBoxDayMon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"     
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:checked="true"
+                android:clickable="false"/>
+
+		</RelativeLayout>
+		
+	<View   android:id="@+id/firstDividerMon"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_width="fill_parent"
+        android:background="#eeeeee" />
+     <RelativeLayout
+         android:id="@+id/relativeLayoutTue"
+         android:clickable="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+            <TextView
+            	    android:id="@+id/titleDayTue"
+            	    android:layout_width="wrap_content"
+            	    android:layout_height="wrap_content"
+            	    android:layout_alignParentLeft="true"
+            	    android:layout_marginLeft="15dp"
+            	    android:layout_centerVertical="true"
+            	    android:layout_toLeftOf="@+id/checkBoxDayTue"
+            	    android:gravity="center_vertical"
+            	    android:text="@string/tuesday"
+            	    android:textSize="@dimen/size_button_text" />
+
+            <CheckBox           
+                android:id="@+id/checkBoxDayTue"
+                android:layout_width="30dp"
+                android:layout_height="30dp"     
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:checked="true"
+                android:clickable="false"/>
+
+		</RelativeLayout>
+     <View   android:id="@+id/firstDividerTue"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_width="fill_parent"
+        android:background="#eeeeee" />
+     <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayoutWen"
+         android:clickable="true">
+
+            <TextView
+            	    android:id="@+id/titleDayWen"
+            	    android:layout_width="wrap_content"
+            	    android:layout_height="wrap_content"
+            	    android:layout_alignParentLeft="true"
+            	    android:layout_marginLeft="15dp"
+            	    android:layout_centerVertical="true"
+            	    android:layout_toLeftOf="@+id/checkBoxDayWen"
+            	    android:gravity="center_vertical"
+            	    android:text="@string/wednesday"
+            	    android:textSize="@dimen/size_button_text" />
+
+            <CheckBox           
+                android:id="@+id/checkBoxDayWen"
+                android:layout_width="30dp"
+                android:layout_height="30dp"     
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:checked="true"
+                android:clickable="false"/>
+
+		</RelativeLayout>
+     <View   android:id="@+id/firstDividerThu"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_width="fill_parent"
+        android:background="#eeeeee" />
+     <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayoutThu"
+         android:clickable="true">
+
+            <TextView
+            	    android:id="@+id/titleDayThu"
+            	    android:layout_width="wrap_content"
+            	    android:layout_height="wrap_content"
+            	    android:layout_alignParentLeft="true"
+            	    android:layout_marginLeft="15dp"
+            	    android:layout_centerVertical="true"
+            	    android:layout_toLeftOf="@+id/checkBoxDayThu"
+            	    android:gravity="center_vertical"
+            	    android:text="@string/thursday"
+            	    android:textSize="@dimen/size_button_text" />
+
+            <CheckBox           
+                android:id="@+id/checkBoxDayThu"
+                android:layout_width="30dp"
+                android:layout_height="30dp"     
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:checked="true"
+                android:clickable="false"/>
+
+		</RelativeLayout>
+     
+     <View   android:id="@+id/firstDividerFri"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_width="fill_parent"
+        android:background="#eeeeee" />
+     <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayoutFri"
+         android:clickable="true">
+
+            <TextView
+            	    android:id="@+id/titleDayFri"
+            	    android:layout_width="wrap_content"
+            	    android:layout_height="wrap_content"
+            	    android:layout_alignParentLeft="true"
+            	    android:layout_marginLeft="15dp"
+            	    android:layout_centerVertical="true"
+            	    android:layout_toLeftOf="@+id/checkBoxDayFri"
+            	    android:gravity="center_vertical"
+            	    android:text="@string/friday"
+            	    android:textSize="@dimen/size_button_text" />
+
+            <CheckBox           
+                android:id="@+id/checkBoxDayFri"
+                android:layout_width="30dp"
+                android:layout_height="30dp"     
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:checked="true"
+                android:clickable="false"/>
+
+		</RelativeLayout>
+     
+     <View   android:id="@+id/firstDividerSat"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_width="fill_parent"
+        android:background="#eeeeee" />
+     <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayoutSat"
+         android:clickable="true">
+
+            <TextView
+            	    android:id="@+id/titleDaySat"
+            	    android:layout_width="wrap_content"
+            	    android:layout_height="wrap_content"
+            	    android:layout_alignParentLeft="true"
+            	    android:layout_marginLeft="15dp"
+            	    android:layout_centerVertical="true"
+            	    android:layout_toLeftOf="@+id/checkBoxDaySat"
+            	    android:gravity="center_vertical"
+            	    android:text="@string/saturday"
+            	    android:textSize="@dimen/size_button_text" />
+
+            <CheckBox           
+                android:id="@+id/checkBoxDaySat"
+                android:layout_width="30dp"
+                android:layout_height="30dp"     
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:checked="true"
+                android:clickable="false"/>
+
+		</RelativeLayout>
+     
+     <View   android:id="@+id/firstDividerSun"
+        android:layout_height="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_width="fill_parent"
+        android:background="#eeeeee" />
+     <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayoutSun"
+         android:clickable="true">
+
+            <TextView
+            	    android:id="@+id/titleDaySun"
+            	    android:layout_width="wrap_content"
+            	    android:layout_height="wrap_content"
+            	    android:layout_alignParentLeft="true"
+            	    android:layout_marginLeft="15dp"
+            	    android:layout_centerVertical="true"
+            	    android:layout_toLeftOf="@+id/checkBoxDaySun"
+            	    android:gravity="center_vertical"
+            	    android:text="@string/sunday"
+            	    android:textSize="@dimen/size_button_text" />
+
+            <CheckBox           
+                android:id="@+id/checkBoxDaySun"
+                android:layout_width="30dp"
+                android:layout_height="30dp"     
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:checked="true"
+                android:clickable="false"/>
+
+		</RelativeLayout>
+     
+     <LinearLayout
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:weightSum="1.0"
+       style="@style/TitleOkCancle" >
+
+       <Button
+           android:id="@+id/dialogButtonOkWeek"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_marginRight="2dp"
+           android:layout_marginTop="2dp"
+           android:layout_weight="0.50"
+           android:text="@string/set" />
+
+       <Button
+           android:id="@+id/dialogButtonCancelWeek"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:layout_marginRight="2dp"
+           android:layout_marginTop="2dp"
+           android:layout_weight="0.50"
+           android:text="@string/cancel" />
+   </LinearLayout>
+  </LinearLayout>
+
+   
+
+</RelativeLayout>

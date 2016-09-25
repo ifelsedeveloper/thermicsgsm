@@ -1,0 +1,2 @@
+include ':thermicsControl'
+include ':libraries:SlidingMenu'

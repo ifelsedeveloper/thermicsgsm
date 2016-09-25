@@ -1,0 +1,196 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:background="@color/window_background"
+    android:orientation="vertical"
+    tools:context=".MainMenuActivity" >
+
+   <RelativeLayout
+        android:id="@+id/RelativeLayoutMainMenuTitle"
+        style="@style/TextViewTitleActivity"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/nav" >
+        
+        <Button
+            android:id="@+id/buttonViewMenuGlobal"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:background="@drawable/menu"
+        	android:onClick="onClickViewMenuGlobalx"
+        	android:layout_alignParentLeft="true"></Button>
+        <LinearLayout 
+            android:orientation="vertical"
+            android:layout_toLeftOf="@+id/buttonViewInformationHelp"
+	        android:layout_toRightOf="@+id/buttonViewMenuGlobal"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content">
+	        <TextView
+	            android:id="@+id/textViewTitleCompany"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/company_name"
+	            android:textColor="@color/title_white_color"
+	            android:textSize="@dimen/size_title_text"
+	            android:textStyle="bold" />
+	        <TextView
+	            android:id="@+id/textNameSystem"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/company_name"
+	            android:textColor="@color/title_white_color"
+	            android:textSize="@dimen/size_button_text_small"
+	            android:textStyle="bold" />
+		</LinearLayout>
+        <Button
+            android:id="@+id/buttonViewInformationHelp"
+        	android:layout_width="50dp"
+        	android:layout_height="50dp"
+        	android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="2dp"
+        	android:background="@drawable/info"
+        	android:onClick="onClickLayoutLabelThermix"></Button>
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/ScrollViewMainMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/RelativeLayoutMainMenuTitle" >
+
+       <RelativeLayout
+            android:id="@+id/RelativeLayoutInScrollView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/LinearLayoutMainActions"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:weightSum="0.99" >
+
+                <LinearLayout
+                    android:id="@+id/relativeLayoutRow1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.33"
+                    android:weightSum="1.0" >
+                    
+                    <Button
+                        android:id="@+id/buttonWithImageMessages"
+				        android:drawableTop="@drawable/mail"
+				        android:onClick="onClickReportSystem"
+				        android:text="@string/messages"
+				        style="@style/MainMenuButton"></Button>
+                    
+                    <Button
+                        android:id="@+id/buttonWithImageSettingsParam"
+				        android:drawableTop="@drawable/uprav"
+				        android:onClick="onClickSettingsParam"
+				        android:text="@string/config"
+				        style="@style/MainMenuButton"></Button>
+                    
+
+                </LinearLayout>
+
+               <LinearLayout
+                    android:id="@+id/relativeLayoutRow2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.33"
+                    android:weightSum="1.0" >
+
+                    <Button
+                        android:id="@+id/buttonWithImageReport"
+				        android:drawableTop="@drawable/report"
+				        android:onClick="onClickRequestReport"
+				        android:text="@string/report"
+				        style="@style/MainMenuButton"></Button>
+
+
+                    <Button
+                        android:id="@+id/buttonWithImageGuardian"
+				        android:drawableTop="@drawable/secure"
+				        android:onClick="onClickGuardianSet"
+				        android:text="@string/guardian"
+				        style="@style/MainMenuButton"></Button>
+                    
+
+                </LinearLayout>
+
+               <LinearLayout
+                    android:id="@+id/relativeLayoutRow6"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.33"
+                    android:weightSum="1.0" >
+
+                    <Button
+                        android:id="@+id/buttonWithImageSettings"
+				        android:drawableTop="@drawable/settings"
+				        android:onClick="onClickConfigSystem"
+				        android:text="@string/settings"
+				        style="@style/MainMenuButton"></Button>
+                    
+					<Button
+                        android:id="@+id/buttonWithImageBalalnce"
+				        android:drawableTop="@drawable/balance"
+				        android:onClick="onClickRequestBalans"
+				        android:text="@string/balance"
+				        style="@style/MainMenuButton"></Button>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout1LastRep"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/LinearLayoutMainActions"
+                android:layout_margin="@dimen/beetwen_button"
+                android:background="@drawable/white_back"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/TextReportTitle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:textSize="8pt"
+                    android:text="@string/title_last_report"
+                    android:textColor="@color/main_menu_text_color" />
+
+                <TextView
+                    android:id="@+id/TextViewLastReport"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:maxLines="25"
+                    android:padding="5sp"
+                    android:singleLine="false"
+                    android:text="@string/message"
+                    android:textColor="@color/main_menu_message" />
+                <TextView
+                    android:id="@+id/TextViewLastReportTitle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:gravity="right"
+                    android:text="@string/title_last_report_date"
+                    android:textColor="@color/main_menu_date" />
+                
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

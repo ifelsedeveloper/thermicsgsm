@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi\\background_main.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-ldpi\\background_main.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi\\background_main_land.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-ldpi\\background_main_land.png"
+    },
+    {
+        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi\\ic_launcher.png",
+        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-ldpi\\ic_launcher.png"
+    }
+]
