@@ -1,7 +1,0 @@
-#Sun Sep 25 16:53:34 KRAT 2016
-base.0=C\:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_1e6e923a793af735f0a4fcf2c829a31683f88bea
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=C\:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_16baa277edaf087507927535097d615a7b5baf49\\classes.dex
-base.1=C\:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_16baa277edaf087507927535097d615a7b5baf49
-file.0=C\:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_1e6e923a793af735f0a4fcf2c829a31683f88bea\\classes.dex
