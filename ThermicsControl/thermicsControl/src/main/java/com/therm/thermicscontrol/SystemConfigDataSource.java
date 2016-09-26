@@ -57,7 +57,7 @@ public class SystemConfigDataSource {
 		boolean isExistSystem = prefefrence.getBoolean("INITIAL_LOADED_FINISHED", false);
 		if(!isExistSystem) {
 			open();
-			createSystemConfig("ќбъект");
+			createSystemConfig("Объект");
 			setSelectedSystem(1);
 			SharedPreferences.Editor editor = prefefrence.edit();
 			editor.putBoolean(INITIAL_LOADED_FINISHED, true);
