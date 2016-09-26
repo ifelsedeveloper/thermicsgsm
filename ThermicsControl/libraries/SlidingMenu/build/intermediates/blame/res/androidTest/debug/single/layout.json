@@ -1,6 +1,10 @@
 [
     {
-        "merged": "C:\\Share\\ThermicsControl\\libraries\\SlidingMenu\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\slidingmenumain.xml",
-        "source": "C:\\Share\\ThermicsControl\\libraries\\SlidingMenu\\build\\intermediates\\bundles\\debug\\res\\layout\\slidingmenumain.xml"
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\libraries\\SlidingMenu\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\slidingmenumain.xml",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\libraries\\SlidingMenu\\build\\intermediates\\bundles\\debug\\res\\layout\\slidingmenumain.xml"
+    },
+    {
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/libraries/SlidingMenu/build/intermediates/res/merged/androidTest/debug/layout/slidingmenumain.xml",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/libraries/SlidingMenu/build/intermediates/bundles/debug/res/layout/slidingmenumain.xml"
     }
 ]

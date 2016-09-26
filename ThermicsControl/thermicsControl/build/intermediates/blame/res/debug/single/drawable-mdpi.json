@@ -1,30 +1,58 @@
 [
     {
-        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\report.png",
-        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\report.png"
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/build/intermediates/res/merged/debug/drawable-mdpi/settings.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/src/main/res/drawable-mdpi/settings.png"
     },
     {
-        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\balance.png",
-        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\balance.png"
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\report.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\report.png"
     },
     {
-        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_launcher.png",
-        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/build/intermediates/res/merged/debug/drawable-mdpi/balance.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/src/main/res/drawable-mdpi/balance.png"
     },
     {
-        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\mail.png",
-        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\mail.png"
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\balance.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\balance.png"
     },
     {
-        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\settings.png",
-        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\settings.png"
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/build/intermediates/res/merged/debug/drawable-mdpi/uprav.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/src/main/res/drawable-mdpi/uprav.png"
     },
     {
-        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\uprav.png",
-        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\uprav.png"
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_launcher.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\secure.png",
-        "source": "C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\secure.png"
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\mail.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\mail.png"
+    },
+    {
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\settings.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\settings.png"
+    },
+    {
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/build/intermediates/res/merged/debug/drawable-mdpi/secure.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/src/main/res/drawable-mdpi/secure.png"
+    },
+    {
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\uprav.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\uprav.png"
+    },
+    {
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/build/intermediates/res/merged/debug/drawable-mdpi/report.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/src/main/res/drawable-mdpi/report.png"
+    },
+    {
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/build/intermediates/res/merged/debug/drawable-mdpi/mail.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/src/main/res/drawable-mdpi/mail.png"
+    },
+    {
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\secure.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\thermicsControl\\src\\main\\res\\drawable-mdpi\\secure.png"
+    },
+    {
+        "merged": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/build/intermediates/res/merged/debug/drawable-mdpi/ic_launcher.png",
+        "source": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/thermicsControl/src/main/res/drawable-mdpi/ic_launcher.png"
     }
 ]

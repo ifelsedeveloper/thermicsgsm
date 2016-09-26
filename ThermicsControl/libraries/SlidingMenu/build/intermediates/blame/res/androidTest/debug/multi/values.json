@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Share\\ThermicsControl\\libraries\\SlidingMenu\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "outputFile": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/libraries/SlidingMenu/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,31 @@
                     "endOffset": 1130
                 },
                 "from": {
-                    "file": "C:\\Share\\ThermicsControl\\libraries\\SlidingMenu\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "file": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/libraries/SlidingMenu/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 1092,
+                        "endColumn": 42,
+                        "endOffset": 1130
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\libraries\\SlidingMenu\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 1092,
+                    "endColumn": 42,
+                    "endOffset": 1130
+                },
+                "from": {
+                    "file": "/Users/vfadeev/Documents/thermicsgsm/ThermicsControl/C:\\Share\\ThermicsControl\\libraries\\SlidingMenu\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
