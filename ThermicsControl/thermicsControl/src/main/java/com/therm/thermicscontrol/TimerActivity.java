@@ -222,9 +222,9 @@ public class TimerActivity extends BaseActivity {
 	 //spinner1.getSelectedItem()
 		functionTimer = (Spinner) findViewById(R.id.valueSpinnerFunctionTimer);
 		List<String> list = new ArrayList<String>();
-		list.add("ахых Й1 - "+settings.getFunctionRele1());
-		list.add("ахых Й2 - "+settings.getFunctionRele2());
-		list.add("ахых Й3 - "+settings.getFunctionRele3());
+		list.add("реле №1 - "+settings.getFunctionRele1());
+		list.add("реле №2 - "+settings.getFunctionRele2());
+		list.add("реле №3 - "+settings.getFunctionRele3());
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
 			android.R.layout.simple_spinner_item, list);
 		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
