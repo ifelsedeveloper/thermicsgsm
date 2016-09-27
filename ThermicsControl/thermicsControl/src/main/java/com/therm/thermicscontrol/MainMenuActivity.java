@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -33,6 +34,7 @@ import java.text.SimpleDateFormat;
 
 public class MainMenuActivity extends BaseActivity   {
 
+	private static final int PERMISSIONS_REQUEST = 1988;
 	public static final String TAG_events="event_tag_main_menu";
 	public SystemConfig settings=null;
 	public CSettingsDev settingsDev=null;
@@ -165,6 +167,12 @@ public class MainMenuActivity extends BaseActivity   {
 
 			// создааем адаптер и настраиваем список
 			systemConfigSCAdapter = new SystemConfigSympleAdapter(this,R.layout.system_row,systemConfigCursor, from, to, 0, listViewSystems,systemConfig_DB);
+
+
+			String[] missingPermissions = AndroidComponentUtil.missingPermissions(this, AndroidComponentUtil.getPermissions());
+			if (missingPermissions.length > 0) {
+				ActivityCompat.requestPermissions(this, missingPermissions, PERMISSIONS_REQUEST);
+			}
 
 
 		}

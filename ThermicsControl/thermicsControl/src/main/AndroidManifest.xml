@@ -115,7 +115,10 @@
             android:exported="false"
             android:name=".SmsContentProvider"
             android:authorities="com.therm.thermicscontrol">
-        </provider>
+        </provider>
+
+
+
         -->
 
         <service
@@ -139,7 +142,7 @@
 
         <receiver
             android:name="com.therm.thermicscontrol.SMSMonitor">
-            <intent-filter android:priority="100" >
+            <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
@@ -153,7 +156,10 @@
     		<intent-filter android:priority="999">
         		<action android:name="android.intent.action.PACKAGE_DATA_CLEARED"/>
     		</intent-filter>
-		</receiver>
+		</receiver>
+
+
+
         -->
 
         <receiver
