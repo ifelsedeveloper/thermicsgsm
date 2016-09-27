@@ -21,6 +21,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:layout_below="@+id/titleFunctionRele"
+		android:layout_above="@+id/layoutOKCancelFunctionRele"
         android:layout_width="fill_parent"
         android:background="#ffffff" />
 
@@ -30,7 +31,6 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:layout_below="@+id/firstDivider1"
-	    android:layout_above="@+id/layoutOKCancel"
 	    android:layout_alignParentLeft="true"
 	    android:layout_alignParentRight="true"
 	    android:layout_margin="5dp"
