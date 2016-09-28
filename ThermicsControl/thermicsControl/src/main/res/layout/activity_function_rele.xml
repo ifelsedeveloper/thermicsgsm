@@ -21,7 +21,6 @@
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:layout_below="@+id/titleFunctionRele"
-		android:layout_above="@+id/layoutOKCancelFunctionRele"
         android:layout_width="fill_parent"
         android:background="#ffffff" />
 

@@ -76,9 +76,10 @@ public class MainMenuActivity extends BaseActivity   {
 
 			//create for work with shared preference
 			settings=SystemConfigDataSource.getActiveSystem();
+			Thread.sleep(100,0);
 			settingsDev=new CSettingsDev(settings,getApplicationContext());
 			textNameSystem = (TextView) findViewById(R.id.textNameSystem);
-			
+
 			setTitleLastReport(settings.getLastSystemReport(),settings.getLastSystemReportTime());
 			// создаем BroadcastReceiver
 			br = new BroadcastReceiver() {
@@ -477,9 +478,15 @@ public class MainMenuActivity extends BaseActivity   {
 
 	protected void onDestroy() {
 		super.onDestroy();
-		unregisterReceiver(br);
-		unregisterReceiver(br_clear_unreaded_sms);
-		unregisterReceiver(brSystemSelectionChanged);
+		if (br != null) {
+			unregisterReceiver(br);
+		}
+		if (br_clear_unreaded_sms != null) {
+			unregisterReceiver(br_clear_unreaded_sms);
+		}
+		if (brSystemSelectionChanged != null) {
+			unregisterReceiver(brSystemSelectionChanged);
+		}
 	}
 
 

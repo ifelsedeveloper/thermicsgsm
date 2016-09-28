@@ -61,7 +61,7 @@ public class CSettingsDev {
 		{return ncommand;}
 	};
 	
-	CSettingsDev(SystemConfig settings,final Context appcontext)
+	CSettingsDev(SystemConfig settings, final Context appcontext)
 	{
 		this.settings_=settings;
 		
