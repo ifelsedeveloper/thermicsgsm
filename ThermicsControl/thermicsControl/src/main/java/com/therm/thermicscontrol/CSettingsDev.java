@@ -138,7 +138,7 @@ public class CSettingsDev {
 					res = true;
 			}
 		}
-		if(!res) Toast.makeText(appcontext, "¬ведите корректный номер SIM карты", Toast.LENGTH_LONG).show();
+		if(!res) Toast.makeText(appcontext, "Введите корректный номер SIM карты", Toast.LENGTH_LONG).show();
 		return res;
 	}
 	
@@ -153,7 +153,7 @@ public class CSettingsDev {
 		password=settings_.getPinSIM();
 		String message=String.format(Locale.US,"Vkl %d %d %s",nrele, timeout, password);
 		sendSMS(message);
-		Toast.makeText(appcontext,String.format(Locale.US,"ќтправлена команда: %s",message),Toast.LENGTH_LONG).show();
+		Toast.makeText(appcontext,String.format(Locale.US,"отправлена команда: %s",message),Toast.LENGTH_LONG).show();
 	}
 	
 	public void RequestReport()
@@ -219,7 +219,7 @@ public class CSettingsDev {
 	
 	public void SetDefaultDevParametrsMultiSMS() 
 	{
-		Toast.makeText(appcontext, "”становка начальных параметров", Toast.LENGTH_LONG).show();
+		Toast.makeText(appcontext, "установка начальных параметров", Toast.LENGTH_LONG).show();
 		phoneNumber=settings_.getNumberSIM();
 		password=settings_.getPinSIM();
 		

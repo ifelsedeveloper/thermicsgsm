@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.therm.thermicscontrol"
     android:theme="@style/AppBaseTheme"
-    android:versionCode="37"
-    android:versionName="2.5.3" >
+    android:versionCode="38"
+    android:versionName="2.5.4" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -142,8 +142,9 @@
 
         <receiver
             android:name="com.therm.thermicscontrol.SMSMonitor">
-            <intent-filter>
+            <intent-filter android:priority="1000">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+
             </intent-filter>
         </receiver>
 

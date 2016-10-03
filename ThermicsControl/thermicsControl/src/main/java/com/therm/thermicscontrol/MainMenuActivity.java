@@ -92,7 +92,7 @@ public class MainMenuActivity extends BaseActivity   {
 					String sms = intent.getStringExtra(BaseActivity.PARAM_SMS);
 					String time = intent.getStringExtra(BaseActivity.PARAM_SMSTIME);
 					Log.d(TAG_events, "onReceive sms: "+sms+" ;time = "+time);
-					if(!clickControlAlarm) Toast.makeText(getApplicationContext(),sms,Toast.LENGTH_LONG).show();
+					//if(!clickControlAlarm) Toast.makeText(getApplicationContext(),sms,Toast.LENGTH_LONG).show();
 
 					//отправляем полученное сообщение нашему классу
 					settingsDev.recvSMS(sms);

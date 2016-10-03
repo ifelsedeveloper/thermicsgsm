@@ -8,6 +8,7 @@ import android.content.Intent;
 
 import android.telephony.SmsMessage;
 
+import android.util.Log;
 import android.widget.Toast;
 //import android.util.Log;
 
@@ -30,6 +31,10 @@ public class SMSMonitor extends BroadcastReceiver {
 			SystemConfig settings=SystemConfigDataSource.sharedInstanceSystemConfigDataSource().getSystemConfig(sms_from);
 			if(settings != null)
 			{
+				if(!settings.getIsSMSInIncoming()) {
+					Log.d("SMS: ", "aboard broadcast");
+					abortBroadcast();
+				}
 				//Toast.makeText(, text, duration)
 				StringBuilder bodyText = new StringBuilder();
 				for (int i = 0; i < messages.length; i++) {
@@ -44,7 +49,7 @@ public class SMSMonitor extends BroadcastReceiver {
 					mIntent.putExtra("incoming_number", sms_from);
 					context.startService(mIntent);
 				}
-				if(!settings.getIsSMSInIncoming()) abortBroadcast();
+
 			}
 		}
 		}
