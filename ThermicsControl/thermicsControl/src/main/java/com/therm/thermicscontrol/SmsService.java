@@ -413,9 +413,9 @@ public class SmsService extends Service {
                 {
                 	//device 1 or 2
                 	if(lineRele.contains("\\"))
-                		settings.setDevVersion(BaseActivity.deviceBefore01112011);
-                	else
                 		settings.setDevVersion(BaseActivity.deviceBefore01112012);
+                	else
+                		settings.setDevVersion(BaseActivity.deviceBefore01112011);
                 }
                 else
                 {
