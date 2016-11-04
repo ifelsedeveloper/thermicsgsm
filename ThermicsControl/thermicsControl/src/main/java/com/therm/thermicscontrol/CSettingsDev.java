@@ -138,7 +138,7 @@ public class CSettingsDev {
 					res = true;
 			}
 		}
-		if(!res) Toast.makeText(appcontext, "¬ведите корректный номер SIM карты", Toast.LENGTH_LONG).show();
+		if(!res) Toast.makeText(appcontext, "Введите корректный номер SIM карты", Toast.LENGTH_LONG).show();
 		return res;
 	}
 
@@ -153,7 +153,7 @@ public class CSettingsDev {
 		password=settings_.getPinSIM();
 		String message=String.format(Locale.US,"Vkl %d %d %s",nrele, timeout, password);
 		sendSMS(message);
-		Toast.makeText(appcontext,String.format(Locale.US,"ќтправлена команда: %s",message),Toast.LENGTH_LONG).show();
+		Toast.makeText(appcontext,String.format(Locale.US,"отправлена команда: %s",message),Toast.LENGTH_LONG).show();
 	}
 
 	public void RequestReport()
@@ -219,7 +219,7 @@ public class CSettingsDev {
 
 	public void SetDefaultDevParametrsMultiSMS()
 	{
-		Toast.makeText(appcontext, "”становка начальных параметров", Toast.LENGTH_LONG).show();
+		Toast.makeText(appcontext, "Установка начальных параметров", Toast.LENGTH_LONG).show();
 		phoneNumber=settings_.getNumberSIM();
 		password=settings_.getPinSIM();
 
@@ -234,7 +234,7 @@ public class CSettingsDev {
 	{
 		if(isSimNumberValid())
 		{
-			Toast.makeText(appcontext, "ќтправка команд "+settings_.getName(), Toast.LENGTH_LONG).show();
+			Toast.makeText(appcontext, "Отправка команд "+settings_.getName(), Toast.LENGTH_LONG).show();
 			phoneNumber=settings_.getNumberSIM();
 			password=settings_.getPinSIM();
 			if(sms_to_send.size()>0)
@@ -379,43 +379,30 @@ public class CSettingsDev {
 
 	public void AddSetNumberSensorReleWarmCommand(int nSensorReleWarm,int n_rele,boolean anyway)
 	{
-		if(nSensorReleWarm>-1 && nSensorReleWarm<7)
-		{
-			if(settings_.getDevVersion() == BaseActivity.deviceAfter01112012)
-			{
-				if( ( nSensorReleWarm != settings_.getNumberSensorReleWarm() )  || ( n_rele != settings_.getNumberReleWarm() ) || anyway)
-				{
-					password=settings_.getPinSIM();
-					String val = "020";
-					switch(n_rele)
-					{
+		if (nSensorReleWarm > -1 && nSensorReleWarm < 7) {
+			String val;
+			if (settings_.getDevVersion() == BaseActivity.deviceAfter01112012) {
+				if (nSensorReleWarm != this.settings_.getNumberSensorReleWarm() || n_rele != this.settings_.getNumberReleWarm() || anyway) {
+					this.password = this.settings_.getPinSIM();
+					val = "020";
+					switch (n_rele) {
 						case 1:
-							val = String.format(Locale.US,"%d00", nSensorReleWarm);
+							val = String.format(Locale.US, "%d%d%d", Integer.valueOf(nSensorReleWarm), Integer.valueOf(this.settings_.getNumberSensorReleWarm(1)), Integer.valueOf(this.settings_.getNumberSensorReleWarm(2)));
 							break;
 						case 2:
-							val = String.format(Locale.US,"0%d0", nSensorReleWarm);
+							val = String.format(Locale.US, "%d%d%d", Integer.valueOf(this.settings_.getNumberSensorReleWarm(0)), Integer.valueOf(nSensorReleWarm), Integer.valueOf(this.settings_.getNumberSensorReleWarm(2)));
 							break;
 						case 3:
-							val = String.format(Locale.US,"00%d", nSensorReleWarm);
+							val = String.format(Locale.US, "%d%d%d", Integer.valueOf(this.settings_.getNumberSensorReleWarm(0)), Integer.valueOf(this.settings_.getNumberSensorReleWarm(1)), Integer.valueOf(nSensorReleWarm));
 							break;
 					}
-
-					SMSCommand smsCommand = new SMSCommand(getCommandDevSettings(numberSMSFunction.NTmpSensorReleWarm.ncommand(), val, password), 0);
-					sms_to_send.add(smsCommand);
-					//settings_.setNumberSensorReleWarm(nReleWarm);
+					this.sms_to_send.add(new SMSCommand(getCommandDevSettings(numberSMSFunction.NTmpSensorReleWarm.ncommand(), val, this.password), 0));
 				}
-			}
-			else
-			{
-				if( ( nSensorReleWarm != settings_.getNumberSensorReleWarm() )  || ( n_rele != settings_.getNumberReleWarm() ) || anyway)
-				{
-					password=settings_.getPinSIM();
-					String val = "1";
-					val = String.format(Locale.US,"%d", nSensorReleWarm);
-					SMSCommand smsCommand = new SMSCommand(getCommandDevSettings(numberSMSFunction.NTmpSensorReleWarm.ncommand(), val, password), 0);
-					sms_to_send.add(smsCommand);
-					//settings_.setNumberSensorReleWarm(nReleWarm);
-				}
+			} else if( ( nSensorReleWarm != settings_.getNumberSensorReleWarm() )  || ( n_rele != settings_.getNumberReleWarm() ) || anyway) {
+				password=settings_.getPinSIM();
+				val = String.format(Locale.US,"%d", nSensorReleWarm);
+				SMSCommand smsCommand = new SMSCommand(getCommandDevSettings(numberSMSFunction.NTmpSensorReleWarm.ncommand(), val, password), 0);
+				sms_to_send.add(smsCommand);
 			}
 		}
 	}
@@ -786,7 +773,7 @@ class SendCommandsRun implements Runnable {
 			last_type=current_cmd.type;
 			Message msg = new Message();
 			Bundle b = new Bundle();
-			b.putString("msgvalue","ќтправлена команда: "+current_cmd.command);
+			b.putString("msgvalue","отправлена команда: "+current_cmd.command);
 			msg.setData(b);
 			handler.sendMessage(msg);
 			hdp.sendEmptyMessage(0);
@@ -800,12 +787,12 @@ class SendCommandsRun implements Runnable {
 		current_sec=0;
 		if(iSmsRecive && last_type == 0)
 		{
-			while(current_sec < 1)
+			while(current_sec < 2)
 			{};
 		}
 		else
 		{
-			while(current_sec < 1)
+			while(current_sec < 2)
 			{};
 		}
 		hdp.sendEmptyMessage(0);

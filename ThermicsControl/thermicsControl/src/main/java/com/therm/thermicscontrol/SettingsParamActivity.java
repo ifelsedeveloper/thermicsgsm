@@ -41,6 +41,8 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.view.View.OnLongClickListener;
 
+import timber.log.Timber;
+
 
 public class SettingsParamActivity extends BaseActivity {
 
@@ -102,7 +104,7 @@ public class SettingsParamActivity extends BaseActivity {
 			textNameSystem = (TextView) findViewById(R.id.textNameSystem);
 			loadParam();
 
-			Log.i(TAG_events, "creating activity");
+			Timber.i(TAG_events, "creating activity");
 			// создаем BroadcastReceiver
 			brTimer = new BroadcastReceiver() {
 				// действия при получении сообщений
@@ -129,14 +131,14 @@ public class SettingsParamActivity extends BaseActivity {
 					}
 					String sms = intent.getStringExtra(PARAM_SMS);
 					String time = intent.getStringExtra(PARAM_SMSTIME);
-					Log.d(TAG_events, "onReceive sms: "+sms+" ;time = "+time);
+					Timber.i(TAG_events, "onReceive sms: "+sms+" ;time = "+time);
 					//отправляем полученное сообщение нашему классу
 					settingsDev.recvSMS(sms);
 					setReleState();
 
 					for(int i =0; i<3; i++)
 						isRele[i] = settings.getIsRele(i);
-					Log.d("event_tag_settings_param", Long.toString(settings.getId()) + settings.getName()+" | "+Boolean.toString(isRele[0])+" | "+Boolean.toString(isRele[1])+" | "+Boolean.toString(isRele[2]));
+					Timber.i("event_tag_settings_param", Long.toString(settings.getId()) + settings.getName()+" | "+Boolean.toString(isRele[0])+" | "+Boolean.toString(isRele[1])+" | "+Boolean.toString(isRele[2]));
 					setCheckRele(isRele);
 				}
 			};
@@ -364,9 +366,9 @@ public class SettingsParamActivity extends BaseActivity {
 
 	public void setReleState()
 	{
+		setEnableReleN(0,!settings.getIsSetAutoRele1Control() && !(settings.getNumberSensorReleWarm(0) > 0));
 		setEnableReleN(1,true);
-		setEnableReleN(0,!settings.getIsSetAutoRele1Control());
-		setEnableReleN(2,!settings.getIsAutoPowerOnAlarm());
+		setEnableReleN(2,!settings.getIsAutoPowerOnAlarm() && !(settings.getNumberSensorReleWarm(2) > 0));
 
 		if(numberSensorTMPReleWarm==0)
 			setEnableReleN(1,true);
@@ -410,29 +412,22 @@ public class SettingsParamActivity extends BaseActivity {
 	LinearLayout layoutToggleButtons;
 	public void setSeekBar()
 	{
-		if(numberSensorTMPReleWarm != settings.getNumberSensorReleWarm() || (value_seek_rele!=tmp_rele_warm) || numberRele != settings.getNumberReleWarm())
-			viewOkCancel.setVisibility(View.VISIBLE );
-		else
-			viewOkCancel.setVisibility(View.GONE);
-
-
-		if(numberSensorTMPReleWarm==0 && settings.getDevVersion() == 1)
-		{
-			linearLayoutDayTemp.setVisibility(View.GONE);
-			linearLayoutNightTemp.setVisibility(View.GONE);
-			layoutToggleButtons.setVisibility(View.GONE);
+		if (this.numberSensorTMPReleWarm == this.settings.getNumberSensorReleWarm() && value_seek_rele == this.tmp_rele_warm && this.numberRele == this.settings.getNumberReleWarm()) {
+			this.viewOkCancel.setVisibility(View.GONE);
+		} else {
+			this.viewOkCancel.setVisibility(View.GONE);
 		}
-		else
-		{
-			setVisibilityScrollRegulator();
-
-			value_seek_rele = newTempDayHotKeys[numberSensorTMPReleWarm][newTempSelectedButton];
-			value_seek_rele_night = newTempNightHotKeys[numberSensorTMPReleWarm][newTempSelectedButton];
-
-			sbWeightRele.setProgress(value_seek_rele-min_tmp);
-			sbWeightReleNight.setProgress(value_seek_rele_night-min_tmp);
-
+		if (this.numberSensorTMPReleWarm == 0 && this.settings.getDevVersion() == minNRele) {
+			this.linearLayoutDayTemp.setVisibility(View.GONE);
+			this.linearLayoutNightTemp.setVisibility(View.GONE);
+			this.layoutToggleButtons.setVisibility(View.GONE);
+			return;
 		}
+		setVisibilityScrollRegulator();
+		value_seek_rele = this.newTempDayHotKeys[this.numberSensorTMPReleWarm][this.newTempSelectedButton];
+		value_seek_rele_night = this.newTempNightHotKeys[this.numberSensorTMPReleWarm][this.newTempSelectedButton];
+		this.sbWeightRele.setProgress(value_seek_rele - min_tmp);
+		this.sbWeightReleNight.setProgress(value_seek_rele_night - min_tmp);
 
 	}
 
@@ -487,36 +482,26 @@ public class SettingsParamActivity extends BaseActivity {
 		}
 	}
 
-
 	public int numberSensorTMPReleWarm=2;
 	static public final int maxNTmpSensor = 6;
 	static public final int minNTmpSensor = 0;
 
-	public void onClickIncNTmpSensorRele(View v)
-	{
-		if(numberSensorTMPReleWarm >= minNTmpSensor && numberSensorTMPReleWarm <maxNTmpSensor)
-		{
-			numberSensorTMPReleWarm++;
-			editNTmpSensorRele.setText(String.format("%d", numberSensorTMPReleWarm));
-			//change title and function
-			SetFunctionSensorRele();
-			setSeekBar();
-			UpdateValueButtons();
-
-			for(int i = 0; i<7;i++) mInitializedTempSensor[i] = false;
+	public void onClickIncNTmpSensorRele(View v) {
+		if (this.numberSensorTMPReleWarm >= minNTmpSensor && this.numberSensorTMPReleWarm < maxNTmpSensor) {
+			this.numberSensorTMPReleWarm++;
+			ReloadTempSensor();
+			for (int i = 0; i < 7; i += minNRele) {
+				this.mInitializedTempSensor[i] = false;
+			}
+            viewOkCancel.setVisibility(View.VISIBLE);
 		}
 	}
 
-	public void onClickDecNTmpSensorRele(View v)
-	{
-		if(numberSensorTMPReleWarm > minNTmpSensor && numberSensorTMPReleWarm <=maxNTmpSensor)
-		{
-			numberSensorTMPReleWarm--;
-			editNTmpSensorRele.setText(String.format("%d", numberSensorTMPReleWarm));
-			//change title and function
-			SetFunctionSensorRele();
-			setSeekBar();
-			UpdateValueButtons();
+	public void onClickDecNTmpSensorRele(View v) {
+		if (this.numberSensorTMPReleWarm > 0 && this.numberSensorTMPReleWarm <= maxNTmpSensor) {
+			this.numberSensorTMPReleWarm--;
+			ReloadTempSensor();
+            viewOkCancel.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -526,14 +511,18 @@ public class SettingsParamActivity extends BaseActivity {
 
 	public void onClickIncNRele(View v)
 	{
-		if(numberRele <= 0 || numberRele >= 4) numberRele = 1;
-		if(numberRele >= minNRele && numberRele <maxNRele)
-		{
+		if (this.numberRele <= 0 || this.numberRele >= 4) {
+			this.numberRele = minNRele;
+		}
+		if (this.numberRele >= minNRele && this.numberRele < maxNRele) {
+			if(this.numberRele > 0) {
+				settings.setNumberSensorReleWarm(this.numberRele - 1, this.numberSensorTMPReleWarm);
+			}
 			numberRele++;
-			editNRele.setText(String.format("%d", numberRele));
-			//change title and function
+			editNRele.setText(String.format("%d", this.numberRele));
 			SetFunctionSensorRele();
 			setSeekBar();
+			loadNumberTempSensorForCurrentRele(this.numberRele);
 		}
 	}
 
@@ -542,13 +531,30 @@ public class SettingsParamActivity extends BaseActivity {
 		if(numberRele <= 0 || numberRele >= 4) numberRele = 1;
 		if(numberRele > minNRele && numberRele <=maxNRele)
 		{
+			if(this.numberRele > 0) {
+				settings.setNumberSensorReleWarm(this.numberRele - 1, this.numberSensorTMPReleWarm);
+			}
 			numberRele--;
 			editNRele.setText(String.format("%d", numberRele));
 			//change title and function
 			SetFunctionSensorRele();
 			setSeekBar();
+			loadNumberTempSensorForCurrentRele(this.numberRele);
 		}
 	}
+
+	private void loadNumberTempSensorForCurrentRele(int nRele) {
+		this.numberSensorTMPReleWarm = this.settings.getNumberSensorReleWarm(nRele - 1);
+		ReloadTempSensor();
+	}
+
+	private void ReloadTempSensor() {
+		editNTmpSensorRele.setText(String.format("%d", Integer.valueOf(this.numberSensorTMPReleWarm)));
+		SetFunctionSensorRele();
+		setSeekBar();
+		UpdateValueButtons();
+	}
+
 
 	//save parameters to system
 	public void saveParam2()
@@ -606,8 +612,10 @@ public class SettingsParamActivity extends BaseActivity {
 
 					if(!SendCommandsToDevice)
 					{
-						settings.setNumberSensorReleWarm(numberSensorTMPReleWarm);
-						settings.setNumberReleWarm(numberRele);
+						settings.setNumberSensorReleWarm(SettingsParamActivity.this.numberSensorTMPReleWarm);
+						settings.setNumberReleWarm(SettingsParamActivity.this.numberRele);
+						settings.setNumberSensorReleWarm(SettingsParamActivity.this.numberRele - 1, SettingsParamActivity.this.numberSensorTMPReleWarm);
+						setReleState();
 					}
 
 					if(settingsDev.sms_to_send.size() > 0)
@@ -616,10 +624,11 @@ public class SettingsParamActivity extends BaseActivity {
 						settings.setNumberReleWarm(numberRele);
 						//viewOkCancel.setVisibility(View.INVISIBLE);
 						viewOkCancel.setVisibility(View.GONE);
-						LoadProgressDialog(settingsDev.sms_to_send.size()+1,"Настройка термостата");
+						LoadProgressDialog(settingsDev.sms_to_send.size()+ SettingsParamActivity.minNRele,"Настройка термостата");
 						settingsDev.sendCommands();
 						setReleState();
 						pd.show();
+
 					}
 					else
 					{
@@ -658,7 +667,7 @@ public class SettingsParamActivity extends BaseActivity {
 	public void ClickRele(final int nrele)
 	{
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-		Log.i(TAG_events,"onClickCheckBoxBoiler");
+		Timber.i(TAG_events,"onClickCheckBoxBoiler");
 		final boolean isReleN=(!isRele[nrele]);
 		final String titleProgress;
 		final String questionDialog;
@@ -750,7 +759,7 @@ public class SettingsParamActivity extends BaseActivity {
 	private void VklRele60(final int nrele)
 	{
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-		Log.i(TAG_events,"onClickCheckBoxBoiler");
+		Timber.i(TAG_events,"onClickCheckBoxBoiler");
 		final String titleProgress;
 		final String questionDialog;
 		final String actionDialog;
@@ -804,7 +813,7 @@ public class SettingsParamActivity extends BaseActivity {
 		if(settingsDev.isSimNumberValid())
 		{
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-			Log.i(TAG_events,"onClickCheckBoxBoiler");
+			Timber.i(TAG_events,"onClickCheckBoxBoiler");
 			isUpr=(!isUpr);
 			final String titleProgress;
 			final String questionDialog;
@@ -898,7 +907,7 @@ public class SettingsParamActivity extends BaseActivity {
 	public void onClickCheckBoxTimer(View v)
 	{
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-		Log.i(TAG_events,"onClickCheckBoxisTimer");
+		Timber.i(TAG_events,"onClickCheckBoxisTimer");
 		isTimer=(!isTimer);
 		final String questionDialog;
 		final String actionDialog;
@@ -1012,11 +1021,11 @@ public class SettingsParamActivity extends BaseActivity {
 
 	void UpdateValueButtons()
 	{
-		int nsensor = numberSensorTMPReleWarm;
-		for(int nbutton = 0; nbutton < SystemConfig.numberButtons ; nbutton++)
-		{
-			setValueForHotButton(nbutton, newTempDayHotKeys[nsensor][nbutton], newTempNightHotKeys[nsensor][nbutton]);
-			statesButtons[nbutton] = false;
+		int nsensor = this.numberSensorTMPReleWarm;
+		for (int nbutton = 0; nbutton < 4; nbutton ++) {
+			setValueForHotButton(nbutton, this.newTempDayHotKeys[nsensor][nbutton], this.newTempNightHotKeys[nsensor][nbutton]);
+			this.statesButtons[nbutton] = false;
+			Timber.i("nbutton = " + nbutton + " " + this.newTempDayHotKeys[nsensor][nbutton] + " " + this.newTempNightHotKeys[nsensor][nbutton]);
 		}
 
 	}
@@ -1482,7 +1491,7 @@ public class SettingsParamActivity extends BaseActivity {
 
 	//AutoRequest
 	public void onClickLayoutCheckBoxAutoRequest(View v) {
-		Log.i(TAG_events,"RequestSystemActivity");
+		Timber.i(TAG_events,"RequestSystemActivity");
 		Intent intent = new Intent(this, RequestSystemActivity.class);
 		startActivity(intent);
 	}
@@ -1490,7 +1499,7 @@ public class SettingsParamActivity extends BaseActivity {
 	private boolean isAutoRequest = true;
 	public void onClickCheckBoxAutoRequest(View v) {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-		Log.i(TAG_events,"onClickCheckBoxisTimer");
+		Timber.i(TAG_events,"onClickCheckBoxisTimer");
 		isTimer=(!isTimer);
 		final String questionDialog;
 		final String actionDialog;

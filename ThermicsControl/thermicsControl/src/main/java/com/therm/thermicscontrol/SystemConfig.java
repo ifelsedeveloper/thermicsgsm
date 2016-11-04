@@ -11,6 +11,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import timber.log.Timber;
+
 public class SystemConfig {
 
 	private long _id;
@@ -20,7 +22,7 @@ public class SystemConfig {
 	private String _tableAutorequest;
 
 	public SystemConfig(long idSystem) {
-		Log.d("event_tag_settings_param", "id system = " + Long.toString(idSystem));
+		Timber.i("event_tag_settings_param", "id system = " + Long.toString(idSystem));
 		if(idSystem == 1) {
 			_settings = ContextApplication.getAppContext().getSharedPreferences(
 					BaseActivity.MYSYSTEM_PREFERENCES, Context.MODE_MULTI_PROCESS);
@@ -141,12 +143,12 @@ public class SystemConfig {
 					result);
 		else
 			setIsRele(nrele, result);
-		Log.d("event_tag_settings_param","get " + Long.toString(_id)+" " + getName()+" | "+ Integer.toString(nrele)+" | "+ Boolean.toString(result));
+		Timber.i("event_tag_settings_param","get " + Long.toString(_id)+" " + getName()+" | "+ Integer.toString(nrele)+" | "+ Boolean.toString(result));
 		return result;
 	}
 
 	public void setIsRele(int nrele, boolean isRele) {
-		Log.d("event_tag_settings_param", "set " + Long.toString(_id)+" " + getName()+" | "+ Integer.toString(nrele)+" | "+ Boolean.toString(isRele));
+		Timber.i("event_tag_settings_param", "set " + Long.toString(_id)+" " + getName()+" | "+ Integer.toString(nrele)+" | "+ Boolean.toString(isRele));
 		_settings.edit().putBoolean(BaseActivity.prefIsRele[nrele], isRele).commit();
 	}
 
@@ -422,6 +424,24 @@ public class SystemConfig {
 		prefEditor.commit();
 		//prefEditor.apply();
 		return;
+	}
+
+	public int getNumberSensorReleWarm(int nRele) {
+		int result = 0;
+		if (this._settings.contains(BaseActivity.prefNumberSensorsReleWarm[nRele])) {
+			return this._settings.getInt(BaseActivity.prefNumberSensorsReleWarm[nRele], 0);
+		}
+		if (getNumberReleWarm() == nRele + 1) {
+			result = getNumberSensorReleWarm();
+		}
+		setNumberSensorReleWarm(nRele, result);
+		return result;
+	}
+
+	public void setNumberSensorReleWarm(int nRele, int nSensor) {
+		SharedPreferences.Editor prefEditor = this._settings.edit();
+		prefEditor.putInt(BaseActivity.prefNumberSensorsReleWarm[nRele], nSensor);
+		prefEditor.commit();
 	}
 
 	public int getNumberReleWarm() {

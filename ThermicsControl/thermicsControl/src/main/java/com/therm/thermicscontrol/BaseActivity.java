@@ -144,7 +144,8 @@ public final static int deviceBefore01112012 = 2;
 public final static int deviceAfter01112012 = 3;
 
 public static final String prefIsAutoRequest = "prefIsAutoRequest";
-public static final String prefIsAutoRequestEnabled = "prefIsAutoRequestEnabled";
+	public static final String prefIsAutoRequestEnabled = "prefIsAutoRequestEnabled";
+	public static final String[] prefNumberSensorsReleWarm = {"numberSensorReleWarm1", "numberSensorReleWarm2", "numberSensorReleWarm3"};
 
 public boolean onOptionsItemSelected(MenuItem item) {
 //	switch (item.getItemId()) {
