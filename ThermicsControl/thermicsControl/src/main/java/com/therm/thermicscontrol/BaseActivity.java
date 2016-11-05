@@ -115,7 +115,7 @@ public static final String [] prefTEMP_DAY_CONFIG = {
 	"temp_day_config51", "tmp5_rele", "temp_day_config53","temp_day_config54",
 	"temp_day_config61", "tmp6_rele", "temp_day_config63","temp_day_config64"};
 
-public final static String NTEMP_CONFIG = "ntemp_config";
+public final static String []NTEMP_CONFIG =  { "ntemp_config1","ntemp_config2", "ntemp_config3" };
 
 public final static String FUNCTION_UPR = "function_upr";
 

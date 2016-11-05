@@ -460,7 +460,7 @@ public class CSettingsDev {
 	{
 		if(tmprele>-56 && tmprele<100)
 		{
-			int nbutton = settings_.getNTempConfig();
+			int nbutton = settings_.getNTempConfig(n_rele - 1);
 			switch(settings_.getDevVersion())
 			{
 				case BaseActivity.deviceAfter01112012:

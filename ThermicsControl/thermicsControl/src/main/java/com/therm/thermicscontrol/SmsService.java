@@ -427,6 +427,7 @@ public class SmsService extends Service {
                 		Log.d("parseSMS",String.format("nRele = %d dayTempR = %d nigthTempR = %d",  nRele,dayTempR,nigthTempR));
                 		settings.setNumberReleWarm(nRele);
                 		settings.setActiveReleTemp(dayTempR,nigthTempR);
+
                 		if(settings.getNumberSensorReleWarm() == 0) {
                 			settings.setNumberSensorReleWarm(2);
                 		}
@@ -519,27 +520,23 @@ public class SmsService extends Service {
         	int n_sensor=0;
         	int n_rele = 0;
         	String str_nsenosr1=sms.substring(n+datchik_rele.length(), n+datchik_rele.length()+1);
-        	
-        	
-        	if(!str_nsenosr1.equalsIgnoreCase("0"))
-        	{
-        		n_sensor=Integer.parseInt(str_nsenosr1);
-        		n_rele = 1;
-        	}
+			n_sensor=Integer.parseInt(str_nsenosr1);
+			n_rele = 1;
+        	settings.setNumberSensorReleWarm(n_rele - 1, n_sensor);
+
         	if(sms.length() > n+datchik_rele.length()+2)
         	{
 	        	String str_nsenosr2=sms.substring(n+datchik_rele.length()+1, n+datchik_rele.length()+2);
 	        	String str_nsenosr3=sms.substring(n+datchik_rele.length()+2, n+datchik_rele.length()+3);
-	        	if(!str_nsenosr2.equalsIgnoreCase("0"))
-	        	{
-	            	n_sensor=Integer.parseInt(str_nsenosr2);
-	            	n_rele = 2;
-	        	}
-	        	if(!str_nsenosr3.equalsIgnoreCase("0"))
-	        	{
-	            	n_sensor=Integer.parseInt(str_nsenosr3);
-	            	n_rele = 3;
-	        	}
+
+				n_sensor=Integer.parseInt(str_nsenosr2);
+				n_rele = 2;
+				settings.setNumberSensorReleWarm(n_rele - 1, n_sensor);
+
+				n_sensor=Integer.parseInt(str_nsenosr3);
+				n_rele = 3;
+				settings.setNumberSensorReleWarm(n_rele - 1, n_sensor);
+
         	}
         	//Toast.makeText(getApplicationContext(), str_nsenosr1 + str_nsenosr2 + str_nsenosr3, Toast.LENGTH_LONG).show();
         	settings.setNumberSensorReleWarm(n_sensor);

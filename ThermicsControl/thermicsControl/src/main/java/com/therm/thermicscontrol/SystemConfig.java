@@ -118,6 +118,7 @@ public class SystemConfig {
 		SharedPreferences.Editor prefEditor = _settings.edit();
 		prefEditor.putInt(BaseActivity.prefDeviceVersion, deviceVersion);
 		prefEditor.commit();
+
 		return;
 	}
 
@@ -373,17 +374,17 @@ public class SystemConfig {
 	}
 	
 	public void setActiveReleTemp(int dayTemp, int nightTemp){
-		int nButton = getNTempConfig();
+		int nButton = getNTempConfig(1);
 		int nSensor = getNumberSensorReleWarm();
 		setTempDayConfig(nSensor,nButton,dayTemp);
 		setTempNightConfig(nSensor,nButton,nightTemp);
 	}
 	
 
-	public int getNTempConfig() {
+	public int getNTempConfig(int nrele) {
 		int result = 1;
-		if (_settings.contains(BaseActivity.NTEMP_CONFIG) == true)
-			result = _settings.getInt(BaseActivity.NTEMP_CONFIG, result);
+		if (_settings.contains(BaseActivity.NTEMP_CONFIG[nrele]) == true)
+			result = _settings.getInt(BaseActivity.NTEMP_CONFIG[nrele], result);
 		else {
 			// set day temp config
 			int numberSensorTMPReleWarm = getNumberSensorReleWarm();
@@ -392,16 +393,15 @@ public class SystemConfig {
 			int tmp_rele_warm_night = getTempNightConfig(
 					numberSensorTMPReleWarm, result);
 			setTempDayConfig(getNumberSensorReleWarm(), result, tmp_rele_warm);
-			setTempNightConfig(getNumberSensorReleWarm(), result,
-					tmp_rele_warm_night);
-			setNTempConfig(result);
+			setTempNightConfig(getNumberSensorReleWarm(), result, tmp_rele_warm_night);
+			setNTempConfig(nrele, result);
 		}
 		return result;
 	}
 
-	public void setNTempConfig(int nconfig_temp) {
+	public void setNTempConfig(int nrele ,int nconfig_temp) {
 		SharedPreferences.Editor prefEditor = _settings.edit();
-		prefEditor.putInt(BaseActivity.NTEMP_CONFIG, nconfig_temp);
+		prefEditor.putInt(BaseActivity.NTEMP_CONFIG[nrele], nconfig_temp);
 		prefEditor.commit();
 		//prefEditor.apply();
 		return;
@@ -422,7 +422,7 @@ public class SystemConfig {
 		prefEditor.putInt(BaseActivity.prefNumberSensorReleWarm,
 				numberSensorReleWarm);
 		prefEditor.commit();
-		//prefEditor.apply();
+		prefEditor.apply();
 		return;
 	}
 
@@ -442,6 +442,7 @@ public class SystemConfig {
 		SharedPreferences.Editor prefEditor = this._settings.edit();
 		prefEditor.putInt(BaseActivity.prefNumberSensorsReleWarm[nRele], nSensor);
 		prefEditor.commit();
+		prefEditor.apply();
 	}
 
 	public int getNumberReleWarm() {
@@ -457,7 +458,7 @@ public class SystemConfig {
 		SharedPreferences.Editor prefEditor = _settings.edit();
 		prefEditor.putInt(BaseActivity.prefNumberReleWarm, numberReleWarm);
 		prefEditor.commit();
-		//prefEditor.apply();
+		prefEditor.apply();
 		return;
 	}
 
