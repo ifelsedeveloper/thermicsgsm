@@ -617,11 +617,16 @@ public class SettingsParamActivity extends BaseActivity {
                     }
 
                     if (settingsDev.sms_to_send.size() > 0) {
+                        int oldNumberSensoreReleWarm = settings.getNumberSensorReleWarm(numberRele - 1);
+                        if (oldNumberSensoreReleWarm != numberSensorTMPReleWarm && numberSensorTMPReleWarm == 0) {
+                            settingsDev.AddRequestReportCommand();
+                        }
                         settings.setNumberSensorReleWarm(numberSensorTMPReleWarm);
                         settings.setNumberReleWarm(numberRele);
                         //viewOkCancel.setVisibility(View.INVISIBLE);
                         viewOkCancel.setVisibility(View.GONE);
                         LoadProgressDialog(settingsDev.sms_to_send.size() + SettingsParamActivity.minNRele, "Настройка термостата");
+
                         settingsDev.sendCommands();
                         setReleState();
                         pd.show();
