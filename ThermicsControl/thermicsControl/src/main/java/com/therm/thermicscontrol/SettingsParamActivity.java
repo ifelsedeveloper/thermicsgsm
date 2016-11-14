@@ -154,6 +154,13 @@ public class SettingsParamActivity extends BaseActivity {
             editTextTmpReleWarmNight = (EditText) findViewById(R.id.editTextTmpReleNight);
             editNRele = (EditText) findViewById(R.id.editTextNRele);
             textNameSystem = (TextView) findViewById(R.id.textNameSystem);
+
+//            if(settings.getNumberSensorReleWarm() > 0 && settings.getNumberSensorReleWarm(1) == 0
+//                    && settings.getDevVersion() == BaseActivity.deviceAfter01112012) {
+//                settings.setNumberSensorReleWarm(1,  settings.getNumberSensorReleWarm());
+//                settings.setNumberReleWarm(0);
+//            }
+
             loadParam();
 
             Timber.i(TAG_events, "creating activity");
@@ -398,6 +405,8 @@ public class SettingsParamActivity extends BaseActivity {
     }
 
     public void setReleState() {
+
+
         setEnableReleN(0, !settings.getIsSetAutoRele1Control() && !(settings.getNumberSensorReleWarm(0) > 0));
         setEnableReleN(1, true && !(settings.getNumberSensorReleWarm(1) > 0));
         setEnableReleN(2, !settings.getIsAutoPowerOnAlarm() && !(settings.getNumberSensorReleWarm(2) > 0));
