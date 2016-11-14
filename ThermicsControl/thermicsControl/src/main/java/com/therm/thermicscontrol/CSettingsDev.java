@@ -138,6 +138,12 @@ public class CSettingsDev {
 					res = true;
 			}
 		}
+		if(phone_number.length() == 14) {
+			if(phone_number.startsWith("+375")) {
+				res = true;
+			}
+		}
+		//+375
 		if(!res) Toast.makeText(appcontext, "Введите корректный номер SIM карты", Toast.LENGTH_LONG).show();
 		return res;
 	}
