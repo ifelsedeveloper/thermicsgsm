@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.therm.thermicscontrol"
     android:theme="@style/AppBaseTheme"
-    android:versionCode="41"
-    android:versionName="2.5.7" >
+    android:versionCode="42"
+    android:versionName="2.5.8" >
 
     <uses-sdk
         android:minSdkVersion="9"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="25" />
 
     <uses-permission android:name="android.permission.INTERNET" >
     </uses-permission>
@@ -142,9 +142,8 @@
 
         <receiver
             android:name="com.therm.thermicscontrol.SMSMonitor">
-            <intent-filter android:priority="1000">
+            <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-
             </intent-filter>
         </receiver>
 
@@ -205,6 +204,9 @@
             android:name="com.therm.thermicscontrol.TimersListActivity"
             android:label="@string/title_activity_timers_list" >
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="7a3cf10273625242e3ca58d3c9d37fd7fd8454b8" />
     </application>
 
 </manifest>

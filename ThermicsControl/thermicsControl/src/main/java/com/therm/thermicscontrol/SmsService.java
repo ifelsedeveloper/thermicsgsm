@@ -356,7 +356,7 @@ public class SmsService extends Service {
         Intent intent = new Intent(this, MessageSystemActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
         
-        if (currentapiVersion >= android.os.Build.VERSION_CODES.FROYO){
+        if (currentapiVersion >= android.os.Build.VERSION_CODES.FROYO) {
             // Do something for froyo and above versions
         	//Define sound URI
         	Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -382,23 +382,6 @@ public class SmsService extends Service {
         	
         	//notif.number = num_not;
         	nm.notify(1, notif);
-        } else{
-            // do something for phones running an SDK before froyo
-        	Notification notif = new Notification(R.drawable.ic_launcher, "Новое сообщение от системы Кситал", 
-          	      System.currentTimeMillis());       	    
-	                 	    
-	         // 2-я часть
-	         notif.setLatestEventInfo(this, "Система Кситал", String.format("Непрочитанных сообщений %d", num_not), pIntent);
-	          	    
-	         // ставим флаг, чтобы уведомление пропало после нажатия
-	         notif.flags |= Notification.DEFAULT_VIBRATE |Notification.DEFAULT_SOUND |Notification.FLAG_AUTO_CANCEL;
-	         notif.flags |= Notification.FLAG_SHOW_LIGHTS;
-	         notif.ledARGB = 0xff00ff00;
-	         notif.ledOnMS = 800;
-	         notif.ledOffMS = 1000* 36000;
-	         //notif.	    
-	         notif.number = num_not;
-	         nm.notify(1, notif);
         }
 		//detect device version
         String [] linesRep = sms.split("\n");
