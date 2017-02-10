@@ -18,8 +18,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
 
             ext.betaDistributionReleaseNotesFilePath =
                     file('../crashlytics_release_notes.txt').absolutePath
@@ -27,6 +27,10 @@ android {
                     file('../beta_distribution_emails.txt').absolutePath
             ext.betaDistributionGroupAliasesFilePath = file('../beta_distribution_groups.txt').absolutePath
         }
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
 

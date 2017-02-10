@@ -29,6 +29,8 @@ import android.util.Log;
 import android.widget.Toast;
 import android.support.v4.app.NotificationCompat;
 
+import timber.log.Timber;
+
 
 public class SmsService extends Service {
 	
@@ -259,17 +261,54 @@ public class SmsService extends Service {
 			
 			if(sms_body.contains(datchik_rele))
 			{
+
+				String to_replace;
 				if(sms_body.length() > sms_body.indexOf(datchik_rele)+datchik_rele.length()+2 && settings.getDevVersion() == BaseActivity.deviceAfter01112012)
 				{
-					String to_replace = sms_body.substring(sms_body.indexOf(datchik_rele),sms_body.indexOf(datchik_rele)+datchik_rele.length()+3);
-					if(settings.getNumberSensorReleWarm() > 0)
-						sms_body=sms_body.replace(to_replace,"Для реле №"+Integer.toString(settings.getNumberReleWarm())+" задан термодатчик №"+Integer.toString(settings.getNumberSensorReleWarm()));
-					else
-						sms_body=sms_body.replace(to_replace,"Термостат отключен");
+					to_replace = sms_body.substring(sms_body.indexOf(datchik_rele),sms_body.indexOf(datchik_rele)+datchik_rele.length()+3);
+					int n=sms_body.indexOf(datchik_rele);
+					if(n>-1) {
+						int n_sensor = 0;
+						int n_rele = 0;
+						String newThermostatSate = "\n";
+
+						String str_nsenosr1 = sms_body.substring(n + datchik_rele.length(), n + datchik_rele.length() + 1);
+						n_sensor = Integer.parseInt(str_nsenosr1);
+						n_rele = 1;
+						if (n_sensor > 0) {
+							newThermostatSate += "Для реле №" + n_rele + " задан термодатчик №" + n_sensor + "\n";
+						} else {
+							newThermostatSate += "Для реле №" + n_rele + " отключен термостат" + "\n";
+						}
+
+						if (sms_body.length() > n + datchik_rele.length() + 2) {
+							String str_nsenosr2 = sms_body.substring(n + datchik_rele.length() + 1, n + datchik_rele.length() + 2);
+							String str_nsenosr3 = sms_body.substring(n + datchik_rele.length() + 2, n + datchik_rele.length() + 3);
+
+							n_sensor = Integer.parseInt(str_nsenosr2);
+							n_rele = 2;
+							if (n_sensor > 0) {
+								newThermostatSate += "Для реле №" + n_rele + " задан термодатчик №" + n_sensor + "\n";
+							} else {
+								newThermostatSate += "Для реле №" + n_rele + " отключен термостат" + "\n";
+							}
+
+							n_sensor = Integer.parseInt(str_nsenosr3);
+							n_rele = 3;
+							if (n_sensor > 0) {
+								newThermostatSate += "Для реле №" + n_rele + " задан термодатчик №" + n_sensor + "\n";
+							} else {
+								newThermostatSate += "Для реле №" + n_rele + " отключен термостат" + "\n";
+							}
+							sms_body = sms_body.replace(to_replace, newThermostatSate);
+
+						}
+					}
+
 				}
 				else
 				{
-					String to_replace = sms_body.substring(sms_body.indexOf(datchik_rele),sms_body.indexOf(datchik_rele)+datchik_rele.length()+1);
+					to_replace = sms_body.substring(sms_body.indexOf(datchik_rele),sms_body.indexOf(datchik_rele)+datchik_rele.length()+1);
 					if(settings.getNumberSensorReleWarm() > 0)
 						sms_body=sms_body.replace(to_replace,"Для реле №"+Integer.toString(settings.getNumberReleWarm())+" задан термодатчик №"+Integer.toString(settings.getNumberSensorReleWarm()));
 					else
@@ -346,6 +385,8 @@ public class SmsService extends Service {
 	
 	private void parseSMS(String sms,SystemConfig settings)
 	{
+		Log.d("parseSMS","SmsService: sms: " + sms);
+		Timber.i(sms);
 		//increment number notifications
 		//CSettingsPref.incNumNotification();
         int num_not = settings.getNumNotificationSaved() + 1;
@@ -402,6 +443,14 @@ public class SmsService extends Service {
                 }
                 else
                 {
+//					T1=+20,5C;
+//					T2=+55,0C;
+//					T3=+31,5C;
+//					Control snjat.
+//					Naprjagenie norma.
+//					RELE=001
+//					xxxx
+//					Temp.R2=+50/+55
                 	settings.setDevVersion(BaseActivity.deviceAfter01112012);
                 	if(sms.contains("RELE=")){
                 		int nRele = Integer.parseInt(lineRele.substring(6, 7));
@@ -414,10 +463,37 @@ public class SmsService extends Service {
                 		if(settings.getNumberSensorReleWarm() == 0) {
                 			settings.setNumberSensorReleWarm(2);
                 		}
+
                 	}
                 }
         	}
         }
+
+		int nReleWarm;
+		if(sms.contains("Temp.R1=")) {
+			Timber.i("SmsService: Temp.R1;");
+			nReleWarm = 0;
+			if(settings.getNumberSensorReleWarm(nReleWarm) > 0 ) {
+				Log.d("parseSMS","SmsService: Temp.R1; nsensor =  " + settings.getNumberSensorReleWarm(nReleWarm));
+				settings.setNumberSensorReleWarm(nReleWarm, settings.getNumberSensorReleWarm(nReleWarm));
+			}
+		}
+		if(sms.contains("Temp.R2=")) {
+			nReleWarm = 1;
+			Timber.i("SmsService: Temp.R2;");
+			if(settings.getNumberSensorReleWarm(nReleWarm) > 0 ) {
+				Log.d("parseSMS","SmsService: Temp.R2; nsensor = " + settings.getNumberSensorReleWarm(nReleWarm));
+				settings.setNumberSensorReleWarm(nReleWarm, settings.getNumberSensorReleWarm(nReleWarm));
+			}
+		}
+		if(sms.contains("Temp.R3=")) {
+			nReleWarm = 2;
+			Log.d("parseSMS","SmsService: Temp.R3;");
+			if(settings.getNumberSensorReleWarm(nReleWarm) > 0 ) {
+				Log.d("parseSMS","SmsService: Temp.R3; nsensor = " + settings.getNumberSensorReleWarm(nReleWarm) );
+				settings.setNumberSensorReleWarm(nReleWarm, settings.getNumberSensorReleWarm(nReleWarm));
+			}
+		}
         
         
         //
@@ -496,6 +572,7 @@ public class SmsService extends Service {
         	}
         }
         ////n tmp sensor
+		Timber.i("SmsService: datchik rele=");
         String datchik_rele="datchik rele=";
         n=sms.indexOf(datchik_rele);
         if(n>-1)
@@ -504,6 +581,7 @@ public class SmsService extends Service {
         	int n_rele = 0;
         	String str_nsenosr1=sms.substring(n+datchik_rele.length(), n+datchik_rele.length()+1);
 			n_sensor=Integer.parseInt(str_nsenosr1);
+			Log.d("parseSMS","SmsService: datchik rele 1; n_sensor = " + n_sensor);
 			n_rele = 1;
         	settings.setNumberSensorReleWarm(n_rele - 1, n_sensor);
 
@@ -515,10 +593,11 @@ public class SmsService extends Service {
 				n_sensor=Integer.parseInt(str_nsenosr2);
 				n_rele = 2;
 				settings.setNumberSensorReleWarm(n_rele - 1, n_sensor);
-
+				Log.d("parseSMS","SmsService: datchik rele 2; n_sensor = " + n_sensor);
 				n_sensor=Integer.parseInt(str_nsenosr3);
 				n_rele = 3;
 				settings.setNumberSensorReleWarm(n_rele - 1, n_sensor);
+				Log.d("parseSMS","SmsService: datchik rele 3; n_sensor = " + n_sensor);
 
         	}
         	//Toast.makeText(getApplicationContext(), str_nsenosr1 + str_nsenosr2 + str_nsenosr3, Toast.LENGTH_LONG).show();

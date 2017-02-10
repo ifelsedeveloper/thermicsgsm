@@ -19,6 +19,7 @@
 # please KEEP ALL THE NAMES
 #-keepnames class ** { *; }
 
+
 # ButterKnife rules
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**
@@ -108,3 +109,5 @@
 -keep class org.apache.http.** { *; }
 -dontwarn org.apache.http.**
 -dontwarn android.net.**
+-keep class com.github.mikephil.charting.** { *; }
+-dontwarn io.realm.**

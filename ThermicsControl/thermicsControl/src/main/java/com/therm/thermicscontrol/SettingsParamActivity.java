@@ -408,7 +408,7 @@ public class SettingsParamActivity extends BaseActivity {
 
 
         setEnableReleN(0, !settings.getIsSetAutoRele1Control() && !(settings.getNumberSensorReleWarm(0) > 0));
-        setEnableReleN(1, true && !(settings.getNumberSensorReleWarm(1) > 0));
+        setEnableReleN(1, !(settings.getNumberSensorReleWarm(1) > 0 || settings.getNumberSensorReleWarm() > 0));
         setEnableReleN(2, !settings.getIsAutoPowerOnAlarm() && !(settings.getNumberSensorReleWarm(2) > 0));
 
         if(settings.getDevVersion() == BaseActivity.deviceBefore01112011 || settings.getDevVersion() == BaseActivity.deviceBefore01112012) {
@@ -618,10 +618,11 @@ public class SettingsParamActivity extends BaseActivity {
                         }
                     }
 
+                    settings.setNumberSensorReleWarm(numberSensorTMPReleWarm);
+                    settings.setNumberReleWarm(numberRele);
+
                     if (!SendCommandsToDevice) {
-                        settings.setNumberSensorReleWarm(SettingsParamActivity.this.numberSensorTMPReleWarm);
-                        settings.setNumberReleWarm(SettingsParamActivity.this.numberRele);
-                        settings.setNumberSensorReleWarm(SettingsParamActivity.this.numberRele - 1, SettingsParamActivity.this.numberSensorTMPReleWarm);
+                        settings.setNumberSensorReleWarm(numberRele - 1, numberSensorTMPReleWarm);
                         setReleState();
                     }
 
