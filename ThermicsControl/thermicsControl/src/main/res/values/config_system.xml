@@ -61,7 +61,7 @@
 	<string name="default_number_sensortmp">1</string>
 	<string name="default_number_sensortmp2">2</string>
 	<dimen name="width_3dg_number">50dp</dimen>
-	<dimen name="width_phone_number">160dp</dimen>
+	<dimen name="width_phone_number">180dp</dimen>
 	<dimen name = "height_send_button">40dp</dimen>
 	<string-array name="device_versions">
         <item>до 01.11.2011</item>

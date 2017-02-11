@@ -77,9 +77,10 @@
             	<EditText
             	    android:id="@+id/editTextPhoneNumber"
             	    android:layout_width="@dimen/width_phone_number"
-            	    android:layout_height="@dimen/height_edit_field"
+            	    android:layout_height="wrap_content"
             	    android:layout_alignParentRight="true"
             	    android:layout_marginLeft="10dp"
+					android:textSize="@dimen/size_button_text"
             	    android:ems="12"
             	    android:gravity="center_vertical|center_horizontal"
             	    android:inputType="phone"
@@ -96,16 +97,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-            <TextView
-            	    android:id="@+id/titleNumberPhone2"
-            	    android:text="@string/sim_number2"
-            	    android:layout_toLeftOf="@+id/editTextPhoneNumber2"
-            	    style="@style/TextViewConfigSubTitle" />
-            
-            	<EditText
+			<EditText
             	    android:id="@+id/editTextPhoneNumber2"
             	    android:layout_width="@dimen/width_phone_number"
-            	    android:layout_height="@dimen/height_edit_field"
+            	    android:layout_height="wrap_content"
             	    android:layout_alignParentRight="true"
             	    android:layout_marginLeft="10dp"
             	    android:ems="12"
@@ -116,7 +111,15 @@
 					android:focusableInTouchMode="true">
 
             	</EditText>
-            	
+
+			<TextView
+                    android:id="@+id/titleNumberPhone2"
+                    android:text="@string/sim_number2"
+				style="@style/TextViewConfigSubTitle"
+				android:layout_centerVertical="true"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentStart="true" />
+
 		</RelativeLayout>
         
         <RelativeLayout
@@ -133,7 +136,7 @@
             	<EditText
             	    android:id="@+id/editTextCodeRequestBalans"
             	    android:layout_width="100dp"
-            	    android:layout_height="@dimen/height_edit_field"
+            	    android:layout_height="wrap_content"
             	    android:layout_alignParentRight="true"
             	    android:layout_marginLeft="10dp"
             	    android:layout_marginTop="2dp"
@@ -187,16 +190,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-            <TextView
-            	    android:id="@+id/titlePhonePIN"
-            	    android:layout_toLeftOf="@+id/editTextNumberPassword"
-            	    android:text="@string/sim_pin"
-            	    style="@style/TextViewConfigSubTitle" />
-            
-            	<EditText
+			<EditText
             	    android:id="@+id/editTextNumberPassword"
             	    android:layout_width="100dp"
-            	    android:layout_height="@dimen/height_edit_field"
+            	    android:layout_height="wrap_content"
             	    android:layout_alignParentRight="true"
             	    android:layout_marginLeft="10dp"
             	    android:layout_marginTop="2dp"
@@ -210,7 +207,16 @@
             	    
 
             	</EditText>
-            	
+
+			<TextView
+                    android:id="@+id/titlePhonePIN"
+				android:text="@string/sim_pin"
+                    style="@style/TextViewConfigSubTitle"
+				android:layout_alignBaseline="@+id/editTextNumberPassword"
+				android:layout_alignBottom="@+id/editTextNumberPassword"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentStart="true" />
+
 		</RelativeLayout>
 		<View   android:id="@+id/firstDividerForVersion"
         		style="@style/ViewDeviderHorizontal" /> 
@@ -221,7 +227,7 @@
        <TextView
            android:id="@+id/textViewLabelDeviceVersions"
            android:layout_width="wrap_content"
-           android:layout_height="@dimen/height_edit_field"
+           android:layout_height="wrap_content"
            android:layout_alignParentLeft="true"
            android:layout_centerVertical="true"
            android:layout_toLeftOf="@+id/device_versions"
@@ -243,7 +249,7 @@
        <Button
             android:id="@+id/buttonRequestDevVerion"
             android:layout_width="140dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
             android:text="@string/detect_device_version"
             android:textSize="6pt"
@@ -363,7 +369,7 @@
             	<EditText
             	    android:id="@+id/editTextUpperBoundTmp"
             	    android:layout_width="@dimen/width_3dg_number"
-            	    android:layout_height="@dimen/height_edit_field"
+            	    android:layout_height="wrap_content"
             	    android:layout_alignParentRight="true"
             	    android:layout_marginLeft="10dp"
             	    android:layout_marginTop="2dp"
@@ -392,7 +398,7 @@
             	<EditText
             	    android:id="@+id/editTextLowerBoundTmp"
             	    android:layout_width="@dimen/width_3dg_number"
-            	    android:layout_height="@dimen/height_edit_field"
+            	    android:layout_height="wrap_content"
             	    android:layout_alignParentRight="true"
             	    android:layout_marginLeft="10dp"
             	    android:layout_marginTop="2dp"
@@ -417,23 +423,23 @@
             	    android:layout_toLeftOf="@+id/editTextNumberSensorTMPSMS"
             	    android:text="@string/number_tmp_sensor"
             	    style="@style/TextViewConfigSubTitle" />
-            
-            	<EditText
-            	    android:id="@+id/editTextNumberSensorTMPSMS"
-            	    android:layout_width="@dimen/width_3dg_number"
-            	    android:layout_height="@dimen/height_edit_field"
-            	    android:layout_alignParentRight="true"
-            	    android:layout_marginLeft="10dp"
-            	    android:layout_marginTop="2dp"
-            	    android:ems="3"
-            	    android:gravity="center_vertical|center_horizontal"
-            	    android:inputType="number"
-            	    android:text="@string/default_number_sensortmp"
-            	    android:focusable="true"
-					android:focusableInTouchMode="true" >
-            	</EditText>
-            	
-		</RelativeLayout>
+
+			 <EditText
+                 android:id="@+id/editTextNumberSensorTMPSMS"
+                 android:layout_width="@dimen/width_3dg_number"
+                 android:layout_height="wrap_content"
+				 android:ems="3"
+                 android:gravity="center_vertical|center_horizontal"
+                 android:inputType="number"
+                 android:text="@string/default_number_sensortmp"
+                 android:focusable="true"
+                 android:focusableInTouchMode="true"
+				 android:layout_alignParentTop="true"
+				 android:layout_alignParentRight="true"
+				 android:layout_alignParentEnd="true">
+             </EditText>
+
+		 </RelativeLayout>
         
          
         <View   android:id="@+id/firstDivider6"
@@ -559,7 +565,7 @@
 		    android:gravity="center_vertical|center_horizontal"
 		    android:inputType="text"
 		    android:layout_width="fill_parent"
-            android:layout_height="@dimen/height_edit_field"
+            android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:text="@string/default_value_sms_alarm"
             android:textSize="7pt"
@@ -690,7 +696,7 @@
             	<EditText
             	    android:id="@+id/editTextSMSHead"
             	    android:layout_width="@dimen/width_phone_number"
-            	    android:layout_height="@dimen/height_edit_field"
+            	    android:layout_height="wrap_content"
             	    android:layout_alignParentRight="true"
             	    android:layout_marginLeft="10dp"
             	    android:gravity="center_vertical|center_horizontal"
