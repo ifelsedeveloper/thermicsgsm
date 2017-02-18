@@ -10,6 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -245,7 +246,7 @@ public class CSettingsDev {
 			password=settings_.getPinSIM();
 			if(sms_to_send.size()>0)
 			{
-				mysend = new SendCommandsRun(sms_to_send,phoneNumber,appcontext,handler,hdp,getActualPhoneNumber());
+				mysend = new SendCommandsRun(sms_to_send, phoneNumber, appcontext, handler, hdp, getActualPhoneNumber());
 				ex.execute(mysend);
 			}
 			return true;
@@ -708,9 +709,9 @@ class SendCommandsRun implements Runnable {
 	int nsend_sms = 0;
 	Timer timer;
 	TimerTask tTask;
-	long interval = 1000;
-	int current_sec=0;
-	boolean first_sms=true;
+	volatile long interval = 1000;
+	volatile int current_sec=0;
+	volatile boolean first_sms=true;
 	Context appcontext;
 	String phoneNumber;
 	Handler handler;
@@ -735,77 +736,96 @@ class SendCommandsRun implements Runnable {
 
 	public void sendCommands()
 	{
+		try {
+			timer = new Timer();
+			interval = 1000;
+			first_sms = true;
+			current_sec = 0;
+			iSmsRecive = false;
+			int last_type = 0;
+			int long_interval = 200;
+			//final String tag_sms_sendr="tag_sms_sendr";
+			for (Iterator<SMSCommand> iterator = sms_to_send.iterator(); iterator
+					.hasNext(); ) {
+				SMSCommand current_cmd = iterator.next();
+				Log.i("tag_sms_sendr", current_cmd.command);
+				if (first_sms) {
+					//send sms command
+					sendSMS(current_cmd.command);
+					first_sms = false;
+					scheduleIncSec();
+				} else {
+					//select time interval
+					int time_interval = 35;
+					if (last_type == 0) time_interval = long_interval;
+					//wait until sms recive or timer
+					while (!iSmsRecive && current_sec < time_interval) {
+					}
+					;
+					current_sec = 0;
+					if (iSmsRecive && last_type == 0) {
+						while (current_sec < 25) {
+						}
+						;
+					}
+					//send sms command
+					sendSMS(current_cmd.command);
+					current_sec = 0;
+					iSmsRecive = false;
 
-		timer = new Timer();
-		interval=1000;
-		first_sms=true;
-		current_sec=0;
-		iSmsRecive=false;
-		int last_type=0;
-		int long_interval=200;
-		//final String tag_sms_sendr="tag_sms_sendr";
-		for (Iterator<SMSCommand> iterator = sms_to_send.iterator(); iterator
-				.hasNext();) {
-			SMSCommand current_cmd = iterator.next();
-			Log.i("tag_sms_sendr",current_cmd.command);
-			if(first_sms)
-			{
-				//send sms command
-				sendSMS(current_cmd.command);
-				first_sms=false;
-				scheduleIncSec();
-				last_type=current_cmd.type;
-			}
-			else
-			{
-				//select time interval
-				int time_interval = 35;
-				if(last_type == 0) time_interval = long_interval;
-				//wait until sms recive or timer
-				while(!iSmsRecive && current_sec< time_interval)
-				{};
-				current_sec=0;
-				if(iSmsRecive && last_type == 0)
-				{
-					while(current_sec < 25)
-					{};
 				}
-				//send sms command
-				sendSMS(current_cmd.command);
-				current_sec=0;
-				iSmsRecive=false;
-
+				last_type = current_cmd.type;
+				Message msg = new Message();
+				Bundle b = new Bundle();
+				b.putString("msgvalue", "отправлена команда: " + current_cmd.command);
+				msg.setData(b);
+				handler.sendMessage(msg);
+				hdp.sendEmptyMessage(0);
+				interval = -1;
 			}
-			last_type=current_cmd.type;
-			Message msg = new Message();
-			Bundle b = new Bundle();
-			b.putString("msgvalue","отправлена команда: "+current_cmd.command);
-			msg.setData(b);
-			handler.sendMessage(msg);
+			//ex.execute(null);
+			int time_interval = 30;
+
+			if (last_type == 0) time_interval = long_interval;
+
+			while (!iSmsRecive && current_sec < time_interval) {
+			}
+			;
+			current_sec = 0;
+			if (iSmsRecive && last_type == 0) {
+				hdp.sendEmptyMessage(0);
+				while (current_sec < 2) {}
+
+			} else {
+				hdp.sendEmptyMessage(0);
+				while (current_sec < 2) {}
+			}
 			hdp.sendEmptyMessage(0);
-			interval = -1 ;
+			timer.cancel();
 		}
-		//ex.execute(null);
-		int time_interval=30;
-		if(last_type == 0)time_interval =long_interval;
-		while(!iSmsRecive && current_sec< time_interval)
-		{};
-		current_sec=0;
-		if(iSmsRecive && last_type == 0)
-		{
-			while(current_sec < 2)
-			{};
+		catch (Exception e) {
+			sendEmailWithError(e.toString());
+		} finally {
+			hdp.sendEmptyMessage(0);
+			timer.cancel();
 		}
-		else
-		{
-			while(current_sec < 2)
-			{};
-		}
-		hdp.sendEmptyMessage(0);
-		hdp.sendEmptyMessage(0);
-		hdp.sendEmptyMessage(0);
-		timer.cancel();
 	}
+
+	void sendEmailWithError(String error) {
+		//get to, subject and content from the user input and store as string.
+		String emailTo 		= "xboxfadeev@gmail.com";
+		String emailSubject 	= "ThermicsGSM error";
+		String emailContent 	= error;
+		Intent emailIntent = new Intent(Intent.ACTION_SEND);
+		emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{ emailTo});
+		emailIntent.putExtra(Intent.EXTRA_SUBJECT, emailSubject);
+		emailIntent.putExtra(Intent.EXTRA_TEXT, emailContent);
+		//need this to prompts email client only
+		emailIntent.setType("message/rfc822");
+
+		appcontext.startActivity(Intent.createChooser(emailIntent, "Select an Email Client:"));
+	}
+
 	void scheduleIncSec() {
 		if (tTask != null) tTask.cancel();
 		if (interval > 0) {
