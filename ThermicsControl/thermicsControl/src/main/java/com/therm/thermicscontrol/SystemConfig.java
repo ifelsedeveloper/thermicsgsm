@@ -546,6 +546,24 @@ public class SystemConfig {
 		return;
 	}
 
+	public int getPrefTimeoutRele() {
+		int result = 60;
+		if (_settings.contains(BaseActivity.prefTimeoutRele) == true)
+			result = _settings.getInt(BaseActivity.prefTimeoutRele,
+					result);
+		else
+			setPrefTimeoutRele(result);
+		return result;
+	}
+
+	public void setPrefTimeoutRele(int timeout) {
+		SharedPreferences.Editor prefEditor = _settings.edit();
+		prefEditor.putInt(BaseActivity.prefTimeoutRele,
+				timeout);
+		prefEditor.commit();
+		return;
+	}
+
 	public boolean getIsDeviceDefaultDevParam() {
 		boolean result = false;
 		if (_settings.contains(BaseActivity.prefIsDeviceDefaulDevtParam) == true)

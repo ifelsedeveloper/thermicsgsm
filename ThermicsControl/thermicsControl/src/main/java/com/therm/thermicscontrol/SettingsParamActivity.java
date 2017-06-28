@@ -680,7 +680,7 @@ public class SettingsParamActivity extends BaseActivity {
             titleProgress = String.format(Locale.ENGLISH, "Включение реле №%d", nrele + 1);
             questionDialog = String.format(Locale.ENGLISH, "Включить реле №%d", nrele + 1);
             actionDialog = "Включить";
-            neutralActionDialog = "Вкл. 60 сек";
+            neutralActionDialog = String.format("Вкл. %d сек", settings.getPrefTimeoutRele());
         } else {
             titleProgress = String.format(Locale.ENGLISH, "Отключение реле №%d", nrele + 1);
             questionDialog = String.format(Locale.ENGLISH, "Отключить реле №%d", nrele + 1);
@@ -761,7 +761,7 @@ public class SettingsParamActivity extends BaseActivity {
 
         titleProgress = String.format(Locale.ENGLISH, "Включение реле №%d", nrele + 1);
         questionDialog = String.format(Locale.ENGLISH, "Включить реле №%d", nrele + 1);
-        actionDialog = "Вкл. 60 сек";
+        actionDialog = String.format("Вкл. %d сек", settings.getPrefTimeoutRele());
 
         //set parameters to device
         //add commands to queue
@@ -1370,7 +1370,7 @@ public class SettingsParamActivity extends BaseActivity {
         b.setTitle(title);
         b.setPositiveButton("Вкл", new OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                settingsDev.VklRele(nrele, 60);
+                settingsDev.VklRele(nrele, settings.getPrefTimeoutRele());
             }
         });
         b.setNegativeButton("Отмена", new OnClickListener() {

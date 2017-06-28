@@ -48,4 +48,5 @@
 	<string name="Text1">Text 1</string>
 	<string name="Title1">Title 1</string>
 	<string name="value">23</string>
+    <string name="timeoutVklRele">Таймаут включения реле</string>
 </resources>

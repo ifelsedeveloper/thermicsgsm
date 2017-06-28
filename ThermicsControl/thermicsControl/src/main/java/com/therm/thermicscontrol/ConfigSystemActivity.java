@@ -144,6 +144,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	public boolean isShowDeviceVersion = false;
 	public CNotificationSMS [] notificationSMS=null;
 	public int numberTmpSensorSMS=0;
+	public int timeoutVklRele = 60;
 	
 	public String textSMSAlarmZone;
 	public String titleSMSAlarmZone;
@@ -161,7 +162,8 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	editTextLowerBoundTmp,
 	editTextUpperBoundTmp,
 	editTextSMSHead,
-	editTextSMSAarmZone;
+	editTextSMSAarmZone,
+	editTextTimeoutVklRele;
 	
 	CheckBox checkBoxDaylyReport,
 	checkBoxSMSPostanovka,
@@ -211,6 +213,8 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		
 		titleCodeRequestBalans = (TextView) findViewById(R.id.titleCodeRequestBalans);
 		textNameSystem = (TextView) findViewById(R.id.textNameSystem);
+
+		editTextTimeoutVklRele = (EditText) findViewById(R.id.editTimeoutReleVkl);
 	}
 	
 	public void checkStateOkCancel()
@@ -221,7 +225,11 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		LsimUSSD = editTextCodeRequestBalans.getText().toString();
 		LsimPassword = editTextNumberPassword.getText().toString();
 		LisSIM1 = ActiveSIM.isChecked();
-		
+		if(editTextTimeoutVklRele.getText().toString().length() > 0) {
+			LtimeoutVklRele = Integer.parseInt(editTextTimeoutVklRele.getText().toString());
+		} else {
+			LtimeoutVklRele = 5;
+		}
 		
 		String LnumberTmpSensorSMSstr = editTextNumberSensorTMPSMS.getText().toString();
 		boolean flagLow=false,flagUp=false;
@@ -285,7 +293,8 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 				  (isSMSPostanovka ^ LisSMSPostanovka) ||
 				  (isSMSSnjatie ^ LisSMSSnjatie)) || isEditNumberPasswordHasFocus ||
 				  (LdeviceVersion != deviceVersion) ||
-				  (LisSIM1 != isSIM1) && 
+						(LtimeoutVklRele != timeoutVklRele) ||
+				  (LisSIM1 != isSIM1) &&
 				  flag_digits
 						)
 					viewOkCancel.setVisibility(View.VISIBLE);
@@ -343,7 +352,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 			LzoneValue[i]=localZoneValue[i];
 		}
 		isAutoOnRele1 = settings.getIsSetAutoRele1Control();
-		
+		timeoutVklRele = settings.getPrefTimeoutRele();
 		int i;
 		for(i=0;i<6;i++)
 		{
@@ -450,7 +459,10 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		
 		editTextSMSAarmZone.setText(textSMSAlarmZone);
 		editTextSMSAarmZone.addTextChangedListener(this);
-		
+
+		editTextTimeoutVklRele.setText(String.format("%d", timeoutVklRele));
+		editTextTimeoutVklRele.addTextChangedListener(this);
+
 		ActiveSIM.setChecked(isSIM1);
 		
 		setRequestCodeBalanse();
@@ -482,6 +494,7 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 	
 	int deviceVersion = 3;
 	int LdeviceVersion = 3;
+	int LtimeoutVklRele = 60;
 	boolean LisDailyReport;
 	boolean LisAutoAlarm;
 	boolean LisAutoOnRele1;
@@ -700,7 +713,9 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		    		viewOkCancel.setVisibility(View.GONE);
 		    		settings.setPinSIM(LsimPassword); 
 		    		simPassword = LsimPassword;
-		    		
+					settings.setPrefTimeoutRele(LtimeoutVklRele);
+
+					timeoutVklRele = LtimeoutVklRele;
 		    		deviceVersion = LdeviceVersion;
 		    		settings.setDevVersion(deviceVersion);
 		    		if(deviceVersion != 3)
@@ -718,12 +733,14 @@ public class ConfigSystemActivity extends BaseActivity implements TextWatcher, O
 		        	simPassword = settings.getPinSIM();
 		        	LsimPassword = simPassword;
 		        	LdeviceVersion = deviceVersion;
+					LtimeoutVklRele = timeoutVklRele;
 		        	spinnerSelectDevice.setSelection(LdeviceVersion-1);
 		        	editTextNumberPassword.setText(simPassword);
 		        	editTextPhoneNumber.setText(simNumber);
 		        	editTextPhoneNumber2.setText(simNumber2);
 		        	editTextSMSHead.setText(titleSMSAlarmZone);
 		        	editTextSMSAarmZone.setText(textSMSAlarmZone);
+					editTextTimeoutVklRele.setText(String.format("%d", LtimeoutVklRele));
 		        	checkBoxIsSMSInIncoming.setChecked(isSMSInIncoming);
 		        	setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 		        	viewOkCancel.setVisibility(View.GONE);
