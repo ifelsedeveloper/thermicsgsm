@@ -718,7 +718,7 @@ public class SettingsParamActivity extends BaseActivity {
                             }
                         }, 60000);
 
-                        settingsDev.AddSetReleNCommand(nrele + 1, isReleN, 60, true);
+                        settingsDev.AddSetReleNCommand(nrele + 1, isReleN, settings.getPrefTimeoutRele(), true);
                         LoadProgressDialog(settingsDev.sms_to_send.size() + 1, titleProgress);
                         settingsDev.sendCommands();
                         pd.show();
@@ -784,7 +784,7 @@ public class SettingsParamActivity extends BaseActivity {
                         }
                     }, 60000);
 
-                    settingsDev.AddSetReleNCommand(nrele + 1, true, 60, true);
+                    settingsDev.AddSetReleNCommand(nrele + 1, true, settings.getPrefTimeoutRele(), true);
                     LoadProgressDialog(settingsDev.sms_to_send.size() + 1, titleProgress);
                     settingsDev.sendCommands();
                     pd.show();
