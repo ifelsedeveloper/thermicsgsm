@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.therm.thermicscontrol"
     android:theme="@style/AppBaseTheme"
-    android:versionCode="44"
-    android:versionName="2.5.10" >
+    android:versionCode="48"
+    android:versionName="2.5.13" >
 
     <uses-sdk
         android:minSdkVersion="9"

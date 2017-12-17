@@ -75,7 +75,7 @@
             <LinearLayout
                 android:id="@+id/LinearLayoutMainActions"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="455dp"
                 android:orientation="vertical"
                 android:weightSum="0.99" >
 
