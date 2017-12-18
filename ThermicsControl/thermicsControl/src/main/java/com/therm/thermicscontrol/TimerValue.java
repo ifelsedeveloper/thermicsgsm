@@ -7,6 +7,9 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.widget.Toast;
 
 
 public class TimerValue implements Serializable {
@@ -40,7 +43,7 @@ public class TimerValue implements Serializable {
 	public String toString()
 	{
 		String res = "";
-		res = String.format("n_rele = %d start_hour = %d start_minute = %d", n_rele, start_hour,start_minute);
+		res = String.format("n_rele = %d start_hour = %d start_minute = %d enable = %b id_system = %d stop_minute = %d", n_rele, start_hour, start_minute, enable, id_system, stop_minute);
 		return res;
 	}
 	String getDays()
@@ -141,7 +144,7 @@ public class TimerValue implements Serializable {
 				timeToSend=timeToSend + 24 * 3600;
 				day_of_week++;
 			}
-			
+			//Toast.makeText(context,"Add alarm 1", Toast.LENGTH_LONG).show();
 			//Toast.makeText(this, "number = " + Long.toString(currentRowNumber), Toast.LENGTH_LONG).show();
 			int repeat_time = 7*24*3600*1000;
 			int k = 0;
@@ -161,8 +164,8 @@ public class TimerValue implements Serializable {
 				
 				Intent intent = new Intent(context, TimerActionService.class);
 	
-				//to pass :
-				intent.putExtra("TimerValue", this);  
+				//to pass : TimerValue
+                putToIntent(intent);
 				intent.putExtra(TimerActionService.ATTRIBUTE_COMMAND, isStart);
 				intent.putExtra(TimerActionService.ATTRIBUTE_IDSYSTEM, id_system);
 				int add_time = k*24*3600;
@@ -178,7 +181,7 @@ public class TimerValue implements Serializable {
 				{
 					intent.setAction(Long.toString(idIntents[i]));
 					PendingIntent pIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-					
+					//Toast.makeText(context,"Add alarm 20", Toast.LENGTH_LONG).show();
 					schedulerManger.set(AlarmManager.RTC_WAKEUP, (timeToSend + 4)*1000, pIntent);
 					schedulerManger.setRepeating(AlarmManager.RTC_WAKEUP,(timeToSend + 2 + add_time)*1000, repeat_time, pIntent);
 				}
@@ -193,7 +196,7 @@ public class TimerValue implements Serializable {
 					idIntents[i] = getStopIdIntent(i);
 				
 				Intent intent = new Intent(context, TimerActionService.class);
-				intent.putExtra("TimerValue", this); 
+				putToIntent(intent);
 				intent.putExtra(TimerActionService.ATTRIBUTE_COMMAND, isStart);
 				intent.putExtra(TimerActionService.ATTRIBUTE_IDSYSTEM, id_system);
 				int add_time = k*24*3600;
@@ -209,7 +212,7 @@ public class TimerValue implements Serializable {
 				{
 					intent.setAction(Long.toString(idIntents[i]));
 					PendingIntent pIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-					
+					//Toast.makeText(context,"Add alarm 21", Toast.LENGTH_LONG).show();
 					schedulerManger.set(AlarmManager.RTC_WAKEUP, (timeToSend + 4)*1000, pIntent);
 					schedulerManger.setRepeating(AlarmManager.RTC_WAKEUP,(timeToSend + 2 + add_time)*1000, repeat_time, pIntent);
 				}
@@ -254,4 +257,35 @@ public class TimerValue implements Serializable {
 			schedulerManger.cancel(pIntent);
 		}
 	}
+
+    public void putToIntent(Intent intent) {
+        intent.putExtra("TimerValue.n_rele", n_rele);
+        intent.putExtra("TimerValue.enable", enable);
+        intent.putExtra("TimerValue.start_hour", start_hour);
+        intent.putExtra("TimerValue.start_minute", start_minute);
+        intent.putExtra("TimerValue.stop_hour", stop_hour);
+        intent.putExtra("TimerValue.stop_minute", stop_minute);
+        for(int i = 0; i < 7; i++) {
+            intent.putExtra("isDay" + i, isDay[i]);
+        }
+        intent.putExtra("TimerValue.id_system", id_system);
+        intent.putExtra("TimerValue.row_id", row_id);
+    }
+
+    public static TimerValue getFromIntent(Intent intent) {
+        TimerValue res = new TimerValue();
+        res.n_rele = intent.getIntExtra("TimerValue.n_rele", res.n_rele);
+        res.enable = intent.getBooleanExtra("TimerValue.enable", res.enable);
+        res.start_hour = intent.getIntExtra("TimerValue.start_hour", res.start_hour);
+        res.start_minute = intent.getIntExtra("TimerValue.start_minute", res.start_minute);
+        res.stop_hour = intent.getIntExtra("TimerValue.stop_hour", res.stop_hour);
+        res.stop_minute = intent.getIntExtra("TimerValue.stop_minute", res.stop_minute);
+        for(int i = 0; i < 7; i++) {
+            res.isDay[i] = intent.getBooleanExtra("isDay" + i, res.isDay[i]);
+        }
+        res.id_system = intent.getLongExtra("TimerValue.id_system", res.id_system);
+        res.row_id = intent.getLongExtra("TimerValue.row_id", res.row_id);
+
+        return res;
+    }
 }

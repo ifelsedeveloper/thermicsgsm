@@ -127,13 +127,10 @@
         </service>
     
         <service
-            android:name="com.therm.thermicscontrol.DateTimeActionManager$TimerActionService"
+            android:name="com.therm.thermicscontrol.TimerActionService"
             android:process=":timeractiondtserviceprocess" >
         </service>
-        
-    	<service
-            android:name="com.therm.thermicscontrol.TimerActionService">
-        </service>
+
     
         <service
             android:name="com.therm.thermicscontrol.SmsService"

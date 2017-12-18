@@ -11,6 +11,7 @@ import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -21,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class TimerActivity extends BaseActivity {
 
@@ -291,8 +293,11 @@ public class TimerActivity extends BaseActivity {
 		
 		//
 		databaseTimers.close();
+		Log.i("Timer 0", timerValue.toString());
 		timerValue.AddStartTimer(this);
+		Log.i("Timer 1", timerValue.toString());
 		timerValue.AddStopTimer(this);
+		Log.i("Timer 2", timerValue.toString());
 		onBackPressed();
 	}
 	
