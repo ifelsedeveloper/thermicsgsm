@@ -72,7 +72,15 @@ public class SystemConfigDataSource {
 	public static SystemConfig getActiveSystem()
 	{	
 		SystemConfigDataSource dataSource = sharedInstanceSystemConfigDataSource();
-		return dataSource.getSystemConfig(dataSource.idSelectedSystem());
+		SystemConfig res = dataSource.getSystemConfig(dataSource.idSelectedSystem());
+		if(res == null) {
+			List<SystemConfig> systems = dataSource.getAllSystemConfig();
+			if(!systems.isEmpty()) {
+				dataSource.setSelectedSystem(systems.get(0).getId());
+				return systems.get(0);
+			}
+		}
+		return res;
 	}
 	
 	public void setSelectedSystem(long database_id)
